@@ -30,7 +30,7 @@
 5. La base de datos a utilizar será de tipo relacional
 6. El motor de base de datos a utilizar es MySQL
 7. El desarrollo se dividirá en FrontEnd y BackEnd
-9. Para el FrontEnd se utilizará las tecnologías HTML, CSS, JavaScript y AJAX
+9. Para el FrontEnd se utilizará las tecnologías HTML, CSS, Bootstrap, JavaScript, jQuery y AJAX
 11. Para el BackEnd se utilizara el lenguaje PHP en su versión 7 en adelante
 12. Se estará utilizando el Framework CodeIgniter para PHP
 13. La aplicación se alojará en los servidores locales del establecimiento
