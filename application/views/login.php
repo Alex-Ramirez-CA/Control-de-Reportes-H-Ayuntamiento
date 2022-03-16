@@ -15,7 +15,7 @@
             </div>
         </div>
     </div>
-<script src="<?= base_url('assets/css/bootstrap/bootstrap.min.js');?>"></script>
 <script src="<?= base_url('assets/js/jquery/jquery-3.6.0.min.js');?>"></script>
+<script src="<?= base_url('assets/js/bootstrap/bootstrap.min.js');?>"></script>
 </body>
 </html>
