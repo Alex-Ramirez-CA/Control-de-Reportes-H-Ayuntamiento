@@ -10,8 +10,12 @@ class Login extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('login');
-		// var_dump($this->Autenticacion->login('emiramirez991@gmail.com', '1234'));
+		$data = array(
+			'head' => $this->load->view('layout/head', '', TRUE),
+			'footer' => $this->load->view('layout/footer', '', TRUE),
+		);
+		
+		$this->load->view('v_login', $data);
 	}
 
 	public function validar() {
