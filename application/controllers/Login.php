@@ -30,6 +30,9 @@ class Login extends CI_Controller {
 			'id' => $res->no_empleado,
 			'email' => $res->email,
 			'nombre' => $res->nombre,
+			'apellido paterno' => $res->apellido_paterno,
+			'apellido materno' => $res->apellido_materno,
+			'rol' => $res->id_rol,
 		);
 		echo json_encode($data);
 	}
