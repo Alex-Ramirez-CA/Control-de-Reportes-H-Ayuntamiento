@@ -11,6 +11,10 @@
                 // window.location.replace(json.url);
             },
             statusCode: {
+                400: function(xhr) {
+                    let json = JSON.parse(xhr.responseText);
+                    console.log(json);
+                },
                 401: function(xhr) {
                     let json = JSON.parse(xhr.responseText);
                     console.log(json);
