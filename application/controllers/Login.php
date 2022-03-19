@@ -47,7 +47,7 @@ class Login extends CI_Controller {
 				$this->output->set_status_header(401);
 				exit;
 			}
-			// Si todo salio bien, guardar los datos y mandarlos al cliente
+			// Guardar los datos de la consulta
 			$data = array(
 				'id' => $res->no_empleado,
 				'email' => $res->email,
@@ -60,24 +60,8 @@ class Login extends CI_Controller {
 			// Crear sesion de usuario
 			$this->session->set_userdata($data);
 			$this->session->set_flashdata('msg', 'Bienvenido al sistema '.$data['nombre']);
-			// Definir el rol que tendra el usuario para mandarlo a su respectivas vistas
-			$rol_usuario;
-			switch ($data['id_rol']) {
-				case 0:
-					$rol_usuario = 'cliente';
-					break;
-				case 1:
-					$rol_usuario = 'filtro';
-					break;
-				case 2:
-					$rol_usuario = 'tecnico';
-					break;
-				case 3:
-					$rol_usuario = 'administrador';
-					break;
-			}
-			echo json_encode(array('url' => base_url($rol_usuario)));
-			// echo json_encode($data);
+			// Mandar la url
+			echo json_encode(array('url' => base_url($data['rol_nombre'])));
 		}
 	}
 

@@ -16,7 +16,7 @@ class Cliente extends CI_Controller {
 			'footer' => $this->load->view('layout/footer', '', TRUE),
 		);
 
-        if($this->session->userdata('rol') == 0) {
+        if($this->session->userdata('id_rol') == 0) {
         	$this->load->view('v_cliente', $data);
         } else {
             // Si no hay datos de sesion redireccionar a login

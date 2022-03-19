@@ -16,7 +16,7 @@ class Tecnico extends CI_Controller {
 			'footer' => $this->load->view('layout/footer', '', TRUE),
 		);
 
-        if($this->session->userdata('rol') == 2) {
+        if($this->session->userdata('id_rol') == 2) {
         	$this->load->view('v_tecnico', $data);
         } else {
             // Si no hay datos de sesion redireccionar a login

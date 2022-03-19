@@ -16,7 +16,7 @@ class Filtro extends CI_Controller {
 			'footer' => $this->load->view('layout/footer', '', TRUE),
 		);
 
-        if($this->session->userdata('rol') == 1) {
+        if($this->session->userdata('id_rol') == 1) {
         	$this->load->view('v_Filtro', $data);
         } else {
             // Si no hay datos de sesion redireccionar a login
