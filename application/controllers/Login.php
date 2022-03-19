@@ -54,14 +54,15 @@ class Login extends CI_Controller {
 				'nombre' => $res->nombre,
 				'apellido_paterno' => $res->apellido_paterno,
 				'apellido_materno' => $res->apellido_materno,
-				'rol' => $res->id_rol,
+				'id_rol' => $res->id_rol,
+				'rol_nombre' => $res->rol_nombre
 			);
 			// Crear sesion de usuario
 			$this->session->set_userdata($data);
 			$this->session->set_flashdata('msg', 'Bienvenido al sistema '.$data['nombre']);
 			// Definir el rol que tendra el usuario para mandarlo a su respectivas vistas
 			$rol_usuario;
-			switch ($data['rol']) {
+			switch ($data['id_rol']) {
 				case 0:
 					$rol_usuario = 'cliente';
 					break;

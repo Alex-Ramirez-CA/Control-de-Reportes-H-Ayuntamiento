@@ -5,10 +5,26 @@ class Auth extends CI_Model {
     }
 
     public function login($usuario, $password) {
-        $data = $this->db->get_where('usuario', array('email' => $usuario, 'password' => $password),1);
+        $data = $this->db
+            ->select("b.no_empleado, b.email, b.nombre, b.apellido_paterno, b.apellido_materno, a.id_rol, a.nombre as rol_nombre")
+            ->from("rol a")
+            ->join("usuario b", "b.id_rol = a.id_rol")
+            ->where(array('b.email' => $usuario, 'b.password' => $password), 1)
+            ->get();
+
+        if(!$data->result()) {
+            return false;
+        }
+
+        return $data->row();
+    }   
+}
+
+
+/*
+    $data = $this->db->get_where('usuario', array('email' => $usuario, 'password' => $password),1);
         if(!$data->result()) {
             return false;
         }
         return $data->row();
-    }   
-}
+*/
