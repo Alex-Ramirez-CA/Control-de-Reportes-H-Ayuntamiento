@@ -19,12 +19,3 @@ class Auth extends CI_Model {
         return $data->row();
     }   
 }
-
-
-/*
-    $data = $this->db->get_where('usuario', array('email' => $usuario, 'password' => $password),1);
-        if(!$data->result()) {
-            return false;
-        }
-        return $data->row();
-*/

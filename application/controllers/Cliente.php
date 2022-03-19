@@ -6,6 +6,7 @@ class Cliente extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->library(array('session'));
+		$this->load->model('Incidencia');
 	}
 
 	public function index()
@@ -23,6 +24,14 @@ class Cliente extends CI_Controller {
             redirect('login');
         }
 		
+	}
+
+	public function buscar_incidencia() {
+		$id_incidencia = 1;
+		$titulo = 'algo';
+		$res = $this->Incidencia->get_incidencia($id_incidencia, $titulo);
+		echo json_encode($res);
+		// print_r(json_encode($res));
 	}
 
 }
