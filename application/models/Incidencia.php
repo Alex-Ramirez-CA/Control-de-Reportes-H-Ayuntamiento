@@ -13,6 +13,7 @@ class Incidencia extends CI_Model {
             ->join("departamento d", "a.id_departamento=d.id_departamento")
             ->join("usuario u", "d.id_departamento=u.id_departamento")
             ->where(array('i.id_incidencia' => $id_incidencia))
+            ->or_where(array('i.titulo' => $titulo))
             ->get();
 
         if(!$data->result()) {
