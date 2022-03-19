@@ -18,6 +18,7 @@ class Cliente extends CI_Controller {
 		);
 
         if($this->session->userdata('id_rol') == 0) {
+			// Aqui llamar la consulta para traer datos 
         	$this->load->view('v_cliente', $data);
         } else {
             // Si no hay datos de sesion redireccionar a login
