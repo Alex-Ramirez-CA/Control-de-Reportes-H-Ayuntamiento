@@ -5,7 +5,7 @@ class Login extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
-		$this->load->library(array('form_validation'));
+		$this->load->library(array('form_validation','session'));
 		$this->load->helper(array('auth/login_rules'));
 		$this->load->model('Auth');
 	}
@@ -56,7 +56,42 @@ class Login extends CI_Controller {
 				'apellido materno' => $res->apellido_materno,
 				'rol' => $res->id_rol,
 			);
-			echo json_encode($data);
+			// Crear sesion de usuario
+			$this->session->set_userdata($data);
+			$this->session->set_flashdata('msg', 'Bienvenido al sistema '.$data['nombre']);
+			// Definir el rol que tendra el usuario para mandarlo a su respectivas vistas
+			$rol_usuario;
+			switch ($data['rol']) {
+				case 0:
+					$rol_usuario = 'cliente';
+					break;
+				case 1:
+					$rol_usuario = 'filtro';
+					break;
+				case 2:
+					$rol_usuario = 'tecnico';
+					break;
+				case 3:
+					$rol_usuario = 'administrador';
+					break;
+			}
+			echo json_encode(array('url' => base_url($rol_usuario)));
+			// echo json_encode($data);
 		}
+	}
+
+	// Funcion para cerrar sesion
+	public function logout() {
+		$vars = array(
+			'id',
+			'email',
+			'nombre',
+			'apellido paterno',
+			'apellido materno',
+			'rol',
+		);
+		$this->session->unset_userdata($vars);
+		$this->session->sess_destroy();
+		redirect('login');
 	}
 }

@@ -8,7 +8,7 @@
             success: function(data) {
                 let json = JSON.parse(data);
                 console.log(json);
-                // window.location.replace(json.url);
+                window.location.replace(json.url);
             },
             statusCode: {
                 400: function(xhr) {
