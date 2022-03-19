@@ -31,7 +31,7 @@ class Cliente extends CI_Controller {
 		$titulo = 'Fallo de red';
 		$res = $this->Incidencia->get_incidencia($id_incidencia, $titulo);
 		echo json_encode($res);
-		// print_r(json_encode($res));
+		//print_r(json_encode($res));
 	}
 
 }
