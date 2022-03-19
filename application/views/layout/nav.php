@@ -13,9 +13,9 @@
             <a href="<?= base_url('login/logout') ?>">Cerrar Sesion</a>
         </div>
     </div>
-    <a class="navbar-brand"><?= $this->session->rol ?></a>
+    <a class="navbar-brand"><?= $this->uri->segment(1) ?></a>
     <form class="form-inline">
-        <button class="btn btn-outline-success my-2 my-sm-0 mr-4" type="submit">Administración</button>
+        <button class=" <?= $this->uri->segment(1) == 'administrador' ? 'visible' : 'invisible'; ?> btn btn-outline-success my-2 my-sm-0 mr-4" type="submit">Administración</button>
         <button class="btn btn-outline-success my-2 my-sm-0 mr-4" type="submit">Crear reporte</button>
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Mis reportes</button>
         <input name="search" id="search" class="form-control ml-4 mr-2" type="search" placeholder="Buscar reporte" aria-label="Search">
