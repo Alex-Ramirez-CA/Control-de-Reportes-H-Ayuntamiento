@@ -28,5 +28,5 @@
             </div>
         </div>
     </div>
-    <a href="<?= base_url('login/logout') ?>">Cerrar Sesion</a>
+   
 <?= $footer ?>

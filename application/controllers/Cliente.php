@@ -12,6 +12,7 @@ class Cliente extends CI_Controller {
 	{
 		$data = array(
 			'head' => $this->load->view('layout/head', '', TRUE),
+			'nav' => $this->load->view('layout/nav', '', TRUE),
 			'footer' => $this->load->view('layout/footer', '', TRUE),
 		);
 

@@ -10,5 +10,5 @@ class Auth extends CI_Model {
             return false;
         }
         return $data->row();
-    }
+    }   
 }
