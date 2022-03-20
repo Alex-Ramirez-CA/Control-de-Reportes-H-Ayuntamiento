@@ -1,5 +1,5 @@
 (function($) {
-    $("#enviar").submit(function(ev) {
+    $("#enviar").click(function(ev) {
 
         $.ajax({
             url: 'cliente/buscar_incidencia',

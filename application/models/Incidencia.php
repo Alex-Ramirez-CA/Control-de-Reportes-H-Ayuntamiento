@@ -21,7 +21,24 @@ class Incidencia extends CI_Model {
         }
 
         return $data->result();
-    }   
+    }
+    
+    public function usuario_incidencias($no_empleado) {
+        $data = $this->db
+            ->select("i.id_incidencia, i.titulo, i.status, i.fecha_apertura, d.nombre as Departamento, concat_ws(' ', u.nombre, u.apellido_paterno, u.apellido_materno) as Encargado")
+            ->from("incidencia i")
+            ->join("atender_incidencia a", "i.id_incidencia=a.id_incidencia")
+            ->join("departamento d", "a.id_departamento=d.id_departamento")
+            ->join("usuario u", "d.id_departamento=u.id_departamento")
+            ->where(array('i.no_empleado' => $no_empleado))
+            ->get();
+
+        if(!$data->result()) {
+            return false;
+        }
+
+        return $data->result();
+    }
 }
 /*
 // $data = $this->db->get_where('incidencia', array('email' => $usuario, 'password' => $password),1);

@@ -29,7 +29,7 @@
         <button class="btn btn-outline-success my-2 my-sm-0 mr-4" type="submit">Crear reporte</button>
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Mis reportes</button>
         <input name="search" id="search" class="form-control ml-4 mr-2" type="search" placeholder="Buscar reporte" aria-label="Search">
-        <button class="enviar btn btn-outline-success my-2 my-sm-0" type="submit" >Buscar</button>
+        <button class="enviar btn btn-outline-success my-2 my-sm-0" id="enviar" type="submit" >Buscar</button>
     </form>
 </nav>
 <hr>  
