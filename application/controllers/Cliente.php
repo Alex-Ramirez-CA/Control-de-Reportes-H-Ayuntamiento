@@ -28,11 +28,36 @@ class Cliente extends CI_Controller {
 	}
 
 	public function buscar_incidencia() {
+		$no_empleado = $this->session->userdata('id');
 		$id_incidencia = 1;
-		$titulo = 'Fallo de red';
-		$res = $this->Incidencia->get_incidencia($id_incidencia, $titulo);
+		$titulo = 'coloma';
+		$res = $this->Incidencia->get_incidencia($no_empleado, $id_incidencia, $titulo);
 		echo json_encode($res);
-		//print_r(json_encode($res));
+	}
+
+	public function incidecias() {
+		$no_empleado = $this->session->userdata('id');
+		// para incidencias pendientes
+		$status = 0;
+		$res_0 = $this->Incidencia->get_incidencias($no_empleado, $status);
+		// para incidencias en proceso
+		$status = 1;
+		$res_1 = $this->Incidencia->get_incidencias($no_empleado, $status);
+		// $operad='';
+		// foreach ($res_1 as $valor) {
+		// 	if($valor->id_incidencia == $res_1[0]->id_incidencia){
+		// 		$operad .= $valor->Encargado .', ';
+		// 	}
+			
+		// }
+		$data = array(
+			'pendientes' => $res_0,
+			'en_proceso' => $res_1,
+			'finalizado' => ''
+		);
+		// echo $operad;
+		// echo json_encode($res_1);
+		echo json_encode($data);
 	}
 
 }
