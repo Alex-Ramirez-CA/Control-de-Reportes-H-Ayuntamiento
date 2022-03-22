@@ -51,16 +51,8 @@ class Cliente extends CI_Controller {
 		$no_empleado = $this->session->userdata('id');
 		// Recibir el valor del campo de busqueda via post
 		$search = $this->input->post('search');
-		// Hacer la consulta al modelo para las incidencias con status 0
-		$status = 0;
-		$res_0 = $this->Incidencia->get_incidencia($no_empleado, $search, $status);
-		// Hacer la consulta al modelo para las incidencias con status 1
-		$status = 1;
-		$res_1 = $this->Incidencia->get_incidencia($no_empleado, $search, $status);
-		$data = array(
-			$res_0,
-			$res_1
-		);
+		// Hacer consulta al modelo
+		$data = $this->Incidencia->get_incidencia($no_empleado, $search);
 		// Mandar datos al cliente via ajax
 		echo json_encode($data);
 	}
