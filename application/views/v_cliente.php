@@ -4,17 +4,17 @@
 
 <div class="container">
     <div class="row mt-4 justify-content-center">
-        <div class="col-lg-4 col-md-5 col-sm-8" id="titulo-pendiente">
+        <div class="col-6" id="titulo-pendiente">
             <h3>Reportes pendientes</h3>
         </div>
 
-        <div class="col-lg-4 col-md-5 col-sm-8 offset-lg-2 offset-md-1" id="titulo-proceso">
+        <div class="col-6" id="titulo-proceso">
             <h3>Reportes en proceso</h3>
         </div>
     </div>
 
     <div class="row justify-content-center">
-        <div class="col-lg-4 col-md-5 col-sm-8" id="columna-pendiente">
+        <div class="col-6" id="columna-pendiente">
         <?php foreach($en_proceso as $item): ?>
             <div class="card" >
                 <div class="card-body">
@@ -29,11 +29,10 @@
                     </div>
                 </div>
             </div>
-        <?php endforeach; ?>
-            
+        <?php endforeach; ?>   
         </div>
 
-        <div class="col-lg-4 col-md-5 col-sm-8 offset-lg-2 offset-md-1" id="columna-proceso">
+        <div class="col-6" id="columna-proceso">
             <div class="card" >
                 <div class="card-body">
                     <div class="texto-medio">
