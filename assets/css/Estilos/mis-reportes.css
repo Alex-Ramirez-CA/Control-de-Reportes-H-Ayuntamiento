@@ -1,0 +1,106 @@
+.container {
+	width: 100%;
+	min-width: 800px;
+	max-width: 1000px;
+	max-height: 500px;
+}
+
+#titulo-proceso,
+#titulo-pendiente {
+	margin-bottom: 10px;
+}
+
+#titulo-proceso h3,
+#titulo-pendiente h3 {
+	margin: 0;
+	text-align: center;
+	font-size: 18px;
+}
+
+#columna-pendiente,
+#columna-proceso {
+	height: 450px;
+	border-radius: 7px;
+	align-items: center;
+	background: linear-gradient(
+		to bottom right,
+		#f6f8fa,
+		#f6f8fa,
+		#f6f8fa,
+		rgb(250, 255, 254)
+	);
+	box-shadow: 0 3px 5px 0 rgba(31, 38, 135, 0.37);
+	backdrop-filter: blur(20px);
+	border: solid 1px #afafaa;
+	overflow: hidden;
+	overflow-y: scroll;
+}
+
+.card {
+	margin: 0px auto;
+	display: flex;
+	flex-direction: column;
+	width: 285px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	background: rgba(255, 255, 255, 0.3);
+	box-shadow: 0 3px 5px 0 rgba(31, 38, 135, 0.37);
+	backdrop-filter: blur(4px);
+	border-radius: 15px;
+	cursor: default;
+	transition: all 400ms ease;
+}
+
+.card:hover {
+	box-shadow: 0 3px 10px 0 rgba(31, 38, 135, 0.37);
+	transform: translateY(-3%);
+}
+
+.card-body {
+	padding: 8px;
+	display: flex;
+	justify-content: space-between;
+	margin-left: 3px;
+	margin-right: 3px;
+}
+
+.card-body p,
+.card-body h5 {
+	margin-bottom: 2px;
+}
+
+.texto-medio h5,
+.fecha h5 {
+	color: #26a2d9;
+	font-size: 13px;
+	margin: 0px;
+}
+
+.fecha {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.fecha p {
+	font-size: 12px;
+	margin: 0;
+	margin-top: 5px;
+	margin-bottom: 0;
+}
+
+.atiende {
+	font-size: 10.5px;
+	margin-top: 5px;
+}
+
+.departamento {
+	color: white;
+	background-color: #8294be;
+	border-radius: 15px;
+	font-size: 11px;
+	margin-top: 3px;
+	padding-left: 3px;
+	padding-right: 3px;
+}

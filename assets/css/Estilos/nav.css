@@ -1,0 +1,33 @@
+.menu {
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-top: 5px;
+}
+
+#navbar {
+	width: 100%;
+	padding: 0;
+}
+
+p {
+	margin: 0;
+}
+
+.opciones button {
+	width: 130px;
+	border-radius: 10px;
+	border-color: #006e95;
+	color: #006e95;
+}
+
+.opciones button:hover {
+	width: 130px;
+	border-radius: 10px;
+	border-color: #006e95;
+	background-color: #006e95;
+	color: #fff;
+}
+
+#btn-cerrar {
+	height: 30px;
+}
