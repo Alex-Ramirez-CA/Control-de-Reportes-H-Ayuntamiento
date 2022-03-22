@@ -11,10 +11,20 @@ class Cliente extends CI_Controller {
 
 	public function index()
 	{
+		$no_empleado = $this->session->userdata('id');
+		// para incidencias pendientes
+		$status = 0;
+		$res_0 = $this->Incidencia->get_incidencias($no_empleado, $status);
+		// para incidencias en proceso
+		$status = 1;
+		$res_1 = $this->Incidencia->get_incidencias($no_empleado, $status);
+
 		$data = array(
 			'head' => $this->load->view('layout/head', '', TRUE),
 			'nav' => $this->load->view('layout/nav', '', TRUE),
 			'footer' => $this->load->view('layout/footer', '', TRUE),
+			'pendientes' => $res_0,
+			'en_proceso' => $res_1,
 		);
 
         if($this->session->userdata('id_rol') == 0) {
@@ -57,6 +67,7 @@ class Cliente extends CI_Controller {
 		);
 		// echo $operad;
 		// echo json_encode($res_1);
+		// return $data;
 		echo json_encode($data);
 	}
 

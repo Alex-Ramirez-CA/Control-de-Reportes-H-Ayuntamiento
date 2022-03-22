@@ -45,23 +45,23 @@ class Incidencia extends CI_Model {
                 ->get();
         } else if($status == 1) { //Incidencias en proceso
             $data = $this->db
-                ->select("i.id_incidencia, i.titulo, i.status, i.fecha_apertura, d.nombre as 'Departamento', concat_ws(' ', u.nombre, u.apellido_paterno, u.apellido_materno) as Encargado")
+                ->select("i.id_incidencia, i.titulo, i.status, i.fecha_apertura, GROUP_CONCAT(DISTINCT d.nombre SEPARATOR ', ') as departamento, GROUP_CONCAT( u.nombre SEPARATOR ', ') as encargado")
                 ->from("incidencia i")
                 ->join("atender_incidencia a", "i.id_incidencia=a.id_incidencia")
                 ->join("departamento d", "a.id_departamento=d.id_departamento")
                 ->join("usuario u", "d.id_departamento=u.id_departamento")
                 ->where(array('i.no_empleado' => $no_empleado, 'i.status' => $status))
-                ->order_by('i.id_incidencia')
+                ->group_by('i.id_incidencia')
                 ->get();
         } else if($status == 2) { //Incidencias finalizadas
             $data = $this->db
-                ->select("i.id_incidencia, i.titulo, i.status, i.fecha_apertura, d.nombre as 'Departamento', concat_ws(' ', u.nombre, u.apellido_paterno, u.apellido_materno) as Encargado")
+                ->select("i.id_incidencia, i.titulo, i.status, i.fecha_apertura, GROUP_CONCAT(DISTINCT d.nombre SEPARATOR ', ') as departamento, GROUP_CONCAT( u.nombre SEPARATOR ', ') as encargado")
                 ->from("incidencia i")
                 ->join("atender_incidencia a", "i.id_incidencia=a.id_incidencia")
                 ->join("departamento d", "a.id_departamento=d.id_departamento")
                 ->join("usuario u", "d.id_departamento=u.id_departamento")
                 ->where(array('i.no_empleado' => $no_empleado, 'i.status' => $status))
-                ->order_by('i.id_incidencia')
+                ->group_by('i.id_incidencia')
                 ->get();
         }
         if(!$data->result()) {
@@ -71,6 +71,16 @@ class Incidencia extends CI_Model {
     }
 }
 /*
+// Esta es la buena
+SELECT i.id_incidencia, i.titulo, i.status, i.fecha_apertura, GROUP_CONCAT(DISTINCT d.nombre SEPARATOR ', ') as 'departamento', GROUP_CONCAT( u.nombre SEPARATOR ', ') as 'encargado' 
+FROM incidencia as i 
+INNER JOIN atender_incidencia as a ON i.id_incidencia=a.id_incidencia 
+INNER JOIN departamento as d ON a.id_departamento=d.id_departamento 
+INNER JOIN usuario as u ON d.id_departamento=u.id_departamento 
+WHERE i.no_empleado = '55555' AND i.status = '1'
+GROUP BY i.id_incidencia;
+
+
 // $data = $this->db->get_where('incidencia', array('email' => $usuario, 'password' => $password),1);
 //         if(!$data->result()) {
 //             return false;
@@ -100,4 +110,5 @@ SELECT id_incidencia, titulo, status, fecha_apertura
 FROM incidencia
 WHERE no_empleado = '55555' AND status = '0'
 ORDER BY id_incidencia;
+
 */
