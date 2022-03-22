@@ -5,27 +5,29 @@ class Incidencia extends CI_Model {
     }
 
     // Obtener las incidencias que conincidan con la barra de busqueda
-    public function get_incidencia($no_empleado, $search) {
-        // Para las incidencias que ya han sido atendidas
-        $data = $this->db
-            ->select("i.id_incidencia, i.titulo, i.status, i.fecha_apertura, GROUP_CONCAT(DISTINCT d.nombre SEPARATOR ', ') as departamento, GROUP_CONCAT( u.nombre SEPARATOR ', ') as encargado")
-            ->from("incidencia i")
-            ->join("atender_incidencia a", "i.id_incidencia=a.id_incidencia")
-            ->join("departamento d", "a.id_departamento=d.id_departamento")
-            ->join("usuario u", "d.id_departamento=u.id_departamento")
-            // ->where('i.no_empleado', $no_empleado)
-            ->like('i.id_incidencia', $search, 'after', '', TRUE)
-            ->or_like('i.titulo', $search, 'after', '', TRUE)
-            ->group_by('id_incidencia')
-            ->get();
-        // Para las que no han sido atendidas
-        if(!$data->result()) {
+    public function get_incidencia($no_empleado, $search, $status) {
+        $data;
+        if($status == 0) { // Para las incidencias que no han sido atendidas
             $data = $this->db
                 ->select("id_incidencia, titulo, status, fecha_apertura")
                 ->from("incidencia")
-                ->where(array('no_empleado' => $no_empleado, 'id_incidencia' => $search))
-                ->or_where(array('titulo' => $search))
-                ->order_by('id_incidencia')
+                ->where(array('no_empleado' => $no_empleado, 'status', $status))
+                ->like('id_incidencia', $search, 'after', '', TRUE)
+                ->or_like('titulo', $search, 'after', '', TRUE)
+                ->group_by('id_incidencia')
+                ->get();
+        // Para las que no han sido atendidas
+        } else if($status == 1) { //Incidencias en proceso
+            $data = $this->db
+                ->select("i.id_incidencia, i.titulo, i.status, i.fecha_apertura, GROUP_CONCAT(DISTINCT d.nombre SEPARATOR ', ') as departamento, GROUP_CONCAT( u.nombre SEPARATOR ', ') as encargado")
+                ->from("incidencia i")
+                ->join("atender_incidencia a", "i.id_incidencia=a.id_incidencia")
+                ->join("departamento d", "a.id_departamento=d.id_departamento")
+                ->join("usuario u", "d.id_departamento=u.id_departamento")
+                ->where(array('i.no_empleado' => $no_empleado, 'i.status' => $status))
+                ->like('i.id_incidencia', $search, 'after', '', TRUE)
+                ->or_like('i.titulo', $search, 'after', '', TRUE)
+                ->group_by('id_incidencia')
                 ->get();
         }
         // Si no se encuentra ninguna
