@@ -1,10 +1,10 @@
 (function($) {
-    $(".enviar").click(function(ev) {
-
+    $("#search").keyup(function(ev) {
+        let search = $('#search').val();
         $.ajax({
             url: 'cliente/buscar_incidencia',
             type: 'POST',
-            data: $(this).serialize(),
+            data: { search },
             success: function(data) {
                 let json = JSON.parse(data);
                 console.log(json);
