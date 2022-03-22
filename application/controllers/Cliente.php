@@ -11,24 +11,29 @@ class Cliente extends CI_Controller {
 
 	public function index()
 	{
-		$no_empleado = $this->session->userdata('id');
-		// para incidencias pendientes
-		$status = 0;
-		$res_0 = $this->Incidencia->get_incidencias($no_empleado, $status);
-		// para incidencias en proceso
-		$status = 1;
-		$res_1 = $this->Incidencia->get_incidencias($no_empleado, $status);
+		// validar que el usuario este logeado y sea de tipo cliente
+        if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 0) {
+			// Obtener el id del empleado de los datos de sesion
+			$no_empleado = $this->session->userdata('id');
+			
+			// Obtener incidencias pendientes
+			$status = 0;
+			$res_0 = $this->Incidencia->get_incidencias($no_empleado, $status);
+			
+			// Obtener incidencias en proceso
+			$status = 1;
+			$res_1 = $this->Incidencia->get_incidencias($no_empleado, $status);
 
-		$data = array(
-			'head' => $this->load->view('layout/head', '', TRUE),
-			'nav' => $this->load->view('layout/nav', '', TRUE),
-			'footer' => $this->load->view('layout/footer', '', TRUE),
-			'pendientes' => $res_0,
-			'en_proceso' => $res_1,
-		);
+			// Meter la información en un array para mandarlo a la vista
+			$data = array(
+				'head' => $this->load->view('layout/head', '', TRUE),
+				'nav' => $this->load->view('layout/nav', '', TRUE),
+				'footer' => $this->load->view('layout/footer', '', TRUE),
+				'pendientes' => $res_0,
+				'en_proceso' => $res_1,
+			);
 
-        if($this->session->userdata('id_rol') == 0) {
-			// Aqui llamar la consulta para traer datos 
+			// Cargar vista y mandarle los datos
         	$this->load->view('v_cliente', $data);
         } else {
             // Si no hay datos de sesion redireccionar a login
@@ -38,37 +43,19 @@ class Cliente extends CI_Controller {
 	}
 
 	public function buscar_incidencia() {
+		// Validar para que no puedan ingresar a esta direccion sin estar logeados
+		if(!$this->session->has_userdata('id_rol')){
+            redirect('login');
+        }
+		// Extraer id del empleado de las variabes de sesion 
 		$no_empleado = $this->session->userdata('id');
-		$id_incidencia = 1;
-		$titulo = 'coloma';
-		$res = $this->Incidencia->get_incidencia($no_empleado, $id_incidencia, $titulo);
-		echo json_encode($res);
-	}
-
-	public function incidecias() {
-		$no_empleado = $this->session->userdata('id');
-		// para incidencias pendientes
-		$status = 0;
-		$res_0 = $this->Incidencia->get_incidencias($no_empleado, $status);
-		// para incidencias en proceso
-		$status = 1;
-		$res_1 = $this->Incidencia->get_incidencias($no_empleado, $status);
-		// $operad='';
-		// foreach ($res_1 as $valor) {
-		// 	if($valor->id_incidencia == $res_1[0]->id_incidencia){
-		// 		$operad .= $valor->Encargado .', ';
-		// 	}
-			
-		// }
-		$data = array(
-			'pendientes' => $res_0,
-			'en_proceso' => $res_1,
-			'finalizado' => ''
-		);
-		// echo $operad;
-		// echo json_encode($res_1);
-		// return $data;
-		echo json_encode($data);
+		// Recibir el valor del campo de busqueda via post
+		$search = $this->input->post('search');
+		var_dump($search);
+		// Hacer la consulta al modelo
+		// $res = $this->Incidencia->get_incidencia($no_empleado, $search);
+		// Mandar datos al cliente via ajax
+		// echo json_encode($res);
 	}
 
 }

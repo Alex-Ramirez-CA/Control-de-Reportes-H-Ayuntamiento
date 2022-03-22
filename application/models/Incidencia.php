@@ -4,25 +4,25 @@ class Incidencia extends CI_Model {
         $this->load->database();
     }
 
-    public function get_incidencia($no_empleado, $id_incidencia, $titulo) {
+    public function get_incidencia($no_empleado, $search) {
         // Para las incidencias que ya han sido atendidas
         $data = $this->db
-            ->select("i.id_incidencia, i.titulo, i.status, i.fecha_apertura, d.nombre as Departamento, concat_ws(' ', u.nombre, u.apellido_paterno, u.apellido_materno) as Encargado")
+            ->select("i.id_incidencia, i.titulo, i.status, i.fecha_apertura, GROUP_CONCAT(DISTINCT d.nombre SEPARATOR ', ') as departamento, GROUP_CONCAT( u.nombre SEPARATOR ', ') as encargado")
             ->from("incidencia i")
             ->join("atender_incidencia a", "i.id_incidencia=a.id_incidencia")
             ->join("departamento d", "a.id_departamento=d.id_departamento")
             ->join("usuario u", "d.id_departamento=u.id_departamento")
-            ->where(array('i.no_empleado' => $no_empleado, 'i.id_incidencia' => $id_incidencia))
-            ->or_where(array('i.titulo' => $titulo))
-            ->order_by('id_incidencia')
+            ->where(array('i.no_empleado' => $no_empleado, 'i.id_incidencia' => $search))
+            ->or_where(array('i.titulo' => $search))
+            ->group_by('id_incidencia')
             ->get();
         // Para las que no han sido atendidas
         if(!$data->result()) {
             $data = $this->db
                 ->select("id_incidencia, titulo, status, fecha_apertura")
                 ->from("incidencia")
-                ->where(array('no_empleado' => $no_empleado, 'id_incidencia' => $id_incidencia))
-                ->or_where(array('titulo' => $titulo))
+                ->where(array('no_empleado' => $no_empleado, 'id_incidencia' => $search))
+                ->or_where(array('titulo' => $search))
                 ->order_by('id_incidencia')
                 ->get();
         }
@@ -30,7 +30,7 @@ class Incidencia extends CI_Model {
         if(!$data->result()) {
             return false;
         }
-        return $data->result();
+        return $data->row();
     }
 
     // Consulta las incidencias de por usuario y status
