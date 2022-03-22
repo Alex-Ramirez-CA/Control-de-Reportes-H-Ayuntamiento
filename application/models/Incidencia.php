@@ -4,6 +4,7 @@ class Incidencia extends CI_Model {
         $this->load->database();
     }
 
+    // Obtener las incidencias que conincidan con la barra de busqueda
     public function get_incidencia($no_empleado, $search) {
         // Para las incidencias que ya han sido atendidas
         $data = $this->db
@@ -12,8 +13,9 @@ class Incidencia extends CI_Model {
             ->join("atender_incidencia a", "i.id_incidencia=a.id_incidencia")
             ->join("departamento d", "a.id_departamento=d.id_departamento")
             ->join("usuario u", "d.id_departamento=u.id_departamento")
-            ->where(array('i.no_empleado' => $no_empleado, 'i.id_incidencia' => $search))
-            ->or_where(array('i.titulo' => $search))
+            ->where('i.no_empleado', $no_empleado)
+            ->like('i.id_incidencia', $search, 'after', '', TRUE)
+            ->or_like('i.titulo', $search, 'after', '', TRUE)
             ->group_by('id_incidencia')
             ->get();
         // Para las que no han sido atendidas
@@ -30,7 +32,7 @@ class Incidencia extends CI_Model {
         if(!$data->result()) {
             return false;
         }
-        return $data->row();
+        return $data->result();
     }
 
     // Consulta las incidencias de por usuario y status
