@@ -13,7 +13,7 @@ class Incidencia extends CI_Model {
             ->join("atender_incidencia a", "i.id_incidencia=a.id_incidencia")
             ->join("departamento d", "a.id_departamento=d.id_departamento")
             ->join("usuario u", "d.id_departamento=u.id_departamento")
-            ->where('i.no_empleado', $no_empleado)
+            // ->where('i.no_empleado', $no_empleado)
             ->like('i.id_incidencia', $search, 'after', '', TRUE)
             ->or_like('i.titulo', $search, 'after', '', TRUE)
             ->group_by('id_incidencia')
