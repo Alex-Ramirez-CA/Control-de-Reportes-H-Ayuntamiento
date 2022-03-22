@@ -15,19 +15,22 @@
 
     <div class="row justify-content-center">
         <div class="col-lg-4 col-md-5 col-sm-8" id="columna-pendiente">
+        <?php foreach($en_proceso as $item): ?>
             <div class="card" >
                 <div class="card-body">
                     <div class="texto-medio">
-                        <h5>Fallo de red</h5>
-                        <p class="atiende">Atendido por Luis Gerardo</p>                        
-                        <p class="departamento">Departamento: Soporte técnico</p>                        
+                        <h5><?= $item->titulo; ?></h5>
+                        <p class="atiende">Atendido por <?= $item->encargado; ?> </p>                        
+                        <p class="departamento"><?= "Departamento: ".$item->departamento; ?></p>                        
                     </div>
                     <div class="fecha">
                         <h5>Creado</h5>
-                        <p>20/05/2020</p>
+                        <p><?= $item->fecha_apertura; ?></p>
                     </div>
                 </div>
             </div>
+        <?php endforeach; ?>
+            
         </div>
 
         <div class="col-lg-4 col-md-5 col-sm-8 offset-lg-2 offset-md-1" id="columna-proceso">
