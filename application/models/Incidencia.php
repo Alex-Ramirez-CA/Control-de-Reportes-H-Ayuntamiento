@@ -22,7 +22,7 @@ class Incidencia extends CI_Model {
         return $data->result();
     }
 
-    // Consulta las incidencias de por usuario y status
+    // Consulta todas las incidencias de los usuarios por status
     public function get_incidencias($no_empleado, $status) {
         $data;
         if($status == 0) { //Incidencias pendientes
