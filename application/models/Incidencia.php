@@ -4,7 +4,12 @@ class Incidencia extends CI_Model {
         $this->load->database();
     }
 
-    // Obtener las incidencias que conincidan con la barra de busqueda
+    // Insertar datos de una nueva incidencia
+    public function guardar_incidencia($datos) {
+        $this->db->insert('contactos', $datos);
+    }
+    
+    // Obtener las incidencias que conincidan con la busqueda de la barra de busqueda
     public function get_incidencia($no_empleado, $search) {
         $data = $this->db
                 ->select("id_incidencia, titulo, status, fecha_apertura")
@@ -22,7 +27,7 @@ class Incidencia extends CI_Model {
         return $data->result();
     }
 
-    // Consulta todas las incidencias de los usuarios por status
+    // Consulta todas las incidencias de un usuario por sus diferentes status
     public function get_incidencias($no_empleado, $status) {
         $data;
         if($status == 0) { //Incidencias pendientes
@@ -57,6 +62,33 @@ class Incidencia extends CI_Model {
             return false;
         }
         return $data->result();
+    }
+
+    public function datos_reporte($id_incidencia) {
+        $data = $this->db
+                ->select("i.id_incidencia, i.titulo, i.status, i.fecha_apertura, i.fecha_cierre, i.descripcion, concat_ws(' ', u.nombre, u.apellido_paterno, u.apellido_materno) as usuario, u.email, e.nombre, e.direccion_ip, e.inventario, e.serie, e.serie, e.marca, e.procesador, e.ram, e.disco_duro, e.teclado, e.mause, e.dvd, e.inventario_monitor, e.serie_monitor, e.marca_monitor, e.tamano_monitor, e.sistema_operativo, e.observaciones, di.nombre as direccion, de.nombre as dependencia")
+                ->from("incidencia i")
+                ->join("usuario u", "i.no_empleado=u.no_empleado")
+                ->join("equipo e", "u.id_equipo=e.id_equipo")
+                ->join("direccion di", "e.id_direccion=di.id_direccion")
+                ->join("dependencia de", "di.id_dependencia=de.id_dependencia")
+                ->where('i.id_incidencia', $id_incidencia)
+                ->get();
+        
+        // Si no se encuentra resultados
+        if(!$data->result()) {
+            return false;
+        }
+        return $data->row();
+        /* Datos de la incidencia, el usuario que la creo, datos de su equipo, direccion y dependencia a la que pertenece
+        SELECT i.id_incidencia, i.titulo, i.status, i.fecha_apertura, i.fecha_cierre, i.descripcion, concat_ws(' ', u.nombre, u.apellido_paterno, u.apellido_materno) as 'usuario', u.email, e.nombre, e.direccion_ip, e.inventario, e.serie, e.serie, e.marca, e.procesador, e.ram, e.disco_duro, e.teclado, e.mause, e.dvd, e.inventario_monitor, e.serie_monitor, e.marca_monitor, e.tamano_monitor, e.sistema_operativo, e.observaciones, di.nombre as 'dirección', de.nombre as 'dependencía' 
+        FROM incidencia as i 
+        INNER JOIN usuario as u ON i.no_empleado=u.no_empleado 
+        INNER JOIN equipo as e ON u.id_equipo=e.id_equipo
+        INNER JOIN direccion as di ON e.id_direccion=di.id_direccion
+        INNER JOIN dependencia as de ON di.id_dependencia=de.id_dependencia 
+        WHERE i.id_incidencia = '1';
+        */
     }
 }
 /*

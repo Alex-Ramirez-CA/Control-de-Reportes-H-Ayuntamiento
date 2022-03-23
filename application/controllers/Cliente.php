@@ -57,4 +57,35 @@ class Cliente extends CI_Controller {
 		echo json_encode($data);
 	}
 
+	// Recibe un id desde la vista y traes los datos necesario para crear el reporte
+    public function nuevo_reporte($id_incidencia){
+        // $id_incidencia = 1;
+		$generales = $this->Incidencia->datos_reporte($id_incidencia);
+		$comentarios = $this->Atender_incidencia->get_comentarios($id_incidencia);
+		$archivos = $this->Archivo->get_archivos($id_incidencia);
+        $data = array(
+			'head' => $this->load->view('layout/head', '', TRUE),
+			'footer' => $this->load->view('layout/footer', '', TRUE),
+            'generales' => $generales,
+            'comentarios' => $comentarios,
+            'archivos' => $archivos
+		);
+		$this->load->view('v_reporte', $data);
+        // echo json_encode($data);
+    }
+
+	public function nueva_incidencia() {
+		$fecha = date("Y").'-'.date("m").'-'.date("d");
+		$datos = array(
+			'titulo' => $this->input->post('titulo'),
+			'no_empleado' => $this->session->userdata('id'),
+			'fecha_apertura' => $fecha,
+			'fecha_cierre' => '',
+			'descripcion' => $this->input->post('descripcion'),
+			'status' => 0
+		);
+		$this->incidencia->guardar_incidencia($datos);
+		redirect('cliente');
+	}
+
 }
