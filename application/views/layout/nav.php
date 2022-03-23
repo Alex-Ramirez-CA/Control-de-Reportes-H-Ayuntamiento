@@ -1,5 +1,5 @@
 <header class="menu">
-
+    <!-- Primera parte (parte de arriba) del menú de opciones -->
     <div class="parte1">
         <h1 class="navbar-brand p-0 m-0" style="color: #006E95;" id="menu-titulo" href="#">Control de reportes internos del H. Atuntamiento de Colima</h1>
         <div>
@@ -22,6 +22,7 @@
         </div>
     </div>
 
+    <!-- Segunda parte (parte de abajo) del menú de opciones -->
     <div class="parte2">
         <a class="navbar-brand m-0" href="#">Logo de Ayuntamiento de Colima</a>
             <div>
@@ -31,7 +32,10 @@
                         <button class="btn my-2 my-sm-0 mr-2" type="submit">Crear reporte</button>
                         <button class="btn my-2 my-sm-0 mr-2" type="submit">Mis reportes</button>
                     </div>
-                    <input name="search" id="search" class="form-control" type="search" placeholder="Buscar reporte" aria-label="Search">
+                        <input name="search" id="search" class="form-control" type="search" placeholder="Buscar reporte" aria-label="Search">                        
+                        <div id="opciones-buscar">
+                            
+                        </div>
                 </form>
             </div>   
     </div>

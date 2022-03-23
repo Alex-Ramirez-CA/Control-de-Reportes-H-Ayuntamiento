@@ -51,3 +51,8 @@ p {
 	background: #f6f8fa;
 	border-color: #f6f8fa;
 }
+
+.opciones-busqueda {
+	position: absolute;
+	z-index: 3;
+}
