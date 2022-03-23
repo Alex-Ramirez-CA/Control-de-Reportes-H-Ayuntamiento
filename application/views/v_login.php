@@ -1,7 +1,7 @@
 <?= $head ?>
-    <div class="container">
+    <div class="container-Login">
         <div class="row justify-content-center align-items-center" style="height: 100vh">
-            <div class="col-lg-4 col-md-6 col-sm-7 text-center">
+            <div class="col-3 text-center">
                  <form action="<?= base_url('login/validar') ?>" method="POST" id="frm_login">
                     <div class="form-group pb-2">
                         <h1>Inicio de sesión</h1>

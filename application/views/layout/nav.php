@@ -1,11 +1,11 @@
 <header class="menu">
 
     <div class="parte1">
-        <h1 class="navbar-brand p-0 m-0" href="#">Control de reportes internos del H. Atuntamiento de Colima</h1>
+        <h1 class="navbar-brand p-0 m-0" style="color: #006E95;" id="menu-titulo" href="#">Control de reportes internos del H. Atuntamiento de Colima</h1>
         <div>
             <nav class="navbar navbar-light p-0">
                 <div class="btn-group align-items-center">
-                    <p class="pr-2">Bienvenido <?=$this->session->nombre?> </p>
+                    <p class="pr-2" style="color: #006E95;">Bienvenido <?=$this->session->nombre?> </p>
                     <button id="btn-cerrar" type="button" class="btn p-0 pr-2 pl-2 btn-light dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="sr-only">Toggle Dropdown</span>
                     </button>
