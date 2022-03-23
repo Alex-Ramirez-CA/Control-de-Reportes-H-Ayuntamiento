@@ -109,10 +109,29 @@ class Cliente extends CI_Controller {
 			echo json_encode($erros);
 			$this->output->set_status_header(400);
 		} else {
-			// Si se pasa la validacion del formulario recibir los datos del formulario via post
+			// Si se pasa la validacion del formulario
+			// Subir archivo al servidor
+			$mi_archivo = 'archivo';
+			$config['upload_path'] = "uploads/";
+			$config['file_name'] = "nombre_archivo";
+			$config['allowed_types'] = "*";
+			$config['max_size'] = "5000"; //40mb
+			// $config['max_width'] = "2000";
+			// $config['max_height'] = "2000";
+		
+			$this->load->library('upload', $config);
+		
+			if (!$this->upload->do_upload($mi_archivo)) {
+				//Si ocurrio un error al subir la imagen
+				echo $this->upload->display_errors();
+				return;
+			}
+			// Recibir los datos del formulario via post
 			$titulo = $this->input->post('titulo');
 			$descripcion = $this->input->post('descripcion');
+			// Obtener fecha actual
 			$fecha = date("Y").'-'.date("m").'-'.date("d");
+			// Meter los datos en un array para la insercion a la bd
 			$datos = array(
 				'titulo' => $titulo,
 				'no_empleado' => $this->session->userdata('id'),
@@ -121,10 +140,33 @@ class Cliente extends CI_Controller {
 				'descripcion' => $descripcion,
 				'status' => 0
 			);
-			$this->Incidencia->guardar_incidencia($datos);
-			redirect('cliente');
-			// echo json_encode($datos);
+		
+			// $this->Incidencia->guardar_incidencia($datos);
+			// redirect('cliente');
+			echo json_encode($datos);
 		}
 	}
+
+	private function cargar_archivo($nombre_archivo) {
+
+		$mi_archivo = 'archivo';
+		$config['upload_path'] = "../uploads/";
+		$config['file_name'] = "nombre_archivo";
+		$config['allowed_types'] = "*";
+		$config['max_size'] = "5000"; //40mb
+		// $config['max_width'] = "2000";
+		// $config['max_height'] = "2000";
+	
+		$this->load->library('upload', $config);
+	
+		if (!$this->upload->do_upload($mi_archivo)) {
+			//*** ocurrio un error
+			// $data['uploadError'] = $this->upload->display_errors();
+			echo $this->upload->display_errors();
+			return;
+		}
+	
+		var_dump($this->upload->data()); 
+		}
 
 }
