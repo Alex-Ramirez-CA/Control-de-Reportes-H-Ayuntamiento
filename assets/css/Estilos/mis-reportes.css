@@ -1,24 +1,28 @@
 .container {
 	width: 100%;
 	min-width: 800px;
-	max-width: 1000px;
+	max-width: 900px;
 	max-height: 500px;
+	margin-top: 30px;
+	display: flex;
+	justify-content: space-between;
 }
 
-#titulo-proceso,
-#titulo-pendiente {
+.titulo-proceso,
+.titulo-pendiente {
 	margin-bottom: 10px;
 }
 
-#titulo-proceso h3,
-#titulo-pendiente h3 {
+.titulo-proceso h3,
+.titulo-pendiente h3 {
 	margin: 0;
 	text-align: center;
-	font-size: 18px;
+	font-size: 15px;
 }
 
-#columna-pendiente,
-#columna-proceso {
+.columna-pendiente,
+.columna-proceso {
+	width: 370px;
 	height: 450px;
 	border-radius: 7px;
 	align-items: center;
@@ -40,7 +44,7 @@
 	margin: 0px auto;
 	display: flex;
 	flex-direction: column;
-	width: 285px;
+	width: 300px;
 	margin-top: 20px;
 	margin-bottom: 20px;
 	background: rgba(255, 255, 255, 0.3);
@@ -62,18 +66,62 @@
 	justify-content: space-between;
 	margin-left: 3px;
 	margin-right: 3px;
+	width: 290px;
+}
+
+.card-title {
+	margin: 0;
+}
+
+/* Para los reportes pendientes */
+.pendiente .card-title h5 {
+	margin: 0;
+	text-align: center;
+	padding-top: 7px;
+	width: 300px;
+	height: 30px;
+	font-size: 13px;
+	background: #f07d6f;
+	color: white;
+	border-radius: 10px;
+}
+
+.pendiente .texto-medio h5,
+.pendiente .fecha h5 {
+	color: #f07d6f;
+	font-size: 13px;
+	margin: 0px;
+}
+
+/* Para los reportes proceso */
+.proceso .card-title h5 {
+	margin: 0;
+	text-align: center;
+	padding-top: 7px;
+	width: 300px;
+	height: 30px;
+	font-size: 13px;
+	background: #6cc5b2;
+	color: white;
+	border-radius: 10px;
+}
+
+.proceso .texto-medio h5,
+.proceso .fecha h5 {
+	color: #6cc5b2;
+	font-size: 13px;
+	margin: 0px;
+}
+
+.card-title,
+.texto-medio {
+	width: 180px;
+	text-align: justify;
 }
 
 .card-body p,
 .card-body h5 {
 	margin-bottom: 2px;
-}
-
-.texto-medio h5,
-.fecha h5 {
-	color: #26a2d9;
-	font-size: 13px;
-	margin: 0px;
 }
 
 .fecha {
@@ -96,11 +144,7 @@
 }
 
 .departamento {
-	color: white;
-	background-color: #8294be;
-	border-radius: 15px;
+	width: 100%;
 	font-size: 11px;
 	margin-top: 3px;
-	padding-left: 3px;
-	padding-right: 3px;
 }
