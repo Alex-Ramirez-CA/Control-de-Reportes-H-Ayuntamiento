@@ -5,8 +5,9 @@ class Cliente extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
-		$this->load->library(array('session'));
+		$this->load->library(array('session', 'form_validation'));
 		$this->load->model('Incidencia');
+		$this->load->helper(array('incidence/incidencia_rules'));
 	}
 
 	public function index()
@@ -74,18 +75,56 @@ class Cliente extends CI_Controller {
         // echo json_encode($data);
     }
 
-	public function nueva_incidencia() {
-		$fecha = date("Y").'-'.date("m").'-'.date("d");
-		$datos = array(
-			'titulo' => $this->input->post('titulo'),
-			'no_empleado' => $this->session->userdata('id'),
-			'fecha_apertura' => $fecha,
-			'fecha_cierre' => '',
-			'descripcion' => $this->input->post('descripcion'),
-			'status' => 0
+	// Funcion que manda a llamar al formulario para crear una nueva incidencia
+	public function agregar_incidencia() {
+		if(!$this->session->has_userdata('id_rol')){
+            redirect('login');
+        }
+		$data = array(
+			'head' => $this->load->view('layout/head', '', TRUE),
+			'nav' => $this->load->view('layout/nav', '', TRUE),
+			'footer' => $this->load->view('layout/footer', '', TRUE),
 		);
-		$this->incidencia->guardar_incidencia($datos);
-		redirect('cliente');
+        $this->load->view('v_crear_incidencia', $data);
+	}
+
+	// Funcion para guardar la incidencia
+	public function guardar_incidencia() {
+		if(!$this->session->has_userdata('id_rol')){
+            redirect('login');
+        }
+		// Eliminar los deliminatores que agrega por defecto la funcion form_error
+		$this->form_validation->set_error_delimiters('', '');
+		// Cargar las reglas de validación llamando a la función del helper
+		$rules = getIncidenciaRules();
+		$this->form_validation->set_rules($rules);
+		// validar si las reglas se cumplen
+		if($this->form_validation->run() == FALSE) {
+			// Guardar las mensajes en caso de error de validación, dichos mensajes se encuentran en el helper
+			$erros = array(
+				'titulo' => form_error('titulo'),
+				'descripcion' => form_error('descripcion'),
+			);
+			// Mandar respuesta al cliente
+			echo json_encode($erros);
+			$this->output->set_status_header(400);
+		} else {
+			// Si se pasa la validacion del formulario recibir los datos del formulario via post
+			$titulo = $this->input->post('titulo');
+			$descripcion = $this->input->post('descripcion');
+			$fecha = date("Y").'-'.date("m").'-'.date("d");
+			$datos = array(
+				'titulo' => $titulo,
+				'no_empleado' => $this->session->userdata('id'),
+				'fecha_apertura' => $fecha,
+				'fecha_cierre' => '',
+				'descripcion' => $descripcion,
+				'status' => 0
+			);
+			$this->Incidencia->guardar_incidencia($datos);
+			redirect('cliente');
+			// echo json_encode($datos);
+		}
 	}
 
 }

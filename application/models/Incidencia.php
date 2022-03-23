@@ -6,7 +6,7 @@ class Incidencia extends CI_Model {
 
     // Insertar datos de una nueva incidencia
     public function guardar_incidencia($datos) {
-        $this->db->insert('contactos', $datos);
+        $this->db->insert('incidencia', $datos);
     }
     
     // Obtener las incidencias que conincidan con la busqueda de la barra de busqueda
