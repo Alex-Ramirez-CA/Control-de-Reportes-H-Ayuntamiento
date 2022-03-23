@@ -32,7 +32,10 @@
                         <button class="btn my-2 my-sm-0 mr-2" type="submit">Crear reporte</button>
                         <button class="btn my-2 my-sm-0 mr-2" type="submit">Mis reportes</button>
                     </div>
-                    <input name="search" id="search" class="form-control" type="search" placeholder="Buscar reporte" aria-label="Search">
+                        <input name="search" id="search" class="form-control" type="search" placeholder="Buscar reporte" aria-label="Search">                        
+                        <div id="opciones-buscar">
+                            
+                        </div>
                 </form>
             </div>   
     </div>
