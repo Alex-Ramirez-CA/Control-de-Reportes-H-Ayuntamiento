@@ -4,23 +4,23 @@
 
 <div class="container">
 
-    <!-- Columna de los reportes en proceso -->
+    <!-- Columna de los reportes pendientes -->
     
     <div class="pendiente">
         <div class="titulo-pendiente">
-            <h3>Reportes pendientes</h3>
+            <h3><b>Reportes pendientes</b></h3>
         </div>
 
         <div class="columna-pendiente">   
-            <?php foreach($en_proceso as $item): ?>
+            <?php foreach($pendientes as $item): ?>
                 <div class="card">
                     <div class="card-title">
                         <h5><?= $item->titulo; ?></h5>
                     </div>
                     <div class="card-body">
                         <div class="texto-medio">
-                            <p class="atiende">Atendido por <?= $item->encargado; ?> </p>                        
-                            <p class="departamento"><?= "Departamento: ".$item->departamento; ?></p>                        
+                            <p class="atiende"></p>                        
+                            <p class="departamento"></p>                        
                         </div>
                         <div class="fecha">
                             <h5>Creado</h5>
@@ -35,7 +35,7 @@
     <!-- Columna de los reportes en proceso -->
     <div class="proceso">
         <div class="titulo-proceso">
-            <h3>Reportes en proceso</h3>
+            <h3><b>Reportes en proceso</b></h3>
         </div>
         
         <div class="columna-proceso">   
