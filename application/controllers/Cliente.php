@@ -116,7 +116,7 @@ class Cliente extends CI_Controller {
 			// generar un nombre para el archivo con la fecha actual y un valor aleatorio
 			$time = time();
 			$date = date("dmYHis", $time);
-			$nombre_archivo = $date.'_'.rand(0, 999);;
+			$nombre_archivo = $date.'_'.rand(0, 999).'_'.$_FILES['archivo']['name'];
 			// Subir archivo al servidor
 			$mi_archivo = 'archivo';
 			$config['upload_path'] = "uploads/";
