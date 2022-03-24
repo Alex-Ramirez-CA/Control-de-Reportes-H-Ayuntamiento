@@ -113,14 +113,16 @@ class Cliente extends CI_Controller {
 			$this->output->set_status_header(400);
 		} else {
 			// Si se pasa la validacion del formulario
+			// generar un nombre para el archivo con la fecha actual y un valor aleatorio
+			$time = time();
+			$date = date("dmYHis", $time);
+			$nombre_archivo = $date.'_'.rand(0, 999);;
 			// Subir archivo al servidor
 			$mi_archivo = 'archivo';
 			$config['upload_path'] = "uploads/";
-			$config['file_name'] = "nombre_archivo";
+			$config['file_name'] = $nombre_archivo;
 			$config['allowed_types'] = "*";
 			$config['max_size'] = "5000"; //40mb
-			// $config['max_width'] = "2000";
-			// $config['max_height'] = "2000";
 		
 			$this->load->library('upload', $config);
 		
@@ -141,12 +143,13 @@ class Cliente extends CI_Controller {
 				'fecha_apertura' => $fecha,
 				'fecha_cierre' => '',
 				'descripcion' => $descripcion,
-				'status' => 0
+				'status' => 0,
+				'archivo' => $nombre_archivo,
 			);
 		
-			// $this->Incidencia->guardar_incidencia($datos);
-			// redirect('cliente');
-			echo json_encode($datos);
+			$this->Incidencia->guardar_incidencia($datos);
+			redirect('cliente');
+			// echo json_encode($datos);
 		}
 	}
 
