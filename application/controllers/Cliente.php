@@ -64,7 +64,7 @@ class Cliente extends CI_Controller {
 	// Recibe un id desde la vista y traes los datos necesario para crear el reporte
     public function visualizar_reporte(){
         // $id_incidencia = $this->input->post('id_incidencia');
-		$id_incidencia = 1;
+		$id_incidencia = 9;
 		$generales = $this->Incidencia->datos_incidencia($id_incidencia);
 		$comentarios = $this->Atender_incidencia->get_comentarios($id_incidencia);
 		// $archivos = $this->Archivo->get_archivos($id_incidencia);
