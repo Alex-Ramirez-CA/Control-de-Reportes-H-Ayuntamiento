@@ -19,9 +19,9 @@
                 }else{
                     foreach($pendientes as $item):
             ?>
-                    <div class="card">
+                    <div class="card" idCard="<?= $item->id_incidencia;?>">
                         <div class="card-title">
-                            <h5><?= $item->titulo; ?></h5>
+                            <h5> <?= $item->titulo; ?></h5>
                         </div>
                         <div class="card-body">
                             <div class="texto-medio">
@@ -54,7 +54,7 @@
                 }else{ 
                     foreach($en_proceso as $item): 
             ?>
-                        <div class="card">
+                        <div class="card" idCard="<?= $item->id_incidencia;?>">
                             <div class="card-title">
                                 <h5><?= $item->titulo; ?></h5>
                             </div>

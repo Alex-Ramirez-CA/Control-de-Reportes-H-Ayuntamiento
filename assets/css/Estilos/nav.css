@@ -1,3 +1,6 @@
+body {
+	position: relative;
+}
 .menu {
 	width: 100%;
 	max-width: 1200px;
@@ -6,6 +9,8 @@
 	background: rgba(255, 255, 255, 0.3);
 	box-shadow: 0 3px 3px 0 rgba(31, 38, 135, 0.37);
 	border-radius: 15px;
+	background: #f6f8fa;
+	position: relative;
 }
 
 .parte1,
@@ -14,7 +19,6 @@
 	justify-content: space-between;
 	padding-left: 10px;
 	padding-right: 10px;
-	background: #f6f8fa;
 }
 
 .parte2 {
@@ -27,6 +31,12 @@
 
 p {
 	margin: 0;
+}
+
+.dropdown-menu a:hover {
+	color: #fff;
+	background: #006e95;
+	border-radius: 0.25rem;
 }
 
 .opciones button {
@@ -52,7 +62,33 @@ p {
 	border-color: #f6f8fa;
 }
 
-.opciones-busqueda {
+#opciones-buscar {
 	position: absolute;
-	z-index: 3;
+	display: flex;
+	flex-direction: column;
+	top: 95px;
+	right: 11px;
+	background-color: #fff;
+	width: 205px;
+	overflow: hidden;
+	z-index: 1;
+	border-radius: 0.25rem;
+	border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+#opciones-buscar a {
+	width: 205px;
+	padding-left: 12px;
+	padding-right: 12px;
+	padding-bottom: 5px;
+	padding-top: 5px;
+	cursor: default;
+	color: #212529;
+	text-decoration: none;
+}
+
+#opciones-buscar a:hover {
+	color: #fff;
+	background: #006e95;
+	border-radius: 0.25rem;
 }

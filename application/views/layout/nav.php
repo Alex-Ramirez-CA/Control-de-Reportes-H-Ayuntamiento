@@ -26,16 +26,18 @@
     <div class="parte2">
         <a class="navbar-brand m-0" href="#">Logo de Ayuntamiento de Colima</a>
             <div>
-                <form class="form-inline mt-2">
-                    <div class="opciones">
+                <form class="form-inline mt-2" autocomplete="off">
+                    <div class="opciones" >
                         <button class=" <?= $this->uri->segment(1) == 'administrador' ? 'visible' : 'invisible'; ?> btn my-2 my-sm-0 mr-2" type="submit">Administración</button>
                         <button class="btn my-2 my-sm-0 mr-2" type="submit">Crear reporte</button>
                         <button class="btn my-2 my-sm-0 mr-2" type="submit">Mis reportes</button>
                     </div>
+                    <div class="autocompletar">
                         <input name="search" id="search" class="form-control" type="search" placeholder="Buscar reporte" aria-label="Search">                        
                         <div id="opciones-buscar">
                             
                         </div>
+                    </div>
                 </form>
             </div>   
     </div>
