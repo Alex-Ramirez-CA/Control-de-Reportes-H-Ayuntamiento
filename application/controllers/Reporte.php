@@ -11,30 +11,20 @@ class Reporte extends CI_Controller {
     
     public function index()
 	{
-        // $id_incidencia = 1;
-		// $generales = $this->Incidencia->datos_reporte($id_incidencia);
-		// $comentarios = $this->Atender_incidencia->get_comentarios($id_incidencia);
-		// $archivos = $this->Archivo->get_archivos($id_incidencia);
-        $data = array(
-			'head' => $this->load->view('layout/head', '', TRUE),
-			'footer' => $this->load->view('layout/footer', '', TRUE)
-		);
-		
-		$this->load->view('v_reporte', $data);
+        
 	}
 
-    // Recibe un id desde la vista y traes los datos necesario para crear el reporte
-    public function generar_reporte($id_incidencia){
-        // $id_incidencia = 1;
-		$generales = $this->Incidencia->datos_reporte($id_incidencia);
+    // Recibe el id_incidencia por parametro y traes los datos necesario para crear el reporte
+    public function nuevo_reporte($id_incidencia){
+        $generales = $this->Incidencia->datos_incidencia($id_incidencia);
 		$comentarios = $this->Atender_incidencia->get_comentarios($id_incidencia);
-		$archivos = $this->Archivo->get_archivos($id_incidencia);
-        $data = array(
+		$data = array(
+			'head' => $this->load->view('layout/head', '', TRUE),
+			'footer' => $this->load->view('layout/footer', '', TRUE),
             'generales' => $generales,
             'comentarios' => $comentarios,
-            'archivos' => $archivos
 		);
-        echo json_encode($data);
+		$this->load->view('v_reporte', $data);
     }
 
 }
