@@ -72,7 +72,6 @@ class Cliente extends CI_Controller {
 			// 'footer' => $this->load->view('layout/footer', '', TRUE),
             'generales' => $generales,
             'comentarios' => $comentarios,
-            // 'archivos' => $archivos
 		);
 		// $this->load->view('v_reporte', $data);
         echo json_encode($data);
