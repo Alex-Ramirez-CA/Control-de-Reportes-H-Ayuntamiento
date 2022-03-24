@@ -64,9 +64,9 @@ class Incidencia extends CI_Model {
         return $data->result();
     }
 
-    public function datos_reporte($id_incidencia) {
+    public function datos_incidencia($id_incidencia) {
         $data = $this->db
-                ->select("i.id_incidencia, i.titulo, i.status, i.fecha_apertura, i.fecha_cierre, i.descripcion, concat_ws(' ', u.nombre, u.apellido_paterno, u.apellido_materno) as usuario, u.email, e.nombre, e.direccion_ip, e.inventario, e.serie, e.serie, e.marca, e.procesador, e.ram, e.disco_duro, e.teclado, e.mause, e.dvd, e.inventario_monitor, e.serie_monitor, e.marca_monitor, e.tamano_monitor, e.sistema_operativo, e.observaciones, di.nombre as direccion, de.nombre as dependencia")
+                ->select("i.id_incidencia, i.titulo, i.fecha_apertura, i.fecha_cierre, i.descripcion, i.status, i.archivo, concat_ws(' ', u.nombre, u.apellido_paterno, u.apellido_materno) as usuario, u.email, e.nombre, e.direccion_ip, e.inventario, e.serie, e.serie, e.marca, e.procesador, e.ram, e.disco_duro, e.teclado, e.mause, e.dvd, e.inventario_monitor, e.serie_monitor, e.marca_monitor, e.tamano_monitor, e.sistema_operativo, e.observaciones, di.nombre as direccion, de.nombre as dependencia")
                 ->from("incidencia i")
                 ->join("usuario u", "i.no_empleado=u.no_empleado")
                 ->join("equipo e", "u.id_equipo=e.id_equipo")
