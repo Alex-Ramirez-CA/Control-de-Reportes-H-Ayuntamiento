@@ -6,7 +6,7 @@ class Cliente extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->library(array('session', 'form_validation'));
-		$this->load->model('Incidencia');
+		$this->load->model(array('Incidencia', 'Atender_incidencia'));
 		$this->load->helper(array('incidence/incidencia_rules'));
 	}
 
@@ -63,13 +63,14 @@ class Cliente extends CI_Controller {
 
 	// Recibe un id desde la vista y traes los datos necesario para crear el reporte
     public function visualizar_reporte(){
-        $id_incidencia = $this->input->post('id_incidencia');
+        // $id_incidencia = $this->input->post('id_incidencia');
+		$id_incidencia = 1;
 		$generales = $this->Incidencia->datos_incidencia($id_incidencia);
 		$comentarios = $this->Atender_incidencia->get_comentarios($id_incidencia);
 		// $archivos = $this->Archivo->get_archivos($id_incidencia);
         $data = array(
-			'head' => $this->load->view('layout/head', '', TRUE),
-			'footer' => $this->load->view('layout/footer', '', TRUE),
+			// 'head' => $this->load->view('layout/head', '', TRUE),
+			// 'footer' => $this->load->view('layout/footer', '', TRUE),
             'generales' => $generales,
             'comentarios' => $comentarios,
             // 'archivos' => $archivos
