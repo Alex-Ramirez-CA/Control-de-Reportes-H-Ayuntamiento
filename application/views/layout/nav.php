@@ -24,7 +24,7 @@
 
     <!-- Segunda parte (parte de abajo) del menú de opciones -->
     <div class="parte2">
-        <a class="navbar-brand m-0" href="#">Logo de Ayuntamiento de Colima</a>
+        <a class="navbar-brand m-0" href="<?= base_url($this->session->rol_nombre) ?>">Logo de Ayuntamiento de Colima</a>
             <div>
                 <form class="form-inline mt-2" autocomplete="off">
                     <div class="opciones" >

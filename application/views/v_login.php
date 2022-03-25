@@ -1,32 +1,41 @@
 <?= $head ?>
-    <div class="container-Login">
-        <div class="row justify-content-center align-items-center" style="height: 100vh">
-            <div class="col-3 text-center">
-                 <form action="<?= base_url('login/validar') ?>" method="POST" id="frm_login">
-                    <div class="form-group pb-2">
-                        <h1>Inicio de sesión</h1>
+
+    <div class="container-login">
+        <h1 class="titulo-pagina">Control de reportes internos del H. Ayuntamiento de Colima</h1>
+        <div class="formulario-ingreso">
+            <form action="<?= base_url('login/validar') ?>" method="POST" id="frm_login">
+                <!-- Titulo del formulario -->
+                <div class="form-group" id="titulo-login">
+                    <div class="logo-login">
+                        
                     </div>
-                    <div class="form-group pb-2" id="email"> 
-                        <label for="email">Correo electrónico</label>
-                        <input type="email" name="email" class="form-control" id="email" placeholder="Ingrese su email">
-                        <div class="invalid-feedback">
-                            
-                        </div>
+                    <h3>Inicio de sesión</h3>
+                </div>
+                <!-- Parte del formulario donde se coloca el correo-->
+                <div class="form-group" id="email"> 
+                    <input type="email" name="email" class="form-control" id="email" placeholder="Ingrese su email">
+                    <div class="invalid-feedback">
+                                
                     </div>
-                    <div class="form-group pb-2" id="password">
-                        <label for="password">Contraseña</label>
-                        <input type="password" name="password" class="form-control" id="password" placeholder="Ingrese su contraseña">
-                        <div class="invalid-feedback">
-                            
-                        </div>
+                </div>
+                <!-- Parte del formulario donde se coloca la contraseña-->
+                <div class="form-group" id="password">
+                    <input type="password" name="password" class="form-control" id="password" placeholder="Contraseña">
+                    <div class="invalid-feedback">
+                                
                     </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary form-control">Ingresar</button>
-                    </div>
-                    <div class="form-group" id="alert"></div>
-                </form>
-            </div>
+                </div>
+                <!-- Boton para enviar los datos del formulario -->
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary form-control boton-ingreso">Ingresar</button>
+                </div>
+                <!-- Div para colocar la alerta en caso de error -->
+                <div class="form-group" id="alert"></div>
+
+            </form>
+
         </div>
+        
     </div>
    
 <?= $footer ?>

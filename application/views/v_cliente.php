@@ -54,7 +54,7 @@
                 }else{ 
                     foreach($en_proceso as $item): 
             ?>
-                        <div class="card" idCard="<?= $item->id_incidencia;?>">
+                        <div class="card"  idCard="<?= $item->id_incidencia;?>">
                             <div class="card-title">
                                 <h5><?= $item->titulo; ?></h5>
                             </div>
