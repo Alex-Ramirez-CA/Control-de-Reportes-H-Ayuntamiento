@@ -6,7 +6,7 @@ function getIncidenciaRules() {
                 'label' => 'Titulo',
                 'rules' => 'required',
                 'errors' => array(
-                    'required' => 'El %s es requerido.',
+                    'required' => 'El %s es requerido',
                 ),
         ),
         array(

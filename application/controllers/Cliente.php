@@ -97,9 +97,15 @@ class Cliente extends CI_Controller {
 				'titulo' => form_error('titulo'),
 				'descripcion' => form_error('descripcion'),
 			);
+			$data = array(
+				'head' => $this->load->view('layout/head', '', TRUE),
+				'nav' => $this->load->view('layout/nav', '', TRUE),
+				'footer' => $this->load->view('layout/footer', '', TRUE),
+			);
+			$this->load->view('v_crear_incidencia', $data);
 			// Mandar respuesta al cliente
-			echo json_encode($erros);
-			$this->output->set_status_header(400);
+			// echo json_encode($erros);
+			// $this->output->set_status_header(400);
 		} else {
 			// Si se pasa la validacion del formulario
 			// generar un nombre para el archivo con la fecha actual y un valor aleatorio
@@ -138,7 +144,7 @@ class Cliente extends CI_Controller {
 		
 			$this->Incidencia->guardar_incidencia($datos);
 			redirect('cliente');
-			// echo json_encode($datos);
+			// echo json_encode(array('url' => base_url('cliente')));
 		}
 	}
 }
