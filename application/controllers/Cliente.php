@@ -111,7 +111,11 @@ class Cliente extends CI_Controller {
 			// generar un nombre para el archivo con la fecha actual y un valor aleatorio
 			$time = time();
 			$date = date("dmYHis", $time);
-			$nombre_archivo = $date.'_'.rand(0, 999).'_'.$_FILES['archivo']['name'];
+			// extraer extension del archivo
+			$path = $_FILES['archivo']['name'];
+			$extension = pathinfo($path, PATHINFO_EXTENSION);
+			// asignar nuevo nombre
+			$nombre_archivo = $date.''.rand(0, 99).'.'.$extension;
 			// Subir archivo al servidor
 			$mi_archivo = 'archivo';
 			$config['upload_path'] = "uploads/";
@@ -144,7 +148,7 @@ class Cliente extends CI_Controller {
 		
 			$this->Incidencia->guardar_incidencia($datos);
 			redirect('cliente');
-			// echo json_encode(array('url' => base_url('cliente')));
+			// echo json_encode($datos);
 		}
 	}
 }
