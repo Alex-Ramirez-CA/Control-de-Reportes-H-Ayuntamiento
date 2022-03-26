@@ -1,0 +1,72 @@
+.container-crear-incidencia {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.titulo-crear-reporte {
+	margin-bottom: 20px;
+	margin-top: 20px;
+}
+
+.titulo-crear-reporte h1 {
+	font-size: 22px;
+	color: #4e4e4e;
+}
+
+#frm_incidencia {
+	display: flex;
+	justify-content: space-between;
+	width: 1000px;
+	height: 450px;
+	background-color: aqua;
+	align-items: center;
+	background: linear-gradient(
+		to bottom right,
+		#f6f8fa,
+		#f6f8fa,
+		#f6f8fa,
+		rgb(250, 255, 254)
+	);
+	box-shadow: 0 3px 5px 0 rgba(31, 38, 135, 0.37);
+	backdrop-filter: blur(20px);
+	border: solid 1px #afafaa;
+}
+
+.parte1-formulario {
+	width: 450px;
+	margin-left: 30px;
+}
+
+.parte2-formulario {
+	width: 380px;
+	margin-right: 30px;
+}
+
+.parte1-formulario input,
+.parte2-formulario input {
+	border-radius: 10px;
+}
+
+.boton-guardar-incidencia {
+	background-color: #006e95;
+	color: white;
+	border: 1px solid #006e95;
+	border-radius: 15px;
+}
+
+#archivo input {
+	height: 120px;
+}
+
+.boton-guardar-incidencia:hover {
+	background-color: #f6f8fa;
+	color: #006e95;
+	border-radius: 10px;
+}
+
+#descripcion::-webkit-input-placeholder,
+#titulo::-webkit-input-placeholder {
+	text-align: center;
+	line-height: 240px;
+}

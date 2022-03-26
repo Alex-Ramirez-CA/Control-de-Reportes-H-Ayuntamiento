@@ -15,7 +15,9 @@
 }
 
 .formulario-ingreso {
-	padding: 70px;
+	padding-left: 50px;
+	padding-right: 50px;
+	padding-bottom: 35px;
 	background: #fff;
 	box-shadow: 0 3px 10px 0 #4e4e4e;
 	backdrop-filter: blur(20px);
@@ -24,26 +26,18 @@
 }
 
 .logo-login {
-	height: 80px;
-	width: 180px;
-	background: linear-gradient(
-		to bottom right,
-		#f07d6f,
-		#e52141,
-		#8294be,
-		#26a2d9,
-		#6cc5b2,
-		#55ba7d,
-		#9dcf8e,
-		#f5d344
-	);
 	margin: 0px auto;
-	margin-bottom: 30px;
+	height: 204px;
+	width: 380px;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	margin: 0;
 }
 
 #titulo-login {
 	text-align: center;
-	width: 320px;
+	width: 380px;
 	color: #006e95;
 }
 

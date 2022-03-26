@@ -1,14 +1,12 @@
 <?= $head ?>
 
     <div class="container-login">
-        <h1 class="titulo-pagina">Control de reportes internos del H. Ayuntamiento de Colima</h1>
+        <h1 class="titulo-pagina">Control de reportes internos H. Ayuntamiento de Colima</h1>
         <div class="formulario-ingreso">
             <form action="<?= base_url('login/validar') ?>" method="POST" id="frm_login">
                 <!-- Titulo del formulario -->
                 <div class="form-group" id="titulo-login">
-                    <div class="logo-login">
-                        
-                    </div>
+                    <img class="logo-login" src="<?= base_url('assets/img/logotipos/logo_ayto1-01.png');?>" alt="">
                     <h3>Inicio de sesión</h3>
                 </div>
                 <!-- Parte del formulario donde se coloca el correo-->
