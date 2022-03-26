@@ -23,6 +23,21 @@ body {
 }
 
 .parte2 {
+	height: 65px;
+	align-items: center;
+}
+
+.logo-nav {
+	margin: 0px auto;
+	height: 96px;
+	width: 180px;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	margin: 0;
+}
+
+.parte2 {
 	padding-bottom: 10px;
 }
 
@@ -68,7 +83,7 @@ p {
 	display: flex;
 	flex-direction: column;
 	top: 95px;
-	right: 11px;
+	right: 50px;
 	background-color: #fff;
 	width: 205px;
 	overflow: hidden;
