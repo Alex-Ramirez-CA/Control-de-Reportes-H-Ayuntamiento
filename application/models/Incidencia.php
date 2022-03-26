@@ -39,24 +39,34 @@ class Incidencia extends CI_Model {
                 ->get();
         } else if($status == 1) { //Incidencias en proceso
             $data = $this->db
-                ->select("i.id_incidencia, i.titulo, i.status, i.fecha_apertura, GROUP_CONCAT(DISTINCT d.nombre SEPARATOR ', ') as departamento, GROUP_CONCAT( u.nombre SEPARATOR ', ') as encargado")
-                ->from("incidencia i")
-                ->join("atender_incidencia a", "i.id_incidencia=a.id_incidencia")
-                ->join("departamento d", "a.id_departamento=d.id_departamento")
-                ->join("usuario u", "d.id_departamento=u.id_departamento")
-                ->where(array('i.no_empleado' => $no_empleado, 'i.status' => $status))
-                ->group_by('i.id_incidencia')
+                ->select("id_incidencia, titulo, status, fecha_apertura, (SELECT GROUP_CONCAT(d.nombre SEPARATOR ', ') 
+                FROM incidencia as i 
+                INNER JOIN incidencia_departamento as i_d ON i.id_incidencia=i_d.id_incidencia 
+                INNER JOIN departamento as d ON i_d.id_departamento=d.id_departamento
+                WHERE i.id_incidencia = inc.id_incidencia) as departamento, (SELECT GROUP_CONCAT(u.nombre SEPARATOR ', ') 
+                FROM incidencia as i 
+                INNER JOIN atender_incidencia as ai ON i.id_incidencia=ai.id_incidencia 
+                INNER JOIN usuario as u ON ai.no_empleado=u.no_empleado
+                WHERE i.id_incidencia = inc.id_incidencia) as encargado")
+                ->from("incidencia inc")
+                ->where(array('no_empleado' => $no_empleado, 'status' => $status))
+                ->group_by('id_incidencia')
                 ->get();
         } else if($status == 2) { //Incidencias finalizadas
             $data = $this->db
-                ->select("i.id_incidencia, i.titulo, i.status, i.fecha_apertura, GROUP_CONCAT(DISTINCT d.nombre SEPARATOR ', ') as departamento, GROUP_CONCAT( u.nombre SEPARATOR ', ') as encargado")
-                ->from("incidencia i")
-                ->join("atender_incidencia a", "i.id_incidencia=a.id_incidencia")
-                ->join("departamento d", "a.id_departamento=d.id_departamento")
-                ->join("usuario u", "d.id_departamento=u.id_departamento")
-                ->where(array('i.no_empleado' => $no_empleado, 'i.status' => $status))
-                ->group_by('i.id_incidencia')
-                ->get();
+            ->select("id_incidencia, titulo, status, fecha_apertura, (SELECT GROUP_CONCAT(d.nombre SEPARATOR ', ') 
+            FROM incidencia as i 
+            INNER JOIN incidencia_departamento as i_d ON i.id_incidencia=i_d.id_incidencia 
+            INNER JOIN departamento as d ON i_d.id_departamento=d.id_departamento
+            WHERE i.id_incidencia = inc.id_incidencia) as departamento, (SELECT GROUP_CONCAT(u.nombre SEPARATOR ', ') 
+            FROM incidencia as i 
+            INNER JOIN atender_incidencia as ai ON i.id_incidencia=ai.id_incidencia 
+            INNER JOIN usuario as u ON ai.no_empleado=u.no_empleado
+            WHERE i.id_incidencia = inc.id_incidencia) as encargado")
+            ->from("incidencia inc")
+            ->where(array('no_empleado' => $no_empleado, 'status' => $status))
+            ->group_by('id_incidencia')
+            ->get();
         }
         if(!$data->result()) {
             return false;
@@ -66,7 +76,7 @@ class Incidencia extends CI_Model {
 
     public function datos_incidencia($id_incidencia) {
         $data = $this->db
-                ->select("i.id_incidencia, i.titulo, i.fecha_apertura, i.fecha_cierre, i.descripcion, i.status, i.archivo, concat_ws(' ', u.nombre, u.apellido_paterno, u.apellido_materno) as usuario, u.email, e.nombre, e.direccion_ip, e.inventario, e.serie, e.serie, e.marca, e.procesador, e.ram, e.disco_duro, e.teclado, e.mause, e.dvd, e.inventario_monitor, e.serie_monitor, e.marca_monitor, e.tamano_monitor, e.sistema_operativo, e.observaciones, di.nombre as direccion, de.nombre as dependencia")
+                ->select("i.id_incidencia, i.titulo, i.fecha_apertura, i.fecha_cierre, i.descripcion, i.status, i.archivo, concat_ws(' ', u.nombre, u.apellido_paterno, u.apellido_materno) as usuario, u.email, e.nombre, e.direccion_ip, e.inventario, e.serie, e.serie, e.marca, e.procesador, e.ram, e.disco_duro, e.teclado, e.mouse, e.dvd, e.inventario_monitor, e.serie_monitor, e.marca_monitor, e.tamano_monitor, e.sistema_operativo, e.observaciones, di.nombre as direccion, de.nombre as dependencia")
                 ->from("incidencia i")
                 ->join("usuario u", "i.no_empleado=u.no_empleado")
                 ->join("equipo e", "u.id_equipo=e.id_equipo")
