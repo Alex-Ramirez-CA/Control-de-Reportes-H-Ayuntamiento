@@ -21,7 +21,7 @@
             ?>
                     <div class="card" idCard="<?= $item->id_incidencia;?>">
                         <div class="card-title">
-                            <h5> <?= $item->titulo; ?></h5>
+                            <b><h5> <?= $item->titulo; ?></h5></b>
                         </div>
                         <div class="card-body">
                             <div class="texto-medio">
@@ -29,7 +29,7 @@
                                 <p class="departamento"><b>Departamento: </b>Por asignar</p>                        
                             </div>
                             <div class="fecha">
-                                <h5>Creado</h5>
+                                <b><h5>Creado</h5></b>
                                 <p><?= $item->fecha_apertura; ?></p>
                             </div>
                         </div>
@@ -56,7 +56,7 @@
             ?>
                         <div class="card"  idCard="<?= $item->id_incidencia;?>">
                             <div class="card-title">
-                                <h5><?= $item->titulo; ?></h5>
+                                <b><h5><?= $item->titulo; ?></h5></b>
                             </div>
                             <div class="card-body">
                                 <div class="texto-medio">
@@ -64,7 +64,7 @@
                                     <p class="departamento"><b>Departamento: </b><?=$item->departamento; ?></p>                        
                                 </div>
                                 <div class="fecha">
-                                    <h5>Creado</h5>
+                                    <b><h5>Creado</h5></b>
                                     <p><?= $item->fecha_apertura; ?></p>
                                 </div>
                             </div>

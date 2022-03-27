@@ -1,6 +1,7 @@
 body {
 	position: relative;
 }
+
 .menu {
 	width: 100%;
 	max-width: 1200px;
@@ -8,21 +9,17 @@ body {
 	padding-top: 10px;
 	background: rgba(255, 255, 255, 0.3);
 	box-shadow: 0 3px 3px 0 rgba(31, 38, 135, 0.37);
-	border-radius: 15px;
+	border-radius: 5px;
 	background: #f6f8fa;
 	position: relative;
 	margin-top: 15px;
 }
 
-.parte1,
 .parte2 {
 	display: flex;
 	justify-content: space-between;
 	padding-left: 10px;
 	padding-right: 10px;
-}
-
-.parte2 {
 	height: 65px;
 	align-items: center;
 }
@@ -37,39 +34,46 @@ body {
 	margin: 0;
 }
 
-.parte2 {
-	padding-bottom: 10px;
+.usuario-icono {
+	height: 33px;
+	width: 33px;
+	background-color: #006e95;
+	border-radius: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
 }
 
-.parte1 {
-	padding-top: 5px;
+.usuario-icono:hover {
+	box-shadow: 0 0px 5px 0 #26a2d9;
+}
+
+.parte2 {
+	padding-bottom: 10px;
 }
 
 p {
 	margin: 0;
 }
 
-.dropdown-menu a:hover {
-	color: #fff;
-	background: #006e95;
-	border-radius: 0.25rem;
-}
-
-.opciones button {
+.opciones a {
 	width: 130px;
+	height: 40px;
 	border-radius: 10px;
 	border-color: #f6f8fa;
 	color: #006e95;
 	background: #f6f8fa;
 }
 
-.opciones button:hover {
+.opciones a:hover {
 	width: 130px;
 	border-radius: 10px;
 	border-color: #006e95;
-	background: #006e95;
+	background-color: #006e95;
 	color: #fff;
 }
+
 
 #btn-cerrar {
 	height: 30px;
@@ -80,20 +84,20 @@ p {
 
 #opciones-buscar {
 	position: absolute;
-	display: flex;
 	flex-direction: column;
-	top: 95px;
-	right: 50px;
+	top: 52px;
+	right: 38px;
 	background-color: #fff;
-	width: 205px;
+	width: 225px;
 	overflow: hidden;
 	z-index: 1;
 	border-radius: 0.25rem;
 	border: 1px solid rgba(0, 0, 0, 0.15);
+	display: none;
 }
 
 #opciones-buscar a {
-	width: 205px;
+	width: 225px;
 	padding-left: 12px;
 	padding-right: 12px;
 	padding-bottom: 5px;
@@ -107,4 +111,33 @@ p {
 	color: #fff;
 	background: #006e95;
 	border-radius: 0.25rem;
+}
+
+.menu-cerrar-sesion {
+	position: absolute;
+	background-color: #fff;
+	border-radius: 0.25rem;
+	padding: 5px;
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	margin-top: 195px;
+	margin-left: 380px;
+	z-index: 1;
+	display: none;
+	width: 310px;
+	text-align: center;
+}
+
+.menu-cerrar-sesion p {
+	margin-bottom: 5px;
+	color: #7f8081;
+}
+
+.menu-cerrar-sesion a {
+	margin-bottom: 5px;
+	color: #006e95;
+}
+
+.menu-cerrar-sesion a:hover {
+	color: #fff;
+	background-color: #006e95;
 }

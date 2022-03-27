@@ -1,0 +1,8 @@
+@font-face {
+	font-family: Acumin;
+	src: url("assets/fuentes/Acumin-BdItPro.otf");
+}
+
+* {
+	font-family: Acumin;
+}

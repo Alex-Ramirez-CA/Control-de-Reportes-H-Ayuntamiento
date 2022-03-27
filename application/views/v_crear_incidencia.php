@@ -3,7 +3,7 @@
     
     <div class="container-crear-incidencia">
         <div class="titulo-crear-reporte">
-            <h1>Ingresar datos de reporte</h1>
+            <b><h1>Ingresar datos de reporte</h1></b>
         </div>
         <form action="<?= base_url('cliente/guardar_incidencia') ?>" method="POST" id="frm_incidencia" enctype="multipart/form-data">
             <div class="parte1-formulario">
@@ -22,7 +22,10 @@
             </div>
             <div class="parte2-formulario">
                 <div class="form-group pb-2" id="archivo">
-                    <input class="form-control" type="file" name="archivo">
+                    <h2>Seleccione o arrastre el archivo</h2>
+                    <input class="input-file" class="form-control" type="file" name="archivo" hidden>
+                    <button class="btn-archivo">Elegir archivo</button>
+                    <div id="preview"></div>
                 </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary form-control boton-guardar-incidencia">Guardar</button>
