@@ -4,7 +4,7 @@
             let search = $('#search').val();
             console.log(search);
             $.ajax({
-                url: 'cliente/buscar_incidencia',
+                url: 'busqueda/buscar_incidencia',
                 type: 'POST',
                 data: { search },
                 success: function(data) {

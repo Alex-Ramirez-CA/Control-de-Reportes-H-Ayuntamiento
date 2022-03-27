@@ -10,16 +10,37 @@ class Incidencia extends CI_Model {
     }
     
     // Obtener las incidencias que conincidan con la busqueda de la barra de busqueda
-    public function get_incidencia($no_empleado, $search) {
-        $data = $this->db
+    public function get_incidencia($rol, $no_empleado, $search) {
+        if($rol == 0) { // Usuario tipo cliente
+            $data = $this->db
                 ->select("id_incidencia, titulo, status, fecha_apertura")
                 ->from("incidencia")
                 ->where('no_empleado', $no_empleado)
                 ->like('id_incidencia', $search, 'after', '', TRUE)
                 ->or_like('titulo', $search, 'after', '', TRUE)
-                ->group_by('id_incidencia')
+                ->order_by('id_incidencia')
                 ->get();
-        
+        } else if($rol == 1) { // Usuario tipo filtro
+            $status = 0;
+            // Busqueda por id_incidencia
+            $data = $this->db
+                ->select("id_incidencia, titulo, status, fecha_apertura")
+                ->from("incidencia")
+                ->where('status', $status)
+                ->like('id_incidencia', $search, 'after', '', TRUE)
+                ->order_by('id_incidencia')
+                ->get();
+            if(!$data->result()) {
+                // Busqueda por titulo
+                $data = $this->db
+                    ->select("id_incidencia, titulo, status, fecha_apertura")
+                    ->from("incidencia")
+                    ->where('status', $status)
+                    ->like('titulo', $search, 'after', '', TRUE)
+                    ->order_by('id_incidencia')
+                    ->get();
+            }
+        }
         // Si no se encuentra resultados
         if(!$data->result()) {
             return false;

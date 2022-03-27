@@ -43,23 +43,23 @@ class Cliente extends CI_Controller {
 		
 	}
 
-	public function buscar_incidencia() {
-		// Validar para que no puedan ingresar a esta direccion sin estar logeados
-		if(!$this->session->has_userdata('id_rol')){
-            redirect('login');
-        }
-		// Extraer id del empleado de las variabes de sesion 
-		$no_empleado = $this->session->userdata('id');
-		// Recibir el valor del campo de busqueda via post
-		$search = $this->input->post('search');
-		// Validar que la variable traiga datos
-		if(!empty($search)) {
-			// Hacer consulta al modelo
-			$data = $this->Incidencia->get_incidencia($no_empleado, $search);
-		}
-		// Mandar datos al cliente via ajax
-		echo json_encode($data);
-	}
+	// public function buscar_incidencia() {
+	// 	// Validar para que no puedan ingresar a esta direccion sin estar logeados
+	// 	if(!$this->session->has_userdata('id_rol')){
+    //         redirect('login');
+    //     }
+	// 	// Extraer id del empleado de las variabes de sesion 
+	// 	$no_empleado = $this->session->userdata('id');
+	// 	// Recibir el valor del campo de busqueda via post
+	// 	$search = $this->input->post('search');
+	// 	// Validar que la variable traiga datos
+	// 	if(!empty($search)) {
+	// 		// Hacer consulta al modelo
+	// 		$data = $this->Incidencia->get_incidencia($no_empleado, $search);
+	// 	}
+	// 	// Mandar datos al cliente via ajax
+	// 	echo json_encode($data);
+	// }
 
 	// recibir id_incidencia y mandar la url para abrir nuevas ventanas
     // public function visualizar_reporte(){
