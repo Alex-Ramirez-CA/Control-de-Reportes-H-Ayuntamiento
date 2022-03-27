@@ -100,12 +100,13 @@ class Reporte extends CI_Controller {
 		}
 	}
 
+	// Funcion que recive la id_incidencia cliceada por el usuario y la regrea junto con la url
 	public function visualizar_reporte(){
         $id_incidencia = $this->input->post('id_incidencia');
         echo json_encode(array('url' => base_url('reporte/nuevo_reporte/'.$id_incidencia)));
     }
 	
-    // Recibe el id_incidencia por parametro y traes los datos necesario para crear el reporte
+    // Recibe el id_incidencia por parametro y trae los datos necesario para crear el reporte
     public function nuevo_reporte($id_incidencia){
         $generales = $this->Incidencia->datos_incidencia($id_incidencia);
 		$comentarios = $this->Atender_incidencia->get_comentarios($id_incidencia);
