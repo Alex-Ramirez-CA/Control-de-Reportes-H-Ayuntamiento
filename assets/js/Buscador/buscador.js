@@ -1,8 +1,8 @@
 (function($) {
-    $("#search").keyup(function(ev) { 
+    $("#search").keyup(function(ev) {
+        $('#opciones-buscar').css('display','flex');
         if($('#search').val()){
             let search = $('#search').val();
-            console.log(search);
             $.ajax({
                 url: 'cliente/buscar_incidencia',
                 type: 'POST',
@@ -19,6 +19,7 @@
                         });
                         $('#opciones-buscar').html(template);
                     }
+                        
                     
                 //window.location.replace(json.url);
                 }
@@ -26,6 +27,20 @@
         }else{
             template = "";
         }        
+    });
+
+    $(document).on('click', '.usuario-icono', function(){
+        if($('.menu-cerrar-sesion').css('display') == 'none'){
+            $('.menu-cerrar-sesion').css('display','block');
+        }else{
+            $('.menu-cerrar-sesion').css('display','none');
+        }
+    });
+
+    $(document).on('click', 'body', function(){
+        if($('#opciones-buscar').css('display') == 'flex'){
+            $('#opciones-buscar').css('display','none');
+        }
     });
 
     $(document).on('click', '.card', function(){
