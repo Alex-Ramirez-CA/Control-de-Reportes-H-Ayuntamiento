@@ -7,7 +7,7 @@
                     <div class="opciones">
                         <a class=" <?= $this->uri->segment(1) == 'administrador' ? 'visible' : 'invisible'; ?> btn my-2 my-sm-0 mr-2" type="submit">Administración</a>
                         <a class="btn my-2 my-sm-0 mr-2" href="reporte/agregar_incidencia">Crear reporte</a>
-                        <a class="btn my-2 my-sm-0 mr-2 btn-misreportes" href="<?= base_url($this->session->rol_nombre) ?>">Mis reportes</a>
+                        <a class="btn my-2 my-sm-0 mr-2 btn-misreportes" href="reporte">Mis reportes</a>
                     </div>
                     <div class="autocompletar">
                         <input name="search" id="search" class="form-control mr-2" type="search" placeholder="Buscar reporte" aria-label="Search">                        
