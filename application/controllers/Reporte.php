@@ -12,7 +12,11 @@ class Reporte extends CI_Controller {
     
     public function index()
 	{
-        // Cargar la vista de los reportes de cada usuario, al presionar el boton mis reportes de la barra de nav
+        
+	}
+
+	public function mis_reportes() {
+		// Cargar la vista de los reportes de cada usuario, al presionar el boton mis reportes de la barra de nav
 		// validar que el usuario este logeado
         if($this->session->has_userdata('id_rol')) {
 			// Obtener el id del empleado de los datos de sesion
