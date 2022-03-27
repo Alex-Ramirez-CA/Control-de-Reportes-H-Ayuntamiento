@@ -31,7 +31,7 @@
     $(document).on('click', '.card', function(){
         let elemento = $(this)[0];
         let id_incidencia = $(elemento).attr('idCard');
-        $.post('cliente/visualizar_reporte', {id_incidencia}, function(response){
+        $.post('reporte/visualizar_reporte', {id_incidencia}, function(response){
             let json = JSON.parse(response);
             window.open(json.url);
         });
@@ -40,7 +40,7 @@
     $(document).on('click', '.autocompletado', function(){
         let elemento = $(this)[0]; 
         let id_incidencia = $(elemento).attr('idCard');
-        $.post('cliente/visualizar_reporte', {id_incidencia}, function(response){
+        $.post('reporte/visualizar_reporte', {id_incidencia}, function(response){
             let json = JSON.parse(response);
             window.open(json.url);
             });

@@ -62,10 +62,10 @@ class Cliente extends CI_Controller {
 	}
 
 	// recibir id_incidencia y mandar la url para abrir nuevas ventanas
-    public function visualizar_reporte(){
-        $id_incidencia = $this->input->post('id_incidencia');
-        echo json_encode(array('url' => base_url('reporte/nuevo_reporte/'.$id_incidencia)));
-    }
+    // public function visualizar_reporte(){
+    //     $id_incidencia = $this->input->post('id_incidencia');
+    //     echo json_encode(array('url' => base_url('reporte/nuevo_reporte/'.$id_incidencia)));
+    // }
 
 	// Funcion que manda a llamar la vista del formulario para crear una nueva incidencia
 	public function agregar_incidencia() {
