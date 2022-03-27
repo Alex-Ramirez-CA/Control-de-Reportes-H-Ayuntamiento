@@ -23,9 +23,7 @@
             <div class="parte2-formulario">
                 <div class="form-group pb-2" id="archivo">
                     <h2>Seleccione o arrastre el archivo</h2>
-                    <input class="input-file" class="form-control" type="file" name="archivo" hidden>
-                    <button class="btn-archivo">Elegir archivo</button>
-                    <div id="preview"></div>
+                    <input class="input-file" class="form-control" type="file" name="archivo">
                 </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary form-control boton-guardar-incidencia">Guardar</button>

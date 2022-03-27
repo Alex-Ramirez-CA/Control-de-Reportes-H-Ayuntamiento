@@ -2,6 +2,5 @@
     <script src="<?= base_url('assets/js/bootstrap/bootstrap.min.js');?>"></script>
     <script src="<?= base_url('assets/js/Auth/login.js');?>"></script>
     <script src="<?= base_url('assets/js/Buscador/buscador.js');?>"></script>
-    <script src="<?= base_url('assets/js/arrastrar-archivo/arrastra-archivo.js');?>"></script>
 </body>
 </html>
