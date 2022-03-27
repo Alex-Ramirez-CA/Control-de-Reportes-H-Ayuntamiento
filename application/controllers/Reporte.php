@@ -6,7 +6,7 @@ class Reporte extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->library(array('session'));
-		$this->load->model(array('Incidencia', 'Atender_incidencia', 'Archivo'));
+		$this->load->model(array('Incidencia', 'Atender_incidencia'));
 	}
     
     public function index()
