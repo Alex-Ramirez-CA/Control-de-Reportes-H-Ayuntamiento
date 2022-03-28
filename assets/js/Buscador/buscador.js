@@ -3,10 +3,11 @@
         $('#opciones-buscar').css('display','flex');
         if($('#search').val()){
             let search = $('#search').val();
+            let url = $('#search').attr('url');
             $.ajax({
                 url: 'busqueda/buscar_incidencia',
                 type: 'POST',
-                data: { search },
+                data: { search, url },
                 success: function(data) {
                     let incidencias = JSON.parse(data);
                     let template = "";
