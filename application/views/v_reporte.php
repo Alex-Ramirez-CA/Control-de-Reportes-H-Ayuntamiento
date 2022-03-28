@@ -14,7 +14,37 @@
             <div class="titulo">
                 <h2><?= $generales->titulo ?></h2>
             </div>
+
             <h3><?= $generales->descripcion ?></h3>
+
+            <div class="titulo">
+                <h2>Datos del creador del reporte</h2>
+            </div>
+            <div class="tabla-datos-creador">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Dato</th>
+                            <th scope="col">Descripción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Nombre</th>
+                            <td><?= $generales->usuario ?></td> 
+                        </tr>
+                        <tr>
+                            <th scope="row">Dependecia</th>
+                            <td><?= $generales->dependencia ?></td> 
+                        </tr>
+                        <tr>
+                            <th scope="row">Dirección</th>
+                            <td><?= $generales->direccion ?></td> 
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
             <div class="fechas-status">
                 <?php
                     $fecha_apertura = strtotime($generales->fecha_apertura);
@@ -88,6 +118,33 @@
                     </tbody>
                 </table>
             </div>
+            <div class="titulo">
+                <h2>Archivo adjuto (descargable)</h2>
+            </div>
+            <?php
+                $imagen = array("gif", "jpe", "jpg", "jpeg", "png","GIF", "JPE", "JPG", "JPEG", "PNG", "jfif", "ief");
+                $word = array("doc","dot");
+                $pdf = array("pdf");
+                $tipo_archivo;
+                $size;
+                if (in_array($generales->ext, $imagen)) {
+                    $tipo_archivo = base_url('uploads/').$generales->archivo;
+                    $size = 100;
+                }elseif(in_array($generales->ext, $word)){
+                    $tipo_archivo = base_url('assets/img/iconos/file-word.png');
+                    $size = 48;
+                }elseif(in_array($generales->ext, $pdf)){
+                    $tipo_archivo = base_url('assets/img/iconos/file-pdf.png');
+                    $size = 48;
+                }else{
+                    $tipo_archivo = base_url('assets/img/iconos/file-excel.png');
+                    $size = 48;
+                }
+            ?>
+            <a class="archivo-descarga" href="<?= base_url('uploads/').$generales->archivo?>" download>
+                <img src="<?= $tipo_archivo ?>" alt="<?= $generales->archivo?>" width="<?=$size?>">
+            </a>
+            <p class="nombre-archivo-descarga"><?= $generales->archivo?></p>
 
         </div>
         <div class="comentarios-reporte">

@@ -156,7 +156,8 @@
 }
 
 .tabla-especificaciones,
-.fechas-status {
+.fechas-status,
+.tabla-datos-creador {
 	margin-right: 20px;
 	margin-left: 20px;
 	margin-top: 20px;
@@ -179,4 +180,16 @@
 	color: #006e95;
 	font-size: 16px;
 	margin: 0;
+}
+
+.archivo-descarga {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 5px;
+}
+
+.nombre-archivo-descarga {
+	text-align: center;
+	margin-bottom: 20px;
+	font-size: 14px;
 }
