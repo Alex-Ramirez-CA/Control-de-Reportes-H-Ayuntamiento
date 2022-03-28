@@ -149,3 +149,9 @@
 	font-size: 12px;
 	margin-top: 3px;
 }
+
+.contenido-vacio-cliente {
+	margin-top: 40%;
+	margin-left: 28%;
+	opacity: 0.8;
+}

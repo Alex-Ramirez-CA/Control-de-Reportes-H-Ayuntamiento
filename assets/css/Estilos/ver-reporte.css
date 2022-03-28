@@ -10,8 +10,12 @@
 	height: 100px;
 	width: 900px;
 	margin-top: 15px;
-	background-color: #006e95;
 	margin-bottom: 25px;
+	box-shadow: 0 3px 3px 0 rgba(31, 38, 135, 0.37);
+	border-radius: 5px;
+	background: #f6f8fa;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .reporte {
@@ -32,28 +36,32 @@
 	width: 180px;
 }
 
-.titulo-status {
+.titulo {
 	display: flex;
-	justify-content: space-between;
+	justify-content: center;
 	margin: 0;
 	margin-top: 15px;
-	padding-left: 20px;
 	margin-left: 20px;
-	margin-right: 20px;
+	margin-right: 19px;
+	margin-bottom: 20px;
 	background-color: #26a2d9;
 	border-radius: 5px;
+	align-items: center;
 }
 
-.titulo-status h2,
-.titulo-status h3 {
+.titulo h2 {
 	margin: 0;
 	color: #fff;
+	margin-top: 3px;
+	width: 100%;
+	text-align: center;
 }
 
 .datos-reporte h3 {
 	font-size: 15px;
 	margin-left: 20px;
 	margin-right: 20px;
+	margin-top: 10px;
 }
 
 .comentarios-reporte {
@@ -105,8 +113,7 @@
 
 .comentario {
 	width: 350px;
-	margin-top: 10px;
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 	padding: 10px;
 	background: #26a2d9;
 	box-shadow: 0 3px 10px 0 rgba(31, 38, 135, 0.37);
@@ -115,8 +122,21 @@
 }
 
 .fecha-comentario {
+	font-size: 10px;
+	background-color: #26a2d9;
+	color: rgb(236, 232, 232);
+	border-radius: 5px;
+	width: 80px;
+	height: 20px;
+	text-align: center;
+	margin-bottom: 5px;
+	padding-top: 4px;
+}
+
+.hora-comentario {
 	text-align: right;
-	font-size: 11px;
+	font-size: 10px;
+	color: rgb(236, 232, 232);
 }
 
 .dir-dep {
@@ -125,11 +145,38 @@
 	justify-content: space-between;
 }
 
-.tabla-especificaciones {
-	padding-top: 10px;
+.nombre-comentador {
+	text-align: left;
+	font-size: 11px;
+	margin-bottom: 1px;
 }
 
-.nombre-comentador {
-	text-align: right;
-	font-size: 11px;
+.texto-comentario {
+	font-size: 13px;
+}
+
+.tabla-especificaciones,
+.fechas-status {
+	margin-right: 20px;
+	margin-left: 20px;
+	margin-top: 20px;
+	font-size: 13px;
+}
+
+.contenido-vacio {
+	margin-top: 130px;
+	opacity: 0.9;
+}
+
+.nombre-usuario-ver-reporte {
+	height: 90px;
+	display: flex;
+	align-items: center;
+	margin-right: 15px;
+}
+
+.nombre-usuario-ver-reporte h3 {
+	color: #006e95;
+	font-size: 16px;
+	margin: 0;
 }

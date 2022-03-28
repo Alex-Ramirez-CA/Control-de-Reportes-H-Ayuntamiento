@@ -15,7 +15,9 @@
 
             <?php 
                 if (empty($pendientes)) {
-                    echo 'Campo vacio';
+            ?>
+                    <img class="contenido-vacio-cliente" src="<?= base_url('assets/img/logotipos/flor.png');?>" alt="" width="150">
+            <?php 
                 }else{
                     foreach($pendientes as $item):
             ?>
@@ -48,11 +50,13 @@
         </div>
         
         <div class="columna-proceso">   
-            <?php
+            <?php 
                 if (empty($en_proceso)) {
-                    echo 'Campo vacio';
-                }else{ 
-                    foreach($en_proceso as $item): 
+            ?>
+                    <img class="contenido-vacio-cliente" src="<?= base_url('assets/img/logotipos/flor.png');?>" alt="" width="150">
+            <?php 
+                }else{
+                    foreach($en_proceso as $item):
             ?>
                         <div class="card"  idCard="<?= $item->id_incidencia;?>">
                             <div class="card-title">

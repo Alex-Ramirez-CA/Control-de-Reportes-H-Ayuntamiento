@@ -55,28 +55,48 @@
 	line-height: 240px;
 }
 
-#archivo {
+.file {
 	display: flex;
-	flex-direction: column;
 	justify-content: center;
 	border: dashed 2px #006e95;
 	height: 200px;
 	border-radius: 5px;
+	align-items: center;
+	flex-direction: column;
 }
 
-#archivo.active {
-	background-color: #006e95;
-	color: black;
-	border: dashed 2px aquamarine;
+.file.active {
+	background-color: #b8d4fe;
+	color: #006e95;
 }
 
-#archivo h2 {
+.file h2,
+.file span {
 	font-size: 18px;
 	color: #006e95;
-	text-align: center;
-	margin-bottom: 20px;
 }
 
-#archivo input {
-	color: #f6f8fa;
+.file span {
+	margin-bottom: 8px;
 }
+
+.file input {
+	display: none;
+}
+
+.file label {
+	border: solid 1px #006e95;
+	cursor: pointer;
+	border-radius: 10px;
+	background-color: #f6f8fa;
+	color: #006e95;
+	text-align: center;
+	width: 180px;
+	height: 25px;
+}
+
+.file label:hover {
+	background-color: #006e95;
+	color: #fff;
+}
+

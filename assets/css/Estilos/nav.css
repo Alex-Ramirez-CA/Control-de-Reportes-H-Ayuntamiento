@@ -74,7 +74,6 @@ p {
 	color: #fff;
 }
 
-
 #btn-cerrar {
 	height: 30px;
 	border-radius: 3px;
@@ -105,12 +104,17 @@ p {
 	cursor: default;
 	color: #212529;
 	text-decoration: none;
+	font-size: 14px;
 }
 
 #opciones-buscar a:hover {
 	color: #fff;
 	background: #006e95;
 	border-radius: 0.25rem;
+}
+
+#search {
+	width: 221px;
 }
 
 .menu-cerrar-sesion {
@@ -125,16 +129,19 @@ p {
 	display: none;
 	width: 310px;
 	text-align: center;
+	padding-top: 13px;
 }
 
 .menu-cerrar-sesion p {
 	margin-bottom: 5px;
 	color: #7f8081;
+	font-size: 14px;
 }
 
 .menu-cerrar-sesion a {
 	margin-bottom: 5px;
 	color: #006e95;
+	font-size: 14px;
 }
 
 .menu-cerrar-sesion a:hover {

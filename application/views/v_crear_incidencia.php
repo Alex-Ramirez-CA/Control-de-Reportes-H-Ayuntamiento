@@ -21,9 +21,13 @@
                 </div>
             </div>
             <div class="parte2-formulario">
-                <div class="form-group pb-2" id="archivo">
-                    <h2>Seleccione o arrastre el archivo</h2>
-                    <input class="input-file" class="form-control" type="file" name="archivo">
+                <div class="form-group pb-2 file">
+                    <h2>Arrastre y sulte el archivo</h2>
+                    <span>o</span>
+                    <label for="archivo">Elegir archivo</label>
+                    <input id="archivo" class="form-control" type="file" name="archivo">
+                    <img id="preview" width="50">
+                    <p id="nombre-archivo"></p>
                 </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary form-control boton-guardar-incidencia">Guardar</button>
@@ -31,5 +35,23 @@
                 <div class="form-group" id="alert"></div>
             </div>
         </form>
+
+        <script type="text/javascript">
+            let archivo = document.querySelector('#archivo');
+            let nombreArchivo = document.querySelector('#nombre-archivo');
+            let img = document.querySelector('#preview');
+            archivo.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                const fileReader = new FileReader();
+                fileReader.readAsDataURL(file);
+                fileReader.addEventListener('load', (e) => {
+                    img.setAttribute('src', e.target.result);   
+                });
+                nombreArchivo.innerText = archivo.files[0].name;     
+            });
+
+
+
+        </script>
    
 <?= $footer ?>
