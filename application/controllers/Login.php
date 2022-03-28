@@ -55,7 +55,8 @@ class Login extends CI_Controller {
 				'apellido_paterno' => $res->apellido_paterno,
 				'apellido_materno' => $res->apellido_materno,
 				'id_rol' => $res->id_rol,
-				'rol_nombre' => $res->rol_nombre
+				'rol_nombre' => $res->rol_nombre,
+				'id_departamento' => $res->id_departamento,
 			);
 			// Crear sesion de usuario
 			$this->session->set_userdata($data);
