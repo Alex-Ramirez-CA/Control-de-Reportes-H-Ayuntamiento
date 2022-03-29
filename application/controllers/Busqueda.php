@@ -22,25 +22,33 @@ class Busqueda extends CI_Controller {
         $data;
         // Obtener el tipo de rol del usuario
         $rol = $this->session->userdata('id_rol');
+        // obtener el id del impleado
+        $no_empleado = $this->session->userdata('id');
         // Recibir el valor del campo de busqueda via post
 		$search = $this->input->post('search');
-        // La busqueda a realizar sera diferente segun el usuario
-        if($rol == 0) { // Cuando es tipo cliente
-            // Extraer id del empleado de las variabes de sesion 
-            $no_empleado = $this->session->userdata('id');
-            // Validar que la variable traiga datos
-            if(!empty($search)) {
-                // Hacer consulta al modelo
-                $data = $this->Incidencia->get_incidencia($rol, $no_empleado, $search);
+        // Recibir la direccion desde donde se hace la busqueda
+        $url = $this->input->post('uri');
+
+        // Validar que la variable de busqueda traiga datos
+        if(!empty($search)) {
+            // La busqueda a realizar sera diferente segun el usuario y el lugar donde se encuentre
+            switch ($url) {
+                case 'reporte':
+                case 'cliente':
+                    $data = $this->Incidencia->buscar_porUsuario($no_empleado, $search);
+                    break;
+                case 'filtro':
+                    $data = $this->Incidencia->buscar_pendientes($search);
+                    break;
+                case 'tecnico':
+                    echo "Funcionalidad en desarrollo";
+                    break;
+                case 'administrador':
+                    echo "Funcionalidad en desarrollo";
+                    break;
             }
-        } else if($rol == 1) { // Cuando es tipo filtro
-            // Extraer id del empleado de las variabes de sesion 
-            $no_empleado = $this->session->userdata('id');
-            // Validar que la variable traiga datos
-            if(!empty($search)) {
-                // Hacer consulta al modelo
-                $data = $this->Incidencia->get_incidencia($rol, $no_empleado, $search);
-            }
+            // Hacer consulta al modelo
+            
         }
 		// Mandar datos al cliente via ajax
 		echo json_encode($data);
