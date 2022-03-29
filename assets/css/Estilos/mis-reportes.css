@@ -1,7 +1,7 @@
 .container {
 	width: 100%;
-	min-width: 800px;
-	max-width: 900px;
+	min-width: 900px;
+	max-width: 1000px;
 	max-height: 500px;
 	margin-top: 30px;
 	display: flex;
@@ -52,7 +52,7 @@
 	box-shadow: 0 3px 5px 0 rgba(31, 38, 135, 0.37);
 	backdrop-filter: blur(4px);
 	border-radius: 15px;
-	cursor: default;
+	cursor: pointer;
 	transition: all 400ms ease;
 }
 

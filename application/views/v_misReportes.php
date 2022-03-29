@@ -32,7 +32,7 @@
                             </div>
                             <div class="fecha">
                                 <b><h5>Creado</h5></b>
-                                <p><?= $item->fecha_apertura; ?></p>
+                                <p><?= date("d/m/Y", strtotime($item->fecha_apertura)); ?></p>
                             </div>
                         </div>
                     </div>
@@ -69,7 +69,7 @@
                                 </div>
                                 <div class="fecha">
                                     <b><h5>Creado</h5></b>
-                                    <p><?= $item->fecha_apertura; ?></p>
+                                    <p><?= date("d/m/Y", strtotime($item->fecha_apertura)); ?></p>
                                 </div>
                             </div>
                         </div>

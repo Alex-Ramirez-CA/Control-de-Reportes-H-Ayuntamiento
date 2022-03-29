@@ -15,7 +15,9 @@
 
             <?php 
                 if (empty($incidencias)) {
-                    echo 'Cuanto vacio';
+            ?>
+                    <img class="contenido-vacio-cliente" src="<?= base_url('assets/img/logotipos/flor.png');?>" alt="" width="150">
+            <?php 
                 }else{
                     foreach($incidencias as $item):
             ?>
@@ -30,7 +32,7 @@
                             </div>
                             <div class="fecha">
                                 <h5>Creado</h5>
-                                <p><?= $item->fecha_apertura; ?></p>
+                                <p><?= date("d/m/Y", strtotime($item->fecha_apertura)); ?></p>
                             </div>
                         </div>
                     </div>
@@ -41,13 +43,15 @@
         </div>
     </div>
 
-    <!-- Columna de los reportes en proceso -->
-    <div class="proceso">
-        <div class="titulo-proceso">
-            <h3><b>Nombre del reporte</b></h3>
+    <!-- Columna para complementar reporte -->
+    <div class="complementar-reporte">
+        <div class="titulo-pendiente">
+            <h3><b>Complementar reporte</b></h3>
         </div>
-        
 
+        <div class="columna-complementar-reporte">
+
+        </div>
     </div>
 
 </div>

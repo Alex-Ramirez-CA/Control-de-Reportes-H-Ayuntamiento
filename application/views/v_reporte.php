@@ -123,7 +123,7 @@
             </div>
             <?php
                 $imagen = array("gif", "jpe", "jpg", "jpeg", "png","GIF", "JPE", "JPG", "JPEG", "PNG", "jfif", "ief");
-                $word = array("doc","dot");
+                $word = array("doc","dot","docx");
                 $pdf = array("pdf");
                 $tipo_archivo;
                 $size;
