@@ -31,4 +31,32 @@ class Filtro extends CI_Controller {
 		
 	}
 
+	public function editar_descripcion() {
+		// Verificar que solo pueda acceder a esta funcion un usuario logeado
+		if($this->session->has_userdata('id_rol')) {
+			// Recibir la id de la incidencia a editar su descripcion vía post
+			$id_incidencia = $this->input->post('id_incidencia');
+			if($desc = $this->Incidencia->get_descripcion($id_incidencia)) {
+				echo json_encode($desc);
+			}
+		} else {
+            // Si no hay datos de sesion redireccionar a login
+            redirect('login');
+        }
+	}
+	public function actualizar_descripcion() {
+		// Verificar que solo pueda acceder a esta funcion un usuario logeado
+		if($this->session->has_userdata('id_rol')) {
+			// Recibir la id de la incidencia
+			$id_incidencia = $this->input->post('id_incidencia');
+			// Recibir la descripcion actualizada
+			$descripcion = $this->input->post('descripcion');
+			$res = $this->Incidencia->update_incidencia($id_incidencia, $descripcion);
+			echo json_encode(array('msg' => 'Descripcion actializada correctamente'));
+		} else {
+            // Si no hay datos de sesion redireccionar a login
+            redirect('login');
+        }
+	}
+
 }
