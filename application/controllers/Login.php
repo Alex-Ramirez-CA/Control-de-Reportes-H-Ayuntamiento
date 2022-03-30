@@ -74,7 +74,9 @@ class Login extends CI_Controller {
 			'nombre',
 			'apellido paterno',
 			'apellido materno',
-			'rol',
+			'id_rol',
+			'rol_nombre',
+			'id_departamento',
 		);
 		$this->session->unset_userdata($vars);
 		$this->session->sess_destroy();
