@@ -84,27 +84,32 @@ class Reporte extends CI_Controller {
 			// $this->output->set_status_header(400);
 		} else {
 			// Si se pasa la validacion del formulario
-			// generar un nombre para el archivo con la fecha actual y un valor aleatorio
-			$time = time();
-			$date = date("dmYHis", $time);
-			// extraer extension del archivo
-			$path = $_FILES['archivo']['name'];
-			$extension = pathinfo($path, PATHINFO_EXTENSION);
-			// asignar nuevo nombre
-			$nombre_archivo = $date.''.rand(0, 99).'.'.$extension;
-			// Subir archivo al servidor
-			$mi_archivo = 'archivo';
-			$config['upload_path'] = "uploads/";
-			$config['file_name'] = $nombre_archivo;
-			$config['allowed_types'] = "*";
-			$config['max_size'] = "5000"; //40mb
-		
-			$this->load->library('upload', $config);
-		
-			if (!$this->upload->do_upload($mi_archivo)) {
-				//Si ocurrio un error al subir la imagen
-				echo $this->upload->display_errors();
-				return;
+			$nombre_archivo = NULL;
+			$extension = NULL;
+			// Verificar si existe un archivo para subir al servidor
+			if($_FILES['archivo']['name']) {
+				// generar un nombre para el archivo con la fecha actual y un valor aleatorio
+				$time = time();
+				$date = date("dmYHis", $time);
+				// extraer extension del archivo
+				$path = $_FILES['archivo']['name'];
+				$extension = pathinfo($path, PATHINFO_EXTENSION);
+				// asignar nuevo nombre
+				$nombre_archivo = $date.''.rand(0, 99).'.'.$extension;
+				// Subir archivo al servidor
+				$mi_archivo = 'archivo';
+				$config['upload_path'] = "uploads/";
+				$config['file_name'] = $nombre_archivo;
+				$config['allowed_types'] = "*";
+				$config['max_size'] = "5000"; //40mb
+			
+				$this->load->library('upload', $config);
+			
+				if (!$this->upload->do_upload($mi_archivo)) {
+					//Si ocurrio un error al subir el archivo
+					echo $this->upload->display_errors();
+					return;
+				}
 			}
 			// Recibir los datos del formulario via post
 			$titulo = $this->input->post('titulo');
