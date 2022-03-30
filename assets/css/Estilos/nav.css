@@ -1,5 +1,7 @@
 body {
 	position: relative;
+	margin: 0;
+	padding: 0;
 }
 
 .menu {
@@ -65,7 +67,7 @@ p {
 	border-radius: 10px;
 	border-color: #f6f8fa;
 	color: #006e95;
-	background: #f6f8fa;
+	background-color: #f6f8fa;
 }
 
 .opciones a:hover {
@@ -126,7 +128,7 @@ p {
 	padding: 5px;
 	border: 1px solid rgba(0, 0, 0, 0.15);
 	margin-top: 195px;
-	margin-left: 380px;
+	margin-left: 385px;
 	z-index: 1;
 	display: none;
 	width: 310px;

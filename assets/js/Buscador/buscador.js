@@ -1,4 +1,5 @@
 (function($) {
+    //Evento que se ejecuta cuando el usuario este escribiendo en la barra de busqueda
     $("#search").keyup(function(ev) {
         $('#opciones-buscar').css('display','flex');
         if($('#search').val()){
@@ -20,9 +21,6 @@
                         });
                         $('#opciones-buscar').html(template);
                     }
-                        
-                    
-                //window.location.replace(json.url);
                 }
             });
         }else{

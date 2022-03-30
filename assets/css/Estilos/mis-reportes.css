@@ -1,11 +1,13 @@
 .container {
 	width: 100%;
-	min-width: 900px;
-	max-width: 1000px;
+	min-width: 850px;
+	max-width: 950px;
 	max-height: 500px;
 	margin-top: 30px;
 	display: flex;
 	justify-content: space-between;
+	margin: 0 auto;
+	margin-top: 30px;
 }
 
 .titulo-proceso,

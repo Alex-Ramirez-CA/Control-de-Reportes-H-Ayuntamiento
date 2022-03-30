@@ -51,7 +51,7 @@
                     $fecha_cierre = strtotime($generales->fecha_cierre);
                 ?>
                 <div class="titulo">
-                    <h2>Fechas y satatus actual</h2>
+                    <h2>Fechas y status actual</h2>
                 </div>
                 <table class="table">
                         <thead>
@@ -63,6 +63,7 @@
                         </thead>
                         <tbody>
                             <tr>
+                                <!--Dar formato a las fechas-->
                                 <td><?= date("d/m/Y", $fecha_apertura) ?></td>
                                 <td><?= date("d/m/Y", $fecha_cierre) ?></td>
                                 <?php
