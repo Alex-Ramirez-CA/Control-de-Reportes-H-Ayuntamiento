@@ -130,8 +130,7 @@ class Reporte extends CI_Controller {
 			);
 		
 			$this->Incidencia->guardar_incidencia($datos);
-			redirect('cliente');
-			// echo json_encode($datos);
+			redirect($this->session->userdata('rol_nombre'));
 		}
 	}
 
