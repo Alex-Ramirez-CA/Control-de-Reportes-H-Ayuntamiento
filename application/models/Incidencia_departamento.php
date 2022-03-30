@@ -12,4 +12,5 @@ class Incidencia_departamento extends CI_Model {
         );
         $this->db->insert('incidencia_departamento', $datos);
     }
+
 }

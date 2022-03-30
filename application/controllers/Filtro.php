@@ -65,7 +65,8 @@ class Filtro extends CI_Controller {
 		if($this->session->has_userdata('id_rol')) {
 			// Recibir la id de la incidencia
 			$id_incidencia = $this->input->post('id_incidencia');
-			// Recibir valores de departamentos asignados
+			// Recibir valores de departamentos y verificar cuales no vienen como datos nulos
+			// para hacer la insercion con los que si traen valor
 			if($id_soporte = $this->input->post('soporte')) {
 				$this->Incidencia_departamento->asignar_departamento($id_soporte, $id_incidencia);
 			}
@@ -75,6 +76,9 @@ class Filtro extends CI_Controller {
 			if($id_administracion = $this->input->post('administracion')) {
 				$this->Incidencia_departamento->asignar_departamento($id_administracion, $id_incidencia);
 			}
+			// cambiar el estatus de la incidancia a 1 para indicar que ya ha sido asignada
+			// a los departamentos
+			$this->Incidencia->status_asignado($id_incidencia);
 			echo json_encode(array('msg' => 'Departamentos asignados correctamente'));
 		} else {
             // Si no hay datos de sesion redireccionar a login

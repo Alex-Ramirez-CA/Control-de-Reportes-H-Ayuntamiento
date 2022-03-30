@@ -135,7 +135,7 @@ class Incidencia extends CI_Model {
         $data = $this->db
             ->select("id_incidencia, titulo, fecha_apertura")
             ->from("incidencia")
-            ->where('status', 0)
+            ->where(array('status' => 0, 'asignado' => 0))
             ->order_by('fecha_apertura')
             ->get();
         if(!$data->result()) {
@@ -160,6 +160,14 @@ class Incidencia extends CI_Model {
     // Actualizar la descripcion de la incidencia
     public function update_incidencia($id_incidencia, $descripcion) {
         $this->db->set('descripcion', $descripcion);
+        $this->db->where('id_incidencia', $id_incidencia);
+        $this->db->update('incidencia');
+    }
+
+    // Poner el estatus del campo asignado en 1 
+    // para indicar que la incidencia ya ha sido asignada a un departamento
+    public function status_asignado($id_incidencia) {
+        $this->db->set('asignado', 1);
         $this->db->where('id_incidencia', $id_incidencia);
         $this->db->update('incidencia');
     }
