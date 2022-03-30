@@ -143,6 +143,26 @@ class Incidencia extends CI_Model {
         }
         return $data->result();
     }
+
+    // Traer traer la descripcion de una incidencia
+    public function get_descripcion($id_incidencia) {
+        $data = $this->db
+            ->select("id_incidencia, descripcion")
+            ->from("incidencia")
+            ->where('id_incidencia', $id_incidencia, 1)
+            ->get();
+        if(!$data->result()) {
+            return false;
+        }
+        return $data->row();
+    }
+    
+    // Actualizar la descripcion de la incidencia
+    public function update_incidencia($id_incidencia, $descripcion) {
+        $this->db->set('descripcion', $descripcion);
+        $this->db->where('id_incidencia', $id_incidencia);
+        $this->db->update('incidencia');
+    }
 }
 
 
