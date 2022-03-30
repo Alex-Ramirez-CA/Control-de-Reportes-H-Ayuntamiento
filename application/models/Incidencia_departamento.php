@@ -5,7 +5,11 @@ class Incidencia_departamento extends CI_Model {
     }
 
     // Insertar datos de una nueva incidencia
-    public function asignar_departamento($datos) {
+    public function asignar_departamento($id_departamento, $id_incidencia) {
+        $datos = array(
+            'id_departamento' => $id_departamento,
+            'id_incidencia' => $id_incidencia,
+        );
         $this->db->insert('incidencia_departamento', $datos);
     }
 }

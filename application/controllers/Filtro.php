@@ -66,26 +66,14 @@ class Filtro extends CI_Controller {
 			// Recibir la id de la incidencia
 			$id_incidencia = $this->input->post('id_incidencia');
 			// Recibir valores de departamentos asignados
-			if($soporte = $this->input->post('soporte')) {
-				$datos = array(
-					'id_departamento' => $soporte,
-					'id_incidencia' => $id_incidencia,
-				);
-				$this->Incidencia_departamento->asignar_departamento($datos);
+			if($id_soporte = $this->input->post('soporte')) {
+				$this->Incidencia_departamento->asignar_departamento($id_soporte, $id_incidencia);
 			}
-			if($redes = $this->input->post('redes')) {
-				$datos = array(
-					'id_departamento' => $redes,
-					'id_incidencia' => $id_incidencia,
-				);
-				$this->Incidencia_departamento->asignar_departamento($datos);
+			if($id_redes = $this->input->post('redes')) {
+				$this->Incidencia_departamento->asignar_departamento($id_redes, $id_incidencia);
 			}
-			if($administracion = $this->input->post('administracion')) {
-				$datos = array(
-					'id_departamento' => $administracion,
-					'id_incidencia' => $id_incidencia,
-				);
-				$this->Incidencia_departamento->asignar_departamento($datos);
+			if($id_administracion = $this->input->post('administracion')) {
+				$this->Incidencia_departamento->asignar_departamento($id_administracion, $id_incidencia);
 			}
 			echo json_encode(array('msg' => 'Departamentos asignados correctamente'));
 		} else {
