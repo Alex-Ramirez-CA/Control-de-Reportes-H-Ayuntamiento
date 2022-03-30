@@ -120,7 +120,8 @@ class Reporte extends CI_Controller {
 				'descripcion' => $descripcion,
 				'status' => 0,
 				'archivo' => $nombre_archivo,
-				'ext' => $extension
+				'ext' => $extension,
+				'asignado' => 0
 			);
 		
 			$this->Incidencia->guardar_incidencia($datos);
