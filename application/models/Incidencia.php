@@ -147,7 +147,7 @@ class Incidencia extends CI_Model {
     // Traer traer la descripcion de una incidencia
     public function get_descripcion($id_incidencia) {
         $data = $this->db
-            ->select("id_incidencia, descripcion")
+            ->select("id_incidencia, titulo, fecha_apertura, descripcion")
             ->from("incidencia")
             ->where('id_incidencia', $id_incidencia, 1)
             ->get();
