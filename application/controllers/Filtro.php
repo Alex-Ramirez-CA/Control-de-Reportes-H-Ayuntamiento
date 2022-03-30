@@ -59,4 +59,38 @@ class Filtro extends CI_Controller {
         }
 	}
 
+	// Asignar 
+	public function asignar_departamento() {
+		// Verificar que solo pueda acceder a esta funcion un usuario logeado
+		if($this->session->has_userdata('id_rol')) {
+			// Recibir la id de la incidencia
+			$id_incidencia = $this->input->post('id_incidencia');
+			// Recibir valores de departamentos asignados
+			if($soporte = $this->input->post('soporte')) {
+				$datos = array(
+					'id_departamento' => $soporte,
+					'id_incidencia' => $id_incidencia,
+				);
+				$this->Incidencia_departamento->asignar_departamento($datos);
+			}
+			if($redes = $this->input->post('redes')) {
+				$datos = array(
+					'id_departamento' => $redes,
+					'id_incidencia' => $id_incidencia,
+				);
+				$this->Incidencia_departamento->asignar_departamento($datos);
+			}
+			if($administracion = $this->input->post('administracion')) {
+				$datos = array(
+					'id_departamento' => $administracion,
+					'id_incidencia' => $id_incidencia,
+				);
+				$this->Incidencia_departamento->asignar_departamento($datos);
+			}
+			echo json_encode(array('msg' => 'Departamentos asignados correctamente'));
+		} else {
+            // Si no hay datos de sesion redireccionar a login
+            redirect('login');
+        }
+	}
 }
