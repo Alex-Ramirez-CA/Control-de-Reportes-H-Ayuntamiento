@@ -64,6 +64,38 @@ class Incidencia extends CI_Model {
         return $data->result();
     }
 
+    // Hacer la busqueda entre todas las incidencias de un departamento determinado
+    // para la pantalla principal del tecnico
+    public function buscar_departamento($id_departamento, $search) {
+        // Busqueda por id_incidencia
+        $data = $this->db
+            ->distinct()
+            ->select("i.id_incidencia, i.titulo")
+            ->from("incidencia i")
+            ->join("incidencia_departamento id", "i.id_incidencia=id.id_incidencia")
+            ->where('id.id_departamento', $id_departamento)
+            ->like('i.id_incidencia', $search, 'after', '', TRUE)
+            ->order_by('i.id_incidencia')
+            ->get();
+        if(!$data->result()) {
+            // Busqueda por titulo
+            $data = $this->db
+                ->distinct()
+                ->select("i.id_incidencia, i.titulo")
+                ->from("incidencia i")
+                ->join("incidencia_departamento id", "i.id_incidencia=id.id_incidencia")
+                ->where('id.id_departamento', $id_departamento)
+                ->like('i.titulo', $search, 'after', '', TRUE)
+                ->order_by('i.id_incidencia')
+                ->get();
+        }
+        // Si no se encuentra resultados
+        if(!$data->result()) {
+            return false;
+        }
+        return $data->result();
+    }
+
     // Consulta todas las incidencias de un usuario por sus diferentes status
     public function get_incidencias($no_empleado, $status) {
         $data;
@@ -111,6 +143,20 @@ class Incidencia extends CI_Model {
         return $data->result();
     }
 
+    // Obtner todas las incidencias nuevas de todos los usuarios para mostrarselas al filtro
+    public function get_new_incidencias() {
+        $data = $this->db
+            ->select("id_incidencia, titulo, fecha_apertura")
+            ->from("incidencia")
+            ->where(array('status' => 0, 'asignado' => 0))
+            ->order_by('fecha_apertura')
+            ->get();
+        if(!$data->result()) {
+            return false;
+        }
+        return $data->result();
+    }
+
     // Obtener todos los datos necesarios para crear el reporte
     public function datos_incidencia($id_incidencia) {
         $data = $this->db
@@ -128,20 +174,6 @@ class Incidencia extends CI_Model {
             return false;
         }
         return $data->row();
-    }
-
-    // Obtner todas las incidencias nuevas de todos los usuarios para mostrarselas al filtro
-    public function get_new_incidencias() {
-        $data = $this->db
-            ->select("id_incidencia, titulo, fecha_apertura")
-            ->from("incidencia")
-            ->where(array('status' => 0, 'asignado' => 0))
-            ->order_by('fecha_apertura')
-            ->get();
-        if(!$data->result()) {
-            return false;
-        }
-        return $data->result();
     }
 
     // Traer traer la descripcion de una incidencia

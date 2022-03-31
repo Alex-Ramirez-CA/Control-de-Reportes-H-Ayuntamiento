@@ -28,20 +28,24 @@ class Busqueda extends CI_Controller {
 		$search = $this->input->post('search');
         // Recibir la direccion desde donde se hace la busqueda
         $url = $this->input->post('uri');
-
+        // Obtener el departamento al que pertenece el tecnico
+        $id_departamento = $this->session->userdata('id_departamento');
         // Validar que la variable de busqueda traiga datos
         if(!empty($search)) {
             // La busqueda a realizar sera diferente segun el usuario y el lugar donde se encuentre
             switch ($url) {
+                // Para buscar entre los reportes el el usuario visualiza en la vista de mis reportes
                 case 'reporte':
                 case 'cliente':
                     $data = $this->Incidencia->buscar_porUsuario($no_empleado, $search);
                     break;
+                // Para buscar entre los reportes que el usuario filtro vera en su vista principal
                 case 'filtro':
                     $data = $this->Incidencia->buscar_pendientes($search);
                     break;
+                // Para buscar entre los reportes que el usuario tecnico vera en su vista principal
                 case 'tecnico':
-                    echo "Funcionalidad en desarrollo";
+                    $data = $this->Incidencia->buscar_departamento($id_departamento, $search);
                     break;
                 case 'administrador':
                     echo "Funcionalidad en desarrollo";
