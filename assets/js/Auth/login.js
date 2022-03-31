@@ -1,6 +1,6 @@
 (function($) {
+    //Función que se activa al momento de que el usuarioenvia los datos del forulario de login
     $("#frm_login").submit(function(ev) {
-
         $.ajax({
             url: 'login/validar',
             type: 'POST',
@@ -22,8 +22,6 @@
                 }
             },
         });
-
         ev.preventDefault();
-        
     });
 })(jQuery)

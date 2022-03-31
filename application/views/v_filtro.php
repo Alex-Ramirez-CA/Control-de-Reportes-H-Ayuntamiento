@@ -2,9 +2,9 @@
 
 <?= $nav; ?>
 
-<div class="container">
+<div class="contenedor-filtro">
 
-    <!-- Columna de los incidencias pendientes -->
+    <!-- Columna donde se muestran todos los reportes -->
     
     <div class="pendiente">
         <div class="titulo-pendiente">
@@ -21,19 +21,25 @@
                 }else{
                     foreach($incidencias as $item):
             ?>
-                    <div class="card" idCard="<?= $item->id_incidencia;?>">
-                        <div class="card-title">
+                    <div class="card-filtro">
+                        <div class="card-title-filtro">
                             <h5> <?= $item->titulo; ?></h5>
                         </div>
                         <div class="card-body">
-                            <div class="texto-medio">
-                                <p class="atiende"><b>Atendido por: </b>Por asignar</p>                        
-                                <p class="departamento"><b>Departamento: </b>Por asignar</p>                        
-                            </div>
-                            <div class="fecha">
-                                <h5>Creado</h5>
+                            <div class="fecha-filtro">
+                                <b><h5>Creado</h5></b>
                                 <p><?= date("d/m/Y", strtotime($item->fecha_apertura)); ?></p>
                             </div>
+                            <div class="asignar-departamento">
+                                <button class="administracion" idReporte="<?= $item->id_incidencia;?>">Administración</button>
+                                <button class="soporte-tecnico" idReporte="<?= $item->id_incidencia;?>">Soporte técnico</button>
+                                <button class="redes" idReporte="<?= $item->id_incidencia;?>">Redes</button>
+                            </div>
+                        </div>
+                        <div class="opciones-filtro">
+                                <p class="btn-ver-filtro" idReporte="<?= $item->id_incidencia;?>">Ver</p>
+                                <p class="btn-comentar-filtro" idReporte="<?= $item->id_incidencia;?>">Comentar</p> 
+                                <p class="btn-enviar-filtro" idReporte="<?= $item->id_incidencia;?>">Enviar</p>  
                         </div>
                     </div>
             <?php 
@@ -50,7 +56,13 @@
         </div>
 
         <div class="columna-complementar-reporte">
-
+                <h4 class="titulo-reporte-filtro">Titulo</h4>
+                <div class="folio-fecha-filtro">
+                    <h4 id="folio-reporte">Folio </h4>
+                    <h4 id="fecha-reporte">Fecha de creación </h4>
+                </div>
+                <textarea name="descripcion-reporte" id="descripcion-reporte" cols="50" rows="10"></textarea>
+                <button class="guardar-cambios">Guardar cambios</button>
         </div>
     </div>
 
