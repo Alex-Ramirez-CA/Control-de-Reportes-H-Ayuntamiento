@@ -4,9 +4,10 @@ function getIncidenciaRules() {
         array(
                 'field' => 'titulo',
                 'label' => 'Titulo',
-                'rules' => 'required',
+                'rules' => 'required|max_length[40]',
                 'errors' => array(
                     'required' => 'El %s es requerido',
+                    'max_length' => 'El %s debe ser mas corto',
                 ),
         ),
         array(

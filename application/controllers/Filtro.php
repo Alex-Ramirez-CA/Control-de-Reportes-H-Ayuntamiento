@@ -12,7 +12,7 @@ class Filtro extends CI_Controller {
 
 	public function index()
 	{
-		// validar que el usuario este logeado y sea de tipo cliente
+		// validar que el usuario este logeado y sea de tipo filtro
         if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 1) {
 			// Obtener los datos necesarios para la vista principal
 			$data = array(
@@ -22,7 +22,7 @@ class Filtro extends CI_Controller {
 				'incidencias' => $this->Incidencia->get_new_incidencias(),
 			);
 			// Cargar la vista
-        	$this->load->view('v_Filtro', $data);
+        	$this->load->view('v_filtro', $data);
 			// echo json_encode(array('incidencias' => $this->Incidencia->get_new_incidencias()));
         } else {
             // Si no hay datos de sesion redireccionar a login
@@ -59,4 +59,30 @@ class Filtro extends CI_Controller {
         }
 	}
 
+	// Asignar 
+	public function asignar_departamento() {
+		// Verificar que solo pueda acceder a esta funcion un usuario logeado
+		if($this->session->has_userdata('id_rol')) {
+			// Recibir la id de la incidencia
+			$id_incidencia = $this->input->post('id_incidencia');
+			// Recibir valores de departamentos y verificar cuales no vienen como datos nulos
+			// para hacer la insercion con los que si traen valor
+			if($id_soporte = $this->input->post('soporte')) {
+				$this->Incidencia_departamento->asignar_departamento($id_soporte, $id_incidencia);
+			}
+			if($id_redes = $this->input->post('redes')) {
+				$this->Incidencia_departamento->asignar_departamento($id_redes, $id_incidencia);
+			}
+			if($id_administracion = $this->input->post('administracion')) {
+				$this->Incidencia_departamento->asignar_departamento($id_administracion, $id_incidencia);
+			}
+			// cambiar el estatus de la incidancia a 1 para indicar que ya ha sido asignada
+			// a los departamentos
+			$this->Incidencia->status_asignado($id_incidencia);
+			echo json_encode(array('msg' => 'Departamentos asignados correctamente'));
+		} else {
+            // Si no hay datos de sesion redireccionar a login
+            redirect('login');
+        }
+	}
 }

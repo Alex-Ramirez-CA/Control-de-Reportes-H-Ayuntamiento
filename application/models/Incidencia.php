@@ -64,6 +64,38 @@ class Incidencia extends CI_Model {
         return $data->result();
     }
 
+    // Hacer la busqueda entre todas las incidencias de un departamento determinado
+    // para la pantalla principal del tecnico
+    public function buscar_departamento($id_departamento, $search) {
+        // Busqueda por id_incidencia
+        $data = $this->db
+            ->distinct()
+            ->select("i.id_incidencia, i.titulo")
+            ->from("incidencia i")
+            ->join("incidencia_departamento id", "i.id_incidencia=id.id_incidencia")
+            ->where('id.id_departamento', $id_departamento)
+            ->like('i.id_incidencia', $search, 'after', '', TRUE)
+            ->order_by('i.id_incidencia')
+            ->get();
+        if(!$data->result()) {
+            // Busqueda por titulo
+            $data = $this->db
+                ->distinct()
+                ->select("i.id_incidencia, i.titulo")
+                ->from("incidencia i")
+                ->join("incidencia_departamento id", "i.id_incidencia=id.id_incidencia")
+                ->where('id.id_departamento', $id_departamento)
+                ->like('i.titulo', $search, 'after', '', TRUE)
+                ->order_by('i.id_incidencia')
+                ->get();
+        }
+        // Si no se encuentra resultados
+        if(!$data->result()) {
+            return false;
+        }
+        return $data->result();
+    }
+
     // Consulta todas las incidencias de un usuario por sus diferentes status
     public function get_incidencias($no_empleado, $status) {
         $data;
@@ -111,6 +143,73 @@ class Incidencia extends CI_Model {
         return $data->result();
     }
 
+    // Obtner todas las incidencias nuevas de todos los usuarios para mostrarselas al filtro
+    public function get_new_incidencias() {
+        $data = $this->db
+            ->select("id_incidencia, titulo, fecha_apertura")
+            ->from("incidencia")
+            ->where(array('status' => 0, 'asignado' => 0))
+            ->order_by('fecha_apertura')
+            ->get();
+        if(!$data->result()) {
+            return false;
+        }
+        return $data->result();
+    }
+
+    // Consulta todas las incidencias de un departamento por sus diferentes status
+    public function get_incidenciasDepar($id_departamento, $status) {
+        $data;
+        if($status == 0) { //Incidencias pendientes
+            $data = $this->db
+                ->distinct()
+                ->select("i.id_incidencia, i.titulo, i.status, i.fecha_apertura")
+                ->from("incidencia i")
+                ->join("incidencia_departamento id", "i.id_incidencia=id.id_incidencia")
+                ->where(array('id.id_departamento' => $id_departamento, 'status' => $status))
+                ->order_by('i.id_incidencia')
+                ->get();
+        } else if($status == 1) { //Incidencias en proceso
+            $data = $this->db
+                ->distinct()
+                ->select("inc.id_incidencia, inc.titulo, inc.status, inc.fecha_apertura, (SELECT GROUP_CONCAT(d.nombre SEPARATOR ', ') 
+                FROM incidencia as i 
+                INNER JOIN incidencia_departamento as i_d ON i.id_incidencia=i_d.id_incidencia 
+                INNER JOIN departamento as d ON i_d.id_departamento=d.id_departamento
+                WHERE i.id_incidencia = inc.id_incidencia) as departamento, (SELECT GROUP_CONCAT(u.nombre SEPARATOR ', ') 
+                FROM incidencia as i 
+                INNER JOIN atender_incidencia as ai ON i.id_incidencia=ai.id_incidencia 
+                INNER JOIN usuario as u ON ai.no_empleado=u.no_empleado
+                WHERE i.id_incidencia = inc.id_incidencia) as encargado")
+                ->from("incidencia inc")
+                ->join("incidencia_departamento id", "inc.id_incidencia=id.id_incidencia")
+                ->where(array('id.id_departamento' => $id_departamento, 'status' => $status))
+                ->group_by('inc.id_incidencia')
+                ->get();
+        } else if($status == 2) { //Incidencias finalizadas
+            $data = $this->db
+                ->distinct()
+                ->select("inc.id_incidencia, inc.titulo, inc.status, inc.fecha_apertura, (SELECT GROUP_CONCAT(d.nombre SEPARATOR ', ') 
+                FROM incidencia as i 
+                INNER JOIN incidencia_departamento as i_d ON i.id_incidencia=i_d.id_incidencia 
+                INNER JOIN departamento as d ON i_d.id_departamento=d.id_departamento
+                WHERE i.id_incidencia = inc.id_incidencia) as departamento, (SELECT GROUP_CONCAT(u.nombre SEPARATOR ', ') 
+                FROM incidencia as i 
+                INNER JOIN atender_incidencia as ai ON i.id_incidencia=ai.id_incidencia 
+                INNER JOIN usuario as u ON ai.no_empleado=u.no_empleado
+                WHERE i.id_incidencia = inc.id_incidencia) as encargado")
+                ->from("incidencia inc")
+                ->join("incidencia_departamento id", "inc.id_incidencia=id.id_incidencia")
+                ->where(array('id.id_departamento' => $id_departamento, 'status' => $status))
+                ->group_by('inc.id_incidencia')
+                ->get();
+        }
+        if(!$data->result()) {
+            return false;
+        }
+        return $data->result();
+    }
+
     // Obtener todos los datos necesarios para crear el reporte
     public function datos_incidencia($id_incidencia) {
         $data = $this->db
@@ -130,20 +229,6 @@ class Incidencia extends CI_Model {
         return $data->row();
     }
 
-    // Obtner todas las incidencias nuevas de todos los usuarios para mostrarselas al filtro
-    public function get_new_incidencias() {
-        $data = $this->db
-            ->select("id_incidencia, titulo, fecha_apertura")
-            ->from("incidencia")
-            ->where('status', 0)
-            ->order_by('fecha_apertura')
-            ->get();
-        if(!$data->result()) {
-            return false;
-        }
-        return $data->result();
-    }
-
     // Traer traer la descripcion de una incidencia
     public function get_descripcion($id_incidencia) {
         $data = $this->db
@@ -160,6 +245,14 @@ class Incidencia extends CI_Model {
     // Actualizar la descripcion de la incidencia
     public function update_incidencia($id_incidencia, $descripcion) {
         $this->db->set('descripcion', $descripcion);
+        $this->db->where('id_incidencia', $id_incidencia);
+        $this->db->update('incidencia');
+    }
+
+    // Poner el estatus del campo asignado en 1 
+    // para indicar que la incidencia ya ha sido asignada a un departamento
+    public function status_asignado($id_incidencia) {
+        $this->db->set('asignado', 1);
         $this->db->where('id_incidencia', $id_incidencia);
         $this->db->update('incidencia');
     }
