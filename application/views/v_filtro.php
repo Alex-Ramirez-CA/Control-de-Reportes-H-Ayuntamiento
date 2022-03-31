@@ -42,6 +42,19 @@
                                 <p class="btn-enviar-filtro" idReporte="<?= $item->id_incidencia;?>">Enviar</p>  
                         </div>
                     </div>
+                    <form action="<?= base_url('filtro/asignar_departamento') ?>" method="POST" id="frm_login">
+                        <!-- Titulo del formulario -->
+                        <div class="form-group" id="asignar">
+                        <input type="hidden" name="id_incidencia" value="<?= $item->id_incidencia;?>">
+                        <input type="checkbox" name="soporte" id="soporte" value="1"> <label>Soporte técnico</label><br>
+                        <input type="checkbox" name="redes" id="redes" value="2"> <label for="cbox2">Redes</label>
+                        <input type="checkbox" name="administracion" id="administracion" value="3"> <label for="cbox2">Adminstración</label>
+                        </div>
+                        <!-- Boton para enviar los datos del formulario -->
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary form-control boton-enviar">Asignar</button>
+                        </div>
+                    </form>
             <?php 
                     endforeach; 
                 }
