@@ -36,36 +36,40 @@
     $(document).on('click', '.administracion', function(){
         if($(this).hasClass('active')){  
             $(this).removeClass('active');
+            $(this).removeClass($('.btn-enviar-filtro').attr('idReporte'));
         }else{
             $(this).addClass('active');
-            console.log("Se activo Admi del reporte " + $(this).attr("idReporte"));
+            $(this).addClass($('.btn-enviar-filtro').attr('idReporte'));
         }                
     });
 
     $(document).on('click', '.soporte-tecnico', function(){
         if($(this).hasClass('active')){  
             $(this).removeClass('active');
+            console.log($(this).hasClass($('.btn-enviar-filtro').attr('idReporte')));
         }else{
             $(this).addClass('active');
-            console.log("Se activo ST del reporte " + $(this).attr("idReporte"));
+            console.log($(this).hasClass($('.btn-enviar-filtro').attr('idReporte')));
         }                
     });
 
     $(document).on('click', '.redes', function(){
         if($(this).hasClass('active')){  
             $(this).removeClass('active');
+            console.log($(this).hasClass($('.btn-enviar-filtro').attr('idReporte')));
         }else{
             $(this).addClass('active');
-            console.log("Se activo redes del reporte " + $(this).attr("idReporte"));
+            console.log($(this).hasClass($('.btn-enviar-filtro').attr('idReporte')));
         }          
     });
 
     $(document).on('click', '.btn-enviar-filtro', function(){
-        if($('.administracion').hasClass('active') || $('.soporte-tecnico').hasClass('active') || $('.redes').hasClass('active')){
-            console.log($(this).attr("idReporte") + "Se puede enviar");
+        if($('.administracion').hasClass('active') && $('.administracion').hasClass($(this).attr('idReporte'))){
+            console.log("Se puede");
         }else{
-            alert("No puede enviar");
+            console.log("No puede");
         }
+        console.log($(this).attr('idReporte'));
 
         //console.log("id tarjeta " + $(this).attr("idReporte"));         
     });

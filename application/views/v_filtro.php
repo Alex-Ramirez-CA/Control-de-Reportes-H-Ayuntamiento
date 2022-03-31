@@ -31,9 +31,9 @@
                                 <p><?= date("d/m/Y", strtotime($item->fecha_apertura)); ?></p>
                             </div>
                             <div class="asignar-departamento">
-                                <button class="administracion" idReporte="<?= $item->id_incidencia;?>">Administración</button>
-                                <button class="soporte-tecnico" idReporte="<?= $item->id_incidencia;?>">Soporte técnico</button>
-                                <button class="redes" idReporte="<?= $item->id_incidencia;?>">Redes</button>
+                                <button class="administracion">Administración</button>
+                                <button class="soporte-tecnico">Soporte técnico</button>
+                                <button class="redes">Redes</button>
                             </div>
                         </div>
                         <div class="opciones-filtro">
