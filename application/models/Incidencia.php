@@ -95,6 +95,40 @@ class Incidencia extends CI_Model {
         }
         return $data->result();
     }
+    
+    // Hacer la busqueda entre todas las incidencias que atiende o ha atendido un tecnico
+    // para la pantalla atendiendo del usuario tecnico
+    public function buscar_atendiendo($id_departamento, $search, $no_empleado) {
+        // Busqueda por id_incidencia
+        $data = $this->db
+            ->distinct()
+            ->select("i.id_incidencia, i.titulo")
+            ->from("incidencia i")
+            ->join("incidencia_departamento id", "i.id_incidencia=id.id_incidencia")
+            ->join("atender_incidencia ai", "i.id_incidencia=ai.id_incidencia")
+            ->where(array('id.id_departamento' => $id_departamento, 'ai.no_empleado' => $no_empleado))
+            ->like('i.id_incidencia', $search, 'after', '', TRUE)
+            ->order_by('i.id_incidencia')
+            ->get();
+        if(!$data->result()) {
+            // Busqueda por titulo
+            $data = $this->db
+                ->distinct()
+                ->select("i.id_incidencia, i.titulo")
+                ->from("incidencia i")
+                ->join("incidencia_departamento id", "i.id_incidencia=id.id_incidencia")
+                ->join("atender_incidencia ai", "i.id_incidencia=ai.id_incidencia")
+                ->where(array('id.id_departamento' => $id_departamento, 'ai.no_empleado' => $no_empleado))
+                ->like('i.titulo', $search, 'after', '', TRUE)
+                ->order_by('i.id_incidencia')
+                ->get();
+        }
+        // Si no se encuentra resultados
+        if(!$data->result()) {
+            return false;
+        }
+        return $data->result();
+    }
 
     // Consulta todas las incidencias de un usuario por sus diferentes status
     public function get_incidencias($no_empleado, $status) {
