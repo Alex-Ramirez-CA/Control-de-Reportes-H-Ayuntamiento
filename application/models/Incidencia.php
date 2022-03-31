@@ -4,11 +4,15 @@ class Incidencia extends CI_Model {
         $this->load->database();
     }
 
+    // -----------------------------------------------------------------------------------
+
     // Insertar datos de una nueva incidencia
     public function guardar_incidencia($datos) {
         $this->db->insert('incidencia', $datos);
     }
     
+    // -----------------------------------------------------------------------------------
+
     // Hacer la busqueda entre todas las incidencias de un usuario en particular
     public function buscar_porUsuario($no_empleado, $search) {
         // Busqueda por id_incidencia
@@ -129,6 +133,8 @@ class Incidencia extends CI_Model {
         }
         return $data->result();
     }
+
+    // -----------------------------------------------------------------------------------
 
     // Consulta todas las incidencias de un usuario por sus diferentes status
     public function get_incidencias($no_empleado, $status) {
@@ -291,6 +297,8 @@ class Incidencia extends CI_Model {
         return $data->result();
     }
 
+    // -----------------------------------------------------------------------------------
+
     // Obtener todos los datos necesarios para crear el reporte
     public function datos_incidencia($id_incidencia) {
         $data = $this->db
@@ -309,6 +317,8 @@ class Incidencia extends CI_Model {
         }
         return $data->row();
     }
+
+    // -----------------------------------------------------------------------------------
 
     // Traer traer la descripcion de una incidencia
     public function get_descripcion($id_incidencia) {
@@ -329,6 +339,8 @@ class Incidencia extends CI_Model {
         $this->db->where('id_incidencia', $id_incidencia);
         $this->db->update('incidencia');
     }
+
+    // -----------------------------------------------------------------------------------
 
     // Poner el estatus del campo asignado en 1 
     // para indicar que la incidencia ya ha sido asignada a un departamento
