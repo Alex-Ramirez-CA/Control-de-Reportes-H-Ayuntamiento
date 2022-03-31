@@ -157,6 +157,59 @@ class Incidencia extends CI_Model {
         return $data->result();
     }
 
+    // Consulta todas las incidencias de un departamento por sus diferentes status
+    public function get_incidenciasDepar($id_departamento, $status) {
+        $data;
+        if($status == 0) { //Incidencias pendientes
+            $data = $this->db
+                ->distinct()
+                ->select("i.id_incidencia, i.titulo, i.status, i.fecha_apertura")
+                ->from("incidencia i")
+                ->join("incidencia_departamento id", "i.id_incidencia=id.id_incidencia")
+                ->where(array('id.id_departamento' => $id_departamento, 'status' => $status))
+                ->order_by('i.id_incidencia')
+                ->get();
+        } else if($status == 1) { //Incidencias en proceso
+            $data = $this->db
+                ->distinct()
+                ->select("inc.id_incidencia, inc.titulo, inc.status, inc.fecha_apertura, (SELECT GROUP_CONCAT(d.nombre SEPARATOR ', ') 
+                FROM incidencia as i 
+                INNER JOIN incidencia_departamento as i_d ON i.id_incidencia=i_d.id_incidencia 
+                INNER JOIN departamento as d ON i_d.id_departamento=d.id_departamento
+                WHERE i.id_incidencia = inc.id_incidencia) as departamento, (SELECT GROUP_CONCAT(u.nombre SEPARATOR ', ') 
+                FROM incidencia as i 
+                INNER JOIN atender_incidencia as ai ON i.id_incidencia=ai.id_incidencia 
+                INNER JOIN usuario as u ON ai.no_empleado=u.no_empleado
+                WHERE i.id_incidencia = inc.id_incidencia) as encargado")
+                ->from("incidencia inc")
+                ->join("incidencia_departamento id", "inc.id_incidencia=id.id_incidencia")
+                ->where(array('id.id_departamento' => $id_departamento, 'status' => $status))
+                ->group_by('inc.id_incidencia')
+                ->get();
+        } else if($status == 2) { //Incidencias finalizadas
+            $data = $this->db
+                ->distinct()
+                ->select("inc.id_incidencia, inc.titulo, inc.status, inc.fecha_apertura, (SELECT GROUP_CONCAT(d.nombre SEPARATOR ', ') 
+                FROM incidencia as i 
+                INNER JOIN incidencia_departamento as i_d ON i.id_incidencia=i_d.id_incidencia 
+                INNER JOIN departamento as d ON i_d.id_departamento=d.id_departamento
+                WHERE i.id_incidencia = inc.id_incidencia) as departamento, (SELECT GROUP_CONCAT(u.nombre SEPARATOR ', ') 
+                FROM incidencia as i 
+                INNER JOIN atender_incidencia as ai ON i.id_incidencia=ai.id_incidencia 
+                INNER JOIN usuario as u ON ai.no_empleado=u.no_empleado
+                WHERE i.id_incidencia = inc.id_incidencia) as encargado")
+                ->from("incidencia inc")
+                ->join("incidencia_departamento id", "inc.id_incidencia=id.id_incidencia")
+                ->where(array('id.id_departamento' => $id_departamento, 'status' => $status))
+                ->group_by('inc.id_incidencia')
+                ->get();
+        }
+        if(!$data->result()) {
+            return false;
+        }
+        return $data->result();
+    }
+
     // Obtener todos los datos necesarios para crear el reporte
     public function datos_incidencia($id_incidencia) {
         $data = $this->db

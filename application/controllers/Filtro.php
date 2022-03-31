@@ -12,7 +12,7 @@ class Filtro extends CI_Controller {
 
 	public function index()
 	{
-		// validar que el usuario este logeado y sea de tipo cliente
+		// validar que el usuario este logeado y sea de tipo filtro
         if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 1) {
 			// Obtener los datos necesarios para la vista principal
 			$data = array(
@@ -22,7 +22,7 @@ class Filtro extends CI_Controller {
 				'incidencias' => $this->Incidencia->get_new_incidencias(),
 			);
 			// Cargar la vista
-        	$this->load->view('v_Filtro', $data);
+        	$this->load->view('v_filtro', $data);
 			// echo json_encode(array('incidencias' => $this->Incidencia->get_new_incidencias()));
         } else {
             // Si no hay datos de sesion redireccionar a login
