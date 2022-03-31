@@ -228,7 +228,8 @@ class Incidencia extends CI_Model {
                 WHERE i.id_incidencia = inc.id_incidencia) as encargado")
                 ->from("incidencia inc")
                 ->join("incidencia_departamento id", "inc.id_incidencia=id.id_incidencia")
-                ->where(array('id.id_departamento' => $id_departamento, 'status' => $status))
+                ->join("atender_incidencia ai", "inc.id_incidencia=ai.id_incidencia")
+                ->where(array('id.id_departamento' => $id_departamento, 'status' => $status, 'ai.no_empleado' => $no_empleado))
                 ->group_by('inc.id_incidencia')
                 ->get();
         } else if($status == 2) { //Incidencias finalizadas
@@ -245,7 +246,8 @@ class Incidencia extends CI_Model {
                 WHERE i.id_incidencia = inc.id_incidencia) as encargado")
                 ->from("incidencia inc")
                 ->join("incidencia_departamento id", "inc.id_incidencia=id.id_incidencia")
-                ->where(array('id.id_departamento' => $id_departamento, 'status' => $status))
+                ->join("atender_incidencia ai", "inc.id_incidencia=ai.id_incidencia")
+                ->where(array('id.id_departamento' => $id_departamento, 'status' => $status, 'ai.no_empleado' => $no_empleado))
                 ->group_by('inc.id_incidencia')
                 ->get();
         }
