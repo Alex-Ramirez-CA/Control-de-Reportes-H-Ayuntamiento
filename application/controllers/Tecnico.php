@@ -31,16 +31,16 @@ class Tecnico extends CI_Controller {
 				'footer' => $this->load->view('layout/footer', '', TRUE),
 				'pendientes' => $res_0,
 				'en_proceso' => $res_1,
-				'finalizadas' => $res_2,
+				'finalizados' => $res_2,
 			);
 			// Cargar la vista
-        	// $this->load->view('v_tecnico', $data);
-			$datos = array(
-				'pendientes' => $res_0,
-				'en_proceso' => $res_1,
-				'finalizadas' => $res_2,
-			);
-			echo json_encode($datos);
+        	$this->load->view('v_tecnico', $data);
+			// $datos = array(
+			// 	'pendientes' => $res_0,
+			// 	'en_proceso' => $res_1,
+			// 	'finalizados' => $res_2,
+			// );
+			// echo json_encode($datos);
         } else {
             // Si no hay datos de sesion redireccionar a login
             redirect('login');
