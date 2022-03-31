@@ -5,9 +5,8 @@ class Tecnico extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
-		$this->load->library(array('session', 'form_validation'));
-		$this->load->model(array('Incidencia', 'Incidencia_departamento'));
-		$this->load->helper(array('incidence/incidencia_rules'));
+		$this->load->library('session');
+		$this->load->model('Incidencia');
 	}
 
 	public function index()
@@ -35,16 +34,14 @@ class Tecnico extends CI_Controller {
 			);
 			// Cargar la vista
         	$this->load->view('v_tecnico', $data);
-			// $datos = array(
-			// 	'pendientes' => $res_0,
-			// 	'en_proceso' => $res_1,
-			// 	'finalizados' => $res_2,
-			// );
-			// echo json_encode($datos);
         } else {
             // Si no hay datos de sesion redireccionar a login
             redirect('login');
         }
+		
+	}
+
+	public function reportes_atendidos(){
 		
 	}
 
