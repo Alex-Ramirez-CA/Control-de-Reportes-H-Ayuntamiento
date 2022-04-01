@@ -10,7 +10,7 @@
         $.ajax({
             url: 'filtro/asignar_departamento',
             type: 'POST',
-            data: {id_incidencia, soporte, redes, administracion},
+            data: $(this).serialize(),
             success: function(data) {
                 let json = JSON.parse(data);
                 console.log(json.url);
