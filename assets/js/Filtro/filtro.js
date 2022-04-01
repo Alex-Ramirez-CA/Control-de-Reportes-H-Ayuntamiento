@@ -3,10 +3,6 @@
  
 
     $("#frm_departamento").submit(function(ev) {
-        let id_incidencia = $('#id_incidencia').val();
-        let soporte = $('#soporte').val();
-        let redes = $('#redes').val();
-        let administracion = $('#administracion').val();
         $.ajax({
             url: 'filtro/asignar_departamento',
             type: 'POST',
