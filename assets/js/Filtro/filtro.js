@@ -1,5 +1,29 @@
 (function($) {
     let url;
+    
+    $("#frm_departamento").submit(function(ev) {
+        let id_incidencia = $('#id_incidencia').val();
+        let soporte = $('#soporte').val();
+        let redes = $('#redes').val();
+        let administracion = $('#administracion').val();
+        $.ajax({
+            url: 'filtro/asignar_departamento',
+            type: 'POST',
+            data: $(this).serialize(),
+            success: function(data) {
+                let json = JSON.parse(data);
+                console.log(json.url);
+            },
+            statusCode: {
+                400: function(xhr) {
+                    let json = JSON.parse(xhr.responseText);
+                    console.log(json.msg);
+                },
+            },
+        });
+        ev.preventDefault();
+    });
+
     //Función para cuando le de click a la tarjeta
     $(document).on('click', '.btn-ver-filtro', function(){
         let elemento = $(this)[0];
