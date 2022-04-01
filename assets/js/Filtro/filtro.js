@@ -1,6 +1,5 @@
 (function($) {
     let url;
- 
 
     $("#frm_departamento").submit(function(ev) {
         $.ajax({
@@ -9,12 +8,21 @@
             data: $(this).serialize(),
             success: function(data) {
                 let json = JSON.parse(data);
-                console.log(json.url);
+                $('.texto-mensaje').html("Se asigno el reporte con exito");
+                $('.img-mensaje').attr('src',$('.img-mensaje').attr('correcto'));
+                $('.mensaje').css({'visibility':'visible'});
+                $('.contenedor-mensaje').css({'height':'30%'});
+                url = json.url;
             },
             statusCode: {
                 400: function(xhr) {
                     let json = JSON.parse(xhr.responseText);
-                    console.log(json.msg);
+                    $('.texto-mensaje').css({'color':'#E52141'});
+                    $('.texto-mensaje').html(json.msg);
+                    $('.img-mensaje').attr('src',$('.img-mensaje').attr('incorrecto'));
+                    $('.mensaje').css({'visibility':'visible'});
+                    $('.contenedor-mensaje').css({'height':'35%'});
+                    url = json.url;
                 },
             },
         });

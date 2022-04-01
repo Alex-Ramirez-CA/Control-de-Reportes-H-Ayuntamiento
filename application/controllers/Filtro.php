@@ -90,7 +90,10 @@ class Filtro extends CI_Controller {
 				echo json_encode(array('url' => base_url('filtro')));
 				exit;
 			} else {
-				echo json_encode(array('msg' => 'Es necesario asignar al menos un departamento'));
+				echo json_encode(array(
+					'msg' => 'Es necesario asignar al menos un departamento',
+					'url' => base_url('filtro')
+				));
 				$this->output->set_status_header(400);
 				exit;
 			}
