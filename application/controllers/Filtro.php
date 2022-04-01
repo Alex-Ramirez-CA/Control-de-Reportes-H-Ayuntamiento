@@ -87,9 +87,10 @@ class Filtro extends CI_Controller {
 			// a los departamentos
 			if($validar){
 				$this->Incidencia->status_asignado($id_incidencia);
-				echo json_encode(array('msg' => 'Departamentos asignados correctamente'));
+				echo json_encode(array('url' => base_url('filtro')));
 			}
-			redirect('filtro');
+			echo json_encode(array('msg' => 'Es necesario asignar al menos un departamento'));
+			$this->output->set_status_header(500);
 		} else {
             // Si no hay datos de sesion redireccionar a login
             redirect('login');
