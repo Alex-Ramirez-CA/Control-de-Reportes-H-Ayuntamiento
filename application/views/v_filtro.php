@@ -34,7 +34,7 @@
                                 </div>
                                     <!-- Titulo del formulario -->
                                 <div class="form-group" id="asignar">
-                                    <input type="hidden" name="id_incidencia" value="<?= $item->id_incidencia;?>">
+                                    <input type="hidden" name="id_incidencia" id="id_incidencia" value="<?= $item->id_incidencia;?>">
                                     <input type="checkbox" name="soporte" id="soporte" value="1"> <label>Soporte técnico</label><br>
                                     <input type="checkbox" name="redes" id="redes" value="2"> <label for="cbox2">Redes</label><br>
                                     <input type="checkbox" name="administracion" id="administracion" value="3"> <label for="cbox2">Adminstración</label>
