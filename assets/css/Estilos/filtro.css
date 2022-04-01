@@ -138,7 +138,7 @@
 .opciones-filtro {
 	display: flex;
 	justify-content: space-between;
-	width: 284px;
+	width: 283px;
 	align-items: center;
 	margin-right: 8px;
 	margin-left: 8px;
@@ -149,50 +149,106 @@
 	font-size: 10px;
 	width: 80px;
 	height: 20px;
-	padding-top: 5px;
+	padding-top: 3px;
 	text-align: center;
 	border-radius: 5px;
 	cursor: pointer;
 }
 
+.btn-ver-filtro,
 .btn-comentar-filtro {
 	margin-right: 5px;
 	background-color: #26a2d9;
 	color: #fff;
+	border: solid 1px #26a2d9;
 }
 
-.btn-ver-filtro {
-	margin-right: 5px;
-	background-color: #26a2d9;
-	color: #fff;
+.btn-ver-filtro:hover,
+.btn-comentar-filtro:hover {
+	background-color: #0088f8;
+	border: solid 1px #fff;
 }
 
-.btn-enviar-filtro {
+.boton-enviar {
 	background-color: #f5d344;
 	color: rgb(94, 92, 92);
+	font-size: 10px;
+	width: 80px;
+	height: 20px;
+	padding: 0;
+	text-align: center;
+	border-radius: 5px;
+	border: solid 1px #f5d344;
+	padding-top: 3px;
 }
 
-.asignar-departamento {
+.boton-enviar:hover {
+	background-color: #ffcc00;
+}
+
+#asignar label {
+	margin: 0;
+}
+
+#enviar-datos {
+	margin: 0;
+}
+
+#asignar {
+	font-size: 10px;
+	margin: 0;
+}
+
+.mensaje {
+	visibility: hidden;
+	height: 100vh;
+	width: 100%;
+	position: fixed;
+	z-index: 1000;
+	top: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.contenedor-mensaje {
+	width: 40%;
+	height: 35%;
+	background-color: #fff;
 	display: flex;
 	flex-direction: column;
-	width: 150px;
-	font-size: 10px;
-	margin-left: 80px;
+	align-items: center;
+	border-radius: 5px;
+	transition: transform 1s;
+	transform: translateY(0%);
 }
 
-.asignar-departamento button {
-	border-radius: 20px;
-	width: 100px;
-	height: 20px;
-	padding-top: 2px;
-}
-
-.asignar-departamento button.active {
-	background-color: red;
+.cerrar-mensaje {
+	margin-left: 90%;
+	margin-top: 9px;
+	font-size: 16px;
+	padding-top: 3px;
+	height: 26px;
+	width: 26px;
+	text-align: center;
+	background-color: #006e95;
 	color: #fff;
+	border-radius: 100%;
+	cursor: pointer;
 }
 
-.administracion,
-.soporte-tecnico {
-	margin-bottom: 5px;
+.cerrar-mensaje:hover {
+	background: #e52141;
+}
+
+.img-mensaje {
+	width: 30%;
+}
+
+.texto-mensaje {
+	margin-top: 20px;
+	color: #006e95;
+	font-size: 16px;
 }
