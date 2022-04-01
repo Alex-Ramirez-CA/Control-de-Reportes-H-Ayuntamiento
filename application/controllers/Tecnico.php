@@ -65,7 +65,7 @@ class Tecnico extends CI_Controller {
 			// Cambiar el estatus de la incidencia a en_proceso
 			$this->Incidencia->modificar_status($id_incidencia, 1);
 			redirect('tecnico');
-			echo json_encode(array('msg' => 'Listo'));
+			// echo json_encode(array('msg' => 'Listo'));
 		} else {
 			// Si no hay datos de sesion redireccionar a login
 			redirect('login');
