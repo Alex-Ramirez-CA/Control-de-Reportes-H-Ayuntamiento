@@ -25,36 +25,31 @@
                         <div class="card-title-filtro">
                             <h5> <?= $item->titulo; ?></h5>
                         </div>
-                        <div class="card-body">
-                            <div class="fecha-filtro">
-                                <b><h5>Creado</h5></b>
-                                <p><?= date("d/m/Y", strtotime($item->fecha_apertura)); ?></p>
+
+                        <form action="<?= base_url('filtro/asignar_departamento') ?>" method="POST" id="frm_departamento">
+                            <div class="card-body">
+                                <div class="fecha-filtro">
+                                    <b><h5>Creado</h5></b>
+                                    <p><?= date("d/m/Y", strtotime($item->fecha_apertura)); ?></p>
+                                </div>
+                                    <!-- Titulo del formulario -->
+                                <div class="form-group" id="asignar">
+                                    <input type="hidden" name="id_incidencia" value="<?= $item->id_incidencia;?>">
+                                    <input type="checkbox" name="soporte" id="soporte" value="1"> <label>Soporte técnico</label><br>
+                                    <input type="checkbox" name="redes" id="redes" value="2"> <label for="cbox2">Redes</label><br>
+                                    <input type="checkbox" name="administracion" id="administracion" value="3"> <label for="cbox2">Adminstración</label>
+                                </div>
                             </div>
-                            <div class="asignar-departamento">
-                                <button class="administracion">Administración</button>
-                                <button class="soporte-tecnico">Soporte técnico</button>
-                                <button class="redes">Redes</button>
-                            </div>
-                        </div>
-                        <div class="opciones-filtro">
+                            <div class="opciones-filtro">
                                 <p class="btn-ver-filtro" idReporte="<?= $item->id_incidencia;?>">Ver</p>
                                 <p class="btn-comentar-filtro" idReporte="<?= $item->id_incidencia;?>">Comentar</p> 
-                                <p class="btn-enviar-filtro" idReporte="<?= $item->id_incidencia;?>">Enviar</p>  
-                        </div>
+                                <!-- Boton para enviar los datos del formulario -->
+                                <div class="form-group" id="enviar-datos">
+                                    <button type="submit" class="btn btn-primary form-control boton-enviar" >Enviar</button>
+                                </div> 
+                            </div>
+                        </form>
                     </div>
-                    <form action="<?= base_url('filtro/asignar_departamento') ?>" method="POST" id="frm_login">
-                        <!-- Titulo del formulario -->
-                        <div class="form-group" id="asignar">
-                        <input type="hidden" name="id_incidencia" value="<?= $item->id_incidencia;?>">
-                        <input type="checkbox" name="soporte" id="soporte" value="1"> <label>Soporte técnico</label><br>
-                        <input type="checkbox" name="redes" id="redes" value="2"> <label for="cbox2">Redes</label>
-                        <input type="checkbox" name="administracion" id="administracion" value="3"> <label for="cbox2">Adminstración</label>
-                        </div>
-                        <!-- Boton para enviar los datos del formulario -->
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary form-control boton-enviar">Asignar</button>
-                        </div>
-                    </form>
             <?php 
                     endforeach; 
                 }
@@ -76,9 +71,17 @@
                 </div>
                 <textarea name="descripcion-reporte" id="descripcion-reporte" cols="50" rows="10"></textarea>
                 <button class="guardar-cambios">Guardar cambios</button>
+                <div id="alert"></div>
         </div>
     </div>
+</div>
 
+<div class="mensaje">
+    <div class="contenedor-mensaje">
+        <p class="cerrar-mensaje">X</p>
+        <img class="img-mensaje" src="" alt="" correcto="<?= base_url('assets/img/iconos/correcto.svg') ?>" incorrecto="<?= base_url('assets/img/iconos/incorrecto.svg') ?>">
+        <h4 class="texto-mensaje">Cambios guardados con exito</h4>
+    </div>
 </div>
 
 <?= $footer ?>

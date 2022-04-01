@@ -1,4 +1,5 @@
 (function($) {
+    let url;
     //Función para cuando le de click a la tarjeta
     $(document).on('click', '.btn-ver-filtro', function(){
         let elemento = $(this)[0];
@@ -20,58 +21,38 @@
             $('#folio-reporte').html("Folio: " + json.id_incidencia);
             $('#fecha-reporte').html("Creado: " + json.fecha_apertura);
             $('#descripcion-reporte').html(json.descripcion);
-
-            //Función para enviar la descripción del reporte editado
-            $(document).on('click', '.guardar-cambios', function(){
-                let id_incidencia = json.id_incidencia;
-                let descripcion = $('#descripcion-reporte').val()
-                $.post('filtro/actualizar_descripcion', {id_incidencia,descripcion}, function(response){
-                    let json = JSON.parse(response);
-                    console.log(json);
-                });
-            });
+            $('.guardar-cambios').attr('idReporte',json.id_incidencia);
         });
     });
 
-    $(document).on('click', '.administracion', function(){
-        if($(this).hasClass('active')){  
-            $(this).removeClass('active');
-            $(this).removeClass($('.btn-enviar-filtro').attr('idReporte'));
-        }else{
-            $(this).addClass('active');
-            $(this).addClass($('.btn-enviar-filtro').attr('idReporte'));
-        }                
-    });
+    //Función para enviar la descripción del reporte editado
+    $(document).on('click', '.guardar-cambios', function(){
+        let id_incidencia = $('.guardar-cambios').attr('idReporte');
+        let descripcion = $('#descripcion-reporte').val();
+        $.post('filtro/actualizar_descripcion', {id_incidencia,descripcion}, function(response){
+            let json = JSON.parse(response);
+            if (id_incidencia === undefined) {
+                //Se abre el modal con la imagen incorrecta
+                $('.texto-mensaje').css({'color':'#E52141'});
+                $('.texto-mensaje').html("Tiene que seleccionar algún reporte");
+                $('.img-mensaje').attr('src',$('.img-mensaje').attr('incorrecto'));
+                $('.mensaje').css({'visibility':'visible'});
+                $('.contenedor-mensaje').css({'height':'35%'});
+            }else {
+                //Se abre el modal con la imagen correcta
+                $('.texto-mensaje').html(json.msg);
+                $('.img-mensaje').attr('src',$('.img-mensaje').attr('correcto'));
+                $('.mensaje').css({'visibility':'visible'});
+                $('.contenedor-mensaje').css({'height':'30%'});
+            }
+            url = json.url;
+        }); 
+    }); 
 
-    $(document).on('click', '.soporte-tecnico', function(){
-        if($(this).hasClass('active')){  
-            $(this).removeClass('active');
-            console.log($(this).hasClass($('.btn-enviar-filtro').attr('idReporte')));
-        }else{
-            $(this).addClass('active');
-            console.log($(this).hasClass($('.btn-enviar-filtro').attr('idReporte')));
-        }                
-    });
-
-    $(document).on('click', '.redes', function(){
-        if($(this).hasClass('active')){  
-            $(this).removeClass('active');
-            console.log($(this).hasClass($('.btn-enviar-filtro').attr('idReporte')));
-        }else{
-            $(this).addClass('active');
-            console.log($(this).hasClass($('.btn-enviar-filtro').attr('idReporte')));
-        }          
-    });
-
-    $(document).on('click', '.btn-enviar-filtro', function(){
-        if($('.administracion').hasClass('active') && $('.administracion').hasClass($(this).attr('idReporte'))){
-            console.log("Se puede");
-        }else{
-            console.log("No puede");
-        }
-        console.log($(this).attr('idReporte'));
-
-        //console.log("id tarjeta " + $(this).attr("idReporte"));         
+    //Función para cerrar el modal
+    $(document).on('click', '.cerrar-mensaje', function(){
+        $('.mensaje').css({'visibility':'hidden'});
+        window.location.replace(url);
     });
 
 })(jQuery)
