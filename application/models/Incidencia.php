@@ -349,6 +349,16 @@ class Incidencia extends CI_Model {
         $this->db->where('id_incidencia', $id_incidencia);
         $this->db->update('incidencia');
     }
+    
+    // -----------------------------------------------------------------------------------
+
+    // Actualizar el campo de status de la incidencia 
+    // para indicar cuando pasa de pendiente a en proceso, finalizado o veceverza
+    public function modificar_status($id_incidencia, $status) {
+        $this->db->set('status', $status);
+        $this->db->where('id_incidencia', $id_incidencia);
+        $this->db->update('incidencia');
+    }
 }
 
 

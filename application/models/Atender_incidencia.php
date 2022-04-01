@@ -4,6 +4,11 @@ class Atender_incidencia extends CI_Model {
         $this->load->database();
     }
 
+    // Insertar datos de una nueva incidencia
+    public function insertar($data) {
+        $this->db->insert('atender_incidencia', $data);
+    }
+
     public function get_comentarios($id_incidencia) {
         $data = $this->db
                 ->select("ai.comentario, ai.fecha, concat_ws(' ', u.nombre, u.apellido_paterno, u.apellido_materno) as comentario_by")
@@ -18,13 +23,19 @@ class Atender_incidencia extends CI_Model {
             return false;
         }
         return $data->result();
+    }
+
+    public function consultar($id_incidencia, $no_empleado) {
+        $data = $this->db
+                ->select("*")
+                ->from("atender_incidencia")
+                ->where(array('id_incidencia' => $id_incidencia, 'no_empleado' => $no_empleado))
+                ->get();
         
-        /* Cometarios de la incidencia
-        SELECT  ai.comentario, ai.fecha, d.nombre as 'departamento', concat_ws(' ', u.nombre, u.apellido_paterno, u.apellido_materno) as 'comentario_by'
-        FROM atender_incidencia as ai 
-        INNER JOIN departamento as d ON ai.id_departamento=d.id_departamento 
-        INNER JOIN usuario as u ON d.id_departamento=u.id_departamento
-        WHERE ai.id_incidencia = '1';
-        */
+        // Si no se encuentra resultados
+        if(!$data->result()) {
+            return false;
+        }
+        return $data->row();
     }
 }

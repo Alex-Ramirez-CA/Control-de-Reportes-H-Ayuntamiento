@@ -6,7 +6,7 @@ class Tecnico extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->library('session');
-		$this->load->model('Incidencia');
+		$this->load->model(array('Incidencia', 'Atender_incidencia'));
 	}
 
 	public function index()
@@ -43,10 +43,30 @@ class Tecnico extends CI_Controller {
 
 	// Funcion que resgistrara cuando un tercnico le de atender una incidencia
 	public function Atender() {
-		// Esta funcion hara una insercion a la tabla atender_incidencia
-		// agregando el id_incidencia, el no_empleado, el comentario y la fecha actual
-		// de esta manera creando la relación entre ambos
-		// Por ultimo el estatus de la incidencia pasara a ser 1, o en proceso
+		// validar que el usuario este logeado y sea de tipo tecnico
+        if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 2) {
+			// Obtener el id del empleado de los datos de sesion
+			$no_empleado = $this->session->userdata('id');
+			// Recibir id_incidencia vía post
+			$id_incidencia = 21;//$this->input->post('id_incidencia');
+			// Recibir el comentario vía post
+			$comentario = 'Yo lo resulevo';//$this->input->post('comentario');
+			//Obtener la fecha del sistema
+			date_default_timezone_set('America/Mexico_City');
+			$fecha = date("Y-m-d h:i:s", time());
+			$data = array(
+				'no_empleado' => $no_empleado,
+				'id_incidencia' => $id_incidencia,
+				'comentario' => $comentario,
+				'fecha' => $fecha,
+			);
+			$this->Atender_incidencia->insertar($data);
+			$this->Incidencia->modificar_status($id_incidencia, 1);
+			redirect('tecnico');
+		} else {
+			// Si no hay datos de sesion redireccionar a login
+			redirect('login');
+		}
 	}
 	public function Unirme() {
 		// Primeramente se hara una consulta para verificar que el tecnico no este atendiendo
@@ -56,6 +76,8 @@ class Tecnico extends CI_Controller {
 		// agregando el id_incidencia, el no_empleado, el comentario y la fecha actual
 		// Si regresa algo es porque ya existe la relacion y no se hara ninguna accion
 		// El estatus de la incidencia no se modificara
+		date_default_timezone_set('America/Mexico_City');
+		$date = date("Y-m-d h:i:s", time());
 	}
 	public function Reabrir() {
 		// Primeramente se hara una consulta para verificar que el tecnico no este atendiendo
@@ -65,6 +87,8 @@ class Tecnico extends CI_Controller {
 		// agregando el id_incidencia, el no_empleado, el comentario y la fecha actual
 		// Si la consulta regresa algo entonces solo se cambia
 		// el estatus de la incidencia que regresara a ser 1, o en proceso
+		date_default_timezone_set('America/Mexico_City');
+		$date = date("Y-m-d h:i:s", time());
 	}
 	public function finalizar(){
 		// Lo unico que hara esta funcion es pasar el estatus de dicha incidencia a 2
