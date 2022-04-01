@@ -42,7 +42,7 @@ class Tecnico extends CI_Controller {
 	}
 
 	// Funcion que resgistrara cuando un tercnico le de atender una incidencia
-	public function Atender() {
+	public function atender() {
 		// validar que el usuario este logeado y sea de tipo tecnico
         if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 2) {
 			// Obtener el id del empleado de los datos de sesion
@@ -74,7 +74,7 @@ class Tecnico extends CI_Controller {
 
 	// Funcion que llevara a cabo el proceso de vincular la incidenica con el tecnico
 	// Responde al boton de unirme
-	public function Unirme() {
+	public function unirme() {
 		// validar que el usuario este logeado y sea de tipo tecnico
         if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 2) {
 			// Obtener el id del empleado de los datos de sesion
@@ -109,15 +109,15 @@ class Tecnico extends CI_Controller {
 
 	// Funcion que reabrira una incidenia para pasarla a en_proceso y en caso de que no
 	// Unira al usuario a la solucion de esta
-	public function Reabrir() {
+	public function reabrir() {
 		// validar que el usuario este logeado y sea de tipo tecnico
         if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 2) {
 			// Obtener el id del empleado de los datos de sesion
 			$no_empleado = $this->session->userdata('id');
 			// Recibir id_incidencia vía post
-			$id_incidencia = 1;//$this->input->post('id_incidencia');
+			$id_incidencia = $this->input->post('id_incidencia');
 			// Recibir el comentario vía post
-			$comentario = 'Me uno reabriendo';//$this->input->post('comentario');
+			$comentario = $this->input->post('comentario');
 			//Obtener la fecha del sistema
 			date_default_timezone_set('America/Mexico_City');
 			$fecha = date("Y-m-d h:i:s", time());
@@ -152,8 +152,35 @@ class Tecnico extends CI_Controller {
 			redirect('login');
 		}
 	}
+
+	// Lo unico que hara esta funcion es pasar el estatus de dicha incidencia a 2 = finalizado
 	public function finalizar(){
-		// Lo unico que hara esta funcion es pasar el estatus de dicha incidencia a 2
+		// validar que el usuario este logeado y sea de tipo tecnico
+        if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 2) {
+			// Obtener el id del empleado de los datos de sesion
+			$no_empleado = $this->session->userdata('id');
+			// Recibir id_incidencia vía post
+			$id_incidencia = 4;//$this->input->post('id_incidencia');
+			// Recibir el comentario vía post
+			$comentario = 'Doy por terminado esto';//$this->input->post('comentario');
+			//Obtener la fecha del sistema
+			date_default_timezone_set('America/Mexico_City');
+			$fecha = date("Y-m-d h:i:s", time());
+			$data = array(
+				'no_empleado' => $no_empleado,
+				'id_incidencia' => $id_incidencia,
+				'comentario' => $comentario,
+				'fecha' => $fecha,
+			);
+			// Hacer la insercion del registro
+			$this->Atender_incidencia->insertar($data);
+			// Cambiar el estatus de la incidencia a finalizada
+			$this->Incidencia->modificar_status($id_incidencia, 2);
+			redirect('tecnico');
+		} else {
+			// Si no hay datos de sesion redireccionar a login
+			redirect('login');
+		}
 	}
 
 }
