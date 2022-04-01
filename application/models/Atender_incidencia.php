@@ -29,7 +29,7 @@ class Atender_incidencia extends CI_Model {
         $data = $this->db
                 ->select("*")
                 ->from("atender_incidencia")
-                ->where(array('id_incidencia' => $id_incidencia, 'no_empleado' => $no_empleado))
+                ->where(array('id_incidencia' => $id_incidencia, 'no_empleado' => $no_empleado),1)
                 ->get();
         
         // Si no se encuentra resultados

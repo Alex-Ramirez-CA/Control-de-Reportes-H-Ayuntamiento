@@ -65,20 +65,24 @@ class Tecnico extends CI_Controller {
 			// Cambiar el estatus de la incidencia a en_proceso
 			$this->Incidencia->modificar_status($id_incidencia, 1);
 			redirect('tecnico');
+			echo json_encode(array('msg' => 'Listo'));
 		} else {
 			// Si no hay datos de sesion redireccionar a login
 			redirect('login');
 		}
 	}
+
+	// Funcion que llevara a cabo el proceso de vincular la incidenica con el tecnico
+	// Responde al boton de unirme
 	public function Unirme() {
 		// validar que el usuario este logeado y sea de tipo tecnico
         if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 2) {
 			// Obtener el id del empleado de los datos de sesion
 			$no_empleado = $this->session->userdata('id');
 			// Recibir id_incidencia vía post
-			$id_incidencia = 5;//$this->input->post('id_incidencia');
+			$id_incidencia = $this->input->post('id_incidencia');
 			// Recibir el comentario vía post
-			$comentario = 'Me uní a ustedes';//$this->input->post('comentario');
+			$comentario = $this->input->post('comentario');
 			// Se hace una consulta a la bd para verificar que dicho usuario no haya
 			// atendido antes dicho incidencia y no repetir registros
 			if($this->Atender_incidencia->verificar($id_incidencia, $no_empleado)) {
@@ -102,16 +106,51 @@ class Tecnico extends CI_Controller {
 			redirect('login');
 		}
 	}
+
+	// Funcion que reabrira una incidenia para pasarla a en_proceso y en caso de que no
+	// Unira al usuario a la solucion de esta
 	public function Reabrir() {
-		// Primeramente se hara una consulta para verificar que el tecnico no este atendiendo
-		// ya dicha incidencia
-		// Si la consulta regresa false es porque no hay tal relacion y se procese a lo siguiente
-		// Hacer una insercion a la tabla atender_incidencia
-		// agregando el id_incidencia, el no_empleado, el comentario y la fecha actual
-		// Si la consulta regresa algo entonces solo se cambia
-		// el estatus de la incidencia que regresara a ser 1, o en proceso
-		date_default_timezone_set('America/Mexico_City');
-		$date = date("Y-m-d h:i:s", time());
+		// validar que el usuario este logeado y sea de tipo tecnico
+        if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 2) {
+			// Obtener el id del empleado de los datos de sesion
+			$no_empleado = $this->session->userdata('id');
+			// Recibir id_incidencia vía post
+			$id_incidencia = 1;//$this->input->post('id_incidencia');
+			// Recibir el comentario vía post
+			$comentario = 'Me uno reabriendo';//$this->input->post('comentario');
+			//Obtener la fecha del sistema
+			date_default_timezone_set('America/Mexico_City');
+			$fecha = date("Y-m-d h:i:s", time());
+			$data = array(
+				'no_empleado' => $no_empleado,
+				'id_incidencia' => $id_incidencia,
+				'comentario' => $comentario,
+				'fecha' => $fecha,
+			);
+			// Se hace una consulta a la bd para saber si dicho tecnico ya
+			// habia atendido esta esta incidencia
+			if($this->Atender_incidencia->verificar($id_incidencia, $no_empleado)) {
+				// Si dicho tecnico formas parte de quienes atendieron esta incidencia
+				// Se agrega otra insercion
+				$this->Atender_incidencia->insertar($data);
+				// Se le vuelve a cambiar el estatus a la misma a 1 = en proceso
+				$this->Incidencia->modificar_status($id_incidencia, 1);
+				// redirect('tecnico');
+				echo json_encode(array('msg' => 'Reabriste la incidencia'));
+			} else {
+				// SI el usuario no esta vinculado con la incidencia se vincula y tambien
+				// se hace el cambio de estatus de la misma
+				// Agregar registro
+				$this->Atender_incidencia->insertar($data);
+				// Cambiar el estatus de la incidencia a en_proceso
+				$this->Incidencia->modificar_status($id_incidencia, 1);
+				echo json_encode(array('msg' => 'Reabriste la incidencia y te unes a ella'));
+				// redirect('tecnico');
+			}
+		} else {
+			// Si no hay datos de sesion redireccionar a login
+			redirect('login');
+		}
 	}
 	public function finalizar(){
 		// Lo unico que hara esta funcion es pasar el estatus de dicha incidencia a 2
