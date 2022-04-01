@@ -160,9 +160,9 @@ class Tecnico extends CI_Controller {
 			// Obtener el id del empleado de los datos de sesion
 			$no_empleado = $this->session->userdata('id');
 			// Recibir id_incidencia vía post
-			$id_incidencia = 4;//$this->input->post('id_incidencia');
+			$id_incidencia = $this->input->post('id_incidencia');
 			// Recibir el comentario vía post
-			$comentario = 'Doy por terminado esto';//$this->input->post('comentario');
+			$comentario = $this->input->post('comentario');
 			//Obtener la fecha del sistema
 			date_default_timezone_set('America/Mexico_City');
 			$fecha = date("Y-m-d h:i:s", time());
