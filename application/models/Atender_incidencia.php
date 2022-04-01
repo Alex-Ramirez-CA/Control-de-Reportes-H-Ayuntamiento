@@ -25,7 +25,7 @@ class Atender_incidencia extends CI_Model {
         return $data->result();
     }
 
-    public function consultar($id_incidencia, $no_empleado) {
+    public function verificar($id_incidencia, $no_empleado) {
         $data = $this->db
                 ->select("*")
                 ->from("atender_incidencia")
