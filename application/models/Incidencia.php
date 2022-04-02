@@ -148,7 +148,7 @@ class Incidencia extends CI_Model {
                 ->get();
         } else if($status == 1) { //Incidencias en proceso
             $data = $this->db
-                ->select("id_incidencia, titulo, status, fecha_apertura, (SELECT GROUP_CONCAT(d.nombre SEPARATOR ', ') 
+                ->select("id_incidencia, titulo, status, fecha_apertura, (SELECT GROUP_CONCAT( DISTINCT d.nombre SEPARATOR ', ') 
                 FROM incidencia as i 
                 INNER JOIN incidencia_departamento as i_d ON i.id_incidencia=i_d.id_incidencia 
                 INNER JOIN departamento as d ON i_d.id_departamento=d.id_departamento
@@ -163,7 +163,7 @@ class Incidencia extends CI_Model {
                 ->get();
         } else if($status == 2) { //Incidencias finalizadas
             $data = $this->db
-                ->select("id_incidencia, titulo, status, fecha_apertura, (SELECT GROUP_CONCAT(d.nombre SEPARATOR ', ') 
+                ->select("id_incidencia, titulo, status, fecha_apertura, (SELECT GROUP_CONCAT( DISTINCT d.nombre SEPARATOR ', ') 
                 FROM incidencia as i 
                 INNER JOIN incidencia_departamento as i_d ON i.id_incidencia=i_d.id_incidencia 
                 INNER JOIN departamento as d ON i_d.id_departamento=d.id_departamento
@@ -203,7 +203,7 @@ class Incidencia extends CI_Model {
         if($status == 0) { //Incidencias pendientes
             $data = $this->db
                 ->distinct()
-                ->select("inc.id_incidencia, inc.titulo, inc.status, inc.fecha_apertura, (SELECT GROUP_CONCAT(d.nombre SEPARATOR ', ') 
+                ->select("inc.id_incidencia, inc.titulo, inc.status, inc.fecha_apertura, (SELECT GROUP_CONCAT( DISTINCT d.nombre SEPARATOR ', ') 
                 FROM incidencia as i 
                 INNER JOIN incidencia_departamento as i_d ON i.id_incidencia=i_d.id_incidencia 
                 INNER JOIN departamento as d ON i_d.id_departamento=d.id_departamento
@@ -216,7 +216,7 @@ class Incidencia extends CI_Model {
         } else if($status == 1) { //Incidencias en proceso
             $data = $this->db
                 ->distinct()
-                ->select("inc.id_incidencia, inc.titulo, inc.status, inc.fecha_apertura, (SELECT GROUP_CONCAT(d.nombre SEPARATOR ', ') 
+                ->select("inc.id_incidencia, inc.titulo, inc.status, inc.fecha_apertura, (SELECT GROUP_CONCAT( DISTINCT d.nombre SEPARATOR ', ') 
                 FROM incidencia as i 
                 INNER JOIN incidencia_departamento as i_d ON i.id_incidencia=i_d.id_incidencia 
                 INNER JOIN departamento as d ON i_d.id_departamento=d.id_departamento
@@ -233,7 +233,7 @@ class Incidencia extends CI_Model {
         } else if($status == 2) { //Incidencias finalizadas
             $data = $this->db
                 ->distinct()
-                ->select("inc.id_incidencia, inc.titulo, inc.status, inc.fecha_apertura, (SELECT GROUP_CONCAT(d.nombre SEPARATOR ', ') 
+                ->select("inc.id_incidencia, inc.titulo, inc.status, inc.fecha_apertura, (SELECT GROUP_CONCAT( DISTINCT d.nombre SEPARATOR ', ') 
                 FROM incidencia as i 
                 INNER JOIN incidencia_departamento as i_d ON i.id_incidencia=i_d.id_incidencia 
                 INNER JOIN departamento as d ON i_d.id_departamento=d.id_departamento
@@ -261,7 +261,7 @@ class Incidencia extends CI_Model {
         if($status == 1) { //Incidencias en proceso
             $data = $this->db
                 ->distinct()
-                ->select("inc.id_incidencia, inc.titulo, inc.status, inc.fecha_apertura, (SELECT GROUP_CONCAT(d.nombre SEPARATOR ', ') 
+                ->select("inc.id_incidencia, inc.titulo, inc.status, inc.fecha_apertura, (SELECT GROUP_CONCAT( DISTINCT d.nombre SEPARATOR ', ') 
                 FROM incidencia as i 
                 INNER JOIN incidencia_departamento as i_d ON i.id_incidencia=i_d.id_incidencia 
                 INNER JOIN departamento as d ON i_d.id_departamento=d.id_departamento
@@ -279,7 +279,7 @@ class Incidencia extends CI_Model {
         } else if($status == 2) { //Incidencias finalizadas
             $data = $this->db
                 ->distinct()
-                ->select("inc.id_incidencia, inc.titulo, inc.status, inc.fecha_apertura, (SELECT GROUP_CONCAT(d.nombre SEPARATOR ', ') 
+                ->select("inc.id_incidencia, inc.titulo, inc.status, inc.fecha_apertura, (SELECT GROUP_CONCAT( DISTINCT d.nombre SEPARATOR ', ') 
                 FROM incidencia as i 
                 INNER JOIN incidencia_departamento as i_d ON i.id_incidencia=i_d.id_incidencia 
                 INNER JOIN departamento as d ON i_d.id_departamento=d.id_departamento
