@@ -28,7 +28,7 @@
                         <div class="card-body">
                             <div class="texto-medio">
                                 <p class="atiende"><b>Atendido por: </b>Por asignar</p>                        
-                                <p class="departamento"><b>Departamento: </b>Por asignar</p>                        
+                                <p class="departamento"><b>Departamento: </b><?= $item->departamento; ?></p>                        
                             </div>
                             <div class="fecha">
                                 <b><h5>Creado</h5></b>

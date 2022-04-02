@@ -141,10 +141,14 @@ class Incidencia extends CI_Model {
         $data;
         if($status == 0) { //Incidencias pendientes
             $data = $this->db
-                ->select("id_incidencia, titulo, status, fecha_apertura")
-                ->from("incidencia")
+                ->select("id_incidencia, titulo, status, fecha_apertura, (SELECT GROUP_CONCAT( DISTINCT d.nombre SEPARATOR ', ') 
+                FROM incidencia as i 
+                INNER JOIN incidencia_departamento as i_d ON i.id_incidencia=i_d.id_incidencia 
+                INNER JOIN departamento as d ON i_d.id_departamento=d.id_departamento
+                WHERE i.id_incidencia = inc.id_incidencia) as departamento")
+                ->from("incidencia inc")
                 ->where(array('no_empleado' => $no_empleado, 'status' => $status))
-                ->order_by('id_incidencia')
+                ->group_by('id_incidencia')
                 ->get();
         } else if($status == 1) { //Incidencias en proceso
             $data = $this->db
