@@ -1,33 +1,33 @@
 (function($) {
     let url;
 
-    $("#frm_departamento").submit(function(ev) {
-        $.ajax({
-            url: 'filtro/asignar_departamento',
-            type: 'POST',
-            data: $(this).serialize(),
-            success: function(data) {
-                let json = JSON.parse(data);
-                $('.texto-mensaje').html("Se asigno el reporte con exito");
-                $('.img-mensaje').attr('src',$('.img-mensaje').attr('correcto'));
-                $('.mensaje').css({'visibility':'visible'});
-                $('.contenedor-mensaje').css({'height':'30%'});
-                url = json.url;
-            },
-            statusCode: {
-                400: function(xhr) {
-                    let json = JSON.parse(xhr.responseText);
-                    $('.texto-mensaje').css({'color':'#E52141'});
-                    $('.texto-mensaje').html(json.msg);
-                    $('.img-mensaje').attr('src',$('.img-mensaje').attr('incorrecto'));
-                    $('.mensaje').css({'visibility':'visible'});
-                    $('.contenedor-mensaje').css({'height':'35%'});
-                    url = json.url;
-                },
-            },
-        });
-        ev.preventDefault();
-    });
+    // $("#frm_departamento").submit(function(ev) {
+    //     $.ajax({
+    //         url: 'filtro/asignar_departamento',
+    //         type: 'POST',
+    //         data: $(this).serialize(),
+    //         success: function(data) {
+    //             let json = JSON.parse(data);
+    //             $('.texto-mensaje').html("Se asigno el reporte con exito");
+    //             $('.img-mensaje').attr('src',$('.img-mensaje').attr('correcto'));
+    //             $('.mensaje').css({'visibility':'visible'});
+    //             $('.contenedor-mensaje').css({'height':'30%'});
+    //             url = json.url;
+    //         },
+    //         statusCode: {
+    //             400: function(xhr) {
+    //                 let json = JSON.parse(xhr.responseText);
+    //                 $('.texto-mensaje').css({'color':'#E52141'});
+    //                 $('.texto-mensaje').html(json.msg);
+    //                 $('.img-mensaje').attr('src',$('.img-mensaje').attr('incorrecto'));
+    //                 $('.mensaje').css({'visibility':'visible'});
+    //                 $('.contenedor-mensaje').css({'height':'35%'});
+    //                 url = json.url;
+    //             },
+    //         },
+    //     });
+    //     ev.preventDefault();
+    // });
 
     //Función para cuando le de click a la tarjeta
     $(document).on('click', '.btn-ver-filtro', function(){
