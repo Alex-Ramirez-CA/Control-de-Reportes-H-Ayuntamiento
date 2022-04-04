@@ -2,17 +2,13 @@
 
 <?= $nav; ?>
 
-<div class="container">
-
+<div class="container-tecnico">
     <!-- Columna de los reportes pendientes -->
-    
-    <div class="pendiente">
+    <div class="pendientes-filtro">
         <div class="titulo-pendiente">
             <h3><b>Reportes pendientes</b></h3>
         </div>
-
-        <div class="columna-pendiente">
-
+        <div class="columna-filtro">
             <?php 
                 if (empty($pendientes)) {
             ?>
@@ -21,14 +17,20 @@
                 }else{
                     foreach($pendientes as $item):
             ?>
-                    <div class="card" idCard="<?= $item->id_incidencia;?>">
+                    <div class="card-tecnico" idCard="<?= $item->id_incidencia;?>">
                         <div class="card-title">
                             <b><h5> <?= $item->titulo; ?></h5></b>
                         </div>
                         <div class="card-body">
                             <div class="texto-medio">
                                 <p class="atiende"><b>Atendido por: </b>Por asignar</p>                        
-                                <p class="departamento"><b>Departamento: </b><?=$item->departamento; ?></p>                        
+                                <p class="departamento"><b>Departamento: </b>
+                                    <?php if (empty($item->departamento)) { ?>
+                                        Por asignar
+                                    <?php } else { ?>
+                                        <?= $item->departamento; ?>
+                                    <?php } ?>
+                                </p>                        
                             </div>
                             <div class="fecha">
                                 <b><h5>Creado</h5></b>
@@ -39,17 +41,16 @@
             <?php 
                     endforeach; 
                 }
-            ?>   
+            ?>    
         </div>
     </div>
 
-    <!-- Columna de los reportes en proceso -->
-    <div class="proceso">
+    <!-- Columna de los reportes pendientes -->
+    <div class="proceso-filtro">
         <div class="titulo-proceso">
             <h3><b>Reportes en proceso</b></h3>
-        </div>
-        
-        <div class="columna-proceso"> 
+        </div> 
+        <div class="columna-filtro">
             <?php 
                 if (empty($en_proceso)) {
             ?>
@@ -58,7 +59,7 @@
                 }else{
                     foreach($en_proceso as $item):
             ?>
-                        <div class="card"  idCard="<?= $item->id_incidencia;?>">
+                        <div class="card-tecnico"  idCard="<?= $item->id_incidencia;?>">
                             <div class="card-title">
                                 <b><h5><?= $item->titulo; ?></h5></b>
                             </div>
@@ -76,27 +77,26 @@
             <?php 
                     endforeach; 
                 }    
-            ?>   
+            ?>
         </div>
-
     </div>
-    
-    <!-- Columna de los reportes finalizados -->
-    <div class="finalizados">
-        <div class="titulo-finalizados">
+
+    <!-- Columna de los reportes pendientes -->
+    <div class="finalizados-filtro">
+        <div class="titulo-finalizado">
             <h3><b>Reportes finalizados</b></h3>
         </div>
-        
-        <div class="columna-finalizados"> 
+
+        <div class="columna-filtro">
             <?php 
                 if (empty($finalizados)) {
             ?>
-                    <img class="contenido-vacio-cliente" src="<?= base_url('assets/img/logotipos/flor.png');?>" alt="" width="150">
+                    <img class="contenido-vacio-tecnico" src="<?= base_url('assets/img/logotipos/flor.png');?>" alt="" width="150">
             <?php 
                 }else{
                     foreach($finalizados as $item):
             ?>
-                        <div class="card"  idCard="<?= $item->id_incidencia;?>">
+                        <div class="card-tecnico"  idCard="<?= $item->id_incidencia;?>">
                             <div class="card-title">
                                 <b><h5><?= $item->titulo; ?></h5></b>
                             </div>
@@ -114,10 +114,10 @@
             <?php 
                     endforeach; 
                 }    
-            ?>   
-        </div>
-
+            ?>
+        </div>    
     </div>
+    
 
 </div>
 

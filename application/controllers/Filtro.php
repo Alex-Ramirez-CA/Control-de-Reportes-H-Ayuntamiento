@@ -53,7 +53,7 @@ class Filtro extends CI_Controller {
 			$descripcion = $this->input->post('descripcion');
 			$res = $this->Incidencia->update_incidencia($id_incidencia, $descripcion);
 			echo json_encode(array(
-				'msg' => 'Descripcion actializada correctamente',
+				'msg' => 'Descripción actualizada correctamente',
 				'url' => base_url('filtro')
 			));
 		} else {

@@ -214,7 +214,7 @@
 }
 
 .contenedor-mensaje {
-	width: 40%;
+	width: 450px;
 	height: 35%;
 	background-color: #fff;
 	display: flex;
@@ -222,7 +222,7 @@
 	align-items: center;
 	border-radius: 5px;
 	transition: transform 1s;
-	transform: translateY(0%);
+	transform: translateY(-200%);
 }
 
 .cerrar-mensaje {

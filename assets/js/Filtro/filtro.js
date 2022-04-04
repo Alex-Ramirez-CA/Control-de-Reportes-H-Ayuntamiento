@@ -67,12 +67,15 @@
                 $('.img-mensaje').attr('src',$('.img-mensaje').attr('incorrecto'));
                 $('.mensaje').css({'visibility':'visible'});
                 $('.contenedor-mensaje').css({'height':'35%'});
+                $('.contenedor-mensaje').css({'transform':'translateY(0%)'});
             }else {
                 //Se abre el modal con la imagen correcta
+                $('.texto-mensaje').css({'color':'#55BA7D'});
                 $('.texto-mensaje').html(json.msg);
                 $('.img-mensaje').attr('src',$('.img-mensaje').attr('correcto'));
                 $('.mensaje').css({'visibility':'visible'});
                 $('.contenedor-mensaje').css({'height':'30%'});
+                $('.contenedor-mensaje').css({'transform':'translateY(0%)'});
             }
             url = json.url;
         }); 

@@ -8,7 +8,7 @@
         <form action="<?= base_url('reporte/guardar_incidencia') ?>" method="POST" id="frm_incidencia" enctype="multipart/form-data">
             <div class="parte1-formulario">
                 <div class="form-group pb-2" id="titulo"> 
-                    <input type="text" name="titulo" class="form-control" id="titulo" placeholder="Ingrese un titulo">
+                    <input type="text" name="titulo" minlength="4" maxlength="50" class="form-control" id="titulo" placeholder="Ingrese un titulo">
                     <?php if(form_error('titulo')):?>
                         <div class="alert alert-danger" role="alert"><?= form_error('titulo')?></div>
                     <?php endif;?>

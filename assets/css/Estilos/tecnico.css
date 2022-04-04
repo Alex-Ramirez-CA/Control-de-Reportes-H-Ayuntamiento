@@ -1,0 +1,88 @@
+.container-tecnico {
+	width: 100%;
+	min-width: 850px;
+	max-width: 950px;
+	max-height: 500px;
+	margin-top: 30px;
+	display: flex;
+	justify-content: space-between;
+	margin: 0 auto;
+	margin-top: 30px;
+}
+
+.columna-filtro{
+    width: 285px;
+	height: 450px;
+	border-radius: 7px;
+	align-items: center;
+	background: linear-gradient(
+		to bottom right,
+		#f6f8fa,
+		#f6f8fa,
+		#f6f8fa,
+		rgb(250, 255, 254)
+	);
+	box-shadow: 0 3px 5px 0 rgba(31, 38, 135, 0.37);
+	backdrop-filter: blur(20px);
+	border: solid 1px #afafaa;
+	overflow: hidden;
+	overflow-y: scroll;
+}
+
+.card-tecnico {
+	margin: 0px auto;
+	display: flex;
+	flex-direction: column;
+	width: 245px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	background: rgba(255, 255, 255, 0.3);
+	box-shadow: 0 3px 5px 0 rgba(31, 38, 135, 0.37);
+    border: solid 2px #eaf7ff;
+	backdrop-filter: blur(4px);
+	border-radius: 10px;
+	cursor: pointer;
+	transition: all 400ms ease;
+}
+
+.pendientes-filtro .card-title h5 {
+    margin: 0;
+	text-align: center;
+	padding-top: 8px;
+	width: 241px;
+	height: 30px;
+	font-size: 12px;
+	background: #f07d6f;
+	color: white;
+	border-radius: 10px;
+}
+
+.proceso-filtro .card-title h5 {
+    margin: 0;
+	text-align: center;
+	padding-top: 8px;
+	width: 241px;
+	height: 30px;
+	font-size: 12px;
+	background: #6CC5B2;
+	color: white;
+	border-radius: 10px;
+}
+
+.finalizados-filtro .card-title h5 {
+    margin: 0;
+	text-align: center;
+	padding-top: 8px;
+	width: 241px;
+	height: 30px;
+	font-size: 12px;
+	background: #F5D344;
+	color: white;
+	border-radius: 10px;
+}
+
+.contenido-vacio-tecnico {
+    margin-top: 52%;
+	margin-left: 23%;
+	opacity: 0.8;
+}
