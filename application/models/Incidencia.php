@@ -133,6 +133,34 @@ class Incidencia extends CI_Model {
         }
         return $data->result();
     }
+    
+    // Hacer la busqueda entre todas las incidencias que atiende o ha atendido un tecnico
+    // para la pantalla atendiendo del usuario tecnico
+    public function buscar_all($search) {
+        // Busqueda por id_incidencia
+        $data = $this->db
+            ->distinct()
+            ->select("id_incidencia, titulo")
+            ->from("incidencia")
+            ->like('id_incidencia', $search, 'after', '', TRUE)
+            ->order_by('id_incidencia')
+            ->get();
+        if(!$data->result()) {
+            // Busqueda por titulo
+            $data = $this->db
+                ->distinct()
+                ->select("id_incidencia, titulo")
+                ->from("incidencia")
+                ->like('titulo', $search, 'after', '', TRUE)
+                ->order_by('id_incidencia')
+                ->get();
+        }
+        // Si no se encuentra resultados
+        if(!$data->result()) {
+            return false;
+        }
+        return $data->result();
+    }
 
     // -----------------------------------------------------------------------------------
 

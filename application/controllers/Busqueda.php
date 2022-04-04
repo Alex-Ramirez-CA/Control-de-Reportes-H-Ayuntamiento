@@ -51,8 +51,9 @@ class Busqueda extends CI_Controller {
                 case 'atendiendo':
                     $data = $this->Incidencia->buscar_atendiendo($id_departamento, $search, $no_empleado);
                     break;
+                // Para buscar entre todas las incidencias existentes
                 case 'administrador':
-                    echo "Funcionalidad en desarrollo";
+                    $data = $this->Incidencia->buscar_all($search);
                     break;
             }
             // Hacer consulta al modelo
