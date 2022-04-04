@@ -6,7 +6,7 @@ class Atendiendo extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->library('session');
-		$this->load->model('Incidencia');
+		$this->load->model(array('Incidencia', 'Atender_incidencia'));
 	}
 
 	public function index()
