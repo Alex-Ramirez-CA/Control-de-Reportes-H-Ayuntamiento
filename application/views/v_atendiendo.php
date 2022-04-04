@@ -18,18 +18,18 @@
                 }else{
                     foreach($en_proceso as $item):
             ?>
-                        <div class="card"  idCard="<?= $item->id_incidencia;?>">
+                        <div class="card-atendiendo"  idCard="<?= $item->id_incidencia;?>">
                             <div class="card-title">
                                 <b><h5><?= $item->titulo; ?></h5></b>
                             </div>
                             <div class="card-body">
-                                <div class="texto-medio">
-                                    <p class="atiende"><b>Atendido por: </b><?= $item->encargado; ?> </p>                        
-                                    <p class="departamento"><b>Departamento: </b><?=$item->departamento; ?></p>                        
-                                </div>
                                 <div class="fecha">
                                     <b><h5>Creado</h5></b>
                                     <p><?= date("d/m/Y", strtotime($item->fecha_apertura)); ?></p>
+                                </div>
+                                <div class="opciones-tecnico">
+                                    <button class="ver" idReporte="<?= $item->id_incidencia;?>">Ver</button>
+                                    <button class="finalizar" idReporte="<?= $item->id_incidencia;?>">Finalizar</button>
                                 </div>
                             </div>
                         </div>
@@ -61,13 +61,13 @@
                                 <b><h5><?= $item->titulo; ?></h5></b>
                             </div>
                             <div class="card-body">
-                                <div class="texto-medio">
-                                    <p class="atiende"><b>Atendido por: </b><?= $item->encargado; ?> </p>                        
-                                    <p class="departamento"><b>Departamento: </b><?=$item->departamento; ?></p>                        
-                                </div>
                                 <div class="fecha">
                                     <b><h5>Creado</h5></b>
                                     <p><?= date("d/m/Y", strtotime($item->fecha_apertura)); ?></p>
+                                </div>
+                                <div class="opciones-tecnico">
+                                    <button class="ver" idReporte="<?= $item->id_incidencia;?>">Ver</button>
+                                    <button class="unirme" idReporte="<?= $item->id_incidencia;?>">Unirme</button>
                                 </div>
                             </div>
                         </div>
@@ -79,6 +79,14 @@
 
     </div>
 
+</div>
+
+<div class="mensaje">
+    <div class="contenedor-mensaje">
+        <p class="cerrar-mensaje-tecnico">X</p>
+        <textarea name="comentario-tecnico" id="comentario-tecnico" cols="30" rows="10"></textarea>
+        <button class="enviar-comentario">Enviar comentario</button>
+    </div>
 </div>
 
 <?= $footer ?>

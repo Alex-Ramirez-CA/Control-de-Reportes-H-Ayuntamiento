@@ -61,7 +61,8 @@ class Atendiendo extends CI_Controller {
 			$this->Atender_incidencia->insertar($data);
 			// Cambiar el estatus de la incidencia a finalizada
 			$this->Incidencia->modificar_status($id_incidencia, 2);
-			redirect('tecnico');
+			echo json_encode(array('url' => base_url('atendiendo')));
+			//redirect('tecnico');
 		} else {
 			// Si no hay datos de sesion redireccionar a login
 			redirect('login');
