@@ -45,6 +45,51 @@
 	transition: all 400ms ease;
 }
 
+.card-body-tecnico{
+    padding: 8px;
+	display: flex;
+	justify-content: space-between;
+	margin-left: 3px;
+	margin-right: 3px;
+	width: 235px;
+}
+
+.opciones-tecnico {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.opciones-tecnico button {
+    cursor: pointer;
+    font-size: 10px;
+    width: 70px;
+    padding: 0;
+    padding-top: 0.2rem;
+}
+
+.opciones-tecnico .ver {
+    margin-bottom: 5px;
+}
+
+.pendientes-filtro .fecha h5 {
+	color: #f07d6f;
+	font-size: 14px;
+	margin: 0px;
+}
+
+.proceso-filtro .fecha h5 {
+	color: #6CC5B2;
+	font-size: 14px;
+	margin: 0px;
+}
+
+.finalizados-filtro .fecha h5 {
+	color: #F5D344;
+	font-size: 14px;
+	margin: 0px;
+}
+
 .pendientes-filtro .card-title h5 {
     margin: 0;
 	text-align: center;

@@ -21,21 +21,17 @@
                         <div class="card-title">
                             <b><h5> <?= $item->titulo; ?></h5></b>
                         </div>
-                        <div class="card-body">
-                            <div class="texto-medio">
-                                <p class="atiende"><b>Atendido por: </b>Por asignar</p>                        
-                                <p class="departamento"><b>Departamento: </b>
-                                    <?php if (empty($item->departamento)) { ?>
-                                        Por asignar
-                                    <?php } else { ?>
-                                        <?= $item->departamento; ?>
-                                    <?php } ?>
-                                </p>                        
-                            </div>
+                        <div class="card-body-tecnico">
+                            
                             <div class="fecha">
                                 <b><h5>Creado</h5></b>
                                 <p><?=  date("d/m/Y", strtotime($item->fecha_apertura)); ?></p>
                             </div>
+                            <div class="opciones-tecnico">
+                                <button class="ver" idReporte="<?= $item->id_incidencia;?>">Ver</button>
+                                <button class="atender" idReporte="<?= $item->id_incidencia;?>">Atender</button>
+                            </div>
+
                         </div>
                     </div>
             <?php 
@@ -63,15 +59,17 @@
                             <div class="card-title">
                                 <b><h5><?= $item->titulo; ?></h5></b>
                             </div>
-                            <div class="card-body">
-                                <div class="texto-medio">
-                                    <p class="atiende"><b>Atendido por: </b><?= $item->encargado; ?> </p>                        
-                                    <p class="departamento"><b>Departamento: </b><?=$item->departamento; ?></p>                        
-                                </div>
+                            <div class="card-body-tecnico">
+                            
                                 <div class="fecha">
                                     <b><h5>Creado</h5></b>
-                                    <p><?= date("d/m/Y", strtotime($item->fecha_apertura)); ?></p>
+                                    <p><?=  date("d/m/Y", strtotime($item->fecha_apertura)); ?></p>
                                 </div>
+                                <div class="opciones-tecnico">
+                                    <button class="ver" idReporte="<?= $item->id_incidencia;?>">Ver</button>
+                                    <button class="unirme" idReporte="<?= $item->id_incidencia;?>">Unirme</button>
+                                </div>
+
                             </div>
                         </div>
             <?php 
@@ -100,15 +98,17 @@
                             <div class="card-title">
                                 <b><h5><?= $item->titulo; ?></h5></b>
                             </div>
-                            <div class="card-body">
-                                <div class="texto-medio">
-                                    <p class="atiende"><b>Atendido por: </b><?= $item->encargado; ?> </p>                        
-                                    <p class="departamento"><b>Departamento: </b><?=$item->departamento; ?></p>                        
-                                </div>
+                            <div class="card-body-tecnico">
+                            
                                 <div class="fecha">
                                     <b><h5>Creado</h5></b>
-                                    <p><?= date("d/m/Y", strtotime($item->fecha_apertura)); ?></p>
+                                    <p><?=  date("d/m/Y", strtotime($item->fecha_apertura)); ?></p>
                                 </div>
+                                <div class="opciones-tecnico">
+                                    <button class="ver" idReporte="<?= $item->id_incidencia;?>">Ver</button>
+                                    <button class="reabrir" idReporte="<?= $item->id_incidencia;?>">Reabrir</button>
+                                </div>
+
                             </div>
                         </div>
             <?php 
