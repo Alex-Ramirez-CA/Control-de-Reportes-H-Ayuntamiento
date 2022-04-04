@@ -27,7 +27,7 @@
             console.log(comentario);
             $.post('tecnico/atender', {id_incidencia, comentario}, function(response){
                 let json = JSON.parse(response);
-                console.log(json.url);
+                window.location.replace(json.url);
             });
 
         });
@@ -39,6 +39,10 @@
         $('.enviar-comentario').removeAttr('idReporte');
         $('.mensaje').css({'visibility':'hidden'});
         $('.contenedor-mensaje').css({'transform':'translateY(-200%)'});
+        $.post('tecnico/recargar', {}, function(response){
+            let json = JSON.parse(response);
+            window.location.replace(json.url);
+        });
     });
 
 })(jQuery)

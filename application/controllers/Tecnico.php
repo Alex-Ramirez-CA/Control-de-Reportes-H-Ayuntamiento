@@ -154,4 +154,8 @@ class Tecnico extends CI_Controller {
 		}
 	}
 
+	public function recargar() {
+		echo json_encode(array('url' => base_url('tecnico')));
+	}
+
 }
