@@ -121,4 +121,12 @@
 
 </div>
 
+<div class="mensaje">
+    <div class="contenedor-mensaje">
+        <p class="cerrar-mensaje-tecnico">X</p>
+        <textarea name="comentario-tecnico" id="comentario-tecnico" cols="30" rows="10"></textarea>
+        <button class="enviar-comentario">Enviar comentario</button>
+    </div>
+</div>
+
 <?= $footer ?>

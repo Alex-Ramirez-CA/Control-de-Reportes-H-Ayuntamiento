@@ -131,3 +131,34 @@
 	margin-left: 23%;
 	opacity: 0.8;
 }
+
+
+.contenedor-mensaje {
+	width: 600px;
+	height: 50%;
+	background-color: #fff;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	border-radius: 5px;
+	transition: transform 1s;
+	transform: translateY(-200%);
+}
+
+.cerrar-mensaje-tecnico {
+	margin-left: 90%;
+	margin-top: 9px;
+	font-size: 16px;
+	padding-top: 3px;
+	height: 26px;
+	width: 26px;
+	text-align: center;
+	background-color: #006e95;
+	color: #fff;
+	border-radius: 100%;
+	cursor: pointer;
+}
+
+.cerrar-mensaje-tecnico:hover {
+	background: #e52141;
+}
