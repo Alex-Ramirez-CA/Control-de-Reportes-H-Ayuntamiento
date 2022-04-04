@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="<?= base_url('assets/css/Estilos/nueva-incidencia.css');?>">
     <link rel="stylesheet" href="<?= base_url('assets/css/Estilos/ver-reporte.css');?>">
     <link rel="stylesheet" href="<?= base_url('assets/css/Estilos/filtro.css');?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/Estilos/atendiendo.css');?>">
     <link rel="stylesheet" href="<?= base_url('assets/css/Estilos/tecnico.css');?>">
     <title>Control de reportes H. Ayuntamiento de Colima</title>
 </head>

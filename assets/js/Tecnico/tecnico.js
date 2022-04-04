@@ -31,7 +31,48 @@
             });
 
         });
-        //enviar-comentario
+    });
+
+    $(document).on('click', '.unirme', function(){
+        let elemento = $(this)[0];
+        let id = $(elemento).attr('idReporte');
+        $('.mensaje').css({'visibility':'visible'});
+        $('.contenedor-mensaje').css({'transform':'translateY(0%)'});
+        $('.enviar-comentario').attr('idReporte',id);
+
+        $(document).on('click', '.enviar-comentario', function(){
+            let elemento = $(this)[0];
+            let id_incidencia = $(elemento).attr('idReporte');
+            let comentario = $('#comentario-tecnico').val();
+            console.log(id_incidencia);
+            console.log(comentario);
+            $.post('tecnico/unirme', {id_incidencia, comentario}, function(response){
+                let json = JSON.parse(response);
+                window.location.replace(json.url);
+            });
+
+        });
+    });
+
+    $(document).on('click', '.reabrir', function(){
+        let elemento = $(this)[0];
+        let id = $(elemento).attr('idReporte');
+        $('.mensaje').css({'visibility':'visible'});
+        $('.contenedor-mensaje').css({'transform':'translateY(0%)'});
+        $('.enviar-comentario').attr('idReporte',id);
+
+        $(document).on('click', '.enviar-comentario', function(){
+            let elemento = $(this)[0];
+            let id_incidencia = $(elemento).attr('idReporte');
+            let comentario = $('#comentario-tecnico').val();
+            console.log(id_incidencia);
+            console.log(comentario);
+            $.post('tecnico/reabrir', {id_incidencia, comentario}, function(response){
+                let json = JSON.parse(response);
+                window.location.replace(json.url);
+            });
+
+        });
     });
 
     //Función para cerrar el modal

@@ -10,7 +10,7 @@
 	margin-top: 30px;
 }
 
-.columna-filtro{
+.columna-tecnico{
     width: 285px;
 	height: 450px;
 	border-radius: 7px;
@@ -34,8 +34,8 @@
 	display: flex;
 	flex-direction: column;
 	width: 245px;
-	margin-top: 20px;
-	margin-bottom: 20px;
+	margin-top: 12px;
+	margin-bottom: 12px;
 	background: rgba(255, 255, 255, 0.3);
 	box-shadow: 0 3px 5px 0 rgba(31, 38, 135, 0.37);
     border: solid 2px #eaf7ff;

@@ -2,15 +2,14 @@
 
 <?= $nav; ?>
 
-<div class="container">
-
+<div class="container-tecnico">
     <!-- Columna de los reportes en proceso -->
-    <div class="proceso">
+    <div class="proceso-atendiendo">
         <div class="titulo-proceso">
             <h3><b>Reportes en proceso</b></h3>
         </div>
         
-        <div class="columna-proceso"> 
+        <div class="columna-atendiendo"> 
             <?php 
                 if (empty($en_proceso)) {
             ?>
@@ -43,12 +42,12 @@
     </div>
     
     <!-- Columna de los reportes finalizados -->
-    <div class="finalizados">
-        <div class="titulo-finalizados">
+    <div class="finalizados-atendiendo">
+        <div class="titulo-finalizado">
             <h3><b>Reportes finalizados</b></h3>
         </div>
         
-        <div class="columna-finalizados"> 
+        <div class="columna-atendiendo"> 
             <?php 
                 if (empty($finalizados)) {
             ?>

@@ -87,7 +87,10 @@ class Tecnico extends CI_Controller {
 			// Se hace una consulta a la bd para verificar que dicho usuario no haya
 			// atendido antes dicho incidencia y no repetir registros
 			if($this->Atender_incidencia->verificar($id_incidencia, $no_empleado)) {
-				echo json_encode(array('msg' => 'Ya se había unido con anterioridad'));
+				echo json_encode(array(
+					'msg' => 'Ya se había unido con anterioridad',
+					'url' => base_url('tecnico')
+				));
 			} else {
 				//Obtener la fecha del sistema
 				date_default_timezone_set('America/Mexico_City');
@@ -100,7 +103,11 @@ class Tecnico extends CI_Controller {
 				);
 				// Agregar registro
 				$this->Atender_incidencia->insertar($data);
-				redirect('tecnico');
+				echo json_encode(array(
+					'msg' => 'Se ha unido para la solución del reporte',
+					'url' => base_url('tecnico')
+				));
+				//redirect('tecnico');
 			}
 		} else {
 			// Si no hay datos de sesion redireccionar a login
@@ -137,7 +144,10 @@ class Tecnico extends CI_Controller {
 				// Se le vuelve a cambiar el estatus a la misma a 1 = en proceso
 				$this->Incidencia->modificar_status($id_incidencia, 1);
 				// redirect('tecnico');
-				echo json_encode(array('msg' => 'Reabriste la incidencia'));
+				echo json_encode(array(
+					'msg' => 'Reabriste la incidencia',
+					'url' => base_url('tecnico')
+				));
 			} else {
 				// SI el usuario no esta vinculado con la incidencia se vincula y tambien
 				// se hace el cambio de estatus de la misma
@@ -145,7 +155,10 @@ class Tecnico extends CI_Controller {
 				$this->Atender_incidencia->insertar($data);
 				// Cambiar el estatus de la incidencia a en_proceso
 				$this->Incidencia->modificar_status($id_incidencia, 1);
-				echo json_encode(array('msg' => 'Reabriste la incidencia y te unes a ella'));
+				echo json_encode(array(
+					'msg' => 'Reabriste la incidencia y te unes a ella',
+					'url' => base_url('tecnico')
+				));
 				// redirect('tecnico');
 			}
 		} else {

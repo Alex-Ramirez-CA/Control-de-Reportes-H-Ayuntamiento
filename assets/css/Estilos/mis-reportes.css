@@ -53,6 +53,7 @@
 	background: rgba(255, 255, 255, 0.3);
 	box-shadow: 0 3px 5px 0 rgba(31, 38, 135, 0.37);
 	backdrop-filter: blur(4px);
+	border: solid 3px #eaf7ff;
 	border-radius: 15px;
 	cursor: pointer;
 	transition: all 400ms ease;
@@ -81,7 +82,7 @@
 	margin: 0;
 	text-align: center;
 	padding-top: 7px;
-	width: 300px;
+	width: 294px;
 	height: 30px;
 	font-size: 14px;
 	background: #f07d6f;
@@ -101,7 +102,7 @@
 	margin: 0;
 	text-align: center;
 	padding-top: 7px;
-	width: 300px;
+	width: 294px;
 	height: 30px;
 	font-size: 14px;
 	background: #6cc5b2;

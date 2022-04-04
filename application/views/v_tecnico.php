@@ -8,7 +8,7 @@
         <div class="titulo-pendiente">
             <h3><b>Reportes pendientes</b></h3>
         </div>
-        <div class="columna-filtro">
+        <div class="columna-tecnico">
             <?php 
                 if (empty($pendientes)) {
             ?>
@@ -46,7 +46,7 @@
         <div class="titulo-proceso">
             <h3><b>Reportes en proceso</b></h3>
         </div> 
-        <div class="columna-filtro">
+        <div class="columna-tecnico">
             <?php 
                 if (empty($en_proceso)) {
             ?>
@@ -85,7 +85,7 @@
             <h3><b>Reportes finalizados</b></h3>
         </div>
 
-        <div class="columna-filtro">
+        <div class="columna-tecnico">
             <?php 
                 if (empty($finalizados)) {
             ?>
