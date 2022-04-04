@@ -305,6 +305,29 @@ class Incidencia extends CI_Model {
         return $data->result();
     }
 
+    // Consulta todas las incidencias para la vista principal administrador
+    public function get_incidenciasAdmin($status) {
+        $data = $this->db
+                ->distinct()
+                ->select("inc.id_incidencia, inc.titulo, inc.status, inc.fecha_apertura, (SELECT GROUP_CONCAT( DISTINCT d.nombre SEPARATOR ', ') 
+                FROM incidencia as i 
+                INNER JOIN incidencia_departamento as i_d ON i.id_incidencia=i_d.id_incidencia 
+                INNER JOIN departamento as d ON i_d.id_departamento=d.id_departamento
+                WHERE i.id_incidencia = inc.id_incidencia) as departamento, (SELECT GROUP_CONCAT( DISTINCT u.nombre SEPARATOR ', ') 
+                FROM incidencia as i 
+                INNER JOIN atender_incidencia as ai ON i.id_incidencia=ai.id_incidencia 
+                INNER JOIN usuario as u ON ai.no_empleado=u.no_empleado
+                WHERE i.id_incidencia = inc.id_incidencia) as encargado")
+                ->from("incidencia inc")
+                ->where('status', $status)
+                ->group_by('inc.id_incidencia')
+                ->get();
+        if(!$data->result()) {
+            return false;
+        }
+        return $data->result();
+    }
+
     // -----------------------------------------------------------------------------------
 
     // Obtener todos los datos necesarios para crear el reporte
