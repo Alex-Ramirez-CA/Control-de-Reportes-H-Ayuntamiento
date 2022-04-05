@@ -98,7 +98,10 @@ class Atendiendo extends CI_Controller {
 				// Se le vuelve a cambiar el estatus a la misma a 1 = en proceso
 				$this->Incidencia->modificar_status($id_incidencia, 1);
 				// redirect('tecnico');
-				echo json_encode(array('msg' => 'Reabriste la incidencia'));
+				echo json_encode(array(
+					'msg' => 'Reabriste la incidencia',
+					'url' => base_url('atendiendo')
+				));
 			} else {
 				// SI el usuario no esta vinculado con la incidencia se vincula y tambien
 				// se hace el cambio de estatus de la misma
@@ -106,7 +109,10 @@ class Atendiendo extends CI_Controller {
 				$this->Atender_incidencia->insertar($data);
 				// Cambiar el estatus de la incidencia a en_proceso
 				$this->Incidencia->modificar_status($id_incidencia, 1);
-				echo json_encode(array('msg' => 'Reabriste la incidencia y te unes a ella'));
+				echo json_encode(array(
+					'msg' => 'Reabriste la incidencia',
+					'url' => base_url('atendiendo')
+				));
 				// redirect('tecnico');
 			}
 		} else {

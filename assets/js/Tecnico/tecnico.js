@@ -15,9 +15,12 @@
     $(document).on('click', '.atender', function(){
         let elemento = $(this)[0];
         let id = $(elemento).attr('idReporte');
+        let titulo = $(elemento).attr('titulo');
+        $('.titulo-reporte-mensaje').html("Titulo: " + titulo);
         $('.mensaje').css({'visibility':'visible'});
         $('.contenedor-mensaje').css({'transform':'translateY(0%)'});
         $('.enviar-comentario').attr('idReporte',id);
+        $('.enviar-comentario').attr('titulo',titulo);
 
         $(document).on('click', '.enviar-comentario', function(){
             let elemento = $(this)[0];
@@ -36,6 +39,8 @@
     $(document).on('click', '.unirme', function(){
         let elemento = $(this)[0];
         let id = $(elemento).attr('idReporte');
+        let titulo = $(elemento).attr('titulo');
+        $('.titulo-reporte-mensaje').html("Titulo: " + titulo);
         $('.mensaje').css({'visibility':'visible'});
         $('.contenedor-mensaje').css({'transform':'translateY(0%)'});
         $('.enviar-comentario').attr('idReporte',id);
@@ -57,6 +62,8 @@
     $(document).on('click', '.reabrir', function(){
         let elemento = $(this)[0];
         let id = $(elemento).attr('idReporte');
+        let titulo = $(elemento).attr('titulo');
+        $('.titulo-reporte-mensaje').html("Titulo: " + titulo);
         $('.mensaje').css({'visibility':'visible'});
         $('.contenedor-mensaje').css({'transform':'translateY(0%)'});
         $('.enviar-comentario').attr('idReporte',id);
@@ -78,6 +85,8 @@
     $(document).on('click', '.finalizar', function(){
         let elemento = $(this)[0];
         let id = $(elemento).attr('idReporte');
+        let titulo = $(elemento).attr('titulo');
+        $('.titulo-reporte-mensaje').html("Titulo: " + titulo);
         $('.mensaje').css({'visibility':'visible'});
         $('.contenedor-mensaje').css({'transform':'translateY(0%)'});
         $('.enviar-comentario').attr('idReporte',id);
@@ -89,6 +98,29 @@
             console.log(id_incidencia);
             console.log(comentario);
             $.post('atendiendo/finalizar', {id_incidencia, comentario}, function(response){
+                let json = JSON.parse(response);
+                window.location.replace(json.url);
+            });
+
+        });
+    });
+
+    $(document).on('click', '.reabrir-atendido', function(){
+        let elemento = $(this)[0];
+        let id = $(elemento).attr('idReporte');
+        let titulo = $(elemento).attr('titulo');
+        $('.titulo-reporte-mensaje').html("Titulo: " + titulo);
+        $('.mensaje').css({'visibility':'visible'});
+        $('.contenedor-mensaje').css({'transform':'translateY(0%)'});
+        $('.enviar-comentario').attr('idReporte',id);
+
+        $(document).on('click', '.enviar-comentario', function(){
+            let elemento = $(this)[0];
+            let id_incidencia = $(elemento).attr('idReporte');
+            let comentario = $('#comentario-tecnico').val();
+            console.log(id_incidencia);
+            console.log(comentario);
+            $.post('atendiendo/reabrir', {id_incidencia, comentario}, function(response){
                 let json = JSON.parse(response);
                 window.location.replace(json.url);
             });

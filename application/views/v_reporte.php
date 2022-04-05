@@ -70,8 +70,10 @@
                                     $status;
                                     if ($generales->status == 0) {
                                         $status = "Pendiente";
-                                    }else{
+                                    }elseif($generales->status == 1){
                                         $status = "En proceso";  
+                                    }else{
+                                        $status = "Finalizado"; 
                                     }
                                 ?>
                                 <td><?= $status ?></td> 
