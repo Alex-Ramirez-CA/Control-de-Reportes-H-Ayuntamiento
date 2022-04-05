@@ -47,7 +47,7 @@ class Incidencia extends CI_Model {
         $data = $this->db
             ->select("id_incidencia, titulo, status, fecha_apertura")
             ->from("incidencia")
-            ->where('status', 0)
+            ->where(array('status' => 0, 'asignado' => 0))
             ->like('id_incidencia', $search, 'after', '', TRUE)
             ->order_by('id_incidencia')
             ->get();
@@ -56,7 +56,7 @@ class Incidencia extends CI_Model {
             $data = $this->db
                 ->select("id_incidencia, titulo, status, fecha_apertura")
                 ->from("incidencia")
-                ->where('status', 0)
+                ->where(array('status' => 0, 'asignado' => 0))
                 ->like('titulo', $search, 'after', '', TRUE)
                 ->order_by('id_incidencia')
                 ->get();
@@ -134,8 +134,7 @@ class Incidencia extends CI_Model {
         return $data->result();
     }
     
-    // Hacer la busqueda entre todas las incidencias que atiende o ha atendido un tecnico
-    // para la pantalla atendiendo del usuario tecnico
+    // Hacer la busqueda entre todas las incidencias existentes
     public function buscar_all($search) {
         // Busqueda por id_incidencia
         $data = $this->db
