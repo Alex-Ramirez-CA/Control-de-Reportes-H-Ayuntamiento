@@ -91,10 +91,10 @@
                 <textarea name="comentario-tecnico" id="comentario-tecnico" cols="30" rows="10"></textarea>
             </div>
             <div class="respuestas-rapidas">
-                <button>El problema quedo completamente solucionado</button>
-                <button>Me gustaria ayudar a solucionar el problema</button>
+                <button>El problema quedó completamente solucionado</button>
+                <button>Me gustaría ayudar a solucionar el problema</button>
                 <button>El día de hoy comenzaré a darle solución al reporte</button>
-                <button>Ya quedo completamente solucionado el problema</button>
+                <button>Ya quedó completamente solucionado el problema</button>
             </div>
         </div>
         <button class="enviar-comentario">Enviar comentario</button>

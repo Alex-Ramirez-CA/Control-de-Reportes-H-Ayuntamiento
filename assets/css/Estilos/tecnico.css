@@ -70,47 +70,51 @@
 
 .opciones-tecnico .ver {
     margin-bottom: 5px;
-	background-color: #26A2D9;
-	color: #fff;
+	background-color: #eaf7ff;
+	color: #26A2D9;
 	border-radius: 5px;
-	border: solid 1px #eaf7ff;
+	border: solid 1px #26A2D9;
 }
 
 .opciones-tecnico .ver:hover{
 	background-color: #2bb9f7;	
+	color: #fff;
 }
 
 .opciones-tecnico .atender {
-	background-color: #F07D6F;
-	color: #fff;
+	background-color: #eaf7ff;
+	color: #F07D6F;
 	border-radius: 5px;
-	border: solid 1px #eaf7ff;	
+	border: solid 1px #F07D6F;	
 }
 
 .opciones-tecnico .atender:hover {
-	background-color: #fc715f;
+	background-color: #F07D6F;
+	color: #fff;
 }
 
 .opciones-tecnico .unirme, .finalizar{
-	background-color: #6CC5B2;
-	color: #fff;
+	background-color: #eaf7ff;
+	color: #365e55;
 	border-radius: 5px;
-	border: solid 1px #eaf7ff;	
+	border: solid 1px #6CC5B2;	
 }
 
 .opciones-tecnico .unirme:hover, .finalizar:hover {
 	background-color: #3a9c87;
+	color: #fff;
 }
 
 .opciones-tecnico .reabrir, .reabrir-atendido {
-	background-color: #F5D344;
-	color: #fff;
+	background-color: #eaf7ff;
+	color: black;
 	border-radius: 5px;
-	border: solid 1px #eaf7ff;	
+	border: solid 1px #F5D344;	
 }
 
 .opciones-tecnico .reabrir:hover, .reabrir-atendido:hover{
 	background-color: #ccac2b;
+	color: black;
 }
 
 .pendientes-filtro .fecha h5 {
