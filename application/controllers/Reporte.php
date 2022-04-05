@@ -115,6 +115,7 @@ class Reporte extends CI_Controller {
 			$titulo = $this->input->post('titulo');
 			$descripcion = $this->input->post('descripcion');
 			// Obtener fecha actual
+			date_default_timezone_set('America/Mexico_City');
 			$fecha = date("Y").'-'.date("m").'-'.date("d");
 			// Meter los datos en un array para la insercion a la bd
 			$datos = array(
