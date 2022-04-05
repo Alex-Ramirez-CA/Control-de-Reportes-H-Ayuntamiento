@@ -17,6 +17,21 @@
 	overflow-y: scroll;
 }
 
+.card-atendiendo{
+    margin: 0px auto;
+	display: flex;
+	flex-direction: column;
+	width: 300px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	background: rgba(255, 255, 255, 0.3);
+	box-shadow: 0 3px 5px 0 rgba(31, 38, 135, 0.37);
+	backdrop-filter: blur(4px);
+	border: solid 3px #eaf7ff;
+	border-radius: 15px;
+	transition: all 400ms ease;
+}
+
 .proceso-atendiendo .card-title h5 {
 	margin: 0;
 	text-align: center;

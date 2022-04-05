@@ -29,7 +29,7 @@
                             </div>
                             <div class="opciones-tecnico">
                                 <button class="ver" idReporte="<?= $item->id_incidencia;?>">Ver</button>
-                                <button class="atender" idReporte="<?= $item->id_incidencia;?>">Atender</button>
+                                <button class="atender" idReporte="<?= $item->id_incidencia;?>" titulo="<?= $item->titulo;?>">Atender</button>
                             </div>
 
                         </div>
@@ -67,7 +67,7 @@
                                 </div>
                                 <div class="opciones-tecnico">
                                     <button class="ver" idReporte="<?= $item->id_incidencia;?>">Ver</button>
-                                    <button class="unirme" idReporte="<?= $item->id_incidencia;?>">Unirme</button>
+                                    <button class="unirme" idReporte="<?= $item->id_incidencia;?>" titulo="<?= $item->titulo;?>">Unirme</button>
                                 </div>
 
                             </div>
@@ -106,7 +106,7 @@
                                 </div>
                                 <div class="opciones-tecnico">
                                     <button class="ver" idReporte="<?= $item->id_incidencia;?>">Ver</button>
-                                    <button class="reabrir" idReporte="<?= $item->id_incidencia;?>">Reabrir</button>
+                                    <button class="reabrir" idReporte="<?= $item->id_incidencia;?>" titulo="<?= $item->titulo;?>">Reabrir</button>
                                 </div>
 
                             </div>
@@ -123,8 +123,20 @@
 
 <div class="mensaje">
     <div class="contenedor-mensaje">
-        <p class="cerrar-mensaje-tecnico">X</p>
-        <textarea name="comentario-tecnico" id="comentario-tecnico" cols="30" rows="10"></textarea>
+        <p class="cerrar-mensaje-tecnico">x</p>
+        <h2>¿Qué fue lo que se hizo?</h2>
+        <div class="mensaje-comentario">
+            <div class="texto-comentario">
+                <h3 class="titulo-reporte-mensaje"></h3>
+                <textarea name="comentario-tecnico" id="comentario-tecnico" cols="30" rows="10"></textarea>
+            </div>
+            <div class="respuestas-rapidas">
+                <button>El problema quedo completamente solucionado</button>
+                <button>Me gustaria ayudar a solucionar el problema</button>
+                <button>El día de hoy comenzaré a darle solución al reporte</button>
+                <button>Ya quedo completamente solucionado el problema</button>
+            </div>
+        </div>
         <button class="enviar-comentario">Enviar comentario</button>
     </div>
 </div>
