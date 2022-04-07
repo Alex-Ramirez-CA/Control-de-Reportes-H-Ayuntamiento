@@ -45,6 +45,13 @@
 #password input {
 	border: 1px solid #006e95;
 	border-radius: 15px;
+	text-align: center;
+}
+
+#email::-webkit-input-placeholder, 
+#password::-webkit-input-placeholder {
+	text-align: center;
+	line-height: 240px;
 }
 
 .boton-ingreso {

@@ -12,10 +12,29 @@
         <div class="datos-reporte">
             <h1>Datos generales del reporte</h1>
             <div class="titulo">
-                <h2><?= $generales->titulo ?></h2>
+                <h2>Folio y titulo del reporte</h2>
+            </div>
+            <div class="tabla-datos-creador">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Folio</th>
+                            <th scope="col">Titulo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><?=$generales->id_incidencia?></td> 
+                            <td><?=$generales->titulo?></td> 
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
-            <h3><?= $generales->descripcion ?></h3>
+            <div class="titulo">
+                <h2>Descripción del reporte</h2>
+            </div>
+            <h3><?=$generales->descripcion?></h3>
 
             <div class="titulo">
                 <h2>Datos del creador del reporte</h2>

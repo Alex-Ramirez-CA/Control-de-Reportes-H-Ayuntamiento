@@ -8,6 +8,7 @@
     
     <div class="pendiente">
         <div class="titulo-pendiente">
+            <p class="cantidad-reportes"><?= empty($pendientes) ? '0' : count($pendientes); ?></p>
             <h3><b>Reportes pendientes</b></h3>
         </div>
 
@@ -52,6 +53,7 @@
     <!-- Columna de los reportes en proceso -->
     <div class="proceso">
         <div class="titulo-proceso">
+            <p class="cantidad-reportes"><?= empty($en_proceso) ? '0' : count($en_proceso); ?></p>
             <h3><b>Reportes en proceso</b></h3>
         </div>
         

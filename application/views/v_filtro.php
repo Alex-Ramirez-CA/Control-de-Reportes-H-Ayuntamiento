@@ -8,6 +8,7 @@
     
     <div class="pendiente">
         <div class="titulo-pendiente">
+            <p class="cantidad-reportes"><?= empty($incidencias) ? '0' : count($incidencias); ?></p>
             <h3><b>Reportes</b></h3>
         </div>
 
@@ -29,6 +30,10 @@
                         <form action="<?= base_url('filtro/asignar_departamento') ?>" method="POST" id="frm_departamento">
                             <div class="card-body">
                                 <div class="fecha-filtro">
+                                    <b><h5>Folio</h5></b>
+                                    <p><?= $item->id_incidencia;?></p>
+                                </div>
+                                <div class="fecha-filtro">
                                     <b><h5>Creado</h5></b>
                                     <p><?= date("d/m/Y", strtotime($item->fecha_apertura)); ?></p>
                                 </div>
@@ -37,7 +42,7 @@
                                     <input type="hidden" name="id_incidencia" id="id_incidencia" value="<?= $item->id_incidencia;?>">
                                     <input type="checkbox" name="soporte" id="soporte" value="1"> <label>Soporte técnico</label><br>
                                     <input type="checkbox" name="redes" id="redes" value="2"> <label for="cbox2">Redes</label><br>
-                                    <input type="checkbox" name="administracion" id="administracion" value="3"> <label for="cbox2">Adminstración</label>
+                                    <input type="checkbox" name="administracion" id="administracion" value="3"> <label for="cbox2">Administración</label>
                                 </div>
                             </div>
                             <div class="opciones-filtro">
@@ -78,7 +83,7 @@
 
 <div class="mensaje">
     <div class="contenedor-mensaje">
-        <p class="cerrar-mensaje">X</p>
+        <p class="cerrar-mensaje">x</p>
         <img class="img-mensaje" src="" alt="" correcto="<?= base_url('assets/img/iconos/correcto.svg') ?>" incorrecto="<?= base_url('assets/img/iconos/incorrecto.svg') ?>">
         <h4 class="texto-mensaje">Cambios guardados con exito</h4>
     </div>

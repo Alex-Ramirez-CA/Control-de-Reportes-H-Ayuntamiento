@@ -179,25 +179,31 @@
 
 
 .contenedor-mensaje {
-	width: 600px;
+	width: 800px;
 	height: 59%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	border-radius: 3px;
+	border-radius: 10px;
 	transition: transform 1s;
 	transform: translateY(-200%);
-	background-color: rgba(255, 255, 255, 0.3);
-	box-shadow: 0 3px 5px 0 rgba(31, 38, 135, 0.37);
-    border: solid 2px #51689b;
+	background-color: rgba(248, 244, 244, 0.3);
+	box-shadow: 0 0px 40px 0 rgba(31, 38, 135, 0.37);
+    border-left: solid 1px #616161;
+	border-right: solid 1px #616161;
+	border-bottom: solid 1px #616161;
 	backdrop-filter: blur(4px);
 }
 
+.cerrar-ventana {
+	position: absolute;
+}
+
 .cerrar-mensaje-tecnico {
-	margin-left: 109%;
-	margin-top: -3px;
+	margin-left: 850px;
+	margin-bottom: 385px;
 	font-size: 15px;
-	padding-top: 0.3rem;
+	padding-top: 0.295rem;
 	height: 30px;
 	width: 30px;
 	text-align: center;
@@ -212,9 +218,32 @@
 	background: #2e2e2e;
 }
 
-.mensaje h2{
-	font-size: 16px;
-	color: #fff;
+.mensaje-body {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+
+.comentario-tecnico {
+	height: 409px;
+	width: 45%;
+	background-color: #fff;
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	border-top: solid 1px #616161;
+}
+
+.comentario-tecnico h1{
+	font-size: 22px;
+	width: 100%;
+	height: 20%;
+	text-align: center;
+	padding-top: 13px;
+	padding-bottom: 15px;
+	color: #006E95;
 }
 
 .texto-comentario {
@@ -223,28 +252,16 @@
 	max-width: 250px;
 }
 
-.texto-comentario h3 {
-	font-size: 14px;
-	margin: 0;
-	text-align: center;
-	color: #fff;
-	background-color: #611caf;
-	border-radius: 5px;
-	padding-top: 6px;
-	padding-bottom: 3px;
-
-}
-
 .mensaje textarea {
 	margin-top: 10px;
 	background-color: rgba(255, 255, 255, 0.3);
 	box-shadow: 0 3px 5px 0 rgba(31, 38, 135, 0.8);
-    border: solid 2px #999ad1;
+    border: solid 2px #26A2D9;
 	backdrop-filter: blur(4px);
-	min-width: 16.5rem;
+	width: 90%;
 	height: 100%;
 	border-radius: 5px;
-	color: #611caf;
+	color: #035775;
 	padding: 10px;
 }
 
@@ -255,20 +272,107 @@
 }
 
 .respuestas-rapidas {
+	width: 55%;
 	display: flex;
 	flex-direction: column;
+	align-items: center;
+}
+
+.datos-reporte-comentario {
+	width: 100%;
+	min-height: 13%;
+	background: linear-gradient(to right,#006E95,#006E95,#26A2D9,#006E95);
+	border-radius: 10px;
+	margin-bottom: 20px;
+	border-top: solid 1px #616161;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.titulo-reporte-tecnico {
+	font-size: 14px;
+	color: #fff;
+	margin: 0;
+	max-width: 60%;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.folio-participantes {
+	max-width: 40%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-right: 10px;
+	justify-content: center;
+}
+
+.folio {
+	font-size: 13px;
+	color: #fff;
+	margin: 0;
+}
+
+.participantes {
+	display: flex;
+	justify-content: space-between;
+}
+
+.participante {
+	font-size: 10px;
+	background-color: #F5D344;
+	height: 20px;
+	width: 20px;
+	border-radius: 100%;
+	padding-top: 4px;
+	text-align: center;
+	margin-top: 4px;
+	cursor: pointer;
+}
+
+.participantes-texto {
+	font-size: 11px;
+	color: #fff;
+	padding-top: 8px;
+	padding-right: 4px;
+}
+
+.nombres-asignados {
+	position: absolute;
+	font-size: 10px;
+	min-width: 120px;
+	background-color: rgba(49, 48, 48, 0.5);
+	color: #fff;
+	border-radius: 10px;
+	text-align: center;
+	padding-top: 3px;
+	padding-left: 5px;
+	padding-right: 5px;
+	top: 50px;
+    left: 673px;
+}
+
+.participantes figcaption {
+	display: none;
+}
+
+.participantes:hover figcaption {
+	display: block;
 }
 
 .mensaje textarea:focus {
-	border-color: #611caf;
+	border-color: #035775;
     box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 
-	0 0 8px rgba(121, 98, 175, 0.6);
+	0 0 8px rgba(65, 12, 189, 0.6);
     outline: 0 none;
 }
 
 .mensaje button {
-	margin-top: 32px;
-	background-color: #611caf;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	background-color: #006E95;
 	border: solid 2px #5d6c8d;
 	color: #fff;
 	border-radius: 5px;
@@ -283,23 +387,23 @@
 	background-color: #55BA7D;
 	border: solid 2px #1e7051;
 	color: #fff;
-	border-radius: 5px;
+	border-radius: 7px;
 	cursor: pointer;
 	font-size: 13px;
-	min-width: 13rem;
-	max-width: 13rem;
-	min-height: 2.3rem;	
-	margin-top: 20px;
+	width: 24rem;
+	min-height: 3rem;	
 	transition: all 400ms ease;
+	margin: 0;
+	margin-bottom: 15px;
 }
 
 .mensaje button:hover {
-	background-color: #4e158f;
+	background-color: #035775;
 }
 
 .respuestas-rapidas button:hover {	
 	background-color: #1e7051;
 	transition: all 400ms ease;
-	transform: translateY(-3%);
+	transform: translateY(-4%);
 
 }

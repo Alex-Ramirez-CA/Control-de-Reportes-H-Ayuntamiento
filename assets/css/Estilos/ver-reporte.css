@@ -115,15 +115,17 @@
 	width: 350px;
 	margin-bottom: 20px;
 	padding: 10px;
-	background: #26a2d9;
+	background-color: rgba(36, 124, 207, 0.767);
 	box-shadow: 0 3px 10px 0 rgba(31, 38, 135, 0.37);
 	color: #fff;
 	border-radius: 10px;
+	border: solid 2px #9bbadd;
+	padding-bottom: 2px;
 }
 
 .fecha-comentario {
 	font-size: 10px;
-	background-color: #26a2d9;
+	background-color: rgba(36, 124, 207, 0.767);
 	color: rgb(236, 232, 232);
 	border-radius: 5px;
 	width: 80px;
@@ -162,6 +164,7 @@
 	margin-left: 20px;
 	margin-top: 20px;
 	font-size: 13px;
+	text-align: center;
 }
 
 .contenido-vacio {
