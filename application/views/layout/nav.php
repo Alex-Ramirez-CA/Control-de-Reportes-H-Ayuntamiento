@@ -6,7 +6,7 @@
                 <form class="form-inline mt-2" autocomplete="off">
                     <div class="opciones">
                         <a class=" <?= $this->uri->segment(1) == 'administrador' ? 'visible' : 'invisible'; ?> btn my-2 my-sm-0 mr-2" href="#">Administración</a>
-                        <a class=" <?= $this->uri->segment(1) == 'tecnico' ? 'visible' : 'invisible'; ?> btn my-2 my-sm-0 mr-2" href="<?=base_url('atendiendo');?>">Atendiendo</a>
+                        <a class=" <?= $this->uri->segment(1) == 'tecnico' ? 'visible' : 'invisible'; ?>  btn my-2 my-sm-0 mr-2" href="<?=base_url('atendiendo');?>">Atendiendo</a>
                         <a class="btn my-2 my-sm-0 mr-2" href="<?=base_url('reporte/agregar_incidencia');?>">Crear reporte</a>
                         <a class="btn my-2 my-sm-0 mr-2 btn-misreportes" href="<?=base_url('reporte');?>">Mis reportes</a>
                     </div>

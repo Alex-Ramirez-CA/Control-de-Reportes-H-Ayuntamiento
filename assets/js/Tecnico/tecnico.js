@@ -16,7 +16,10 @@
         let elemento = $(this)[0];
         let id = $(elemento).attr('idReporte');
         let titulo = $(elemento).attr('titulo');
-        $('.titulo-reporte-mensaje').html("Titulo: " + titulo);
+        $('.folio').html("Folio: " + id);
+        $('.participante').html("0");
+        $('.nombres-asignados').html("Por definir");
+        $('.titulo-reporte-tecnico').html("Titulo: " + titulo);
         $('.mensaje').css({'visibility':'visible'});
         $('.contenedor-mensaje').css({'transform':'translateY(0%)'});
         $('.enviar-comentario').attr('idReporte',id);
@@ -40,11 +43,15 @@
         let elemento = $(this)[0];
         let id = $(elemento).attr('idReporte');
         let titulo = $(elemento).attr('titulo');
-        $('.titulo-reporte-mensaje').html("Titulo: " + titulo);
+        let participantes = ($(elemento).attr('participantes')).split(',');
+        $('.folio').html("Folio: " + id);
+        //$('.participante').css({'padding-left':'8px'});
+        $('.participante').html(participantes.length);
+        $('.nombres-asignados').html("Atendido por " + participantes);
+        $('.titulo-reporte-tecnico').html("Titulo: " + titulo);
         $('.mensaje').css({'visibility':'visible'});
         $('.contenedor-mensaje').css({'transform':'translateY(0%)'});
         $('.enviar-comentario').attr('idReporte',id);
-
         $(document).on('click', '.enviar-comentario', function(){
             let elemento = $(this)[0];
             let id_incidencia = $(elemento).attr('idReporte');
@@ -63,7 +70,11 @@
         let elemento = $(this)[0];
         let id = $(elemento).attr('idReporte');
         let titulo = $(elemento).attr('titulo');
-        $('.titulo-reporte-mensaje').html("Titulo: " + titulo);
+        let participantes = ($(elemento).attr('participantes')).split(',');
+        $('.folio').html("Folio: " + id);
+        $('.participante').html(participantes.length);
+        $('.nombres-asignados').html("Atendido por " + participantes);
+        $('.titulo-reporte-tecnico').html("Titulo: " + titulo);
         $('.mensaje').css({'visibility':'visible'});
         $('.contenedor-mensaje').css({'transform':'translateY(0%)'});
         $('.enviar-comentario').attr('idReporte',id);
@@ -86,7 +97,9 @@
         let elemento = $(this)[0];
         let id = $(elemento).attr('idReporte');
         let titulo = $(elemento).attr('titulo');
-        $('.titulo-reporte-mensaje').html("Titulo: " + titulo);
+        let participantes = $(elemento).attr('participantes');
+        $('.nombres-asignados').html("Atendido por " + participantes);
+        $('.titulo-reporte-tecnico').html("Titulo: " + titulo);
         $('.mensaje').css({'visibility':'visible'});
         $('.contenedor-mensaje').css({'transform':'translateY(0%)'});
         $('.enviar-comentario').attr('idReporte',id);
@@ -109,7 +122,9 @@
         let elemento = $(this)[0];
         let id = $(elemento).attr('idReporte');
         let titulo = $(elemento).attr('titulo');
-        $('.titulo-reporte-mensaje').html("Titulo: " + titulo);
+        let participantes = $(elemento).attr('participantes');
+        $('.nombres-asignados').html("Atendido por " + participantes);
+        $('.titulo-reporte-tecnico').html("Titulo: " + titulo);
         $('.mensaje').css({'visibility':'visible'});
         $('.contenedor-mensaje').css({'transform':'translateY(0%)'});
         $('.enviar-comentario').attr('idReporte',id);
@@ -138,5 +153,7 @@
             window.location.replace(json.url);
         });
     });
+
+    
 
 })(jQuery)

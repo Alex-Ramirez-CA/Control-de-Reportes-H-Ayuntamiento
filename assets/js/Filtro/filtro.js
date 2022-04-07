@@ -1,7 +1,7 @@
 (function($) {
     let url;
 
-    //Función para cuando le de click a la tarjeta
+    //Función para cuando le de click al botón de ver
     $(document).on('click', '.btn-ver-filtro', function(){
         let elemento = $(this)[0];
         let id_incidencia = $(elemento).attr('idReporte');
@@ -35,11 +35,13 @@
             let json = JSON.parse(response);
             if (id_incidencia === undefined) {
                 //Se abre el modal con la imagen incorrecta
-                $('.texto-mensaje').css({'color':'#E52141'});
+                $('.texto-mensaje').css({'color':'#fff'});
                 $('.texto-mensaje').html("Tiene que seleccionar algún reporte");
                 $('.img-mensaje').attr('src',$('.img-mensaje').attr('incorrecto'));
                 $('.mensaje').css({'visibility':'visible'});
-                $('.contenedor-mensaje').css({'height':'43%'});
+                $('.contenedor-mensaje').css({'box-shadow':'0 0px 45px 0 rgba(179, 34, 34, 0.349'});
+                $('.contenedor-mensaje').css({'width':'450px'});
+                $('.contenedor-mensaje').css({'height':'35%'});
                 $('.contenedor-mensaje').css({'transform':'translateY(0%)'});
             }else {
                 //Se abre el modal con la imagen correcta
@@ -47,7 +49,9 @@
                 $('.texto-mensaje').html(json.msg);
                 $('.img-mensaje').attr('src',$('.img-mensaje').attr('correcto'));
                 $('.mensaje').css({'visibility':'visible'});
-                $('.contenedor-mensaje').css({'height':'36%'});
+                $('.contenedor-mensaje').css({'box-shadow':'0 0px 50px 0 rgba(31, 175, 26, 0.349)'});
+                $('.contenedor-mensaje').css({'width':'450px'});
+                $('.contenedor-mensaje').css({'height':'30%'});
                 $('.contenedor-mensaje').css({'transform':'translateY(0%)'});
             }
             url = json.url;

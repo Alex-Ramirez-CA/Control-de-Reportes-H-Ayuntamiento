@@ -6,6 +6,7 @@
     <!-- Columna de los reportes en proceso -->
     <div class="proceso-atendiendo">
         <div class="titulo-proceso">
+            <p class="cantidad-reportes"><?= empty($en_proceso) ? '0' : count($en_proceso); ?></p>
             <h3><b>Reportes en proceso</b></h3>
         </div>
         
@@ -23,6 +24,10 @@
                                 <b><h5><?= $item->titulo; ?></h5></b>
                             </div>
                             <div class="card-body">
+                                <div class="fecha">
+                                    <b><h5>Folio</h5></b>
+                                    <p><?= $item->id_incidencia;?></p>
+                                </div>
                                 <div class="fecha">
                                     <b><h5>Creado</h5></b>
                                     <p><?= date("d/m/Y", strtotime($item->fecha_apertura)); ?></p>
@@ -44,6 +49,7 @@
     <!-- Columna de los reportes finalizados -->
     <div class="finalizados-atendiendo">
         <div class="titulo-finalizado">
+            <p class="cantidad-reportes"><?= empty($finalizados) ? '0' : count($finalizados); ?></p>
             <h3><b>Reportes finalizados</b></h3>
         </div>
         
@@ -61,6 +67,10 @@
                                 <b><h5><?= $item->titulo; ?></h5></b>
                             </div>
                             <div class="card-body">
+                                <div class="fecha">
+                                    <b><h5>Folio</h5></b>
+                                    <p><?= $item->id_incidencia;?></p>
+                                </div>
                                 <div class="fecha">
                                     <b><h5>Creado</h5></b>
                                     <p><?= date("d/m/Y", strtotime($item->fecha_apertura)); ?></p>
@@ -82,22 +92,37 @@
 </div>
 
 <div class="mensaje">
-<div class="contenedor-mensaje">
+    <div class="cerrar-ventana">
         <p class="cerrar-mensaje-tecnico">x</p>
-        <h2>¿Qué fue lo que se hizo?</h2>
-        <div class="mensaje-comentario">
-            <div class="texto-comentario">
-                <h3 class="titulo-reporte-mensaje"></h3>
+    </div>
+    <div class="contenedor-mensaje">
+        <div class="mensaje-body">
+            <div class="comentario-tecnico">
+                <b><h1>¿Qué fue lo que se hizo?</h1></b>
                 <textarea name="comentario-tecnico" id="comentario-tecnico" cols="30" rows="10"></textarea>
+                <button class="enviar-comentario">Enviar comentario</button>
             </div>
             <div class="respuestas-rapidas">
+                <div class="datos-reporte-comentario">
+                    <h2 class="titulo-reporte-tecnico"></h2>
+                    <div class="folio-participantes">
+                        <h2 class="folio"></h2>
+                        <div class="participantes">
+                            <figcaption>
+                                <p class="nombres-asignados"></p>
+                            </figcaption>
+                            <p class="participantes-texto">Participantes</p>
+                            <p class="participante"></p>
+                        </div>
+                    </div>
+                </div>
                 <button>El problema quedó completamente solucionado</button>
                 <button>Me gustaría ayudar a solucionar el problema</button>
                 <button>El día de hoy comenzaré a darle solución al reporte</button>
                 <button>Ya quedó completamente solucionado el problema</button>
+                <button>Ya quedó completamente solucionado el problema</button>
             </div>
         </div>
-        <button class="enviar-comentario">Enviar comentario</button>
     </div>
 </div>
 
