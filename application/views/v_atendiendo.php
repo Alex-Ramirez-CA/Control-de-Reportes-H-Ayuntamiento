@@ -34,8 +34,22 @@
                                 </div>
                                 <div class="opciones-tecnico">
                                     <button class="ver" idReporte="<?= $item->id_incidencia;?>">Ver</button>
-                                    <button class="finalizar" idReporte="<?= $item->id_incidencia;?>" titulo="<?= $item->titulo;?>">Finalizar</button>
+                                    <button class="finalizar" idReporte="<?= $item->id_incidencia;?>" titulo="<?= $item->titulo;?>" participantes="<?= $item->encargado;?>">Finalizar</button>
                                 </div>
+                            </div>
+                            <div class="tecnico-departamento">
+                                <div class="nom-tecnicos">
+                                    <figcaption>
+                                        <p class="nombre-tecnicos">Atendido por </b><?= $item->encargado; ?></p>
+                                    </figcaption>
+                                    <img src="<?=base_url('assets/img/iconos/tecnicos.svg')?>" alt="">
+                                </div>
+                                <div class="nom-departamentos">
+                                    <figcaption>
+                                        <p class="nombre-departamentos">Se asigno a </b><?= $item->departamento; ?></p>
+                                    </figcaption>
+                                    <img src="<?=base_url('assets/img/iconos/departamentos.svg')?>" alt="">
+                                </div>                                
                             </div>
                         </div>
             <?php 
@@ -77,8 +91,22 @@
                                 </div>
                                 <div class="opciones-tecnico">
                                     <button class="ver" idReporte="<?= $item->id_incidencia;?>">Ver</button>
-                                    <button class="reabrir-atendido" idReporte="<?= $item->id_incidencia;?>" titulo="<?= $item->titulo;?>">Reabrir</button>
+                                    <button class="reabrir-atendido" idReporte="<?= $item->id_incidencia;?>" titulo="<?= $item->titulo;?>" participantes="<?= $item->encargado;?>">Reabrir</button>
                                 </div>
+                            </div>
+                            <div class="tecnico-departamento">
+                                <div class="nom-tecnicos">
+                                    <figcaption>
+                                        <p class="nombre-tecnicos">Atendido por </b><?= $item->encargado; ?></p>
+                                    </figcaption>
+                                    <img src="<?=base_url('assets/img/iconos/tecnicos.svg')?>" alt="">
+                                </div>
+                                <div class="nom-departamentos">
+                                    <figcaption>
+                                        <p class="nombre-departamentos">Se asigno a </b><?= $item->departamento; ?></p>
+                                    </figcaption>
+                                    <img src="<?=base_url('assets/img/iconos/departamentos.svg')?>" alt="">
+                                </div>                                
                             </div>
                         </div>
             <?php 

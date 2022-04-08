@@ -97,7 +97,9 @@
         let elemento = $(this)[0];
         let id = $(elemento).attr('idReporte');
         let titulo = $(elemento).attr('titulo');
-        let participantes = $(elemento).attr('participantes');
+        let participantes = ($(elemento).attr('participantes')).split(',');
+        $('.folio').html("Folio: " + id);
+        $('.participante').html(participantes.length);
         $('.nombres-asignados').html("Atendido por " + participantes);
         $('.titulo-reporte-tecnico').html("Titulo: " + titulo);
         $('.mensaje').css({'visibility':'visible'});
@@ -122,7 +124,9 @@
         let elemento = $(this)[0];
         let id = $(elemento).attr('idReporte');
         let titulo = $(elemento).attr('titulo');
-        let participantes = $(elemento).attr('participantes');
+        let participantes = ($(elemento).attr('participantes')).split(',');
+        $('.folio').html("Folio: " + id);
+        $('.participante').html(participantes.length);
         $('.nombres-asignados').html("Atendido por " + participantes);
         $('.titulo-reporte-tecnico').html("Titulo: " + titulo);
         $('.mensaje').css({'visibility':'visible'});

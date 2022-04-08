@@ -171,6 +171,59 @@
 	border-radius: 10px;
 }
 
+.tecnico-departamento {
+	display: flex;
+	justify-content: space-between;
+	margin-right: 9px;
+	margin-left: 9px;
+	margin-bottom: 5px;
+	position: relative;
+}
+
+.nombre-tecnicos {
+	position: absolute;
+	font-size: 10px;
+	width: 165px;
+	background-color: rgba(49, 48, 48, 0.5);
+	color: #fff;
+	border-radius: 10px;
+	text-align: center;
+	padding-top: 3px;
+	padding-left: 5px;
+	padding-right: 5px;
+	left: 25px;
+}
+
+.nom-tecnicos figcaption {
+	display: none;
+}
+
+.nom-tecnicos:hover figcaption {
+	display: block;
+}
+
+.nombre-departamentos {
+	position: absolute;
+	font-size: 10px;
+	width: 165px;
+	background-color: rgba(49, 48, 48, 0.5);
+	color: #fff;
+	border-radius: 10px;
+	text-align: center;
+	padding-top: 3px;
+	padding-left: 5px;
+	padding-right: 5px;
+	right: 25px;	
+}
+
+.nom-departamentos figcaption {
+	display: none;
+}
+
+.nom-departamentos:hover figcaption {
+	display: block;
+}
+
 .contenido-vacio-tecnico {
     margin-top: 52%;
 	margin-left: 23%;
