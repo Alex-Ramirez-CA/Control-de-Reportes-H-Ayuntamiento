@@ -36,8 +36,19 @@
                                 <button class="atender" idReporte="<?= $item->id_incidencia;?>" titulo="<?= $item->titulo;?>">Atender</button>
                             </div>
                         </div>
-                        <div>
-                            <p>Participantes</p>
+                        <div class="tecnico-departamento">
+                                <div class="nom-tecnicos">
+                                    <figcaption>
+                                        <p class="nombre-tecnicos">Por asignar</p>
+                                    </figcaption>
+                                    <img src="<?=base_url('assets/img/iconos/tecnicos.svg')?>" alt="">
+                                </div>
+                                <div class="nom-departamentos">
+                                    <figcaption>
+                                        <p class="nombre-departamentos">Se asigno a </b><?= $item->departamento; ?></p>
+                                    </figcaption>
+                                    <img src="<?=base_url('assets/img/iconos/departamentos.svg')?>" alt="">
+                                </div>                                
                         </div>
                     </div>
             <?php 
@@ -79,7 +90,20 @@
                                     <button class="ver" idReporte="<?= $item->id_incidencia;?>">Ver</button>
                                     <button class="unirme" idReporte="<?= $item->id_incidencia;?>" titulo="<?= $item->titulo;?>" participantes="<?= $item->encargado;?>">Unirme</button>
                                 </div>
-
+                            </div>
+                            <div class="tecnico-departamento">
+                                <div class="nom-tecnicos">
+                                    <figcaption>
+                                        <p class="nombre-tecnicos">Atendido por </b><?= $item->encargado; ?></p>
+                                    </figcaption>
+                                    <img src="<?=base_url('assets/img/iconos/tecnicos.svg')?>" alt="">
+                                </div>
+                                <div class="nom-departamentos">
+                                    <figcaption>
+                                        <p class="nombre-departamentos">Se asigno a </b><?= $item->departamento; ?></p>
+                                    </figcaption>
+                                    <img src="<?=base_url('assets/img/iconos/departamentos.svg')?>" alt="">
+                                </div>                                
                             </div>
                         </div>
             <?php 
@@ -92,7 +116,18 @@
     <!-- Columna de los reportes pendientes -->
     <div class="finalizados-filtro">
         <div class="titulo-finalizado">
-            <p class="cantidad-reportes"><?= empty($finalizados) ? '0' : count($finalizados); ?></p>
+            <?php
+                $cantidadReportes;
+                if (empty($finalizados)){
+                    $cantidadReportes = 0;
+                }else{
+                    $cantidadReportes = count($finalizados);
+                    if ($cantidadReportes > 999){
+                        $cantidadReportes = round( $cantidadReportes / 1000, 1, PHP_ROUND_HALF_DOWN)."k";
+                    }
+                }
+            ?>
+            <p class="cantidad-reportes"><?= $cantidadReportes ?></p>
             <h3><b>Reportes finalizados</b></h3>
         </div>
 
@@ -122,7 +157,20 @@
                                     <button class="ver" idReporte="<?= $item->id_incidencia;?>">Ver</button>
                                     <button class="reabrir" idReporte="<?= $item->id_incidencia;?>" titulo="<?= $item->titulo;?>" participantes="<?= $item->encargado;?>">Reabrir</button>
                                 </div>
-
+                            </div>
+                            <div class="tecnico-departamento">
+                                <div class="nom-tecnicos">
+                                    <figcaption>
+                                        <p class="nombre-tecnicos">Atendido por </b><?= $item->encargado; ?></p>
+                                    </figcaption>
+                                    <img src="<?=base_url('assets/img/iconos/tecnicos.svg')?>" alt="">
+                                </div>
+                                <div class="nom-departamentos">
+                                    <figcaption>
+                                        <p class="nombre-departamentos">Se asigno a </b><?= $item->departamento; ?></p>
+                                    </figcaption>
+                                    <img src="<?=base_url('assets/img/iconos/departamentos.svg')?>" alt="">
+                                </div>                                
                             </div>
                         </div>
             <?php 
