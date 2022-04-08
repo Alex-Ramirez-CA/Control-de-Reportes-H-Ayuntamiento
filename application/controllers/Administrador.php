@@ -30,7 +30,7 @@ class Administrador extends CI_Controller {
 				'en_proceso' => $res_1,
 				'finalizados' => $res_2,
 			);
-			$this->load->view('v_administrador', $data);
+			echo json_encode($data);
         } else {
             // Si no hay datos de sesion redireccionar a login
             redirect('login');
