@@ -48,6 +48,10 @@ class Reporte extends CI_Controller {
 		if(!$this->session->has_userdata('id_rol')){
             redirect('login');
         }
+		if($this->session->userdata('id_rol') != 0) {
+			// Cuando no es de tipo cliente
+			// Agregarle la opcion de elegir el cliente que hace el reporte
+		}
 		$data = array(
 			'head' => $this->load->view('layout/head', '', TRUE),
 			'nav' => $this->load->view('layout/nav', '', TRUE),
