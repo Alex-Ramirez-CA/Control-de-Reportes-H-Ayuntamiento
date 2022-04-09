@@ -143,6 +143,8 @@ class Tecnico extends CI_Controller {
 				$this->Atender_incidencia->insertar($data);
 				// Se le vuelve a cambiar el estatus a la misma a 1 = en proceso
 				$this->Incidencia->modificar_status($id_incidencia, 1);
+				// Actualizar la fecha de cierre a NULL
+				$this->Incidencia->update_fechaCierre($id_incidencia, NULL);
 				// redirect('tecnico');
 				echo json_encode(array(
 					'msg' => 'Reabriste la incidencia',

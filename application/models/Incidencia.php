@@ -303,14 +303,28 @@ class Incidencia extends CI_Model {
 
     // -----------------------------------------------------------------------------------
 
+    // Obtener datos del quipo asosiado
+    public function datos_equipo($id_incidencia) {
+        $data = $this->db
+                ->select("e.nombre, e.direccion_ip, e.inventario, e.serie, e.serie, e.marca, e.procesador, e.ram, e.disco_duro, e.teclado, e.mouse, e.dvd, e.inventario_monitor, e.serie_monitor, e.marca_monitor, e.tamano_monitor, e.sistema_operativo, e.observaciones")
+                ->from("incidencia i")
+                ->join("equipo e", "i.id_equipo=e.id_equipo")
+                ->where('i.id_incidencia', $id_incidencia)
+                ->get();
+        
+        // Si no se encuentra resultados
+        if(!$data->result()) {
+            return false;
+        }
+        return $data->row();
+    }
     // Obtener todos los datos necesarios para crear el reporte
     public function datos_incidencia($id_incidencia) {
         $data = $this->db
-                ->select("i.id_incidencia, i.titulo, i.fecha_apertura, i.fecha_cierre, i.descripcion, i.status, i.archivo, i.ext, concat_ws(' ', u.nombre, u.apellido_paterno, u.apellido_materno) as usuario, u.email, e.nombre, e.direccion_ip, e.inventario, e.serie, e.serie, e.marca, e.procesador, e.ram, e.disco_duro, e.teclado, e.mouse, e.dvd, e.inventario_monitor, e.serie_monitor, e.marca_monitor, e.tamano_monitor, e.sistema_operativo, e.observaciones, di.nombre as direccion, de.nombre as dependencia")
+                ->select("i.id_incidencia, i.titulo, i.fecha_apertura, i.fecha_cierre, i.descripcion, i.status, i.archivo, i.ext, concat_ws(' ', u.nombre, u.apellido_paterno, u.apellido_materno) as usuario, u.email, di.nombre as direccion, de.nombre as dependencia")
                 ->from("incidencia i")
                 ->join("usuario u", "i.no_empleado=u.no_empleado")
-                ->join("equipo e", "u.id_equipo=e.id_equipo")
-                ->join("direccion di", "e.id_direccion=di.id_direccion")
+                ->join("direccion di", "u.id_direccion=di.id_direccion")
                 ->join("dependencia de", "di.id_dependencia=de.id_dependencia")
                 ->where('i.id_incidencia', $id_incidencia)
                 ->get();
@@ -360,6 +374,14 @@ class Incidencia extends CI_Model {
     // para indicar cuando pasa de pendiente a en proceso, finalizado o veceverza
     public function modificar_status($id_incidencia, $status) {
         $this->db->set('status', $status);
+        $this->db->where('id_incidencia', $id_incidencia);
+        $this->db->update('incidencia');
+    }
+
+    // -----------------------------------------------------------------------------------
+    // Modificar la fecha de cierre, para cuando se finalice una incidencia o se reabra
+    public function update_fechaCierre($id_incidencia, $fecha) {
+        $this->db->set('fecha_cierre', $fecha);
         $this->db->where('id_incidencia', $id_incidencia);
         $this->db->update('incidencia');
     }
