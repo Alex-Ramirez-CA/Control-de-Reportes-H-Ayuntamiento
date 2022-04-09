@@ -6,7 +6,7 @@ class Reporte extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->library(array('session', 'form_validation'));
-		$this->load->model(array('Incidencia', 'Atender_incidencia'));
+		$this->load->model(array('Incidencia', 'Atender_incidencia', 'Equipo_usuario'));
 		$this->load->helper(array('incidence/incidencia_rules'));
 	}
     
@@ -52,10 +52,15 @@ class Reporte extends CI_Controller {
 			// Cuando no es de tipo cliente
 			// Agregarle la opcion de elegir el cliente que hace el reporte
 		}
+		// Obtener el empleado de las variables de sesión
+		$no_empleado = $this->session->userdata('id');
+		// Obtener los datos de los equipos
+		$equipos = $this->Equipo_usuario->obtener_equipos($no_empleado);
 		$data = array(
 			'head' => $this->load->view('layout/head', '', TRUE),
 			'nav' => $this->load->view('layout/nav', '', TRUE),
 			'footer' => $this->load->view('layout/footer', '', TRUE),
+			'equipos' => $equipos,
 		);
         $this->load->view('v_crear_incidencia', $data);
 	}
