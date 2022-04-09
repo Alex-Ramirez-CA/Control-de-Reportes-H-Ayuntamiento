@@ -88,9 +88,6 @@ class Reporte extends CI_Controller {
 				'footer' => $this->load->view('layout/footer', '', TRUE),
 			);
 			$this->load->view('v_crear_incidencia', $data);
-			// Mandar respuesta al cliente
-			// echo json_encode($erros);
-			// $this->output->set_status_header(400);
 		} else {
 			// Si se pasa la validacion del formulario
 			$nombre_archivo = NULL;
@@ -123,6 +120,7 @@ class Reporte extends CI_Controller {
 			// Recibir los datos del formulario via post
 			$titulo = $this->input->post('titulo');
 			$descripcion = $this->input->post('descripcion');
+			$id_equipo = $this->input->post('id_equipo');
 			// Obtener fecha actual
 			date_default_timezone_set('America/Mexico_City');
 			$fecha = date("Y").'-'.date("m").'-'.date("d");
@@ -136,7 +134,8 @@ class Reporte extends CI_Controller {
 				'status' => 0,
 				'archivo' => $nombre_archivo,
 				'ext' => $extension,
-				'asignado' => 0
+				'asignado' => 0,
+				'id_equipo' => $id_equipo,
 			);
 		
 			$this->Incidencia->guardar_incidencia($datos);
