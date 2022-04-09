@@ -51,6 +51,7 @@ class Reporte extends CI_Controller {
 		if($this->session->userdata('id_rol') != 0) {
 			// Cuando no es de tipo cliente
 			// Agregarle la opcion de elegir el cliente que hace el reporte
+			$no_empleado = $this->session->userdata('id');
 		} else {
 			// Si es cliente obtener sus datos de las variables de sesión
 			$no_empleado = $this->session->userdata('id');
