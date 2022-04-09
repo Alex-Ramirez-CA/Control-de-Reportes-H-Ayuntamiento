@@ -61,6 +61,8 @@ class Atendiendo extends CI_Controller {
 			$this->Atender_incidencia->insertar($data);
 			// Cambiar el estatus de la incidencia a finalizada
 			$this->Incidencia->modificar_status($id_incidencia, 2);
+			// Agregar la fecha de cierre
+			$this->Incidencia->update_fechaCierre($id_incidencia, $fecha);
 			echo json_encode(array('url' => base_url('atendiendo')));
 			//redirect('tecnico');
 		} else {
@@ -97,6 +99,8 @@ class Atendiendo extends CI_Controller {
 				$this->Atender_incidencia->insertar($data);
 				// Se le vuelve a cambiar el estatus a la misma a 1 = en proceso
 				$this->Incidencia->modificar_status($id_incidencia, 1);
+				// Actualizar la fecha de cierre a NULL
+				$this->Incidencia->update_fechaCierre($id_incidencia, NULL);
 				// redirect('tecnico');
 				echo json_encode(array(
 					'msg' => 'Reabriste la incidencia',

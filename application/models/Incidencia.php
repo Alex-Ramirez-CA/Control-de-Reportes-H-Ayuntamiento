@@ -377,6 +377,14 @@ class Incidencia extends CI_Model {
         $this->db->where('id_incidencia', $id_incidencia);
         $this->db->update('incidencia');
     }
+
+    // -----------------------------------------------------------------------------------
+    // Modificar la fecha de cierre, para cuando se finalice una incidencia o se reabra
+    public function update_fechaCierre($id_incidencia, $fecha) {
+        $this->db->set('fecha_cierre', $fecha);
+        $this->db->where('id_incidencia', $id_incidencia);
+        $this->db->update('incidencia');
+    }
 }
 
 
