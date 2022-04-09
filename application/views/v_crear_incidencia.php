@@ -21,6 +21,25 @@
                 </div>
             </div>
             <div class="parte2-formulario">
+                <div class="form-group pb-2 equipo">
+                    <h3>Seleccione el equipo que esta fallando</h3>
+                    <select name="seleccion-equipo" id="seleccion-equipo">
+                        <option value="">Ninguno</option>
+                        <?php 
+                            if (empty($equipos)) {
+                        ?>
+                            
+                        <?php 
+                            }else{
+                                foreach($equipos as $item):
+                        ?>
+                                    <option value="<?=$item->id_equipo?>"><?=$item->nombre?></option>
+                        <?php 
+                                endforeach; 
+                            }
+                        ?>
+                    </select>
+                </div>
                 <div class="form-group pb-2 file">
                     <h2>Arrastre y sulte el archivo</h2>
                     <span>o</span>
