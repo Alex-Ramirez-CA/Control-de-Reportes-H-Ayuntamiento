@@ -152,11 +152,13 @@ class Reporte extends CI_Controller {
     // Recibe el id_incidencia por parametro y trae los datos necesario para crear el reporte
     public function nuevo_reporte($id_incidencia){
         $generales = $this->Incidencia->datos_incidencia($id_incidencia);
+        $equipo = $this->Incidencia->datos_equipo($id_incidencia);
 		$comentarios = $this->Atender_incidencia->get_comentarios($id_incidencia);
 		$data = array(
 			'head' => $this->load->view('layout/head', '', TRUE),
 			'footer' => $this->load->view('layout/footer', '', TRUE),
             'generales' => $generales,
+			'equipo' => $equipo,
             'comentarios' => $comentarios,
 		);
 		$this->load->view('v_reporte', $data);
