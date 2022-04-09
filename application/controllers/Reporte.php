@@ -122,7 +122,12 @@ class Reporte extends CI_Controller {
 			// Recibir los datos del formulario via post
 			$titulo = $this->input->post('titulo');
 			$descripcion = $this->input->post('descripcion');
-			$id_equipo = $this->input->post('id_equipo');
+			//Por si el usuario no selecciona ningun equipo
+			if($this->input->post('id_equipo') == 0){
+				$id_equipo = NULL;
+			}else{
+				$id_equipo = $this->input->post('id_equipo');
+			}
 			// Obtener fecha actual
 			date_default_timezone_set('America/Mexico_City');
 			$fecha = date("Y").'-'.date("m").'-'.date("d");

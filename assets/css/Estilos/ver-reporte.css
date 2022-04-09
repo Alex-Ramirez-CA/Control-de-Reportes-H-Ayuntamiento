@@ -103,6 +103,10 @@
 	border-radius: 10px;
 }
 
+.no-archivo {
+	text-align: center;
+}
+
 .comentarios-reporte h1,
 .datos-reporte h1 {
 	text-align: center;

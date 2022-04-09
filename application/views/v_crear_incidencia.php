@@ -23,7 +23,7 @@
             <div class="parte2-formulario">
                 <div class="form-group pb-2 equipo">
                     <h3>Seleccione el equipo que esta fallando</h3>
-                    <select name="seleccion-equipo" id="seleccion-equipo">
+                    <select name="id_equipo" id="seleccion-equipo">
                         <option value="">Ninguno</option>
                         <?php 
                             if (empty($equipos)) {
@@ -61,11 +61,25 @@
             let img = document.querySelector('#preview');
             archivo.addEventListener('change', (e) => {
                 const file = e.target.files[0];
-                const fileReader = new FileReader();
-                fileReader.readAsDataURL(file);
-                fileReader.addEventListener('load', (e) => {
-                    img.setAttribute('src', e.target.result);   
-                });
+                if ((/\.(jpg|jpe|svg|jpeg|jfif|ief|png|gif)$/i).test(file.name)) {
+                    const fileReader = new FileReader();
+                    fileReader.readAsDataURL(file);
+                    fileReader.addEventListener('load', (e) => {
+                        img.setAttribute('src', e.target.result);   
+                    });
+                    console.log('Es una imagen');
+                }else if((/\.(doc|dot|docx)$/i).test(file.name)){ 
+                    img.setAttribute('src', 'http://localhost/Control-de-Reportes-H-Ayuntamiento/assets/img/iconos/file-word.png'); 
+                    console.log('Es un Word');
+                }else if((/\.(pdf)$/i).test(file.name)){
+                    img.setAttribute('src', 'http://localhost/Control-de-Reportes-H-Ayuntamiento/assets/img/iconos/file-pdf.png');
+                    console.log('Es un PDF');
+                }else if((/\.(xlsx|xlsm|xlsb|xltx|xltm|xls|xlt|xlw|xla|xml|csv)$/i).test(file.name)){
+                    img.setAttribute('src', 'http://localhost/Control-de-Reportes-H-Ayuntamiento/assets/img/iconos/file-excel.png');
+                    console.log('Es un Excel');
+                }else{
+                    console.log('Es otro tipo de archivo');
+                }
                 nombreArchivo.innerText = archivo.files[0].name;     
             });
 

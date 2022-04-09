@@ -89,7 +89,7 @@
 
 .file h2,
 .file span {
-	font-size: 18px;
+	font-size: 16px;
 	color: #006e95;
 }
 
@@ -110,6 +110,8 @@
 	text-align: center;
 	width: 180px;
 	height: 25px;
+	font-size: 14px;
+	padding-top: 3px;
 }
 
 .file label:hover {
