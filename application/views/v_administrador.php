@@ -2,8 +2,8 @@
 
 <?= $nav; ?>
 
-<div class="container-tecnico">
-    <!-- Columna de los reportes pendientes -->
+<div class="container">
+    <!-- Columna para los reportes pendientes -->
     <div class="pendientes-filtro">
         <div class="titulo-pendiente">
             <p class="cantidad-reportes"><?= empty($pendientes) ? '0' : count($pendientes); ?></p>
@@ -31,6 +31,10 @@
                                 <b><h5>Creado</h5></b>
                                 <p><?=  date("d/m/Y", strtotime($item->fecha_apertura)); ?></p>
                             </div>
+                            <div class="opciones-tecnico">
+                                <button class="ver" idReporte="<?= $item->id_incidencia;?>">Ver</button>
+                                <button class="atender" idReporte="<?= $item->id_incidencia;?>" titulo="<?= $item->titulo;?>">Atender</button>
+                            </div>
                         </div>
                         <div class="tecnico-departamento">
                                 <div class="nom-tecnicos">
@@ -53,121 +57,5 @@
             ?>    
         </div>
     </div>
-
-    <!-- Columna de los reportes pendientes -->
-    <div class="proceso-filtro">
-        <div class="titulo-proceso">
-            <p class="cantidad-reportes"><?= empty($en_proceso) ? '0' : count($en_proceso); ?></p>
-            <h3><b>Reportes en proceso</b></h3>
-        </div> 
-        <div class="columna-tecnico">
-            <?php 
-                if (empty($en_proceso)) {
-            ?>
-                    <img class="contenido-vacio-cliente" src="<?= base_url('assets/img/logotipos/flor.png');?>" alt="" width="150">
-            <?php 
-                }else{
-                    foreach($en_proceso as $item):
-            ?>
-                        <div class="card-tecnico"  idCard="<?= $item->id_incidencia;?>">
-                            <div class="card-title">
-                                <b><h5><?= $item->titulo; ?></h5></b>
-                            </div>
-                            <div class="card-body-tecnico">
-                                <div class="fecha">
-                                    <b><h5>Folio</h5></b>
-                                    <p><?= $item->id_incidencia;?></p>
-                                </div>
-                                <div class="fecha">
-                                    <b><h5>Creado</h5></b>
-                                    <p><?=  date("d/m/Y", strtotime($item->fecha_apertura)); ?></p>
-                                </div>
-                            </div>
-                            <div class="tecnico-departamento">
-                                <div class="nom-tecnicos">
-                                    <figcaption>
-                                        <p class="nombre-tecnicos">Atendido por </b><?= $item->encargado; ?></p>
-                                    </figcaption>
-                                    <img src="<?=base_url('assets/img/iconos/tecnicos.svg')?>" alt="">
-                                </div>
-                                <div class="nom-departamentos">
-                                    <figcaption>
-                                        <p class="nombre-departamentos">Se asigno a </b><?= $item->departamento; ?></p>
-                                    </figcaption>
-                                    <img src="<?=base_url('assets/img/iconos/departamentos.svg')?>" alt="">
-                                </div>                                
-                            </div>
-                        </div>
-            <?php 
-                    endforeach; 
-                }    
-            ?>
-        </div>
-    </div>
-
-    <!-- Columna de los reportes pendientes -->
-    <div class="finalizados-filtro">
-        <div class="titulo-finalizado">
-            <?php
-                $cantidadReportes;
-                if (empty($finalizados)){
-                    $cantidadReportes = 0;
-                }else{
-                    $cantidadReportes = count($finalizados);
-                    if ($cantidadReportes > 999){
-                        $cantidadReportes = round( $cantidadReportes / 1000, 1, PHP_ROUND_HALF_DOWN)."k";
-                    }
-                }
-            ?>
-            <p class="cantidad-reportes"><?= $cantidadReportes ?></p>
-            <h3><b>Reportes finalizados</b></h3>
-        </div>
-
-        <div class="columna-tecnico">
-            <?php 
-                if (empty($finalizados)) {
-            ?>
-                    <img class="contenido-vacio-tecnico" src="<?= base_url('assets/img/logotipos/flor.png');?>" alt="" width="150">
-            <?php 
-                }else{
-                    foreach($finalizados as $item):
-            ?>
-                        <div class="card-tecnico"  idCard="<?= $item->id_incidencia;?>">
-                            <div class="card-title">
-                                <b><h5><?= $item->titulo; ?></h5></b>
-                            </div>
-                            <div class="card-body-tecnico">
-                                <div class="fecha">
-                                    <b><h5>Folio</h5></b>
-                                    <p><?= $item->id_incidencia;?></p>
-                                </div>
-                                <div class="fecha">
-                                    <b><h5>Creado</h5></b>
-                                    <p><?=  date("d/m/Y", strtotime($item->fecha_apertura)); ?></p>
-                                </div>
-                            </div>
-                            <div class="tecnico-departamento">
-                                <div class="nom-tecnicos">
-                                    <figcaption>
-                                        <p class="nombre-tecnicos">Atendido por </b><?= $item->encargado; ?></p>
-                                    </figcaption>
-                                    <img src="<?=base_url('assets/img/iconos/tecnicos.svg')?>" alt="">
-                                </div>
-                                <div class="nom-departamentos">
-                                    <figcaption>
-                                        <p class="nombre-departamentos">Se asigno a </b><?= $item->departamento; ?></p>
-                                    </figcaption>
-                                    <img src="<?=base_url('assets/img/iconos/departamentos.svg')?>" alt="">
-                                </div>                                
-                            </div>
-                        </div>
-            <?php 
-                    endforeach; 
-                }    
-            ?>
-        </div>    
-    </div>
-    
-
 </div>
 <?= $footer ?>
