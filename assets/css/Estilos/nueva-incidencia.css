@@ -55,24 +55,41 @@
 	line-height: 240px;
 }
 
+.equipo {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.equipo h3 {
+	font-size: 16px;
+	color: #006e95;
+	text-align: center;
+}
+
+#seleccion-equipo {
+	padding-top: 3px;
+	text-align: center;
+	min-width: 180px;
+	max-width: 200px;
+	border-radius: 10px;
+	min-height: 25px;
+	color: #006e95;
+}
+
 .file {
 	display: flex;
 	justify-content: center;
 	border: dashed 2px #006e95;
-	height: 200px;
+	height: 195px;
 	border-radius: 5px;
 	align-items: center;
 	flex-direction: column;
 }
 
-.file.active {
-	background-color: #b8d4fe;
-	color: #006e95;
-}
-
 .file h2,
 .file span {
-	font-size: 18px;
+	font-size: 16px;
 	color: #006e95;
 }
 
@@ -93,6 +110,8 @@
 	text-align: center;
 	width: 180px;
 	height: 25px;
+	font-size: 14px;
+	padding-top: 3px;
 }
 
 .file label:hover {

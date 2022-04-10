@@ -84,7 +84,17 @@
                             <tr>
                                 <!--Dar formato a las fechas-->
                                 <td><?= date("d/m/Y", $fecha_apertura) ?></td>
-                                <td><?= date("d/m/Y", $fecha_cierre) ?></td>
+                                <?php
+                                    if($fecha_cierre == ""){
+                                ?>
+                                    <td><?= $fecha_cierre ?></td>
+                                <?php
+                                    }else{
+                                ?>
+                                    <td><?= date("d/m/Y", $fecha_cierre) ?></td>
+                                <?php
+                                    }
+                                ?>
                                 <?php
                                     $status;
                                     if ($generales->status == 0) {
@@ -102,71 +112,99 @@
             </div>
             
             <div class="tabla-especificaciones">
-            <div class="titulo">
-                <h2>Especificaciones del equipo</h2>
+                <div class="titulo">
+                    <h2>Especificaciones del equipo dañado</h2>
+                </div>
+
+                <?php if(empty($equipo)){ ?>
+                    <h3>No se selecciono algún equipo</h3>
+                <?php }else{ ?>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                            <th scope="col">Especificación</th>
+                            <th scope="col">Descripción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">Nombre</th>
+                                <td><?= $equipo->nombre ?></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">IP</th>
+                                <td><?= $equipo->direccion_ip ?></td>                        
+                            </tr>
+                            <tr>
+                                <th scope="row">Marca</th>
+                                <td><?= $equipo->marca ?></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Sistema operativo</th>
+                                <td><?= $equipo->sistema_operativo ?></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">RAM</th>
+                                <td><?= $equipo->ram ?></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Disco duro</th>
+                                <td><?= $equipo->disco_duro ?></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                <?php } ?>                       
             </div>
-                <table class="table">
-                    <thead>
-                        <tr>
-                        <th scope="col">Especificación</th>
-                        <th scope="col">Descripción</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">Nombre</th>
-                            <td><?= $generales->nombre ?></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">IP</th>
-                            <td><?= $generales->direccion_ip ?></td>                        
-                        </tr>
-                        <tr>
-                            <th scope="row">Marca</th>
-                            <td><?= $generales->marca ?></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Sistema operativo</th>
-                            <td><?= $generales->sistema_operativo ?></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">RAM</th>
-                            <td><?= $generales->ram ?></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Disco duro</th>
-                            <td><?= $generales->disco_duro ?></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+
             <div class="titulo">
                 <h2>Archivo adjuto (descargable)</h2>
             </div>
             <?php
-                $imagen = array("gif", "jpe", "jpg", "jpeg", "png","GIF", "JPE", "JPG", "JPEG", "PNG", "jfif", "ief");
+                $imagen = array("gif", "svg", "jpe", "jpg", "jpeg", "png","GIF", "JPE", "JPG", "JPEG", "PNG", "jfif", "ief");
                 $word = array("doc","dot","docx");
                 $pdf = array("pdf");
                 $tipo_archivo;
                 $size;
-                if (in_array($generales->ext, $imagen)) {
+                if($generales->ext == null){
+            ?>
+                    <h3 class="no-archivo">No se selecciono algún archivo</h3>
+            <?php
+                }elseif (in_array($generales->ext, $imagen)) {
                     $tipo_archivo = base_url('uploads/').$generales->archivo;
                     $size = 100;
+            ?>
+                    <a class="archivo-descarga" href="<?= base_url('uploads/').$generales->archivo?>" download>
+                        <img src="<?= $tipo_archivo ?>" alt="<?= $generales->archivo?>" width="<?=$size?>">
+                    </a>
+                    <p class="nombre-archivo-descarga"><?= $generales->archivo?></p>
+            <?php
                 }elseif(in_array($generales->ext, $word)){
                     $tipo_archivo = base_url('assets/img/iconos/file-word.png');
                     $size = 48;
+            ?>
+                    <a class="archivo-descarga" href="<?= base_url('uploads/').$generales->archivo?>" download>
+                        <img src="<?= $tipo_archivo ?>" alt="<?= $generales->archivo?>" width="<?=$size?>">
+                    </a>
+                    <p class="nombre-archivo-descarga"><?= $generales->archivo?></p>
+            <?php
                 }elseif(in_array($generales->ext, $pdf)){
                     $tipo_archivo = base_url('assets/img/iconos/file-pdf.png');
                     $size = 48;
+            ?>
+                    <a class="archivo-descarga" href="<?= base_url('uploads/').$generales->archivo?>" download>
+                        <img src="<?= $tipo_archivo ?>" alt="<?= $generales->archivo?>" width="<?=$size?>">
+                    </a>
+                    <p class="nombre-archivo-descarga"><?= $generales->archivo?></p>
+            <?php
                 }else{
                     $tipo_archivo = base_url('assets/img/iconos/file-excel.png');
                     $size = 48;
-                }
             ?>
-            <a class="archivo-descarga" href="<?= base_url('uploads/').$generales->archivo?>" download>
-                <img src="<?= $tipo_archivo ?>" alt="<?= $generales->archivo?>" width="<?=$size?>">
-            </a>
-            <p class="nombre-archivo-descarga"><?= $generales->archivo?></p>
+                    <a class="archivo-descarga" href="<?= base_url('uploads/').$generales->archivo?>" download>
+                        <img src="<?= $tipo_archivo ?>" alt="<?= $generales->archivo?>" width="<?=$size?>">
+                    </a>
+                    <p class="nombre-archivo-descarga"><?= $generales->archivo?></p>
+            <?php } ?>
 
         </div>
         <div class="comentarios-reporte">
