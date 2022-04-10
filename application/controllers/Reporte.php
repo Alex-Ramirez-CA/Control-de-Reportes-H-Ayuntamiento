@@ -48,10 +48,12 @@ class Reporte extends CI_Controller {
 		if(!$this->session->has_userdata('id_rol')){
             redirect('login');
         }
+		$es_cliente = TRUE;
 		if($this->session->userdata('id_rol') != 0) {
 			// Cuando no es de tipo cliente
 			// Agregarle la opcion de elegir el cliente que hace el reporte
 			$no_empleado = $this->session->userdata('id');
+			$es_cliente = FALSE;
 		} else {
 			// Si es cliente obtener sus datos de las variables de sesión
 			$no_empleado = $this->session->userdata('id');
@@ -64,6 +66,7 @@ class Reporte extends CI_Controller {
 			'nav' => $this->load->view('layout/nav', '', TRUE),
 			'footer' => $this->load->view('layout/footer', '', TRUE),
 			'equipos' => $equipos,
+			'es_cliente' => $es_cliente,
 		);
         $this->load->view('v_crear_incidencia', $data);
 	}
