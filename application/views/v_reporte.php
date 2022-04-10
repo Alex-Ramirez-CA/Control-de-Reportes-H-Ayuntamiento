@@ -84,7 +84,17 @@
                             <tr>
                                 <!--Dar formato a las fechas-->
                                 <td><?= date("d/m/Y", $fecha_apertura) ?></td>
-                                <td><?= date("d/m/Y", $fecha_cierre) ?></td>
+                                <?php
+                                    if($fecha_cierre == ""){
+                                ?>
+                                    <td><?= $fecha_cierre ?></td>
+                                <?php
+                                    }else{
+                                ?>
+                                    <td><?= date("d/m/Y", $fecha_cierre) ?></td>
+                                <?php
+                                    }
+                                ?>
                                 <?php
                                     $status;
                                     if ($generales->status == 0) {
