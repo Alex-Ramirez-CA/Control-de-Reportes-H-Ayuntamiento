@@ -54,7 +54,7 @@
         let nombre = $(elemento).text();
         $(".search_usuario").val(nombre);
         $('.creador-reporte').html("Creador del reporte: " + nombre);
-        $('.creador-reporte').val(id_usuario);
+        $('#id_usuario').val(id_usuario);
         $.post('obtener_equipos', {id_usuario}, function(response){
             let json = JSON.parse(response);
             let template = "";

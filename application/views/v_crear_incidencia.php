@@ -14,7 +14,8 @@
         </div>
         <form action="<?= base_url('reporte/guardar_incidencia') ?>" method="POST" id="frm_incidencia" enctype="multipart/form-data">
             <div class="parte1-formulario">
-                <h2 name="id_usuario" class="creador-reporte" nombre="<?=$this->session->nombre." ".$this->session->apellido_paterno." ".$this->session->apellido_materno?>">Creador del reporte: <?=$this->session->nombre." ".$this->session->apellido_paterno." ".$this->session->apellido_materno?></h2>
+            <input type="text" name="id_usuario" id="id_usuario">
+                <h2 class="creador-reporte" nombre="<?=$this->session->nombre." ".$this->session->apellido_paterno." ".$this->session->apellido_materno?>">Creador del reporte: <?=$this->session->nombre." ".$this->session->apellido_paterno." ".$this->session->apellido_materno?></h2>
                 <div class="form-group pb-2" id="titulo"> 
                     <input type="text" name="titulo" minlength="4" maxlength="45" class="form-control" id="titulo" placeholder="Ingrese un titulo">
                     <?php if(form_error('titulo')):?>
