@@ -132,13 +132,21 @@ class Reporte extends CI_Controller {
 			}else{
 				$id_equipo = $this->input->post('id_equipo');
 			}
+			// Obtener el no_empleado de quien sera la incidencia
+			if($this->input->post('id_usuario') == 0){ 
+				$no_empleado = $this->session->userdata('id');
+			}else{
+				$no_empleado = $this->input->post('id_usuario');
+				$id_equipo = $this->Equipo_usuario->get_equipo($no_empleado);
+				$id_equipo = $id_equipo->id_equipo;
+			}
 			// Obtener fecha actual
 			date_default_timezone_set('America/Mexico_City');
 			$fecha = date("Y").'-'.date("m").'-'.date("d");
 			// Meter los datos en un array para la insercion a la bd
 			$datos = array(
 				'titulo' => $titulo,
-				'no_empleado' => $this->session->userdata('id'),
+				'no_empleado' => $no_empleado,
 				'fecha_apertura' => $fecha,
 				'fecha_cierre' => NULL,
 				'descripcion' => $descripcion,
