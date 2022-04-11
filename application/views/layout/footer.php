@@ -5,5 +5,6 @@
     <script src="<?= base_url('assets/js/Filtro/filtro.js');?>"></script>
     <script src="<?= base_url('assets/js/Tecnico/tecnico.js');?>"></script>
     <script src="<?= base_url('assets/js/arrastrar-archivo/arrastrar.js');?>"></script>
+    <script src="<?= base_url('assets/js/nueva_incidencia/nueva_incidencia.js');?>"></script>
 </body>
 </html>

@@ -119,3 +119,13 @@
 	color: #fff;
 }
 
+.search_usuario {
+    visibility: hidden;
+    width: 423px;
+    padding-left: 10px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #f6f8fa;
+    border: solid 1px #006e95;
+}
+

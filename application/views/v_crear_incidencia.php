@@ -19,6 +19,10 @@
                         <div class="alert alert-danger" role="alert"><?= form_error('descripcion')?></div>
                     <?php endif;?>
                 </div>
+                <div class="form-group">
+                    <input type="checkbox" id="alguien-mas"> <label for="alguien-mas" class="label-alguien-mas">Reporte para alguien más</label>
+                    <input class="search_usuario" type="text">
+                </div>
             </div>
             <div class="parte2-formulario">
                 <div class="form-group pb-2 equipo">

@@ -63,21 +63,21 @@ class Busqueda extends CI_Controller {
 		echo json_encode($data);
 	}
 
-    public function buscar_empleado() {
-        // Validar para que no puedan ingresar a esta direccion sin estar logeados
-		if(!$this->session->has_userdata('id_rol')){
-            redirect('login');
-        }
-        // Recibir el valor del campo de busqueda via post
-		$search_usuario = $this->input->post('search_usuario');
-        // Hacer consulta a la base de datos
-        if($search_usuario != '' || $search_usuario != NULL) {
-            $data = $this->Usuario->buscarEmpleado($search_usuario);
-        } else {
-            $data = NULL;
-        }
+    // public function buscar_empleado() {
+    //     // Validar para que no puedan ingresar a esta direccion sin estar logeados
+	// 	if(!$this->session->has_userdata('id_rol')){
+    //         redirect('login');
+    //     }
+    //     // Recibir el valor del campo de busqueda via post
+	// 	$search_usuario = $this->input->post('search_usuario');
+    //     // Hacer consulta a la base de datos
+    //     if($search_usuario != '' || $search_usuario != NULL) {
+    //         $data = $this->Usuario->buscarEmpleado($search_usuario);
+    //     } else {
+    //         $data = NULL;
+    //     }
         
-        echo json_encode($data);
-    }
+    //     echo json_encode($data);
+    // }
 
 }
