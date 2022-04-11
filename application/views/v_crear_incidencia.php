@@ -5,8 +5,16 @@
         <div class="titulo-crear-reporte">
             <b><h1>Ingresar datos de reporte</h1></b>
         </div>
+        <div>
+            <input type="checkbox" id="alguien-mas"> <label for="alguien-mas" class="label-alguien-mas">Hacer reporte para alguien más</label>
+            <input class="search_usuario" type="text" placeholder="Ingrese el número o nombre del trabajador">
+            <div class="opciones-usuarios-nueva-incidencia">
+            
+            </div>
+        </div>
         <form action="<?= base_url('reporte/guardar_incidencia') ?>" method="POST" id="frm_incidencia" enctype="multipart/form-data">
             <div class="parte1-formulario">
+                <h2 name="id_usuario" class="creador-reporte" nombre="<?=$this->session->nombre." ".$this->session->apellido_paterno." ".$this->session->apellido_materno?>">Creador del reporte: <?=$this->session->nombre." ".$this->session->apellido_paterno." ".$this->session->apellido_materno?></h2>
                 <div class="form-group pb-2" id="titulo"> 
                     <input type="text" name="titulo" minlength="4" maxlength="45" class="form-control" id="titulo" placeholder="Ingrese un titulo">
                     <?php if(form_error('titulo')):?>
@@ -18,10 +26,6 @@
                     <?php if(form_error('descripcion')):?>
                         <div class="alert alert-danger" role="alert"><?= form_error('descripcion')?></div>
                     <?php endif;?>
-                </div>
-                <div class="form-group">
-                    <input type="checkbox" id="alguien-mas"> <label for="alguien-mas" class="label-alguien-mas">Reporte para alguien más</label>
-                    <input class="search_usuario" type="text">
                 </div>
             </div>
             <div class="parte2-formulario">

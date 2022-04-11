@@ -57,7 +57,7 @@
         $.post('reporte/visualizar_reporte', {id_incidencia}, function(response){
             let json = JSON.parse(response);
             window.open(json.url);
-            });
+        });
         console.log(id_incidencia);
     });
 

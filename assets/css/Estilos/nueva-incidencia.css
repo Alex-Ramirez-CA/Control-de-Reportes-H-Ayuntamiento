@@ -19,7 +19,7 @@
 	justify-content: space-between;
 	width: 1000px;
 	height: 450px;
-	align-items: center;
+	margin-top: 30px;
 }
 
 .parte1-formulario {
@@ -70,8 +70,7 @@
 #seleccion-equipo {
 	padding-top: 3px;
 	text-align: center;
-	min-width: 180px;
-	max-width: 200px;
+	min-width: 100%;
 	border-radius: 10px;
 	min-height: 25px;
 	color: #006e95;
@@ -120,12 +119,44 @@
 }
 
 .search_usuario {
-    visibility: hidden;
+    display: none;
     width: 423px;
     padding-left: 10px;
-    height: 40px;
-    border-radius: 20px;
+    height: 30px;
+    border-radius: 10px;
     background-color: #f6f8fa;
     border: solid 1px #006e95;
+	color: #006e95;
+	position: relative;
 }
 
+.creador-reporte {
+	font-size: 16px;
+	color: #006e95;
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+.opciones-usuarios-nueva-incidencia {
+	display: none;
+	width: 420px;
+	background-color: #fff;
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	position: absolute;
+	margin-left: 19px;
+	margin-top: 1px;
+	border-radius: 0.25rem;
+	font-size: 14px;
+	cursor: pointer;
+}
+.opciones-usuarios-nueva-incidencia p {
+	padding-left: 10px;
+	color: #212529;
+	height: 25px;
+	padding-top: 4px;
+}
+
+.opciones-usuarios-nueva-incidencia p:hover {
+	background-color: #006e95;
+	color: #fff;	
+}
