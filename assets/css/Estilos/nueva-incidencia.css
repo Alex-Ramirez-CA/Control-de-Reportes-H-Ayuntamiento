@@ -52,8 +52,25 @@
 #descripcion::-webkit-input-placeholder,
 #titulo::-webkit-input-placeholder {
 	text-align: center;
-	line-height: 240px;
+	line-height: 181px;
 }
+
+.descripcion-reporte {
+	height: 195px;
+}
+
+.search_usuario {
+	visibility: hidden;
+	
+	width: 423px;
+	padding-left: 10px;
+	height: 40px;
+	border-radius: 20px;
+	background-color: #f6f8fa;
+	border: solid 1px #006e95;
+}
+
+
 
 .equipo {
 	display: flex;

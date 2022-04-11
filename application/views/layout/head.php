@@ -15,5 +15,6 @@
     <link rel="stylesheet" href="<?= base_url('assets/css/Estilos/filtro.css');?>">
     <link rel="stylesheet" href="<?= base_url('assets/css/Estilos/atendiendo.css');?>">
     <link rel="stylesheet" href="<?= base_url('assets/css/Estilos/tecnico.css');?>">
+    <script src="<?= base_url('assets/js/crear-incidencia/crear-incidencia.js');?>" defer></script>
 </head>
 <body>
