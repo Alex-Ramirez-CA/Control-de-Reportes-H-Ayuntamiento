@@ -5,13 +5,13 @@
             <nav class="navbar navbar-light p-0">
                 <form class="form-inline mt-2" autocomplete="off">
                     <div class="opciones">
-                        <a class=" <?= $this->uri->segment(1) == 'administrador' ? 'visible' : 'invisible'; ?> btn my-2 my-sm-0 mr-2" href="#">Administración</a>
-                        <a class=" <?= $this->uri->segment(1) == 'tecnico' ? 'visible' : 'invisible'; ?>  btn my-2 my-sm-0 mr-2" href="<?=base_url('atendiendo');?>">Atendiendo</a>
+                        <a style="display: <?= $this->session->rol_nombre == 'administrador' ? 'inline-block' : 'none'; ?>;" class="btn my-2 my-sm-0 mr-2" href="#">Administración</a>
+                        <a style="display: <?= $this->session->rol_nombre == 'tecnico' ? 'inline-block' : 'none'; ?>;" class="btn my-2 my-sm-0 mr-2" href="<?=base_url('atendiendo');?>">Atendiendo</a>
                         <a class="btn my-2 my-sm-0 mr-2" href="<?=base_url('reporte/agregar_incidencia');?>">Crear reporte</a>
                         <a class="btn my-2 my-sm-0 mr-2 btn-misreportes" href="<?=base_url('reporte');?>">Mis reportes</a>
                     </div>
                     <div class="autocompletar">
-                        <input name="search" id="search" url="<?= $this->uri->segment(1);?>" class="form-control mr-2" type="search" placeholder="Buscar reporte" aria-label="Search">                        
+                        <input name="search" id="search" url="<?= $this->uri->segment(1);?>" class="form-control mr-2" type="search" placeholder="Buscar reporte" aria-label="Search" style="display: <?= $this->uri->segment(2) == 'agregar_incidencia' ? 'none' : 'inline-block'; ?>;">                        
                         <div id="opciones-buscar">
                             
                         </div>

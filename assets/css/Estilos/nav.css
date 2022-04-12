@@ -1,5 +1,4 @@
 body {
-	position: relative;
 	margin: 0;
 	padding: 0;
 }
@@ -13,7 +12,6 @@ body {
 	box-shadow: 0 3px 3px 0 rgba(31, 38, 135, 0.37);
 	border-radius: 5px;
 	background: #f6f8fa;
-	position: relative;
 	margin-top: 15px;
 }
 
@@ -47,6 +45,7 @@ body {
 	cursor: pointer;
 	padding-top: 4px;
 	padding-right: 1px;
+	position: relative;
 }
 
 .usuario-icono:hover {
@@ -129,7 +128,7 @@ p {
 	padding: 5px;
 	border: 1px solid rgba(0, 0, 0, 0.15);
 	margin-top: 195px;
-	margin-left: 526px;
+	margin-left: 44.748%;
 	z-index: 1;
 	display: none;
 	width: 310px;

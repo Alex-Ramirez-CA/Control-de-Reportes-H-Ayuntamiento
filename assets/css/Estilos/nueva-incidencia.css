@@ -7,6 +7,7 @@
 .titulo-crear-reporte {
 	margin-bottom: 20px;
 	margin-top: 20px;
+	margin-top: 30px;
 }
 
 .titulo-crear-reporte h1 {
@@ -17,19 +18,18 @@
 #frm_incidencia {
 	display: flex;
 	justify-content: space-between;
-	width: 1000px;
+	width: 90%;
+	max-width: 1000px;
 	height: 450px;
 	margin-top: 30px;
 }
 
 .parte1-formulario {
-	width: 450px;
-	margin-left: 30px;
+	width: 45%;
 }
 
 .parte2-formulario {
-	width: 380px;
-	margin-right: 30px;
+	width: 40%;
 }
 
 .parte1-formulario input,
@@ -52,7 +52,7 @@
 #descripcion::-webkit-input-placeholder,
 #titulo::-webkit-input-placeholder {
 	text-align: center;
-	line-height: 240px;
+	line-height: 1500%;
 }
 
 .equipo {
@@ -65,15 +65,40 @@
 	font-size: 16px;
 	color: #006e95;
 	text-align: center;
+	margin-bottom: 10px;
 }
 
 #seleccion-equipo {
 	padding-top: 3px;
 	text-align: center;
-	min-width: 100%;
+	width: 100%;
 	border-radius: 10px;
-	min-height: 25px;
+	height: 35px;
 	color: #006e95;
+	border: 1px solid #006e95;
+}
+
+#titulo {
+	height: 35px;
+	color: #006e95;
+	text-align: center;
+	border-radius: 10px;
+}
+
+#titulo input {
+	padding-top: 6px;
+	border: 1px solid #006e95;
+}
+
+#descripcion {
+	color: #006e95;
+	border-radius: 10px;
+	margin: 0;
+	padding-bottom: 0;
+}
+
+#descripcion textarea {
+	border: 1px solid #006e95;
 }
 
 .file {
@@ -131,7 +156,7 @@
 }
 
 .creador-reporte {
-	font-size: 16px;
+	font-size: 15px;
 	color: #006e95;
 	text-align: center;
 	margin-bottom: 10px;
@@ -150,10 +175,12 @@
 	cursor: pointer;
 }
 .opciones-usuarios-nueva-incidencia p {
-	padding-left: 10px;
 	color: #212529;
 	height: 25px;
-	padding-top: 4px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 12px;
+	padding-right: 12px;	
 }
 
 .opciones-usuarios-nueva-incidencia p:hover {
@@ -163,4 +190,23 @@
 
 #id_usuario {
 	display: none;
+}
+
+input:focus {
+	border-color: #035775;
+    box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 
+	0 0 8px rgb(177, 194, 250);
+    outline: 0 none;
+}
+
+select:focus {
+	border-color: #035775;
+    box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 
+	0 0 8px rgb(177, 194, 250);
+    outline: 0 none;
+}
+
+.label-alguien-mas {
+	font-size: 16px;
+	color: #006e95;
 }

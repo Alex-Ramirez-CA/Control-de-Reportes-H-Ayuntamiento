@@ -3,11 +3,9 @@
         if($('#alguien-mas').is(':checked')){
             $('.search_usuario').css({'display':'inline'});
             $('.label-alguien-mas').css({'display':'none'});
-            $('.creador-reporte').html("Creador del reporte:");
         }else{
             $('.search_usuario').css({'display':'none'});
             $('.label-alguien-mas').css({'display':'inline'});
-            $('.creador-reporte').html("Creador del reporte: " + $('.creador-reporte').attr('nombre'));
         }
     });
 
