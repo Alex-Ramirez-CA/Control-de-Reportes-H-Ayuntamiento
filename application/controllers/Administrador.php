@@ -78,9 +78,10 @@ class Administrador extends CI_Controller {
 		// $data = $this->Incidencia->get_incidenciasFiltradas(0, NULL, NULL, NULL, NULL, NULL, NULL);
 		// $status, $direccion, $dependencia, $equipo, $departamento
 		$pendientes = $this->Incidencia->get_incidenciasStatusCero(0, 2, 1, 2, 2);
+		$en_proceso = $this->Incidencia->get_incidenciasStatusUno(1, 2, 1, 1, 3);
 		$data = array(
 					'pendientes' => $pendientes,
-					'en_proceso' => false,
+					'en_proceso' => $en_proceso,
 					'finalizados' => false,
 				);
 		echo json_encode($data);
