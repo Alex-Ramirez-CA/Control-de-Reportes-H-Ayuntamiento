@@ -76,7 +76,8 @@ class Administrador extends CI_Controller {
         //     redirect('login');
         // }
 		// $data = $this->Incidencia->get_incidenciasFiltradas(0, NULL, NULL, NULL, NULL, NULL, NULL);
-		$pendientes = $this->Incidencia->get_incidenciasStatusCero(0, NULL, NULL, NULL, NULL);
+		// $status, $direccion, $dependencia, $equipo, $departamento
+		$pendientes = $this->Incidencia->get_incidenciasStatusCero(0, 2, 1, 2, 2);
 		$data = array(
 					'pendientes' => $pendientes,
 					'en_proceso' => false,
