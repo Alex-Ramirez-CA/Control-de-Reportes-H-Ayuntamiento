@@ -300,6 +300,284 @@ class Incidencia extends CI_Model {
         }
         return $data->result();
     }
+    
+    public function get_incidenciasStatusCero($status, $direccion, $dependencia, $equipo, $departamento) {
+        $queryDirecc = 'd.id_direccion IS NOT NULL';
+        $queryDepen = 'd.id_dependencia IS NOT NULL';
+        if($direccion != NULL) {
+            $queryDirecc = 'd.id_direccion = '.$direccion;
+        }
+        if($dependencia != NULL) {
+            $queryDepen = 'd.id_dependencia = '.$dependencia;
+        }
+        if($equipo != NULL) {
+            $queryEquipo = 'e.id_equipo = '.$equipo;
+            $data = $this->db
+                ->distinct()
+                ->select("inc.id_incidencia, inc.titulo, inc.status, inc.fecha_apertura, (SELECT GROUP_CONCAT( DISTINCT d.nombre SEPARATOR ', ') 
+                FROM incidencia as i 
+                INNER JOIN incidencia_departamento as i_d ON i.id_incidencia=i_d.id_incidencia 
+                INNER JOIN departamento as d ON i_d.id_departamento=d.id_departamento
+                WHERE i.id_incidencia = inc.id_incidencia) as departamento, (SELECT GROUP_CONCAT( DISTINCT u.nombre SEPARATOR ', ') 
+                FROM incidencia as i 
+                INNER JOIN atender_incidencia as ai ON i.id_incidencia=ai.id_incidencia 
+                INNER JOIN usuario as u ON ai.no_empleado=u.no_empleado
+                WHERE i.id_incidencia = inc.id_incidencia) as encargado")
+                ->from("incidencia inc")
+                ->join("usuario u", "inc.no_empleado=u.no_empleado")
+                ->join("direccion d", "u.id_direccion=d.id_direccion")
+                ->join("dependencia dp", "d.id_dependencia=dp.id_dependencia")
+                ->join("equipo e", "inc.id_equipo=e.id_equipo")
+                ->where('inc.status', $status)
+                ->where($queryDirecc)
+                ->where($queryDepen)
+                ->where($queryEquipo)
+                ->group_by('inc.id_incidencia')
+                ->get();
+        } else if($departamento != NULL) {
+            $queryDepa = 'id.id_departamento = '.$departamento;
+            if($equipo == NULL) {
+               $data = $this->db
+                    ->distinct()
+                    ->select("inc.id_incidencia, inc.titulo, inc.status, inc.fecha_apertura, (SELECT GROUP_CONCAT( DISTINCT d.nombre SEPARATOR ', ') 
+                    FROM incidencia as i 
+                    INNER JOIN incidencia_departamento as i_d ON i.id_incidencia=i_d.id_incidencia 
+                    INNER JOIN departamento as d ON i_d.id_departamento=d.id_departamento
+                    WHERE i.id_incidencia = inc.id_incidencia) as departamento, (SELECT GROUP_CONCAT( DISTINCT u.nombre SEPARATOR ', ') 
+                    FROM incidencia as i 
+                    INNER JOIN atender_incidencia as ai ON i.id_incidencia=ai.id_incidencia 
+                    INNER JOIN usuario as u ON ai.no_empleado=u.no_empleado
+                    WHERE i.id_incidencia = inc.id_incidencia) as encargado")
+                    ->from("incidencia inc")
+                    ->join("usuario u", "inc.no_empleado=u.no_empleado")
+                    ->join("direccion d", "u.id_direccion=d.id_direccion")
+                    ->join("dependencia dp", "d.id_dependencia=dp.id_dependencia")
+                    ->join("incidencia_departamento id", "inc.id_incidencia=id.id_incidencia")
+                    ->where('inc.status', $status)
+                    ->where($queryDirecc)
+                    ->where($queryDepen)
+                    ->where($queryDepa)
+                    ->group_by('inc.id_incidencia')
+                    ->get(); 
+            } else {
+                $queryEquipo = 'e.id_equipo = '.$equipo;
+                $data = $this->db
+                    ->distinct()
+                    ->select("inc.id_incidencia, inc.titulo, inc.status, inc.fecha_apertura, (SELECT GROUP_CONCAT( DISTINCT d.nombre SEPARATOR ', ') 
+                    FROM incidencia as i 
+                    INNER JOIN incidencia_departamento as i_d ON i.id_incidencia=i_d.id_incidencia 
+                    INNER JOIN departamento as d ON i_d.id_departamento=d.id_departamento
+                    WHERE i.id_incidencia = inc.id_incidencia) as departamento, (SELECT GROUP_CONCAT( DISTINCT u.nombre SEPARATOR ', ') 
+                    FROM incidencia as i 
+                    INNER JOIN atender_incidencia as ai ON i.id_incidencia=ai.id_incidencia 
+                    INNER JOIN usuario as u ON ai.no_empleado=u.no_empleado
+                    WHERE i.id_incidencia = inc.id_incidencia) as encargado")
+                    ->from("incidencia inc")
+                    ->join("usuario u", "inc.no_empleado=u.no_empleado")
+                    ->join("direccion d", "u.id_direccion=d.id_direccion")
+                    ->join("dependencia dp", "d.id_dependencia=dp.id_dependencia")
+                    ->join("equipo e", "inc.id_equipo=e.id_equipo")
+                    ->join("incidencia_departamento id", "inc.id_incidencia=id.id_incidencia")
+                    ->where('inc.status', $status)
+                    ->where($queryDirecc)
+                    ->where($queryDepen)
+                    ->where($queryEquipo)
+                    ->where($queryDepa)
+                    ->group_by('inc.id_incidencia')
+                    ->get();
+            }
+            
+        } else {
+           $data = $this->db
+                ->distinct()
+                ->select("inc.id_incidencia, inc.titulo, inc.status, inc.fecha_apertura, (SELECT GROUP_CONCAT( DISTINCT d.nombre SEPARATOR ', ') 
+                FROM incidencia as i 
+                INNER JOIN incidencia_departamento as i_d ON i.id_incidencia=i_d.id_incidencia 
+                INNER JOIN departamento as d ON i_d.id_departamento=d.id_departamento
+                WHERE i.id_incidencia = inc.id_incidencia) as departamento, (SELECT GROUP_CONCAT( DISTINCT u.nombre SEPARATOR ', ') 
+                FROM incidencia as i 
+                INNER JOIN atender_incidencia as ai ON i.id_incidencia=ai.id_incidencia 
+                INNER JOIN usuario as u ON ai.no_empleado=u.no_empleado
+                WHERE i.id_incidencia = inc.id_incidencia) as encargado")
+                ->from("incidencia inc")
+                ->join("usuario u", "inc.no_empleado=u.no_empleado")
+                ->join("direccion d", "u.id_direccion=d.id_direccion")
+                ->join("dependencia dp", "d.id_dependencia=dp.id_dependencia")
+                ->where('inc.status', $status)
+                ->where($queryDirecc)
+                ->where($queryDepen)
+                ->group_by('inc.id_incidencia')
+                ->get(); 
+        }
+        
+        if(!$data->result()) {
+            return false;
+        }
+        return $data->result();
+    }
+    
+    // Consulta todas las incidencias para la vista principal administrador
+    public function get_incidenciasFiltradas($status, $fecha_inicio, $fecha_fin, $departamento, $dependencia, $direccion, $equipo) {
+        if($status == 0) {
+            $queryFecha = 'inc.fecha_cierre IS NULL';
+            $queryDepen = 'd.id_dependencia IS NOT NULL';
+            $queryDirecc = 'd.id_direccion IS NOT NULL';
+            if($fecha_inicio != NULL && $fecha_fin != NULL) {
+                $queryFecha = 'inc.fecha_cierre BETWEEN "'. date('Y-m-d', strtotime($fecha_inicio)). '" and "'. date('Y-m-d', strtotime($fecha_fin)).'"';
+            }
+            if($departamento != NULL) {
+                $queryDepa = 'id.id_departamento = '.$departamento;
+            }
+            if($dependencia != NULL) {
+                $queryDepen = 'd.id_dependencia = '.$dependencia;
+            }
+            if($direccion != NULL) {
+                $queryDirecc = 'd.id_direccion = '.$direccion;
+            }
+            $data = $this->db
+                ->distinct()
+                ->select("inc.id_incidencia, inc.titulo, inc.status, inc.fecha_apertura, (SELECT GROUP_CONCAT( DISTINCT d.nombre SEPARATOR ', ') 
+                FROM incidencia as i 
+                INNER JOIN incidencia_departamento as i_d ON i.id_incidencia=i_d.id_incidencia 
+                INNER JOIN departamento as d ON i_d.id_departamento=d.id_departamento
+                WHERE i.id_incidencia = inc.id_incidencia) as departamento, (SELECT GROUP_CONCAT( DISTINCT u.nombre SEPARATOR ', ') 
+                FROM incidencia as i 
+                INNER JOIN atender_incidencia as ai ON i.id_incidencia=ai.id_incidencia 
+                INNER JOIN usuario as u ON ai.no_empleado=u.no_empleado
+                WHERE i.id_incidencia = inc.id_incidencia) as encargado")
+                ->from("incidencia inc")
+                ->join("usuario u", "inc.no_empleado=u.no_empleado")
+                ->join("direccion d", "u.id_direccion=d.id_direccion")
+                ->join("dependencia dp", "d.id_dependencia=dp.id_dependencia")
+                ->where('inc.status', $status)
+                ->where($queryFecha)
+                ->where($queryDepen)
+                ->where($queryDirecc)
+                ->group_by('inc.id_incidencia')
+                ->get();
+        } else if($status == 1) {
+            $queryFecha = 'inc.fecha_cierre IS NULL';
+            $queryDepa = 'id.id_departamento IS NOT NULL';
+            $queryDepen = 'd.id_dependencia IS NOT NULL';
+            $queryDirecc = 'd.id_direccion IS NOT NULL';
+            if($fecha_inicio != NULL && $fecha_fin != NULL) {
+                $queryFecha = 'inc.fecha_cierre BETWEEN "'. date('Y-m-d', strtotime($fecha_inicio)). '" and "'. date('Y-m-d', strtotime($fecha_fin)).'"';
+            }
+            if($departamento != NULL) {
+                $queryDepa = 'id.id_departamento = '.$departamento;
+            }
+            if($dependencia != NULL) {
+                $queryDepen = 'd.id_dependencia = '.$dependencia;
+            }
+            if($direccion != NULL) {
+                $queryDirecc = 'd.id_direccion = '.$direccion;
+            }
+            $data = $this->db
+                ->distinct()
+                ->select("inc.id_incidencia, inc.titulo, inc.status, inc.fecha_apertura, (SELECT GROUP_CONCAT( DISTINCT d.nombre SEPARATOR ', ') 
+                FROM incidencia as i 
+                INNER JOIN incidencia_departamento as i_d ON i.id_incidencia=i_d.id_incidencia 
+                INNER JOIN departamento as d ON i_d.id_departamento=d.id_departamento
+                WHERE i.id_incidencia = inc.id_incidencia) as departamento, (SELECT GROUP_CONCAT( DISTINCT u.nombre SEPARATOR ', ') 
+                FROM incidencia as i 
+                INNER JOIN atender_incidencia as ai ON i.id_incidencia=ai.id_incidencia 
+                INNER JOIN usuario as u ON ai.no_empleado=u.no_empleado
+                WHERE i.id_incidencia = inc.id_incidencia) as encargado")
+                ->from("incidencia inc")
+                ->join("incidencia_departamento id", "inc.id_incidencia=id.id_incidencia")
+                ->join("usuario u", "inc.no_empleado=u.no_empleado")
+                ->join("direccion d", "u.id_direccion=d.id_direccion")
+                ->join("dependencia dp", "d.id_dependencia=dp.id_dependencia")
+                ->where('inc.status', $status)
+                ->where($queryFecha)
+                ->where($queryDepa)
+                ->where($queryDepen)
+                ->where($queryDirecc)
+                ->group_by('inc.id_incidencia')
+                ->get();
+        } else if($status == 2) {
+            $queryFecha = 'inc.fecha_cierre IS NOT NULL';
+            $queryDepa = 'id.id_departamento IS NOT NULL';
+            $queryDepen = 'd.id_dependencia IS NOT NULL';
+            $queryDirecc = 'd.id_direccion IS NOT NULL';
+            if($fecha_inicio != NULL && $fecha_fin != NULL) {
+                $queryFecha = 'inc.fecha_cierre BETWEEN "'. date('Y-m-d', strtotime($fecha_inicio)). '" and "'. date('Y-m-d', strtotime($fecha_fin)).'"';
+            }
+            if($departamento != NULL) {
+                $queryDepa = 'id.id_departamento = '.$departamento;
+            }
+            if($dependencia != NULL) {
+                $queryDepen = 'd.id_dependencia = '.$dependencia;
+            }
+            if($direccion != NULL) {
+                $queryDirecc = 'd.id_direccion = '.$direccion;
+            }
+            $data = $this->db
+                ->distinct()
+                ->select("inc.id_incidencia, inc.titulo, inc.status, inc.fecha_apertura, (SELECT GROUP_CONCAT( DISTINCT d.nombre SEPARATOR ', ') 
+                FROM incidencia as i 
+                INNER JOIN incidencia_departamento as i_d ON i.id_incidencia=i_d.id_incidencia 
+                INNER JOIN departamento as d ON i_d.id_departamento=d.id_departamento
+                WHERE i.id_incidencia = inc.id_incidencia) as departamento, (SELECT GROUP_CONCAT( DISTINCT u.nombre SEPARATOR ', ') 
+                FROM incidencia as i 
+                INNER JOIN atender_incidencia as ai ON i.id_incidencia=ai.id_incidencia 
+                INNER JOIN usuario as u ON ai.no_empleado=u.no_empleado
+                WHERE i.id_incidencia = inc.id_incidencia) as encargado")
+                ->from("incidencia inc")
+                ->join("incidencia_departamento id", "inc.id_incidencia=id.id_incidencia")
+                ->join("usuario u", "inc.no_empleado=u.no_empleado")
+                ->join("direccion d", "u.id_direccion=d.id_direccion")
+                ->join("dependencia dp", "d.id_dependencia=dp.id_dependencia")
+                ->where('inc.status', $status)
+                ->where($queryFecha)
+                ->where($queryDepa)
+                ->where($queryDepen)
+                ->where($queryDirecc)
+                ->group_by('inc.id_incidencia')
+                ->get();
+        }
+        
+        // if($fecha_inicio != NULL && $fecha_fin != NULL) {
+        //     $queryFecha = 'inc.fecha_cierre BETWEEN "'. date('Y-m-d', strtotime($fecha_inicio)). '" and "'. date('Y-m-d', strtotime($fecha_fin)).'"';
+        // }
+        // if($departamento != NULL) {
+        //     $queryDepa = 'id.id_departamento = '.$departamento;
+        // }
+        // if($dependencia != NULL) {
+        //     $queryDepen = 'd.id_dependencia = '.$dependencia;
+        // }
+        // if($direccion != NULL) {
+        //     $queryDirecc = 'd.id_direccion = '.$direccion;
+        // }
+        // $data = $this->db
+        //         ->distinct()
+        //         ->select("inc.id_incidencia, inc.titulo, inc.status, inc.fecha_apertura, (SELECT GROUP_CONCAT( DISTINCT d.nombre SEPARATOR ', ') 
+        //         FROM incidencia as i 
+        //         INNER JOIN incidencia_departamento as i_d ON i.id_incidencia=i_d.id_incidencia 
+        //         INNER JOIN departamento as d ON i_d.id_departamento=d.id_departamento
+        //         WHERE i.id_incidencia = inc.id_incidencia) as departamento, (SELECT GROUP_CONCAT( DISTINCT u.nombre SEPARATOR ', ') 
+        //         FROM incidencia as i 
+        //         INNER JOIN atender_incidencia as ai ON i.id_incidencia=ai.id_incidencia 
+        //         INNER JOIN usuario as u ON ai.no_empleado=u.no_empleado
+        //         WHERE i.id_incidencia = inc.id_incidencia) as encargado")
+        //         ->from("incidencia inc")
+        //         ->join("incidencia_departamento id", "inc.id_incidencia=id.id_incidencia")
+        //         ->join("usuario u", "inc.no_empleado=u.no_empleado")
+        //         ->join("direccion d", "u.id_direccion=d.id_direccion")
+        //         ->join("dependencia dp", "d.id_dependencia=dp.id_dependencia")
+        //         ->where('inc.status', $status)
+        //         ->where($queryFecha)
+        //         ->where($queryDepa)
+        //         ->where($queryDepen)
+        //         ->where($queryDirecc)
+        //         ->group_by('inc.id_incidencia')
+        //         ->get();
+        
+        if(!$data->result()) {
+            return false;
+        }
+        return $data->result();
+    }
 
     // -----------------------------------------------------------------------------------
 
