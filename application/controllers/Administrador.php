@@ -55,6 +55,12 @@ class Administrador extends CI_Controller {
 	public function filtrar_incidencias()
 	{
 		if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 3) {
+			$fecha_inicio = $this->input->post('fecha_inicio'); 
+			$fecha_fin = $this->input->post('fecha_fin'); 
+			$direccion = $this->input->post('direccion');
+			$dependencia = $this->input->post('dependencia'); 
+			$equipo = $this->input->post('equipo');
+			$departamento = $this->input->post('departamento');
 			// $status, $direccion, $dependencia, $equipo, $departamento
 			$pendientes = $this->Incidencia->get_incidenciasStatusCero(0, 2, 1, "Impresora Canon", 2);
 			$en_proceso = $this->Incidencia->get_incidenciasStatusUno(1, 2, 1, "UHY6-KID8-9IR8", 3);
