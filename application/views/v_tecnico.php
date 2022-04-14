@@ -24,9 +24,9 @@
                         </div>
                         <div class="card-body-tecnico">
                             <div class="fecha">
-                                    <b><h5>Folio</h5></b>
-                                    <p><?= $item->id_incidencia;?></p>
-                                </div>
+                                <b><h5>Folio</h5></b>
+                                <p><?= $item->id_incidencia;?></p>
+                            </div>
                             <div class="fecha">
                                 <b><h5>Creado</h5></b>
                                 <p><?=  date("d/m/Y", strtotime($item->fecha_apertura)); ?></p>

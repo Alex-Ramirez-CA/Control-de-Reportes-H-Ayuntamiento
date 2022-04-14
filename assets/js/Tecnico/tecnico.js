@@ -4,7 +4,6 @@
     $(document).on('click', '.ver', function(){
         let elemento = $(this)[0];
         let id_incidencia = $(elemento).attr('idReporte');
-        console.log(id_incidencia);
         $.post('reporte/visualizar_reporte', {id_incidencia}, function(response){
             let json = JSON.parse(response);
             window.open(json.url);
@@ -29,8 +28,6 @@
             let elemento = $(this)[0];
             let id_incidencia = $(elemento).attr('idReporte');
             let comentario = $('#comentario-tecnico').val();
-            console.log(id_incidencia);
-            console.log(comentario);
             $.post('tecnico/atender', {id_incidencia, comentario}, function(response){
                 let json = JSON.parse(response);
                 window.location.replace(json.url);
@@ -83,8 +80,6 @@
             let elemento = $(this)[0];
             let id_incidencia = $(elemento).attr('idReporte');
             let comentario = $('#comentario-tecnico').val();
-            console.log(id_incidencia);
-            console.log(comentario);
             $.post('tecnico/reabrir', {id_incidencia, comentario}, function(response){
                 let json = JSON.parse(response);
                 window.location.replace(json.url);
@@ -110,8 +105,6 @@
             let elemento = $(this)[0];
             let id_incidencia = $(elemento).attr('idReporte');
             let comentario = $('#comentario-tecnico').val();
-            console.log(id_incidencia);
-            console.log(comentario);
             $.post('atendiendo/finalizar', {id_incidencia, comentario}, function(response){
                 let json = JSON.parse(response);
                 window.location.replace(json.url);
@@ -137,8 +130,6 @@
             let elemento = $(this)[0];
             let id_incidencia = $(elemento).attr('idReporte');
             let comentario = $('#comentario-tecnico').val();
-            console.log(id_incidencia);
-            console.log(comentario);
             $.post('atendiendo/reabrir', {id_incidencia, comentario}, function(response){
                 let json = JSON.parse(response);
                 window.location.replace(json.url);

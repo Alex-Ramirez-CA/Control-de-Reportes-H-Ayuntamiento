@@ -19,15 +19,14 @@
                     
                     <div class="usuario-icono">
                         <p style="color: #fff;"><?= substr($this->session->nombre, 0, 1).substr($this->session->apellido_paterno, 0, 1)?></p>
+                        <div class="menu-cerrar-sesion">
+                            <p><?=$this->session->nombre." ".$this->session->apellido_paterno." ".$this->session->apellido_materno?></p>
+                            <p><?= $this->session->email ?></p>
+                            <p>Registrado como <?= strtoupper($this->session->rol_nombre); ?></p>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item py-1" href="<?= base_url('login/logout') ?>">Cerrar sesión</a>
+                        </div>
                     </div>
-                    <div class="menu-cerrar-sesion">
-                        <p><?=$this->session->nombre." ".$this->session->apellido_paterno." ".$this->session->apellido_materno?></p>
-                        <p><?= $this->session->email ?></p>
-                        <p>Registrado como <?= strtoupper($this->session->rol_nombre); ?></p>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item py-1" href="<?= base_url('login/logout') ?>">Cerrar sesión</a>
-                    </div>
-                    
                 </form>
             </nav>   
     </div>

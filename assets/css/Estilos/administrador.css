@@ -1,0 +1,114 @@
+.titulo-columna {
+	margin-bottom: 10px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;	
+}
+
+.titulo-columna h3{
+	margin: 0;
+	text-align: center;
+	font-size: 16px;
+	color: #006e95;
+	padding-top: 4px;
+}
+
+.columna-tripleta-pendiente,.columna-tripleta-proceso, .columna-tripleta-finalizado {
+    width: 285px;
+	height: 450px;
+	border-radius: 7px;
+	align-items: center;
+	background: linear-gradient(
+		to bottom right,
+		#f6f8fa,
+		#f6f8fa,
+		#f6f8fa,
+		rgb(250, 255, 254)
+	);
+	box-shadow: 0 3px 5px 0 rgba(31, 38, 135, 0.37);
+	backdrop-filter: blur(20px);
+	border: solid 1px #afafaa;
+	overflow: hidden;
+	overflow-y: scroll;
+}
+
+.card-tres-columnas {
+	margin: 0px auto;
+	display: flex;
+	flex-direction: column;
+	width: 245px;
+	margin-top: 12px;
+	margin-bottom: 12px;
+	background: rgba(255, 255, 255, 0.3);
+	box-shadow: 0 3px 5px 0 rgba(31, 38, 135, 0.37);
+    border: solid 2px #eaf7ff;
+	backdrop-filter: blur(4px);
+	border-radius: 5px;
+	cursor: default;
+	transition: all 400ms ease;
+}
+
+.cantidad-reportes-pendiente, .cantidad-reportes-proceso, .cantidad-reportes-finalizado {
+	height: 25px;
+	width: 25px;
+	background-color: #006e95;
+	color: #fff;
+	display:flex;
+	padding-top: 3px;
+	justify-content: center;
+	border-radius: 100%;
+	margin-right: 5px;
+	font-size: 10px;
+	align-items: center;
+}
+
+.pendiente .card-title h5 {
+    margin: 0;
+	text-align: center;
+	padding-top: 8px;
+	width: 241px;
+	height: 30px;
+	font-size: 12px;
+	background: #f07d6f;
+	color: white;
+	border-radius: 10px;
+}
+
+.proceso .card-title h5 {
+    margin: 0;
+	text-align: center;
+	padding-top: 8px;
+	width: 241px;
+	height: 30px;
+	font-size: 12px;
+	background: #6CC5B2;
+	color: white;
+	border-radius: 10px;
+}
+
+.finalizado .card-title h5 {
+    margin: 0;
+	text-align: center;
+	padding-top: 8px;
+	width: 241px;
+	height: 30px;
+	font-size: 12px;
+	background: #F5D344;
+	color: white;
+	border-radius: 10px;
+}
+
+.card-body-tres-columnas{
+    padding: 8px;
+	display: flex;
+	justify-content: space-between;
+	margin-left: 3px;
+	margin-right: 3px;
+	width: 235px;
+}
+
+.finalizado .fecha h5 {
+	color: #F5D344;
+	font-size: 14px;
+	margin: 0px;
+}

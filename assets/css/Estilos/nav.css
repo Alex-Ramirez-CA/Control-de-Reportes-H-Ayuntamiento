@@ -127,8 +127,8 @@ p {
 	border-radius: 0.25rem;
 	padding: 5px;
 	border: 1px solid rgba(0, 0, 0, 0.15);
-	margin-top: 195px;
-	margin-left: 44.748%;
+	top: 40px;
+	left: -267px;
 	z-index: 1;
 	display: none;
 	width: 310px;
