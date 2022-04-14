@@ -6,7 +6,7 @@
     //Función que carga las incidencias
     function obtenerIncidencias (){
         $.ajax({
-            url: 'administrador/cargar_datos',
+            url: 'cargar_datos',
             type: 'GET',
             success: function(response) {
                 let incidencias = JSON.parse(response);
