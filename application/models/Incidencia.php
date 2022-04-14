@@ -332,7 +332,7 @@ class Incidencia extends CI_Model {
                 ->group_by('inc.id_incidencia')
                 ->get();
         } else if($equipo != NULL && $departamento != NULL) {
-            $queryEquipo = 'e.id_equipo = '.$equipo;
+            $queryEquipo = 'e.nombre = "'.$equipo.'"';
             $queryDepa = 'id.id_departamento = '.$departamento;
             $data = $this->db
                 ->distinct()
@@ -383,7 +383,7 @@ class Incidencia extends CI_Model {
                 ->group_by('inc.id_incidencia')
                 ->get(); 
         } else if($equipo != NULL && $departamento == NULL) {
-            $queryEquipo = 'e.id_equipo = '.$equipo;
+            $queryEquipo = 'e.nombre = "'.$equipo.'"';
             $data = $this->db
                 ->distinct()
                 ->select("inc.id_incidencia, inc.titulo, inc.status, inc.fecha_apertura, (SELECT GROUP_CONCAT( DISTINCT d.nombre SEPARATOR ', ') 
@@ -445,7 +445,7 @@ class Incidencia extends CI_Model {
                 ->group_by('inc.id_incidencia')
                 ->get();
         } else if($equipo != NULL && $departamento != NULL) {
-            $queryEquipo = 'e.id_equipo = '.$equipo;
+            $queryEquipo = 'e.nombre = "'.$equipo.'"';
             $queryDepa = 'id.id_departamento = '.$departamento;
             $data = $this->db
                 ->distinct()
@@ -496,7 +496,7 @@ class Incidencia extends CI_Model {
                 ->group_by('inc.id_incidencia')
                 ->get(); 
         } else if($equipo != NULL && $departamento == NULL) {
-            $queryEquipo = 'e.id_equipo = '.$equipo;
+            $queryEquipo = 'e.nombre = "'.$equipo.'"';
             $data = $this->db
                 ->distinct()
                 ->select("inc.id_incidencia, inc.titulo, inc.status, inc.fecha_apertura, (SELECT GROUP_CONCAT( DISTINCT d.nombre SEPARATOR ', ') 
@@ -563,7 +563,7 @@ class Incidencia extends CI_Model {
                 ->group_by('inc.id_incidencia')
                 ->get();
         } else if($equipo != NULL && $departamento != NULL) {
-            $queryEquipo = 'e.id_equipo = '.$equipo;
+            $queryEquipo = 'e.nombre = "'.$equipo.'"';
             $queryDepa = 'id.id_departamento = '.$departamento;
             $data = $this->db
                 ->distinct()
@@ -616,7 +616,7 @@ class Incidencia extends CI_Model {
                 ->group_by('inc.id_incidencia')
                 ->get(); 
         } else if($equipo != NULL && $departamento == NULL) {
-            $queryEquipo = 'e.id_equipo = '.$equipo;
+            $queryEquipo = 'e.nombre = "'.$equipo.'"';
             $data = $this->db
                 ->distinct()
                 ->select("inc.id_incidencia, inc.titulo, inc.status, inc.fecha_apertura, (SELECT GROUP_CONCAT( DISTINCT d.nombre SEPARATOR ', ') 
