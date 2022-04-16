@@ -1,3 +1,23 @@
+/*
+------------------------------------------------------------------------------------------------------------
+Estilos para el contendeor de la pagina web
+------------------------------------------------------------------------------------------------------------
+*/
+.container {
+	width: 100%;
+	max-width: 950px;
+	max-height: 1000px;
+	display: flex;
+	justify-content: space-between;
+	margin: 0 auto;
+	margin-top: 30px;
+}
+
+/*
+------------------------------------------------------------------------------------------------------------
+Estilos para los titulos de las columnas y el número de reportes
+------------------------------------------------------------------------------------------------------------
+*/
 .titulo-columna {
 	margin-bottom: 10px;
 	display: flex;
@@ -13,6 +33,267 @@
 	padding-top: 4px;
 }
 
+.cantidad-reportes-pendiente, .cantidad-reportes-proceso, .cantidad-reportes-finalizado {
+	height: 25px;
+	width: 25px;
+	background-color: #006e95;
+	color: #fff;
+	display:flex;
+	padding-top: 3px;
+	justify-content: center;
+	border-radius: 100%;
+	margin-right: 5px;
+	font-size: 10px;
+	align-items: center;
+}
+
+.cantidad-reportes {
+	height: 25px;
+	width: 25px;
+	background-color: #006e95;
+	color: #fff;
+	display:flex;
+	padding-top: 3px;
+	justify-content: center;
+	border-radius: 100%;
+	margin-right: 5px;
+	font-size: 10px;
+	align-items: center;
+}
+
+/*
+------------------------------------------------------------------------------------------------------------
+Estilos para los titulos de las tarjetas 
+------------------------------------------------------------------------------------------------------------
+*/
+.pendiente .card-title h5 {
+    margin: 0;
+	text-align: center;
+	padding-top: 8px;
+	height: 30px;
+	font-size: 12px;
+	background: #f07d6f;
+	color: white;
+	border-radius: 10px;
+}
+
+.proceso .card-title h5 {
+    margin: 0;
+	text-align: center;
+	padding-top: 8px;
+	height: 30px;
+	font-size: 12px;
+	background: #6CC5B2;
+	color: white;
+	border-radius: 10px;
+}
+
+.finalizado .card-title h5 {
+    margin: 0;
+	text-align: center;
+	padding-top: 8px;
+	height: 30px;
+	font-size: 12px;
+	background: #F5D344;
+	color: white;
+	border-radius: 10px;
+}
+
+/*
+------------------------------------------------------------------------------------------------------------
+Estilos para los textos de las fechas y el texto medio de las tarjetas
+------------------------------------------------------------------------------------------------------------
+*/
+
+.fecha {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.fecha p {
+	font-size: 12px;
+	margin: 0;
+	margin-top: 5px;
+	margin-bottom: 0;
+}
+
+.pendiente .texto-medio h5,
+.pendiente .fecha h5 {
+	color: #f07d6f;
+	font-size: 14px;
+	margin: 0px;
+}
+
+.proceso .texto-medio h5,
+.proceso .fecha h5 {
+	color: #6cc5b2;
+	font-size: 14px;
+	margin: 0px;
+}
+
+.finalizado .fecha h5 {
+	color: #F5D344;
+	font-size: 14px;
+	margin: 0px;
+}
+
+.card-title,
+.texto-medio {
+	width: 100%;
+	text-align: justify;
+	margin: 0;
+}
+
+/*
+------------------------------------------------------------------------------------------------------------
+Estilos para las opciones de las tarjetas (ver, atender, unirme, finalizar y reabrir)
+------------------------------------------------------------------------------------------------------------
+*/
+.opciones-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.opciones-card button {
+    cursor: pointer;
+    font-size: 10px;
+    width: 70px;
+    padding: 0;
+    padding-top: 0.2rem;
+}
+
+.opciones-card .ver {
+    margin-bottom: 5px;
+	background-color: #eaf7ff;
+	color: #26A2D9;
+	border-radius: 5px;
+	border: solid 1px #26A2D9;
+}
+
+.opciones-card .ver:hover{
+	background-color: #2bb9f7;	
+	color: #fff;
+}
+
+.opciones-card .atender {
+	background-color: #eaf7ff;
+	color: #F07D6F;
+	border-radius: 5px;
+	border: solid 1px #F07D6F;	
+}
+
+.opciones-card .atender:hover {
+	background-color: #F07D6F;
+	color: #fff;
+}
+
+.opciones-card .unirme, .finalizar{
+	background-color: #eaf7ff;
+	color: #365e55;
+	border-radius: 5px;
+	border: solid 1px #6CC5B2;	
+}
+
+.opciones-card .unirme:hover, .finalizar:hover {
+	background-color: #3a9c87;
+	color: #fff;
+}
+
+.opciones-card .reabrir, .reabrir-atendido {
+	background-color: #eaf7ff;
+	color: black;
+	border-radius: 5px;
+	border: solid 1px #F5D344;	
+}
+
+.opciones-card .reabrir:hover, .reabrir-atendido:hover{
+	background-color: #ccac2b;
+	color: black;
+}
+
+/*
+------------------------------------------------------------------------------------------------------------
+Estilos para cuando hay 2 columnas en pantalla
+------------------------------------------------------------------------------------------------------------
+*/
+.columna-pendiente, .columna-proceso {
+	width: 370px;
+	height: 450px;
+	border-radius: 7px;
+	align-items: center;
+	background: linear-gradient(
+		to bottom right,
+		#f6f8fa,
+		#f6f8fa,
+		#f6f8fa,
+		rgb(250, 255, 254)
+	);
+	box-shadow: 0 3px 5px 0 rgba(31, 38, 135, 0.37);
+	backdrop-filter: blur(20px);
+	border: solid 1px #afafaa;
+	overflow: hidden;
+	overflow-y: scroll;
+}
+
+.card {
+	margin: 0px auto;
+	display: flex;
+	flex-direction: column;
+	width: 300px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	background: rgba(255, 255, 255, 0.3);
+	box-shadow: 0 3px 5px 0 rgba(31, 38, 135, 0.37);
+	backdrop-filter: blur(4px);
+	border: solid 3px #eaf7ff;
+	border-radius: 15px;
+	cursor: pointer;
+	transition: all 400ms ease;
+}
+
+.card:hover {
+	box-shadow: 0 3px 10px 0 rgba(31, 38, 135, 0.37);
+	transform: translateY(-3%);
+}
+
+.card-body {
+	padding: 8px;
+	display: flex;
+	justify-content: space-between;
+	margin-left: 3px;
+	margin-right: 3px;
+	width: 290px;
+}
+
+.card-body p, .card-body h5 {
+	margin-bottom: 2px;
+}
+
+.atiende {
+	font-size: 12px;
+	margin-top: 5px;
+}
+
+.departamento {
+	width: 100%;
+	font-size: 12px;
+	margin-top: 3px;
+}
+
+.contenido-vacio-cliente {
+	margin-top: 40%;
+	margin-left: 28%;
+	opacity: 0.8;
+}
+
+/*
+------------------------------------------------------------------------------------------------------------
+Estilos para cuando hay 3 columnas en pantalla
+------------------------------------------------------------------------------------------------------------
+*/
 .columna-tripleta-pendiente,.columna-tripleta-proceso, .columna-tripleta-finalizado {
     width: 285px;
 	height: 450px;
@@ -45,57 +326,6 @@
 	backdrop-filter: blur(4px);
 	border-radius: 5px;
 	cursor: default;
-	transition: all 400ms ease;
-}
-
-.cantidad-reportes-pendiente, .cantidad-reportes-proceso, .cantidad-reportes-finalizado {
-	height: 25px;
-	width: 25px;
-	background-color: #006e95;
-	color: #fff;
-	display:flex;
-	padding-top: 3px;
-	justify-content: center;
-	border-radius: 100%;
-	margin-right: 5px;
-	font-size: 10px;
-	align-items: center;
-}
-
-.pendiente .card-title h5 {
-    margin: 0;
-	text-align: center;
-	padding-top: 8px;
-	width: 241px;
-	height: 30px;
-	font-size: 12px;
-	background: #f07d6f;
-	color: white;
-	border-radius: 10px;
-}
-
-.proceso .card-title h5 {
-    margin: 0;
-	text-align: center;
-	padding-top: 8px;
-	width: 241px;
-	height: 30px;
-	font-size: 12px;
-	background: #6CC5B2;
-	color: white;
-	border-radius: 10px;
-}
-
-.finalizado .card-title h5 {
-    margin: 0;
-	text-align: center;
-	padding-top: 8px;
-	width: 241px;
-	height: 30px;
-	font-size: 12px;
-	background: #F5D344;
-	color: white;
-	border-radius: 10px;
 }
 
 .card-body-tres-columnas{
@@ -104,11 +334,257 @@
 	justify-content: space-between;
 	margin-left: 3px;
 	margin-right: 3px;
-	width: 235px;
+	width: 100%;
 }
 
-.finalizado .fecha h5 {
-	color: #F5D344;
+/*
+------------------------------------------------------------------------------------------------------------
+Estilos para los filtros que puede aplicar el administrador
+------------------------------------------------------------------------------------------------------------
+*/
+.titulo-mensaje {
+	background: linear-gradient(to right,#006E95,#006E95,#26A2D9,#006E95);
+	width: 100%;
+	border-radius: 10px;
+	text-align: center;
+}
+
+.titulo-mensaje h1 {
+	font-size: 25px;
+	color: #fff;
+	margin-top: 10px;
+}
+
+.parte1-filtros, .parte2-filtros, .parte3-filtros {
+	margin-top: 10px;
+	height: 300px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.filtro {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: #f6f8fa;
+	padding: 10px;
+	border-radius: 10px;
+	box-shadow: 0 3px 5px 0 rgba(31, 38, 135, 0.37);
+    border: solid 2px #eaf7ff;
+	width: 160px;
+	position: relative;
+	cursor: pointer;
+}
+
+
+.filtro h2 {
+	font-size: 16px;
+	color: #006e95;
+	text-align: center;
+}
+
+.parte1-filtros {
+	margin-left: 30px;
+}
+
+.parte2-filtros {
+	justify-content: center;
+}
+
+.parte3-filtros {
+	margin-right: 30px;
+}
+
+.filtro-dependecia, .filtro-fecha, .filtro-direccion, .filtro-equipo, .filtro-departamento {
+	width: 70px;
+}
+
+/*Estilos para el filtro de fechas*/
+.fechas-filtro {
+	position: absolute;
+	top: 8px;
+	z-index: 1;
+	visibility: hidden;
+	transition: all 400ms ease;
+	width: 240px;
+	background: #fff;
+	display: flex;
+	flex-direction: column;
+	border-radius: 10px; 
+	border: solid 2px #d4d2d2;
+	padding: 10px;
+	transform: translatex(15%);
+}
+
+.filtro:hover .fechas-filtro {
+	visibility: visible;
+	transform: translatex(87%);
+}
+
+.inicio, .fin {
+	display: flex;
+}
+
+.inicio label, .fin label {
 	font-size: 14px;
-	margin: 0px;
+	margin-top: 8px;
+}
+
+.inicio label {
+	margin-right: 10px;
+	color: #55BA7D;
+}
+
+.fin label {
+	margin-right: 27px;
+	color: #E52141;
+}
+
+.inicio input, .fin input {
+	text-align: center;
+	border: solid 1px #006e95;
+	border-radius: 10px;
+	font-size: 12px;
+	color: #006e95;
+}
+
+.inicio {
+	margin-bottom: 10px;
+}
+
+/*Estilos para el filtro departamentos*/
+.lista-departamentos {
+	position: absolute;
+	top: 20px;
+	z-index: 1;
+	visibility: hidden;
+	transition: all 400ms ease;
+	width: 150px;
+	background: #fff;
+	display: flex;
+	flex-direction: column;
+	border-radius: 10px; 
+	border: solid 2px #d4d2d2;
+	transform: translatex(4%);
+}
+
+.lista-departamentos p {
+	text-align: center;
+	font-size: 14px;
+	height: 25px;
+	background-color: #f6f8fa;
+	border-radius: 8px;
+	padding-top: 4px;
+	color: #006e95;
+	cursor: pointer;
+}
+
+.lista-departamentos p:hover {
+	background-color: #006e95;	
+	color: #fff;
+}
+
+.lista-departamentos p.active {
+	background-color: #006e95;	
+	color: #fff;
+}
+
+.filtro:hover .lista-departamentos {
+	visibility: visible;
+	transform: translatex(-109%);
+}
+
+/*Estilos para el filtro de dependencia*/
+.lista-dependecias {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	visibility: hidden;
+	transition: all 400ms ease;
+	width: 250px;
+	height: 300px;
+	background: #f6f8fa;
+	display: flex;
+	flex-direction: column;
+	border-radius: 10px; 
+	border: solid 2px #d4d2d2;
+	overflow: hidden;
+	overflow-y: scroll;
+}
+
+.lista-dependecias p {
+	text-align: center;
+	font-size: 14px;
+	background-color: #f6f8fa;
+	border-radius: 8px;
+	padding-top: 4px;
+	color: #006e95;
+	cursor: pointer;
+	height:auto;
+	word-wrap: break-word;
+	margin-bottom: 5px;
+}
+
+.lista-dependecias p:hover {
+	background-color: #006e95;	
+	color: #fff;
+}
+
+.lista-dependecias p.active {
+	background-color: #006e95;	
+	color: #fff;
+}
+
+.filtro:hover .lista-dependecias {
+	visibility: visible;
+	transform: translatex(67%);
+}
+
+/*Estilos para el filtro de direcciones*/
+.lista-direcciones {
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 1;
+	visibility: hidden;
+	transition: all 400ms ease;
+	width: 250px;
+	height: 300px;
+	background: #f6f8fa;
+	display: flex;
+	flex-direction: column;
+	border-radius: 10px; 
+	border: solid 2px #d4d2d2;
+	overflow: hidden;
+	overflow-y: scroll;
+}
+
+.lista-direcciones p {
+	text-align: center;
+	font-size: 14px;
+	background-color: #f6f8fa;
+	border-radius: 8px;
+	padding-top: 4px;
+	color: #006e95;
+	cursor: pointer;
+	height:auto;
+	word-wrap: break-word;
+	margin-bottom: 5px;
+}
+
+.lista-direcciones p:hover {
+	background-color: #006e95;	
+	color: #fff;
+}
+
+.lista-direcciones p.active {
+	background-color: #006e95;	
+	color: #fff;
+}
+
+.filtro:hover .lista-direcciones {
+	visibility: visible;
+	transform: translatex(-67%);
 }

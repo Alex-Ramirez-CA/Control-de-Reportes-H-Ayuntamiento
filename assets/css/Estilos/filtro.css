@@ -206,7 +206,7 @@
 }
 
 .mensaje {
-	visibility: hidden;
+	/*visibility: hidden;*/
 	height: 100vh;
 	width: 100%;
 	position: fixed;
@@ -214,7 +214,6 @@
 	top: 0;
 	left: 0;
 	backdrop-filter: blur(3px);
-	background-color: rgba(77, 75, 75, 0.5);
 	display: flex;
 	flex-direction: column;
 	justify-content: center;

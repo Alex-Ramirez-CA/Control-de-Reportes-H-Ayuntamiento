@@ -2,14 +2,14 @@
 
 <?= $nav; ?>
 
-<div class="container-tecnico">
+<div class="container" rol="<?= $this->session->id_rol; ?>">
     <!-- Columna de los reportes pendientes -->
-    <div class="pendientes-filtro">
-        <div class="titulo-pendiente">
-            <p class="cantidad-reportes"><?= empty($pendientes) ? '0' : count($pendientes); ?></p>
+    <div class="pendiente">
+        <div class="titulo-columna">
+            <p class="cantidad-reportes-pendiente"><?= empty($pendientes) ? '0' : count($pendientes); ?></p>
             <h3><b>Reportes pendientes</b></h3>
         </div>
-        <div class="columna-tecnico">
+        <div class="columna-tripleta-pendiente">
             <?php 
                 if (empty($pendientes)) {
             ?>
@@ -18,11 +18,11 @@
                 }else{
                     foreach($pendientes as $item):
             ?>
-                    <div class="card-tecnico" idCard="<?= $item->id_incidencia;?>">
+                    <div class="card-tres-columnas" idCard="<?= $item->id_incidencia;?>">
                         <div class="card-title">
                             <b><h5> <?= $item->titulo; ?></h5></b>
                         </div>
-                        <div class="card-body-tecnico">
+                        <div class="card-body-tres-columnas">
                             <div class="fecha">
                                 <b><h5>Folio</h5></b>
                                 <p><?= $item->id_incidencia;?></p>
@@ -31,7 +31,7 @@
                                 <b><h5>Creado</h5></b>
                                 <p><?=  date("d/m/Y", strtotime($item->fecha_apertura)); ?></p>
                             </div>
-                            <div class="opciones-tecnico">
+                            <div class="opciones-card">
                                 <button class="ver" idReporte="<?= $item->id_incidencia;?>">Ver</button>
                                 <button class="atender" idReporte="<?= $item->id_incidencia;?>" titulo="<?= $item->titulo;?>">Atender</button>
                             </div>
@@ -59,12 +59,12 @@
     </div>
 
     <!-- Columna de los reportes pendientes -->
-    <div class="proceso-filtro">
-        <div class="titulo-proceso">
-            <p class="cantidad-reportes"><?= empty($en_proceso) ? '0' : count($en_proceso); ?></p>
+    <div class="proceso">
+        <div class="titulo-columna">
+            <p class="cantidad-reportes-proceso"><?= empty($en_proceso) ? '0' : count($en_proceso); ?></p>
             <h3><b>Reportes en proceso</b></h3>
         </div> 
-        <div class="columna-tecnico">
+        <div class="columna-tripleta-proceso">
             <?php 
                 if (empty($en_proceso)) {
             ?>
@@ -73,11 +73,11 @@
                 }else{
                     foreach($en_proceso as $item):
             ?>
-                        <div class="card-tecnico"  idCard="<?= $item->id_incidencia;?>">
+                        <div class="card-tres-columnas"  idCard="<?= $item->id_incidencia;?>">
                             <div class="card-title">
                                 <b><h5><?= $item->titulo; ?></h5></b>
                             </div>
-                            <div class="card-body-tecnico">
+                            <div class="card-body-tres-columnas">
                                 <div class="fecha">
                                     <b><h5>Folio</h5></b>
                                     <p><?= $item->id_incidencia;?></p>
@@ -86,7 +86,7 @@
                                     <b><h5>Creado</h5></b>
                                     <p><?=  date("d/m/Y", strtotime($item->fecha_apertura)); ?></p>
                                 </div>
-                                <div class="opciones-tecnico">
+                                <div class="opciones-card">
                                     <button class="ver" idReporte="<?= $item->id_incidencia;?>">Ver</button>
                                     <button class="unirme" idReporte="<?= $item->id_incidencia;?>" titulo="<?= $item->titulo;?>" participantes="<?= $item->encargado;?>">Unirme</button>
                                 </div>
@@ -114,8 +114,8 @@
     </div>
 
     <!-- Columna de los reportes pendientes -->
-    <div class="finalizados-filtro">
-        <div class="titulo-finalizado">
+    <div class="finalizado">
+        <div class="titulo-columna">
             <?php
                 $cantidadReportes;
                 if (empty($finalizados)){
@@ -127,11 +127,11 @@
                     }
                 }
             ?>
-            <p class="cantidad-reportes"><?= $cantidadReportes ?></p>
+            <p class="cantidad-reportes-finalizado"><?= $cantidadReportes ?></p>
             <h3><b>Reportes finalizados</b></h3>
         </div>
 
-        <div class="columna-tecnico">
+        <div class="columna-tripleta-finalizado">
             <?php 
                 if (empty($finalizados)) {
             ?>
@@ -140,11 +140,11 @@
                 }else{
                     foreach($finalizados as $item):
             ?>
-                        <div class="card-tecnico"  idCard="<?= $item->id_incidencia;?>">
+                        <div class="card-tres-columnas"  idCard="<?= $item->id_incidencia;?>">
                             <div class="card-title">
                                 <b><h5><?= $item->titulo; ?></h5></b>
                             </div>
-                            <div class="card-body-tecnico">
+                            <div class="card-body-tres-columnas">
                                 <div class="fecha">
                                     <b><h5>Folio</h5></b>
                                     <p><?= $item->id_incidencia;?></p>
@@ -153,7 +153,7 @@
                                     <b><h5>Creado</h5></b>
                                     <p><?=  date("d/m/Y", strtotime($item->fecha_apertura)); ?></p>
                                 </div>
-                                <div class="opciones-tecnico">
+                                <div class="opciones-card">
                                     <button class="ver" idReporte="<?= $item->id_incidencia;?>">Ver</button>
                                     <button class="reabrir" idReporte="<?= $item->id_incidencia;?>" titulo="<?= $item->titulo;?>" participantes="<?= $item->encargado;?>">Reabrir</button>
                                 </div>

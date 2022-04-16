@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="<?= base_url('assets/css/Estilos/fuente.css');?>">
     <link rel="stylesheet" href="<?= base_url('assets/css/Estilos/nav.css');?>">
     <link rel="stylesheet" href="<?= base_url('assets/css/Estilos/login.css');?>">
-    <link rel="stylesheet" href="<?= base_url('assets/css/Estilos/mis-reportes.css');?>">
     <link rel="stylesheet" href="<?= base_url('assets/css/Estilos/nueva-incidencia.css');?>">
     <link rel="stylesheet" href="<?= base_url('assets/css/Estilos/ver-reporte.css');?>">
     <link rel="stylesheet" href="<?= base_url('assets/css/Estilos/filtro.css');?>">

@@ -5,6 +5,7 @@
             <nav class="navbar navbar-light p-0">
                 <form class="form-inline mt-2" autocomplete="off">
                     <div class="opciones">
+                    <a style="display: <?= $this->session->rol_nombre == 'administrador' ? 'inline-block' : 'none'; ?>;" class="btn my-2 my-sm-0 mr-2" id="btn-filtros" href="#">Filtros</a>
                         <a style="display: <?= $this->session->rol_nombre == 'administrador' ? 'inline-block' : 'none'; ?>;" class="btn my-2 my-sm-0 mr-2" href="#">Administración</a>
                         <a style="display: <?= $this->session->rol_nombre == 'tecnico' ? 'inline-block' : 'none'; ?>;" class="btn my-2 my-sm-0 mr-2" href="<?=base_url('atendiendo');?>">Atendiendo</a>
                         <a class="btn my-2 my-sm-0 mr-2" href="<?=base_url('reporte/agregar_incidencia');?>">Crear reporte</a>

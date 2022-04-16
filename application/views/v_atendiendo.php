@@ -2,15 +2,15 @@
 
 <?= $nav; ?>
 
-<div class="container-tecnico">
+<div class="container">
     <!-- Columna de los reportes en proceso -->
-    <div class="proceso-atendiendo">
-        <div class="titulo-proceso">
+    <div class="proceso">
+        <div class="titulo-columna">
             <p class="cantidad-reportes"><?= empty($en_proceso) ? '0' : count($en_proceso); ?></p>
             <h3><b>Reportes en proceso</b></h3>
         </div>
         
-        <div class="columna-atendiendo"> 
+        <div class="columna-proceso"> 
             <?php 
                 if (empty($en_proceso)) {
             ?>
@@ -32,7 +32,7 @@
                                     <b><h5>Creado</h5></b>
                                     <p><?= date("d/m/Y", strtotime($item->fecha_apertura)); ?></p>
                                 </div>
-                                <div class="opciones-tecnico">
+                                <div class="opciones-card">
                                     <button class="ver" idReporte="<?= $item->id_incidencia;?>">Ver</button>
                                     <button class="finalizar" idReporte="<?= $item->id_incidencia;?>" titulo="<?= $item->titulo;?>" participantes="<?= $item->encargado;?>">Finalizar</button>
                                 </div>
@@ -61,13 +61,13 @@
     </div>
     
     <!-- Columna de los reportes finalizados -->
-    <div class="finalizados-atendiendo">
-        <div class="titulo-finalizado">
+    <div class="finalizado">
+        <div class="titulo-columna">
             <p class="cantidad-reportes"><?= empty($finalizados) ? '0' : count($finalizados); ?></p>
             <h3><b>Reportes finalizados</b></h3>
         </div>
         
-        <div class="columna-atendiendo"> 
+        <div class="columna-proceso"> 
             <?php 
                 if (empty($finalizados)) {
             ?>
@@ -89,7 +89,7 @@
                                     <b><h5>Creado</h5></b>
                                     <p><?= date("d/m/Y", strtotime($item->fecha_apertura)); ?></p>
                                 </div>
-                                <div class="opciones-tecnico">
+                                <div class="opciones-card">
                                     <button class="ver" idReporte="<?= $item->id_incidencia;?>">Ver</button>
                                     <button class="reabrir-atendido" idReporte="<?= $item->id_incidencia;?>" titulo="<?= $item->titulo;?>" participantes="<?= $item->encargado;?>">Reabrir</button>
                                 </div>
