@@ -51,20 +51,20 @@
                     <h2>Por dependencia</h2>
                     <img class="filtro-dependecia" src="./assets/img/iconos/dependencias.svg" alt="">
                     <div class="lista-dependecias">
-                        <p class="opcion-dependecia">Regidores</p>
-                        <p class="opcion-dependecia">Presidencia municipal</p>
-                        <p class="opcion-dependecia">Secretaria del ayuntamiento</p>
-                        <p class="opcion-dependecia">Oficialia mayor</p>
-                        <p class="opcion-dependecia">Tesorería mayor</p>
-                        <p class="opcion-dependecia">Dirección general de recursos jurídicos</p>
-                        <p class="opcion-dependecia">Dirección general de servicios públicos</p>
-                        <p class="opcion-dependecia">Dirección general de desarrollo urbano y medio</p>
-                        <p class="opcion-dependecia">Contraloría municipal</p>
-                        <p class="opcion-dependecia">Policía municipal de Colima</p>
-                        <p class="opcion-dependecia">Dirección general de desarrollo económico, social y humano</p>
-                        <p class="opcion-dependecia">Dirección general de obras públicas</p>
-                        <p class="opcion-dependecia">Jubilados y pensionados</p>
-                        <p class="opcion-dependecia">Organismos autónomos</p>
+                        <p class="opcion-dependecia" idDependecia="1">Regidores</p>
+                        <p class="opcion-dependecia" idDependecia="2">Presidencia municipal</p>
+                        <p class="opcion-dependecia" idDependecia="3">Secretaria del ayuntamiento</p>
+                        <p class="opcion-dependecia" idDependecia="4">Oficialia mayor</p>
+                        <p class="opcion-dependecia" idDependecia="5">Tesorería mayor</p>
+                        <p class="opcion-dependecia" idDependecia="6">Dirección general de recursos jurídicos</p>
+                        <p class="opcion-dependecia" idDependecia="7">Dirección general de servicios públicos</p>
+                        <p class="opcion-dependecia" idDependecia="8">Dirección general de desarrollo urbano y medio</p>
+                        <p class="opcion-dependecia" idDependecia="9">Contraloría municipal</p>
+                        <p class="opcion-dependecia" idDependecia="10">Policía municipal de Colima</p>
+                        <p class="opcion-dependecia" idDependecia="11">Dirección general de desarrollo económico, social y humano</p>
+                        <p class="opcion-dependecia" idDependecia="12">Dirección general de obras públicas</p>
+                        <p class="opcion-dependecia" idDependecia="13">Jubilados y pensionados</p>
+                        <p class="opcion-dependecia" idDependecia="14">Organismos autónomos</p>
                     </div>
                 </div>
                 <div class="filtro">
@@ -93,34 +93,34 @@
                     <h2>Por dirección</h2>
                     <img class="filtro-direccion" src="./assets/img/iconos/direcciones.svg" alt="">
                     <div class="lista-direcciones">
-                        <p class="opcion-direccion">Regidores</p>
-                        <p class="opcion-direccion">Presidencia municipal</p>
-                        <p class="opcion-direccion">Secretaria del ayuntamiento</p>
-                        <p class="opcion-direccion">Oficialia mayor</p>
-                        <p class="opcion-direccion">Tesorería mayor</p>
-                        <p class="opcion-direccion">Dirección general de recursos jurídicos</p>
-                        <p class="opcion-direccion">Dirección general de servicios públicos</p>
-                        <p class="opcion-direccion">Dirección general de desarrollo urbano y medio</p>
-                        <p class="opcion-direccion">Contraloría municipal</p>
-                        <p class="opcion-direccion">Policía municipal de Colima</p>
-                        <p class="opcion-direccion">Dirección general de desarrollo económico, social y humano</p>
-                        <p class="opcion-direccion">Dirección general de obras públicas</p>
-                        <p class="opcion-direccion">Jubilados y pensionados</p>
-                        <p class="opcion-direccion">Organismos autónomos</p>
+                        <p class="opcion-direccion" idDireccion="1">Regidores</p>
+                        <p class="opcion-direccion" idDireccion="2">Presidencia municipal</p>
+                        <p class="opcion-direccion" idDireccion="3">Secretaria del ayuntamiento</p>
+                        <p class="opcion-direccion" idDireccion="4">Oficialia mayor</p>
+                        <p class="opcion-direccion" idDireccion="5">Tesorería mayor</p>
+                        <p class="opcion-direccion" idDireccion="6">Dirección general de recursos jurídicos</p>
+                        <p class="opcion-direccion" idDireccion="7">Dirección general de servicios públicos</p>
+                        <p class="opcion-direccion" idDireccion="8">Dirección general de desarrollo urbano y medio</p>
+                        <p class="opcion-direccion" idDireccion="9">Contraloría municipal</p>
+                        <p class="opcion-direccion" idDireccion="10">Policía municipal de Colima</p>
+                        <p class="opcion-direccion" idDireccion="11">Dirección general de desarrollo económico, social y humano</p>
+                        <p class="opcion-direccion" idDireccion="12">Dirección general de obras públicas</p>
+                        <p class="opcion-direccion" idDireccion="13">Jubilados y pensionados</p>
+                        <p class="opcion-direccion" idDireccion="14">Organismos autónomos</p>
                     </div>
                 </div>
                 <div class="filtro">
                     <h2>Por departamento</h2>
                     <img class="filtro-departamento" src="./assets/img/iconos/departamentos.svg" alt="">
                     <div class="lista-departamentos">
-                        <p class="administracion">Administración</p>
-                        <p class="soporte_tecnico">Soporte técnico</p>
-                        <p class="redes">Redes</p>
+                        <p class="opcion-departamento" idDepartamento="1">Soporte técnico</p>
+                        <p class="opcion-departamento" idDepartamento="2">Redes</p>
+                        <p class="opcion-departamento" idDepartamento="3">Administración</p>
                     </div>
                 </div>
             </div>
         </div>
-        <button>Aplicar filtros</button>
+        <button id="aplicar-filtros">Aplicar filtros</button>
     </div>
 </div>
 

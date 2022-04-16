@@ -1,4 +1,8 @@
 (function($) {
+    let direccion = 0;
+    let departamento = 0;
+    let dependecia = 0;
+
     //Obtener las incidencia para el cliente tipo Administrador
     if (($('.container').attr('rol')) == 3){
         obtenerIncidencias ();
@@ -169,33 +173,15 @@
     });
 
     //Eventos cuando selccione algun departamento
-    $(document).on('click', '.administracion', function(){
+    $(document).on('click', '.opcion-departamento', function(){
         if($(this).hasClass('active')){
-            $(this).removeClass('active');
+            $(this).toggleClass('active');
+            departamento = 0;
         }else{
-            $(this).addClass('active')
-            $('.soporte_tecnico').removeClass('active');
-            $('.redes').removeClass('active');
-        }
-    });
-
-    $(document).on('click', '.soporte_tecnico', function(){
-        if($(this).hasClass('active')){
-            $(this).removeClass('active');
-        }else{
-            $(this).addClass('active');
-            $('.administracion').removeClass('active');
-            $('.redes').removeClass('active');
-        }
-    });
-
-    $(document).on('click', '.redes', function(){
-        if($(this).hasClass('active')){
-            $(this).removeClass('active');
-        }else{
-            $(this).addClass('active')
-            $('.administracion').removeClass('active');
-            $('.soporte_tecnico').removeClass('active');
+            $('.lista-departamentos').children().removeClass('active');
+            $(this).toggleClass('active');
+            departamento = $(this).attr('idDepartamento');
+            //console.log("departamento " + departamento);
         }
     });
 
@@ -203,9 +189,12 @@
     $(document).on('click', '.opcion-dependecia', function(){
         if($(this).hasClass('active')){
             $(this).toggleClass('active');
+            dependecia = 0;
         }else{
             $('.lista-dependecias').children().removeClass('active');
             $(this).toggleClass('active');
+            dependecia = $(this).attr('idDependecia');
+            //console.log("dependecia " + dependecia);
         }
     });
 
@@ -213,10 +202,30 @@
     $(document).on('click', '.opcion-direccion', function(){
         if($(this).hasClass('active')){
             $(this).toggleClass('active');
+            direccion = 0;
         }else{
             $('.lista-direcciones').children().removeClass('active');
             $(this).toggleClass('active');
+            direccion = $(this).attr('idDireccion');
+            //console.log("direccion " + direccion);
         }
+    });
+
+    //Evento de cuando clique en enviar filtros
+    $(document).on('click', '#aplicar-filtros', function(){
+        let fecha_inicio = $('#fecha_inicio').val();
+        let fecha_fin = $('#fecha_fin').val();
+        console.log("Depa "+ departamento);
+        console.log("Depe " + dependecia);
+        console.log("Dir " + direccion);
+        console.log("Inicio " + fecha_inicio);
+        console.log("Fin " + fecha_fin);
+        console.log("--------------------------");
+        // $.post('administrador/filtrar_incidencias', {dependecia, direccion, departamento}, function(response){
+        //     let json = JSON.parse(response);
+        // });
+        $('.mensaje').css({'visibility':'hidden'});
+        $('.contenedor-mensaje').css({'transform':'translateY(-200%)'});
     });
 
     //Función que carga las incidencias
@@ -398,7 +407,5 @@
             }
         });
     }
-
-    console.log();
     
 })(jQuery)
