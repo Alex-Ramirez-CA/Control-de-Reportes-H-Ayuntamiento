@@ -6,7 +6,7 @@ class Administrador extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->library(array('session'));
-		$this->load->model(array('Incidencia', 'Atender_incidencia'));
+		$this->load->model(array('Incidencia', 'Atender_incidencia', 'Equipo'));
 	}
 
 	public function index()
@@ -78,5 +78,23 @@ class Administrador extends CI_Controller {
             redirect('login');
         }
 	}
+
+	// Funcion para el campo de busqueda de equipos
+	public function buscar_equipo() {
+        // Validar para que no puedan ingresar a esta direccion sin estar logeados
+		if(!$this->session->has_userdata('id_rol')){
+            redirect('login');
+        }
+        // Recibir el valor del campo de busqueda via post
+		$search_equipo = $this->input->post('search_equipo');
+        // Hacer consulta a la base de datos
+        if($search_equipo != '' || $search_equipo != NULL) {
+            $data = $this->Equipo->buscarEquipo($search_equipo);
+        } else {
+            $data = NULL;
+        }
+        
+        echo json_encode($data);
+    }
 
 }
