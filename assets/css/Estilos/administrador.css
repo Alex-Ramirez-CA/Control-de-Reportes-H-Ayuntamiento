@@ -404,7 +404,7 @@ Estilos para los filtros que puede aplicar el administrador
 .fechas-filtro {
 	position: absolute;
 	top: 8px;
-	z-index: 1;
+	z-index: -1;
 	visibility: hidden;
 	transition: all 400ms ease;
 	width: 240px;
@@ -420,6 +420,7 @@ Estilos para los filtros que puede aplicar el administrador
 .filtro:hover .fechas-filtro {
 	visibility: visible;
 	transform: translatex(87%);
+	z-index: 1;
 }
 
 .inicio, .fin {
@@ -457,7 +458,7 @@ Estilos para los filtros que puede aplicar el administrador
 .lista-departamentos {
 	position: absolute;
 	top: 20px;
-	z-index: 1;
+	z-index: -1;
 	visibility: hidden;
 	transition: all 400ms ease;
 	width: 150px;
@@ -466,7 +467,7 @@ Estilos para los filtros que puede aplicar el administrador
 	flex-direction: column;
 	border-radius: 10px; 
 	border: solid 2px #d4d2d2;
-	transform: translatex(4%);
+	transform: translatex(5%);
 }
 
 .lista-departamentos p {
@@ -493,6 +494,7 @@ Estilos para los filtros que puede aplicar el administrador
 .filtro:hover .lista-departamentos {
 	visibility: visible;
 	transform: translatex(-109%);
+	z-index: 1;
 }
 
 /*Estilos para el filtro de dependencia*/
@@ -500,7 +502,7 @@ Estilos para los filtros que puede aplicar el administrador
 	position: absolute;
 	top: 0;
 	left: 0;
-	z-index: 1;
+	z-index: -1;
 	visibility: hidden;
 	transition: all 400ms ease;
 	width: 250px;
@@ -540,6 +542,7 @@ Estilos para los filtros que puede aplicar el administrador
 .filtro:hover .lista-dependecias {
 	visibility: visible;
 	transform: translatex(67%);
+	z-index: 1;
 }
 
 /*Estilos para el filtro de direcciones*/
@@ -547,9 +550,9 @@ Estilos para los filtros que puede aplicar el administrador
 	position: absolute;
 	top: 0;
 	right: 0;
-	z-index: 1;
+	z-index: -1;
 	visibility: hidden;
-	transition: all 400ms ease;
+	transition: all 300ms ease;
 	width: 250px;
 	height: 300px;
 	background: #f6f8fa;
@@ -587,4 +590,5 @@ Estilos para los filtros que puede aplicar el administrador
 .filtro:hover .lista-direcciones {
 	visibility: visible;
 	transform: translatex(-67%);
+	z-index: 1;
 }
