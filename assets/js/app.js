@@ -1,7 +1,7 @@
 (function($) {
     let direccion = null;
     let departamento = null;
-    let dependecia = null;
+    let dependencia = null;
 
     //Obtener las incidencia para el cliente tipo Administrador
     if (($('.container').attr('rol')) == 3){
@@ -189,11 +189,11 @@
     $(document).on('click', '.opcion-dependecia', function(){
         if($(this).hasClass('active')){
             $(this).toggleClass('active');
-            dependecia = null;
+            dependencia = null;
         }else{
             $('.lista-dependecias').children().removeClass('active');
             $(this).toggleClass('active');
-            dependecia = $(this).attr('idDependecia');
+            dependencia = $(this).attr('idDependecia');
             //console.log("dependecia " + dependecia);
         }
     });
@@ -216,14 +216,15 @@
         let fecha_inicio = $('#fecha_inicio').val();
         let fecha_fin = $('#fecha_fin').val();
         console.log("Depa "+ departamento);
-        console.log("Depe " + dependecia);
+        console.log("Depe " + dependencia);
         console.log("Dir " + direccion);
         console.log("Inicio " + fecha_inicio);
         console.log("Fin " + fecha_fin);
         console.log("--------------------------");
-        // $.post('administrador/filtrar_incidencias', {dependecia, direccion, departamento}, function(response){
-        //     let json = JSON.parse(response);
-        // });
+        $.post('administrador/filtrar_incidencias', {dependencia, direccion, departamento, fecha_inicio, fecha_fin}, function(response){
+            // let json = JSON.parse(response);
+            // console.log(json);
+        });
         $('.mensaje').css({'visibility':'hidden'});
         $('.contenedor-mensaje').css({'transform':'translateY(-200%)'});
     });

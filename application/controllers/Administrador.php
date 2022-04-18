@@ -57,20 +57,20 @@ class Administrador extends CI_Controller {
 		if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 3) {
 			$fecha_inicio = $this->input->post('fecha_inicio'); 
 			$fecha_fin = $this->input->post('fecha_fin'); 
-			$direccion = $this->input->post('direccion');
-			$dependencia = $this->input->post('dependencia'); 
-			$equipo = $this->input->post('equipo');
-			$departamento = $this->input->post('departamento');
+			$direccion = (int)$this->input->post('direccion');
+			$dependencia = (int)$this->input->post('dependencia'); 
+			$equipo = (int)$this->input->post('equipo');
+			$departamento = (int)$this->input->post('departamento');
 			// $status, $direccion, $dependencia, $equipo, $departamento
-			$pendientes = $this->Incidencia->get_incidenciasStatusCero(0, 2, 1, "Impresora Canon", 2);
-			$en_proceso = $this->Incidencia->get_incidenciasStatusUno(1, 2, 1, "UHY6-KID8-9IR8", 3);
-			// $status, $fecha_inicio, $fecha_fin, $direccion, $dependencia, $equipo, $departamento
-			$finalizados = $this->Incidencia->get_incidenciasStatusDos(2, '2022-04-07', '2022-04-13', 2, 1, NULL, 1);
+			$pendientes = $this->Incidencia->get_incidenciasStatusCero(0, $direccion, $dependencia, NULL, $departamento);
+			$en_proceso = $this->Incidencia->get_incidenciasStatusUno(1, $direccion, $dependencia, NULL, $departamento);
+			// // $status, $fecha_inicio, $fecha_fin, $direccion, $dependencia, $equipo, $departamento
+			$finalizados = $this->Incidencia->get_incidenciasStatusDos(2, $fecha_inicio, $fecha_fin, $direccion, $dependencia, NULL, $departamento);
 			$data = array(
-						'pendientes' => $pendientes,
-						'en_proceso' => $en_proceso,
-						'finalizados' => $finalizados,
-					);
+				'pendientes' => $pendientes,
+				'en_proceso' => $en_proceso,
+				'finalizados' => $finalizados,
+			);
 			echo json_encode($data);
 
         } else {
