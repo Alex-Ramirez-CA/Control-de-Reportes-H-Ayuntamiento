@@ -62,10 +62,10 @@ class Administrador extends CI_Controller {
 			$equipo = (int)$this->input->post('equipo');
 			$departamento = (int)$this->input->post('departamento');
 			// $status, $direccion, $dependencia, $equipo, $departamento
-			$pendientes = $this->Incidencia->get_incidenciasStatusCero(0, $direccion, $dependencia, NULL, $departamento);
-			$en_proceso = $this->Incidencia->get_incidenciasStatusUno(1, $direccion, $dependencia, NULL, $departamento);
+			$pendientes = $this->Incidencia->get_incidenciasStatusCero(0, $direccion, $dependencia, $equipo, $departamento);
+			$en_proceso = $this->Incidencia->get_incidenciasStatusUno(1, $direccion, $dependencia, $equipo, $departamento);
 			// // $status, $fecha_inicio, $fecha_fin, $direccion, $dependencia, $equipo, $departamento
-			$finalizados = $this->Incidencia->get_incidenciasStatusDos(2, $fecha_inicio, $fecha_fin, $direccion, $dependencia, NULL, $departamento);
+			$finalizados = $this->Incidencia->get_incidenciasStatusDos(2, $fecha_inicio, $fecha_fin, $direccion, $dependencia, $equipo, $departamento);
 			$data = array(
 				'pendientes' => $pendientes,
 				'en_proceso' => $en_proceso,
