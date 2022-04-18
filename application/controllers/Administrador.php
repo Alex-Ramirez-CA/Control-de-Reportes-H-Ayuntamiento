@@ -61,9 +61,15 @@ class Administrador extends CI_Controller {
 			$dependencia = (int)$this->input->post('dependencia'); 
 			$equipo = (int)$this->input->post('equipo');
 			$departamento = (int)$this->input->post('departamento');
-			// $status, $direccion, $dependencia, $equipo, $departamento
-			$pendientes = $this->Incidencia->get_incidenciasStatusCero(0, $direccion, $dependencia, $equipo, $departamento);
-			$en_proceso = $this->Incidencia->get_incidenciasStatusUno(1, $direccion, $dependencia, $equipo, $departamento);
+			// Para mostrar solo los finalizados cuando se elija una fecha
+			if($fecha_inicio != NULL && $fecha_fin != NULL) {
+				$pendientes = false;
+				$en_proceso = false;
+			} else  {
+				// $status, $direccion, $dependencia, $equipo, $departamento
+				$pendientes = $this->Incidencia->get_incidenciasStatusCero(0, $direccion, $dependencia, $equipo, $departamento);
+				$en_proceso = $this->Incidencia->get_incidenciasStatusUno(1, $direccion, $dependencia, $equipo, $departamento);
+			}
 			// // $status, $fecha_inicio, $fecha_fin, $direccion, $dependencia, $equipo, $departamento
 			$finalizados = $this->Incidencia->get_incidenciasStatusDos(2, $fecha_inicio, $fecha_fin, $direccion, $dependencia, $equipo, $departamento);
 			$data = array(
@@ -91,7 +97,7 @@ class Administrador extends CI_Controller {
         if($search_equipo != '' || $search_equipo != NULL) {
             $data = $this->Equipo->buscarEquipo($search_equipo);
         } else {
-            $data = FALSE;
+            $data = false;
         }
         
         echo json_encode($data);
