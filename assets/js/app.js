@@ -2,6 +2,7 @@
     let direccion = null;
     let departamento = null;
     let dependencia = null;
+    let equipo = null;
 
     //Obtener las incidencia para el cliente tipo Administrador
     if (($('.container').attr('rol')) == 3){
@@ -211,19 +212,57 @@
         }
     });
 
+    //Evento de cuando el administrador busque los reportes por filtro
+    $("#search_equipo").keyup(function(ev) {
+        if($('#search_equipo').val()){
+            $('.opciones-busqueda-equipo').css('display','block');
+            let search_equipo = $('#search_equipo').val();
+            //console.log(search_usuario)
+            $.ajax({
+                url: 'administrador/buscar_equipo',
+                type: 'POST',
+                data: { search_equipo },
+                success: function(data) {
+                    let equipos = JSON.parse(data);
+                    let template = "";
+                    if (equipos){
+                        equipos.forEach(element => {
+                            template += ` <p class="opcion-equipo" idEquipo="${element.id_equipo}">${element.nombre}</p> `;
+                        });
+                    }else {
+                        template = "";
+                    }
+                    $('.opciones-busqueda-equipo').html(template);
+                }
+            });
+        }else {
+            equipo = null;
+            template = "";
+            $('.opciones-busqueda-equipo').html(template);
+        }
+    });
+
+    $(document).on('click', '.opcion-equipo', function(){
+        let elemento = $(this)[0]; 
+        equipo = $(elemento).attr('idEquipo');
+        $('#search_equipo').val($(this).text());
+        $('.opciones-busqueda-equipo').css('display','none');
+    });
+
     //Evento de cuando clique en enviar filtros
     $(document).on('click', '#aplicar-filtros', function(){
         let fecha_inicio = $('#fecha_inicio').val();
         let fecha_fin = $('#fecha_fin').val();
+        console.log("Equipo "+ equipo);
         console.log("Depa "+ departamento);
         console.log("Depe " + dependencia);
         console.log("Dir " + direccion);
         console.log("Inicio " + fecha_inicio);
         console.log("Fin " + fecha_fin);
         console.log("--------------------------");
-        $.post('administrador/filtrar_incidencias', {dependencia, direccion, departamento, fecha_inicio, fecha_fin}, function(response){
-            // let json = JSON.parse(response);
-            // console.log(json);
+        $.post('administrador/filtrar_incidencias', {dependencia, direccion, departamento, fecha_inicio, fecha_fin, equipo}, function(response){
+            let json = JSON.parse(response);
+            console.log(json);
         });
         $('.mensaje').css({'visibility':'hidden'});
         $('.contenedor-mensaje').css({'transform':'translateY(-200%)'});

@@ -86,6 +86,10 @@
                 <div class="filtro">
                     <h2>Por equipo</h2>
                     <img class="filtro-equipo" src="./assets/img/iconos/equipos.svg" alt="">
+                    <input type="text" id="search_equipo" autocomplete="off">
+                    <div class="opciones-busqueda-equipo">
+                    
+                    </div>
                 </div>
             </div>
             <div class="parte3-filtros">

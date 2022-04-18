@@ -412,7 +412,7 @@ Estilos para los filtros que puede aplicar el administrador
 	display: flex;
 	flex-direction: column;
 	border-radius: 10px; 
-	border: solid 2px #d4d2d2;
+	border: 1px solid rgba(0, 0, 0, 0.15);
 	padding: 10px;
 	transform: translatex(15%);
 }
@@ -466,7 +466,7 @@ Estilos para los filtros que puede aplicar el administrador
 	display: flex;
 	flex-direction: column;
 	border-radius: 10px; 
-	border: solid 2px #d4d2d2;
+	border: 1px solid rgba(0, 0, 0, 0.15);
 	transform: translatex(5%);
 	margin-bottom: 5px;
 }
@@ -512,7 +512,7 @@ Estilos para los filtros que puede aplicar el administrador
 	display: flex;
 	flex-direction: column;
 	border-radius: 10px; 
-	border: solid 2px #d4d2d2;
+	border: 1px solid rgba(0, 0, 0, 0.15);
 	overflow: hidden;
 	overflow-y: scroll;
 }
@@ -560,7 +560,7 @@ Estilos para los filtros que puede aplicar el administrador
 	display: flex;
 	flex-direction: column;
 	border-radius: 10px; 
-	border: solid 2px #d4d2d2;
+	border: 1px solid rgba(0, 0, 0, 0.15);
 	overflow: hidden;
 	overflow-y: scroll;
 }
@@ -592,4 +592,64 @@ Estilos para los filtros que puede aplicar el administrador
 	visibility: visible;
 	transform: translatex(-67%);
 	z-index: 1;
+}
+
+/*Estilos para el filtro de buscar por equipo*/
+#search_equipo {
+	visibility: hidden;
+	position: absolute;
+	top: 75%;
+	right: 0 auto;
+	z-index: -1;
+	transition: all 1s ease;
+	border: solid 1px #006e95;
+	border-radius: 5px;
+	width: 150%;
+	height: 25%;
+	color: #006e95;
+	font-size: 14px;
+	padding-left: 8px;
+	padding-top: 5px;
+}
+
+.filtro:hover #search_equipo {
+	visibility: visible;
+	transform: translatey(135%);
+	z-index: 1;
+	transition: all 300ms ease;
+}
+
+.opciones-busqueda-equipo {
+	visibility: hidden;
+	display: none;
+	z-index: -1;
+	position: absolute;
+	top: 0;
+	right: 0 auto;
+	width: 150%;
+	background: #fff;
+	border-radius: 5px;
+	max-height: 120px;
+	overflow: hidden;
+	overflow-y: scroll;
+	border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.filtro:hover .opciones-busqueda-equipo {
+	transform: translatey(157px);
+	z-index: 1;
+	visibility: visible;
+}
+
+.opciones-busqueda-equipo p {
+	text-align: center;
+	font-size: 14px;
+	color: #006e95;
+	min-height: 25px;
+	padding-top: 4px;	
+}
+
+.opciones-busqueda-equipo p:hover {
+	background-color: #006e95;
+	color: #fff;
 }
