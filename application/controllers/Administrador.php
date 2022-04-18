@@ -91,7 +91,7 @@ class Administrador extends CI_Controller {
         if($search_equipo != '' || $search_equipo != NULL) {
             $data = $this->Equipo->buscarEquipo($search_equipo);
         } else {
-            $data = NULL;
+            $data = FALSE;
         }
         
         echo json_encode($data);
