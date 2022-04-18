@@ -468,6 +468,7 @@ Estilos para los filtros que puede aplicar el administrador
 	border-radius: 10px; 
 	border: solid 2px #d4d2d2;
 	transform: translatex(5%);
+	margin-bottom: 5px;
 }
 
 .lista-departamentos p {

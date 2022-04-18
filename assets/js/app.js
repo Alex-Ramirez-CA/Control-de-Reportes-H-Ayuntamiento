@@ -1,7 +1,7 @@
 (function($) {
-    let direccion = 0;
-    let departamento = 0;
-    let dependecia = 0;
+    let direccion = null;
+    let departamento = null;
+    let dependecia = null;
 
     //Obtener las incidencia para el cliente tipo Administrador
     if (($('.container').attr('rol')) == 3){
@@ -176,7 +176,7 @@
     $(document).on('click', '.opcion-departamento', function(){
         if($(this).hasClass('active')){
             $(this).toggleClass('active');
-            departamento = 0;
+            departamento = null;
         }else{
             $('.lista-departamentos').children().removeClass('active');
             $(this).toggleClass('active');
@@ -189,7 +189,7 @@
     $(document).on('click', '.opcion-dependecia', function(){
         if($(this).hasClass('active')){
             $(this).toggleClass('active');
-            dependecia = 0;
+            dependecia = null;
         }else{
             $('.lista-dependecias').children().removeClass('active');
             $(this).toggleClass('active');
@@ -202,7 +202,7 @@
     $(document).on('click', '.opcion-direccion', function(){
         if($(this).hasClass('active')){
             $(this).toggleClass('active');
-            direccion = 0;
+            direccion = null;
         }else{
             $('.lista-direcciones').children().removeClass('active');
             $(this).toggleClass('active');
