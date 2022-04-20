@@ -6,7 +6,7 @@ class Administrador extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->library(array('session'));
-		$this->load->model(array('Incidencia', 'Atender_incidencia', 'Equipo'));
+		$this->load->model(array('Incidencia', 'Atender_incidencia', 'Equipo', 'Dependencia', 'Direccion', 'Departamento'));
 	}
 
 	public function index()
@@ -50,6 +50,22 @@ class Administrador extends CI_Controller {
             redirect('login');
         }
 		
+	}
+
+	// Función que trae los datos de las dependencias, direcciones y departamentos existentes
+	public function datos_filtros() {
+		if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 3) {
+		
+			$data = array(
+				'dependencias' => $this->Dependencia->get_dependencias(),
+				'direcciones' => $this->Direccion->get_direcciones(),
+				'departamentos' => $this->Departamento->get_departamentos(),
+			);
+			echo json_encode($data);
+        } else {
+            // Si no hay datos de sesion redireccionar a login
+            redirect('login');
+        }
 	}
 	
 	public function filtrar_incidencias()
