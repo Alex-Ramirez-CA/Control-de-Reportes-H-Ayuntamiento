@@ -6,7 +6,7 @@ class Usuario extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->library(array('session'));
-		$this->load->model(array('Incidencia'));
+		$this->load->model(array('Incidencia', 'Departamento', 'Rol'));
 	}
 
     public function index()
@@ -17,6 +17,8 @@ class Usuario extends CI_Controller {
 				'head' => $this->load->view('layout/head', '', TRUE),
 				'nav' => $this->load->view('layout/nav', '', TRUE),
 				'footer' => $this->load->view('layout/footer', '', TRUE),
+                'departamentos' => $this->Departamento->get_departamentos(),
+                'roles' => $this->Rol->get_roles(),
 			);
 			$this->load->view('v_agregar_usuario', $data);
         } else {
