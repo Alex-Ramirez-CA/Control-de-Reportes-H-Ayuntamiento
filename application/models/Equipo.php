@@ -29,6 +29,7 @@ class Equipo extends CI_Model {
             ->from("equipo")
             ->like('direccion_ip', $search, 'after', '', TRUE)
             ->limit(5)
+            ->where('status', 1)
             ->order_by('id_equipo')
             ->get();
         // Si no se encuentra resultados
@@ -36,6 +37,21 @@ class Equipo extends CI_Model {
             return false;
         }
         return $data->result();
+    }
+
+    // Obtener la impresora asosiada a una determinada direccion
+    public function obtenerImpresora($id_direccion) {
+        $data = $this->db
+            ->select("id_equipo")
+            ->from("equipo")
+            ->where(array('id_direccion' => $id_direccion, 'tipo_equipo' => 'Impresora'))
+            ->get();
+
+        // Si no se encuentra resultados
+        if(!$data->result()) {
+            return false;
+        }
+        return $data->row(); 
     }
 
 }

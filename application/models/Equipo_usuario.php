@@ -4,6 +4,11 @@ class Equipo_usuario extends CI_Model {
         $this->load->database();
     }
 
+    // Crear la relacion de usuario con el equipo
+    public function insertar($data) {
+        $this->db->insert('equipo_usuario', $data);
+    }
+
     // Obtener los uquipo a los que esta asignado el usuario
     public function obtener_equipos($no_empleado) {
         $data = $this->db

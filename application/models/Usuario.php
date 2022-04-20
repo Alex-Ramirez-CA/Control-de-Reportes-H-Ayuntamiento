@@ -4,6 +4,11 @@ class Usuario extends CI_Model {
         $this->load->database();
     }
 
+    // Insertar datos de un usuario nuevo
+    public function guardar_usuario($datos) {
+        $this->db->insert('usuario', $datos);
+    }
+
     // Obtener los uquipo a los que esta asignado el usuario
     public function buscarEmpleado($search) {
         // Busqueda por no_empleado
@@ -53,6 +58,20 @@ class Usuario extends CI_Model {
             return false;
         }
         return $data->result();
+    }
+
+    public function obtenerNoEmpleado($email) {
+        $data = $this->db
+                ->select("no_empleado")
+                ->from("usuario")
+                ->where('email', $email)
+                ->get();
+        
+        // Si no se encuentra resultados
+        if(!$data->result()) {
+            return false;
+        }
+        return $data->row();
     }
 
 }

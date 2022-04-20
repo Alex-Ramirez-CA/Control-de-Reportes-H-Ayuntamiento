@@ -5,8 +5,9 @@ class Usuarios extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
-		$this->load->library(array('session'));
-		$this->load->model(array('Usuario', 'Departamento', 'Rol', 'Direccion', 'Equipo'));
+		$this->load->library(array('form_validation','session'));
+		$this->load->model(array('Usuario', 'Departamento', 'Rol', 'Direccion', 'Equipo', 'Equipo_usuario'));
+		$this->load->helper(array('user/usuario_rules'));
 	}
 
     // Carga el formulario de agregar usuario nuevo
@@ -37,7 +38,7 @@ class Usuarios extends CI_Controller {
             redirect('login');
         }
         // Recibir el valor del campo de busqueda via post
-		$search_IP = '192';//$this->input->post('search_IP');
+		$search_IP = $this->input->post('search_IP');
         // Hacer consulta a la base de datos
         if($search_IP != '' || $search_IP != NULL) {
             $data = $this->Equipo->buscarDireccionIP($search_IP);
@@ -54,14 +55,21 @@ class Usuarios extends CI_Controller {
 		// Eliminar los deliminatores que agrega por defecto la funcion form_error
 		$this->form_validation->set_error_delimiters('', '');
 		// Cargar las reglas de validación llamando a la función del helper
-		$rules = getIncidenciaRules();
+		$rules = getUsuarioRules();
 		$this->form_validation->set_rules($rules);
 		// validar si las reglas se cumplen
 		if($this->form_validation->run() == FALSE) {
 			// Guardar las mensajes en caso de error de validación, dichos mensajes se encuentran en el helper
 			$erros = array(
-				'titulo' => form_error('titulo'),
-				'descripcion' => form_error('descripcion'),
+				'nombre' => form_error('nombre'),
+				'apellido_paterno' => form_error('apellido_paterno'),
+				'apellido_materno' => form_error('apellido_materno'),
+				'email' => form_error('email'),
+				'password' => form_error('password'),
+				'id_direccion' => form_error('id_direccion'),
+				'id_rol' => form_error('id_rol'),
+				'id_departamento' => form_error('id_departamento'),
+				'id_equipo' => form_error('id_equipo'),
 			);
 			$data = array(
 				'head' => $this->load->view('layout/head', '', TRUE),
@@ -73,23 +81,38 @@ class Usuarios extends CI_Controller {
 			
 			// Datos para hacer la insercion en la tabla de usuario
 			$datos = array(
-				'nombre' => $nombre,
-				'apellido_paterno' => $apellido_paterno,
-				'apellido_materno' => $apellido_materno,
-				'email' => $email,
-				'password' => $password,
-				'id_direccion' => $id_direccion,
-				'id_rol' => $id_rol,
-				'id_departamento' => $id_departamento,
+				'nombre' => $this->input->post('nombre'),
+				'apellido_paterno' => $this->input->post('apellido_paterno'),
+				'apellido_materno' => $this->input->post('apellido_materno'),
+				'email' => $this->input->post('email'),
+				'password' => $this->input->post('password'),
+				'id_direccion' => $this->input->post('id_direccion'),
+				'id_rol' => $this->input->post('id_rol'),
+				'id_departamento' => $this->input->post('id_departamento'),
 			);
-            // El id_equipo para crear el vinculo con su equipo peronal
-            $id_equipo = 'id_equipo';
-		
-            // Hacer insercion a la tabla de usuarios
+			// Hacer insercion a la tabla de usuarios
 			$this->Usuario->guardar_usuario($datos);
 
-            // Crear la conexion con su equipo
+			// Crear el vinculo entre el usuario y su equipo personal
+			// Obtener el numero de empleado por su email
+			$res = $this->Usuario->obtenerNoEmpleado($this->input->post('email'));
+			$no_empleado = $res->no_empleado;
+			$data = array(
+				'id_equipo' => $this->input->post('id_equipo'),
+				'no_empleado' => $no_empleado,
+			);
+            $this->Equipo_usuario->insertar($data);
 
+			// Crear el vinculo del usuario con la impresora de su direccion
+			// Validar que dicha direccion si tenga ya una impresora
+			if($res = $this->Equipo->obtenerImpresora($id_direccion)) {
+				$id_equipo = $res->id_equipo;
+				$data = array(
+					'id_equipo' => $id_equipo,
+					'no_empleado' => $no_empleado,
+				);
+				$this->Equipo_usuario->insertar($data);
+			}
 
 			redirect('usuario');
 		}
