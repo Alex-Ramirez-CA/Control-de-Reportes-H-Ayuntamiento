@@ -18,7 +18,7 @@ class Usuario extends CI_Controller {
 				'nav' => $this->load->view('layout/nav', '', TRUE),
 				'footer' => $this->load->view('layout/footer', '', TRUE),
 			);
-			$this->load->view('v_administrador', $data);
+			$this->load->view('v_agregar_usuario', $data);
         } else {
             // Si no hay datos de sesion redireccionar a login
             redirect('login');
