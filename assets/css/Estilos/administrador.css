@@ -71,6 +71,7 @@ Estilos para los titulos de las tarjetas
 	text-align: center;
 	padding-top: 8px;
 	height: 30px;
+	width: 143%;
 	font-size: 12px;
 	background: #f07d6f;
 	color: white;
@@ -82,6 +83,7 @@ Estilos para los titulos de las tarjetas
 	text-align: center;
 	padding-top: 8px;
 	height: 30px;
+	width: 143%;
 	font-size: 12px;
 	background: #6CC5B2;
 	color: white;
@@ -93,6 +95,7 @@ Estilos para los titulos de las tarjetas
 	text-align: center;
 	padding-top: 8px;
 	height: 30px;
+	width: 143%;
 	font-size: 12px;
 	background: #F5D344;
 	color: white;
@@ -141,8 +144,7 @@ Estilos para los textos de las fechas y el texto medio de las tarjetas
 
 .card-title,
 .texto-medio {
-	width: 100%;
-	text-align: justify;
+	width: 70%;
 	margin: 0;
 }
 
@@ -507,7 +509,7 @@ Estilos para los filtros que puede aplicar el administrador
 	visibility: hidden;
 	transition: all 400ms ease;
 	width: 250px;
-	height: 300px;
+	max-height: 300px;
 	background: #f6f8fa;
 	display: flex;
 	flex-direction: column;
@@ -555,7 +557,7 @@ Estilos para los filtros que puede aplicar el administrador
 	visibility: hidden;
 	transition: all 300ms ease;
 	width: 250px;
-	height: 300px;
+	max-height: 300px;
 	background: #f6f8fa;
 	display: flex;
 	flex-direction: column;
