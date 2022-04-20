@@ -6,7 +6,7 @@ class Usuarios extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->library(array('session'));
-		$this->load->model(array('Usuario', 'Departamento', 'Rol', 'Direccion'));
+		$this->load->model(array('Usuario', 'Departamento', 'Rol', 'Direccion', 'Equipo'));
 	}
 
     // Carga el formulario de agregar usuario nuevo
@@ -29,6 +29,24 @@ class Usuarios extends CI_Controller {
         }
 		
 	}
+
+	// Funcion para el campo de busqueda de equipos
+	public function buscar_direccionIP() {
+        // Validar para que no puedan ingresar a esta direccion sin estar logeados
+		if(!$this->session->has_userdata('id_rol')){
+            redirect('login');
+        }
+        // Recibir el valor del campo de busqueda via post
+		$search_IP = '192';//$this->input->post('search_IP');
+        // Hacer consulta a la base de datos
+        if($search_IP != '' || $search_IP != NULL) {
+            $data = $this->Equipo->buscarDireccionIP($search_IP);
+        } else {
+            $data = false;
+        }
+        
+        echo json_encode($data);
+    }
 
     // Funcion para guardar los datos del usuario agregado
 	public function guardar_usuario() {
@@ -64,8 +82,8 @@ class Usuarios extends CI_Controller {
 				'id_rol' => $id_rol,
 				'id_departamento' => $id_departamento,
 			);
-            // La direccion_ip para crear el vinculo con su equipo peronal
-            $direccion_ip = 'direccion_ip';
+            // El id_equipo para crear el vinculo con su equipo peronal
+            $id_equipo = 'id_equipo';
 		
             // Hacer insercion a la tabla de usuarios
 			$this->Usuario->guardar_usuario($datos);
