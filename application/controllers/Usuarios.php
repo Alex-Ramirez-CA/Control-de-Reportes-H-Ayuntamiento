@@ -113,8 +113,10 @@ class Usuarios extends CI_Controller {
 				);
 				$this->Equipo_usuario->insertar($data);
 			}
-
-			redirect('usuario');
+			echo json_encode(array(
+				'msg' => 'Usuario agregado correctamente',
+				'url' => base_url('usuarios'),
+			));
 		}
         } else {
             // Si no hay datos de sesion redireccionar a login
