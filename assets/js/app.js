@@ -167,6 +167,7 @@
     */
     //Evento cuando se clica el boton de aplicar filtros
     $(document).on('click', '#btn-filtros', function(){
+        obtenerDatosFiltros ();
         $('.mensaje').css({'visibility':'visible'});
         $('.contenedor-mensaje').css({'transform':'translateY(0%)'});
     });
@@ -271,7 +272,49 @@
         });
     }
 
-    function obtenerIncidencias (response) {
+    function obtenerDatosFiltros (){
+        $.ajax({
+            url: 'administrador/datos_filtros',
+            type: 'GET',
+            success: function(response) {
+                let datosfiltros = JSON.parse(response);
+                let template_departamentos = "";
+                let template_direcciones = "";
+                let template_dependencias = "";
+
+                if(datosfiltros.departamentos){
+                    (datosfiltros.departamentos).forEach(departamento => {
+                        template_departamentos += `
+                        <p class="opcion-departamento" idDepartamento="${departamento.id_departamento}">${departamento.nombre}</p>
+                        `;
+                    });
+                }
+
+                if(datosfiltros.dependencias){
+                    (datosfiltros.dependencias).forEach(dependencia => {
+                        template_dependencias += `
+                        <p class="opcion-dependecia" idDependecia="${dependencia.id_dependencia}">${dependencia.nombre}</p>
+                        `;
+                    });
+                }
+
+                if(datosfiltros.direcciones){
+                    (datosfiltros.direcciones).forEach(direccion => {
+                        template_direcciones += `
+                        <p class="opcion-direccion" idDireccion="${direccion.id_direccion}">${direccion.nombre}</p>
+                        `;
+                    });
+                } 
+
+                //Pintar los datos en sus columnas correspondientes
+                $('.lista-dependecias').html(template_dependencias);
+                $('.lista-direcciones').html(template_direcciones);
+                $('.lista-departamentos').html(template_departamentos);
+            }
+        });
+    }
+
+    function obtenerIncidencias (response){
         let incidencias = JSON.parse(response);
         let template_pendientes = "";
         let template_proceso = "";
