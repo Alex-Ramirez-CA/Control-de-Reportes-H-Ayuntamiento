@@ -486,5 +486,69 @@
         $('.cantidad-reportes-proceso').html(cantidad_proceso);
         $('.cantidad-reportes-finalizado').html(cantidad_finalizados);
     }
+
+    //Evento de cuando el administrador un equipo por su IP al ingresar un usuario nuevo
+    $("#direccion_ip").keyup(function(ev) {
+        if($('#direccion_ip').val()){
+            $('.opciones_busqueda_ip').css('display','block');
+            let search_IP = $('#direccion_ip').val();
+            //console.log(search_IP)
+            $.ajax({
+                url: 'usuarios/buscar_direccionIP',
+                type: 'POST',
+                data: { search_IP },
+                success: function(data) {
+                    let equipos = JSON.parse(data);
+                    let template = "";
+                    if (equipos){
+                        equipos.forEach(element => {
+                            template += ` <p class="opcion_equipo_ip" idEquipo="${element.id_equipo}">${element.direccion_ip}</p> `;
+                        });
+                    }else {
+                        template = "";
+                    }
+                    $('.opciones_busqueda_ip').html(template);
+                }
+            });
+        }else {
+            template = "";
+            $('.opciones-busqueda-equipo').html(template);
+            $('#direccion_ip').removeAttr('idEquipo');
+        }
+    });
+
+    //Evento de cuando clique en enviar filtros
+    $(document).on('click', '.opcion_equipo_ip', function(){
+        let elemento = $(this)[0];
+        $('#direccion_ip').val($(this).text());
+        $('#direccion_ip').attr('idEquipo',$(elemento).attr('idEquipo'));
+        $('.opciones_busqueda_ip').css('display','none');
+    });
+
+    //Evento cuando se clica guardar los datos a la hora de guardar un usuario
+    $(document).on('click', '#btn_guardar_usuario', function(){
+        let nombre = $('#nombre').val();
+        let apellido_paterno = $('#apellido_paterno').val();
+        let apellido_materno = $('#apellido_materno').val();
+        let email = $('#email').val();
+        let password = $('#contraseña').val();
+        let id_direccion = $('#direccion').val();
+        let id_rol = $('#tipo_usuario').val();
+        let id_departamento = $('#departamento').val();
+        let id_equipo = $('#direccion_ip').attr('idEquipo');
+        // console.log(nombre);
+        // console.log(apellido_paterno);
+        // console.log(apellido_materno);
+        // console.log(email);
+        // console.log(password);
+        // console.log(id_direccion);
+        // console.log(id_rol);
+        // console.log(id_departamento);
+        // console.log(id_equipo);
+        $.post('usuarios/guardar_usuario', {nombre, apellido_paterno, apellido_materno, email, password, id_direccion, id_rol, id_departamento, id_equipo}, function(response){
+            let incidencias = JSON.parse(response);
+            console.log(incidencias);
+        });
+    });
     
 })(jQuery)

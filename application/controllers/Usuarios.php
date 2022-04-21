@@ -114,7 +114,7 @@ class Usuarios extends CI_Controller {
 				$this->Equipo_usuario->insertar($data);
 			}
 
-			redirect('usuario');
+			redirect('usuarios');
 		}
         } else {
             // Si no hay datos de sesion redireccionar a login

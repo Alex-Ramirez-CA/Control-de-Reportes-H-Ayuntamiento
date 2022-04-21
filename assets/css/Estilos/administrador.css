@@ -655,3 +655,86 @@ Estilos para los filtros que puede aplicar el administrador
 	background-color: #006e95;
 	color: #fff;
 }
+
+ /*Estilos para el formulario de agregar usuario*/
+.formulario_agregar_usuario {
+	border: solid 1px #006e95;
+	width: 100%;
+	height: 500px;
+} 
+
+.titulo_formulario {
+	background: linear-gradient(to right,#006E95,#26A2D9,#006E95, #006E95, #006E95,#26A2D9,#006E95);
+	width: 100%;
+	height: 10%;
+	border-radius: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.titulo_formulario h1 {
+	font-size: 25px;
+	color: #fff;
+	margin: 0;
+}
+
+.columnas_formulario {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	height: 450px;
+}
+
+.columna_formulario {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 50%;
+	width: 40%;
+	margin: 50px 50px;
+	position: relative;
+}
+
+.columna_formulario input {
+	width: 100%;
+	border: solid 1px #006e95;
+	height: 32px;
+	border-radius: 10px;
+	color: #006e95;
+	font-size: 14px;
+	padding-left: 8px;
+}
+
+.columna_formulario select {
+	padding-bottom: 5px;
+	padding-top: 5px;
+	border-radius: 10px;
+	border: solid 1px #006e95;
+	text-align: center;
+	margin-bottom: 1px;
+	width: 100%;
+}
+
+.opciones_busqueda_ip {
+	display: none;
+	position: absolute;
+	background-color: #fff;
+	width: 100%;
+	border-radius: 10px;
+	border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.opciones_busqueda_ip p {
+	text-align: center;
+	font-size: 14px;
+	color: #006e95;
+	min-height: 25px;
+	padding-top: 4px;
+	border-radius: 10px;	
+}
+
+.opciones_busqueda_ip p:hover {
+	background-color: #006e95;
+	color: #fff;
+}
