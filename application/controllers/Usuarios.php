@@ -173,6 +173,54 @@ class Usuarios extends CI_Controller {
 	public function actualizar_usuario() {
 		if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 3) {
 			
+			// Datos para hacer la actualizacón del usuario
+			// $datos = array(
+			// 	'nombre' => $this->input->post('nombre'),
+			// 	'apellido_paterno' => $this->input->post('apellido_paterno'),
+			// 	'apellido_materno' => $this->input->post('apellido_materno'),
+			// 	'email' => $this->input->post('email'),
+			// 	'password' => $this->input->post('password'),
+			// 	'id_direccion' => $this->input->post('id_direccion'),
+			// 	'id_rol' => $this->input->post('id_rol'),
+			// 	'id_departamento' => $this->input->post('id_departamento'),
+			// );
+
+			// Obtener el no_empleado vía post
+			$no_empleado = 1;//$this->input->post('no_empleado');
+
+			// Si la direccion a la que pertenece es modificada
+			// Modificar tambien la impresora a la que estara asociado el usuario
+			$oldDireccion = $this->Usuario->obtenerDireccion($no_empleado);
+			$oldDireccion = $oldDireccion->id_direccion;
+			$newDireccion = 2;//$this->input->post('id_direccion');
+			if($oldDireccion !== $newDireccion){
+				// Obtener el id_equipo de la impresora a la que estaba asignado dicho usuario anteriormente
+				if($res = $this->Equipo->obtenerOldImpresora($no_empleado)) {
+					$old_id_equipo = $res->id_equipo;
+					// Obtener el id_equipo de la impresora de la nueva direccion
+					if($res = $this->Equipo->obtenerImpresora($newDireccion)) {
+						$id_equipo = $res->id_equipo;
+						// Realizar la actualizacion
+						$this->Equipo_usuario->updateEquipo($id_equipo, $no_empleado, $old_id_equipo);
+					}
+				}
+			}
+			
+			
+
+			// Actualizar el equipo o PC del suarios
+			// Obtener el id_equipo vía post
+			$id_equipo = 1;//$this->input->post('id_equipo');
+			// Obtner el id del antiguo equipo del usuario
+			if($res = $this->Equipo->obtenerPC($no_empleado)) {
+				$old_id_equipo = $res->id_equipo;
+				// Realizar la actualizacion
+				$this->Equipo_usuario->updateEquipo($id_equipo, $no_empleado, $old_id_equipo);
+			}
+
+			// Hacer actualización de la tabla de usuarios
+			// $this->Usuario->update_usuario($datos);
+
 		} else {
 			// Si no hay datos de sesion redireccionar a login
 			redirect('login');

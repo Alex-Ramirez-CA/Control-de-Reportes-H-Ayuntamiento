@@ -54,4 +54,34 @@ class Equipo extends CI_Model {
         return $data->row(); 
     }
 
+    public function obtenerPC($no_empleado) {
+        $data = $this->db
+            ->select("e.id_equipo")
+            ->from("equipo e")
+            ->join("equipo_usuario eu", "e.id_equipo=eu.id_equipo")
+            ->where(array('eu.no_empleado' => $no_empleado, 'e.tipo_equipo' => 'PC'))
+            ->get();
+
+        // Si no se encuentra resultados
+        if(!$data->result()) {
+            return false;
+        }
+        return $data->row();
+    }
+    
+    public function obtenerOldImpresora($no_empleado) {
+        $data = $this->db
+            ->select("e.id_equipo")
+            ->from("equipo e")
+            ->join("equipo_usuario eu", "e.id_equipo=eu.id_equipo")
+            ->where(array('eu.no_empleado' => $no_empleado, 'e.tipo_equipo' => 'Impresora'))
+            ->get();
+
+        // Si no se encuentra resultados
+        if(!$data->result()) {
+            return false;
+        }
+        return $data->row();
+    }
+
 }

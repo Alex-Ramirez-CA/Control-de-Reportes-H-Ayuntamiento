@@ -41,4 +41,10 @@ class Equipo_usuario extends CI_Model {
         return $data->row();
     }
 
+    public function updateEquipo($id_equipo, $no_empleado, $old_id_equipo) {
+        $this->db->set('id_equipo', $id_equipo);
+        $this->db->where(array('no_empleado' => $no_empleado, 'id_equipo' => $old_id_equipo));
+        $this->db->update('equipo_usuario');
+    }
+
 }

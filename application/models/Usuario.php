@@ -141,4 +141,18 @@ class Usuario extends CI_Model {
         $this->db->update('usuario');
     }
 
+    public function obtenerDireccion($no_empleado) {
+        $data = $this->db
+            ->select("id_direccion")
+            ->from("usuario")
+            ->where('no_empleado', $no_empleado)
+            ->get();
+
+        // Si no se encuentra resultados
+        if(!$data->result()) {
+            return false;
+        }
+        return $data->row();
+    }
+
 }
