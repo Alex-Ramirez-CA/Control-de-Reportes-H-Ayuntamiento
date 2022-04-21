@@ -97,7 +97,7 @@ class Usuario extends CI_Model {
         $queryDirecc = 'dir.id_direccion IS NOT NULL';
         $queryStatus = 'u.status IS NOT NULL';
 
-        if($rol != NULL || $rol == 0) {
+        if($rol != NULL) {
             $queryRol = 'r.id_rol = '.$rol;
         }
         if($departamento != NULL) {

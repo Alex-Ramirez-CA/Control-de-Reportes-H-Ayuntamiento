@@ -130,7 +130,7 @@ class Usuarios extends CI_Controller {
 
 	public function filtrar_usuarios() {
 		// $rol, $departamento,  $dependencia, $direccion, $status
-		$data = $this->Usuario->filtrarUsuarios(0, NULL,  NULL, NULL, NULL);
+		$data = $this->Usuario->filtrarUsuarios(2, NULL,  NULL, NULL, NULL);
 		echo json_encode($data);
 	}
 
