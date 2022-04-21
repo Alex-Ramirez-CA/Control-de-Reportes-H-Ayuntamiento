@@ -71,12 +71,9 @@ class Usuarios extends CI_Controller {
 				'id_departamento' => form_error('id_departamento'),
 				'id_equipo' => form_error('id_equipo'),
 			);
-			$data = array(
-				'head' => $this->load->view('layout/head', '', TRUE),
-				'nav' => $this->load->view('layout/nav', '', TRUE),
-				'footer' => $this->load->view('layout/footer', '', TRUE),
-			);
-			$this->load->view('v_agregar_usuario', $data);
+			// Mandar respuesta al cliente
+			echo json_encode($erros);
+			$this->output->set_status_header(400);
 		} else {
 			
 			// Datos para hacer la insercion en la tabla de usuario
