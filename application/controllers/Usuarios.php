@@ -121,24 +121,62 @@ class Usuarios extends CI_Controller {
         }
 	}
 
+	// Funcion que trae los datos de todos los usuarios existentes
 	public function listar_usuarios() {
-		// Validar que existan usuarios
-		if($res = $this->Usuario->getUsuarios()) {
-			echo json_encode($res);
+		if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 3) {
+			// Validar que existan usuarios
+			if($res = $this->Usuario->getUsuarios()) {
+				echo json_encode($res);
+			}
+		} else {
+			// Si no hay datos de sesion redireccionar a login
+			redirect('login');
 		}
 	}
 
+	// Filtrar los usuarios
 	public function filtrar_usuarios() {
-		// $rol, $departamento,  $dependencia, $direccion, $status
-		$data = $this->Usuario->filtrarUsuarios(2, 3,  NULL, NULL, NULL);
-		echo json_encode($data);
+		if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 3) {
+			// $rol, $departamento,  $dependencia, $direccion, $status
+			$data = $this->Usuario->filtrarUsuarios(2, 3,  NULL, NULL, NULL);
+			echo json_encode($data);
+		} else {
+			// Si no hay datos de sesion redireccionar a login
+			redirect('login');
+		}
 	}
 
 	// Funcion que permitira actualizar el status de un usuario
-	public function modificarStatus() {
-		$status = $this->input->post('status');
-		$no_empleado = $this->input->post('no_empleado');
-		$this->Usuario->statusUsuario($status, $no_empleado);
+	public function modificar_status() {
+		if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 3) {
+			$status = $this->input->post('status');
+			$no_empleado = $this->input->post('no_empleado');
+			$this->Usuario->statusUsuario($status, $no_empleado);
+		} else {
+			// Si no hay datos de sesion redireccionar a login
+			redirect('login');
+		}
+	}
+
+	// Funcion para cuando se clicke el boton de estidar usuario
+	public function editar_usuario() {
+		if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 3) {
+			// Recibir el no_empleado del usuario seleccionado
+			$no_empleado = $this->input->post('no_empleado');
+		} else {
+			// Si no hay datos de sesion redireccionar a login
+			redirect('login');
+		}
+	}
+
+	// Funcion que guarda los cambios realizados en los datos del usuario
+	public function actualizar_usuario() {
+		if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 3) {
+			
+		} else {
+			// Si no hay datos de sesion redireccionar a login
+			redirect('login');
+		}
 	}
 
 }
