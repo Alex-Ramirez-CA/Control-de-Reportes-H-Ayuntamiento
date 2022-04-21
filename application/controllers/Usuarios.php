@@ -121,4 +121,11 @@ class Usuarios extends CI_Controller {
         }
 	}
 
+	public function listar_usuarios() {
+		// Validar que existan usuarios
+		if($res = $this->Usuario->getUsuarios()) {
+			echo json_encode($res);
+		}
+	}
+
 }

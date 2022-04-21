@@ -74,4 +74,19 @@ class Usuario extends CI_Model {
         return $data->row();
     }
 
+    // Obtiene todos los usuarios existentes
+    public function getUsuarios() {
+        $data = $this->db
+            ->select("u.no_empleado, u.nombre, u.apellido_paterno, u.apellido_materno, u.email, r.nombre as rol, u.status")
+            ->from("usuario u")
+            ->join("rol r", "u.id_rol=r.id_rol")
+            ->get();
+        
+        // Si no se encuentra resultados
+        if(!$data->result()) {
+            return false;
+        }
+        return $data->result();
+    }
+
 }
