@@ -492,6 +492,7 @@
             $('#departamento').prop('disabled', false);
         }else{
             $('#departamento').prop('disabled', 'disabled');
+            $('.departamento_indefinido').prop('selected', 'selected');   
         }
     });
     
@@ -552,7 +553,15 @@
             data: {nombre, apellido_paterno, apellido_materno, email, password, id_direccion, id_rol, id_departamento, id_equipo},
             success: function(data) {
                 let json = JSON.parse(data);
-                window.location.replace(json.url);
+                $(".titulo-mensaje").html(`<b><h1>${json.msg}</h1></b>`);
+                $('.mensaje').css({'visibility':'visible'});
+                $('.contenedor_mensaje_guardar_usuario').css({'transform':'translateY(0%)'});
+                $(document).on('click', '.cerrar_ventana_guardar_usuario', function(){
+                    $('.mensaje').css({'visibility':'hidden'});
+                    $('.contenedor_mensaje_guardar_usuario').css({'transform':'translateY(-200%)'});
+                    window.location.replace(json.url);
+                });
+                
             },
             statusCode: {
                 400: function(xhr) {
@@ -617,4 +626,5 @@
         $('.error_message_direccionIP').css({'transform':'translateY(-10px)'});
         $('.error_message_direccionIP').css({'z-index':'-1'});
     });
+
 })(jQuery)

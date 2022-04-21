@@ -786,3 +786,40 @@ Estilos para los filtros que puede aplicar el administrador
 	font-size: 15px;
 	padding: 3px 5px;
 }
+
+/*Mensaje cuando guarda correctamente un usuario*/
+.contenedor_mensaje_guardar_usuario {
+	min-width: 400px;
+	min-height: 300px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	border-radius: 10px;
+	transition: transform 900ms;
+	transform: translateY(-200%);
+	background-color: rgba(248, 244, 244, 0.3);
+	box-shadow: 0 0px 40px 0 rgba(31, 38, 135, 0.37);
+    border-left: solid 1px #616161;
+	border-right: solid 1px #616161;
+	border-bottom: solid 1px #616161;
+	backdrop-filter: blur(4px);
+}
+
+.cerrar_ventana_guardar_usuario {
+	left: 102%;
+	font-size: 15px;
+	padding-top: 0.295rem;
+	height: 30px;
+	width: 30px;
+	text-align: center;
+	background-color: rgba(0, 0, 0, 0.5);
+	box-shadow: 0 3px 5px 0 rgba(31, 38, 135, 0.37);
+	color: #fff;
+	border-radius: 100%;
+	cursor: pointer;
+	position: absolute;
+}
+
+.cerrar_ventana_guardar_usuario:hover {
+	background: #2e2e2e;
+}
