@@ -105,7 +105,7 @@ class Usuarios extends CI_Controller {
 
 			// Crear el vinculo del usuario con la impresora de su direccion
 			// Validar que dicha direccion si tenga ya una impresora
-			if($res = $this->Equipo->obtenerImpresora($id_direccion)) {
+			if($res = $this->Equipo->obtenerImpresora($this->input->post('id_direccion'))) {
 				$id_equipo = $res->id_equipo;
 				$data = array(
 					'id_equipo' => $id_equipo,
