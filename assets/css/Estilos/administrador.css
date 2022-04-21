@@ -658,10 +658,23 @@ Estilos para los filtros que puede aplicar el administrador
 
  /*Estilos para el formulario de agregar usuario*/
 .formulario_agregar_usuario {
-	border: solid 1px #006e95;
+	border-radius: 10px;
 	width: 100%;
 	height: 500px;
+	background: linear-gradient(
+		to bottom right,
+		#f6f8fa,
+		#f6f8fa,
+		#f6f8fa,
+		rgb(250, 255, 254)
+	);
+	box-shadow: 0 3px 5px 0 rgba(31, 38, 135, 0.37);
+	border: solid 2px #afafaa;
 } 
+
+.formulario_agregar_usuario select, .formulario_agregar_usuario label {
+	color: #006e95;
+}
 
 .titulo_formulario {
 	background: linear-gradient(to right,#006E95,#26A2D9,#006E95, #006E95, #006E95,#26A2D9,#006E95);
@@ -712,8 +725,8 @@ Estilos para los filtros que puede aplicar el administrador
 	border-radius: 10px;
 	border: solid 1px #006e95;
 	text-align: center;
-	margin-bottom: 1px;
 	width: 100%;
+	margin-top: 2px;
 }
 
 .opciones_busqueda_ip {
@@ -723,6 +736,7 @@ Estilos para los filtros que puede aplicar el administrador
 	width: 100%;
 	border-radius: 10px;
 	border: 1px solid rgba(0, 0, 0, 0.15);
+	z-index: 1;
 }
 
 .opciones_busqueda_ip p {
@@ -737,4 +751,38 @@ Estilos para los filtros que puede aplicar el administrador
 .opciones_busqueda_ip p:hover {
 	background-color: #006e95;
 	color: #fff;
+}
+
+#btn_guardar_usuario {
+	background-color: #f6f8fa;
+	color: #006e95;
+	font-size: 18px;
+	border-radius: 10px;
+	border: solid 1px #006e95;
+	margin-top: 8px;
+	width: 100%;
+	padding-top: 11.5px;
+	padding-bottom: 8.5px;
+}
+
+#btn_guardar_usuario:hover {
+	background-color: #006e95;
+	color: #f6f8fa;
+}
+
+.error_message_nombre, .error_message_apellidoP, .error_message_apellidoM, .error_message_email, .error_message_password, .error_message_direccionIP  {
+	position: absolute;
+	background-color: #ffadba;
+	color: #E52141;
+	width: 100%;
+	border-radius: 5px;
+	transition: all 300ms ease;
+	transform: translatey(-10px);
+	z-index: -1;
+}
+
+.error_message_nombre, .error_message_apellidoP, .error_message_apellidoM, .error_message_email, .error_message_password, .error_message_direccionIP p {
+	text-align: center;
+	font-size: 15px;
+	padding: 3px 5px;
 }

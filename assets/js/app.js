@@ -7,6 +7,7 @@
     //Obtener las incidencia para el cliente tipo Administrador
     if (($('.container').attr('rol')) == 3){
         obtenerTodasIncidencias ();
+        obtenerDatosFiltros ();
     }
 
     //Función para cuando le de click al boton de ver
@@ -165,9 +166,8 @@
     Funciones para usuario administrador
     ------------------------------------------------------------------------------------------------------------
     */
-    //Evento cuando se clica el boton de aplicar filtros
+    //Evento cuando se clica el boton de filtros
     $(document).on('click', '#btn-filtros', function(){
-        obtenerDatosFiltros ();
         $('.mensaje').css({'visibility':'visible'});
         $('.contenedor-mensaje').css({'transform':'translateY(0%)'});
     });
@@ -254,7 +254,6 @@
         let fecha_fin = $('#fecha_fin').val();
         $.post('administrador/filtrar_incidencias', {dependencia, direccion, departamento, fecha_inicio, fecha_fin, equipo}, function(response){
             let incidencias = JSON.parse(response);
-            console.log(incidencias);
             obtenerIncidencias (response);
         });
         $('.mensaje').css({'visibility':'hidden'});
@@ -487,6 +486,16 @@
         $('.cantidad-reportes-finalizado').html(cantidad_finalizados);
     }
 
+    //Habilitar los campos del formulario
+    $("#tipo_usuario").change(function() {
+        if($("#tipo_usuario").val() !== "0"){
+            $('#departamento').prop('disabled', false);
+        }else{
+            $('#departamento').prop('disabled', 'disabled');
+        }
+    });
+    
+
     //Evento de cuando el administrador un equipo por su IP al ingresar un usuario nuevo
     $("#direccion_ip").keyup(function(ev) {
         if($('#direccion_ip').val()){
@@ -512,7 +521,8 @@
             });
         }else {
             template = "";
-            $('.opciones-busqueda-equipo').html(template);
+            $('.opciones_busqueda_ip').css('display','none');
+            $('.opciones_busqueda_ip').html(template);
             $('#direccion_ip').removeAttr('idEquipo');
         }
     });
@@ -526,7 +536,7 @@
     });
 
     //Evento cuando se clica guardar los datos a la hora de guardar un usuario
-    $(document).on('click', '#btn_guardar_usuario', function(){
+    $("#btn_guardar_usuario").click(function(ev) {
         let nombre = $('#nombre').val();
         let apellido_paterno = $('#apellido_paterno').val();
         let apellido_materno = $('#apellido_materno').val();
@@ -536,19 +546,75 @@
         let id_rol = $('#tipo_usuario').val();
         let id_departamento = $('#departamento').val();
         let id_equipo = $('#direccion_ip').attr('idEquipo');
-        // console.log(nombre);
-        // console.log(apellido_paterno);
-        // console.log(apellido_materno);
-        // console.log(email);
-        // console.log(password);
-        // console.log(id_direccion);
-        // console.log(id_rol);
-        // console.log(id_departamento);
-        // console.log(id_equipo);
-        $.post('usuarios/guardar_usuario', {nombre, apellido_paterno, apellido_materno, email, password, id_direccion, id_rol, id_departamento, id_equipo}, function(response){
-            let incidencias = JSON.parse(response);
-            console.log(incidencias);
+        $.ajax({
+            url: 'usuarios/guardar_usuario',
+            type: 'POST',
+            data: {nombre, apellido_paterno, apellido_materno, email, password, id_direccion, id_rol, id_departamento, id_equipo},
+            success: function(data) {
+                let json = JSON.parse(data);
+                window.location.replace(json.url);
+            },
+            statusCode: {
+                400: function(xhr) {
+                    let json = JSON.parse(xhr.responseText);
+                    //Para mostrar los mensajes de error en caso de tener en los campos del formulario
+                    $('.error_message_nombre').css({'transform':'translateY(0px)'});
+                    $('.error_message_nombre').css({'z-index':'1'});
+                    $(".error_message_nombre").html(`<p>${json.nombre}</p>`);
+
+                    $('.error_message_apellidoP').css({'transform':'translateY(0px)'});
+                    $('.error_message_apellidoP').css({'z-index':'1'});
+                    $(".error_message_apellidoP").html(`<p>${json.apellido_paterno}</p>`);
+
+                    $('.error_message_apellidoM').css({'transform':'translateY(0px)'});
+                    $('.error_message_apellidoM').css({'z-index':'1'});
+                    $(".error_message_apellidoM").html(`<p>${json.apellido_materno}</p>`);
+
+                    $('.error_message_email').css({'transform':'translateY(0px)'});
+                    $('.error_message_email').css({'z-index':'1'});
+                    $(".error_message_email").html(`<p>${json.email}</p>`);
+
+                    $('.error_message_password').css({'transform':'translateY(0px)'});
+                    $('.error_message_password').css({'z-index':'1'});
+                    $(".error_message_password").html(`<p>${json.password}</p>`);
+
+                    $('.error_message_direccionIP').css({'transform':'translateY(0px)'});
+                    $('.error_message_direccionIP').css({'z-index':'1'});
+                    $(".error_message_direccionIP").html(`<p>${json.id_equipo}</p>`);
+                }
+            },
         });
+        ev.preventDefault();
+    });
+
+    //Funciones para ocultar los mensajes de error del formulario cuando el usuario comience a escribir
+    $(document).on('keyup', '#nombre', function(){
+        $('.error_message_nombre').css({'transform':'translateY(-10px)'});
+        $('.error_message_nombre').css({'z-index':'-1'});
+    });
+
+    $(document).on('keyup', '#apellido_paterno', function(){
+        $('.error_message_apellidoP').css({'transform':'translateY(-10px)'});
+        $('.error_message_apellidoP').css({'z-index':'-1'});
     });
     
+    $(document).on('keyup', '#apellido_materno', function(){
+        $('.error_message_apellidoM').css({'transform':'translateY(-10px)'});
+        $('.error_message_apellidoM').css({'z-index':'-1'});
+    });
+
+    $(document).on('keyup', '#email', function(){
+        $('.error_message_email').css({'transform':'translateY(-10px)'});
+        $('.error_message_email').css({'z-index':'-1'});
+    });
+    
+    $(document).on('keyup', '#contraseña', function(){
+        $('.error_message_password').css({'transform':'translateY(-10px)'});
+        $('.error_message_password').css({'z-index':'-1'});
+    });
+
+    $(document).on('keyup', '#direccion_ip', function(){
+        $('.error_message_direccionIP').css({'transform':'translateY(-10px)'});
+        $('.error_message_direccionIP').css({'z-index':'-1'});
+    });
 })(jQuery)

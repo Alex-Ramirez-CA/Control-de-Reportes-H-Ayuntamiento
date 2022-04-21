@@ -13,11 +13,11 @@
             statusCode: {
                 400: function(xhr) {
                     let json = JSON.parse(xhr.responseText);
-                    console.log(json);
+                    //console.log(json);
                 },
                 401: function(xhr) {
                     let json = JSON.parse(xhr.responseText);
-                    console.log(json);
+                    //console.log(json);
                     $("#alert").html(`<div class="alert alert-danger" role="alert">${json.msg}</div>`);
                 }
             },
