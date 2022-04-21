@@ -83,6 +83,7 @@ class Usuarios extends CI_Controller {
 				'apellido_materno' => $this->input->post('apellido_materno'),
 				'email' => $this->input->post('email'),
 				'password' => $this->input->post('password'),
+				'status' => 1,
 				'id_direccion' => $this->input->post('id_direccion'),
 				'id_rol' => $this->input->post('id_rol'),
 				'id_departamento' => $this->input->post('id_departamento'),
@@ -163,6 +164,9 @@ class Usuarios extends CI_Controller {
 		if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 3) {
 			// Recibir el no_empleado del usuario seleccionado
 			$no_empleado = $this->input->post('no_empleado');
+			// Traer los datos del usuario
+
+			// Cargar la vista y mandar los datos
 		} else {
 			// Si no hay datos de sesion redireccionar a login
 			redirect('login');
@@ -174,16 +178,16 @@ class Usuarios extends CI_Controller {
 		if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 3) {
 			
 			// Datos para hacer la actualizacón del usuario
-			// $datos = array(
-			// 	'nombre' => $this->input->post('nombre'),
-			// 	'apellido_paterno' => $this->input->post('apellido_paterno'),
-			// 	'apellido_materno' => $this->input->post('apellido_materno'),
-			// 	'email' => $this->input->post('email'),
-			// 	'password' => $this->input->post('password'),
-			// 	'id_direccion' => $this->input->post('id_direccion'),
-			// 	'id_rol' => $this->input->post('id_rol'),
-			// 	'id_departamento' => $this->input->post('id_departamento'),
-			// );
+			$datos = array(
+				'nombre' => $this->input->post('nombre'),
+				'apellido_paterno' => $this->input->post('apellido_paterno'),
+				'apellido_materno' => $this->input->post('apellido_materno'),
+				'email' => $this->input->post('email'),
+				'password' => $this->input->post('password'),
+				'id_direccion' => $this->input->post('id_direccion'),
+				'id_rol' => $this->input->post('id_rol'),
+				'id_departamento' => $this->input->post('id_departamento'),
+			);
 
 			// Obtener el no_empleado vía post
 			$no_empleado = 1;//$this->input->post('no_empleado');
@@ -206,8 +210,6 @@ class Usuarios extends CI_Controller {
 				}
 			}
 			
-			
-
 			// Actualizar el equipo o PC del suarios
 			// Obtener el id_equipo vía post
 			$id_equipo = 1;//$this->input->post('id_equipo');
@@ -219,7 +221,7 @@ class Usuarios extends CI_Controller {
 			}
 
 			// Hacer actualización de la tabla de usuarios
-			// $this->Usuario->update_usuario($datos);
+			$this->Usuario->update_usuario($datos);
 
 		} else {
 			// Si no hay datos de sesion redireccionar a login
