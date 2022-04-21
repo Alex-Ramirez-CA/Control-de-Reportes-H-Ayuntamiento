@@ -97,19 +97,19 @@ class Usuario extends CI_Model {
         $queryDirecc = 'dir.id_direccion IS NOT NULL';
         $queryStatus = 'u.status IS NOT NULL';
 
-        if($rol != NULL) {
+        if($rol !== NULL) {
             $queryRol = 'r.id_rol = '.$rol;
         }
-        if($departamento != NULL) {
+        if($departamento !== NULL) {
             $queryDepa = 'depa.id_departamento = '.$departamento;
         }
-        if($dependencia != NULL) {
+        if($dependencia !== NULL) {
             $queryDepen = 'depen.id_dependencia = '.$dependencia;
         }
-        if($direccion != NULL) {
+        if($direccion !== NULL) {
             $queryDirecc = 'dir.id_direccion = '.$direccion;
         }
-        if($status != NULL) {
+        if($status !== NULL) {
             $queryStatus = 'u.status = '.$status;
         }
         $data = $this->db
