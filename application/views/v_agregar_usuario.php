@@ -11,22 +11,37 @@
                 <label for="nombre">
                     Nombre(s)
                     <input id="nombre" type="text">
+                    <div class="error_message_nombre">
+                        
+                    </div>
                 </label>
                 <label for="apellido_paterno">
                     Apellido paterno
                     <input id="apellido_paterno" type="text">
+                    <div class="error_message_apellidoP">
+                        
+                    </div>
                 </label>
                 <label for="apellido_materno">
                     Apellido materno
                     <input id="apellido_materno" type="text">
+                    <div class="error_message_apellidoM">
+                        
+                    </div>
                 </label>
                 <label for="email">
                     Correo electrónico
                     <input id="email" type="email">
+                    <div class="error_message_email">
+                        
+                    </div>
                 </label>
                 <label for="contraseña">
                     Contraseña
                     <input id="contraseña" type="text">
+                    <div class="error_message_password">
+                        
+                    </div>
                 </label>
             </div>
 
@@ -50,6 +65,9 @@
                     <div class="opciones_busqueda_ip">
                         
                     </div>
+                    <div class="error_message_direccionIP">
+                        
+                    </div>
                 </label>
                 <label for="tipo_usuario">
                     Tipo de usuario
@@ -57,7 +75,7 @@
                     <?php
                         foreach($roles as $item):
                     ?>
-                        <option value="<?= $item->id_rol?>"><?= $item->nombre?></option>
+                        <option <?= $item->id_rol == '0' ? 'selected' : ''; ?> value="<?= $item->id_rol?>"><?= $item->nombre?></option>
                     <?php 
                         endforeach; 
                             
@@ -66,7 +84,8 @@
                 </label>
                 <label for="departamento">
                     Departamento interno
-                    <select name="departamento" id="departamento">
+                    <select name="departamento" id="departamento" disabled>
+                        <option selected value="0">Seleccione un departamento</option>
                     <?php
                         foreach($departamentos as $item):
                     ?>
