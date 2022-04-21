@@ -89,4 +89,49 @@ class Usuario extends CI_Model {
         return $data->result();
     }
 
+    // Filtros para las incidencias con status dos
+    public function filtrarUsuarios($rol, $departamento,  $dependencia, $direccion, $status) {
+        $queryRol = 'r.id_rol IS NOT NULL';
+        $queryDepa = 'depa.id_departamento IS NOT NULL';
+        $queryDepen = 'depen.id_dependencia IS NOT NULL';
+        $queryDirecc = 'dir.id_direccion IS NOT NULL';
+        $queryStatus = 'u.status IS NOT NULL';
+
+        if($rol != NULL || $rol == 0) {
+            $queryRol = 'r.id_rol = '.$rol;
+        }
+        if($departamento != NULL) {
+            $queryDepa = 'depa.id_departamento = '.$departamento;
+        }
+        if($dependencia != NULL) {
+            $queryDepen = 'depen.id_dependencia = '.$dependencia;
+        }
+        if($direccion != NULL) {
+            $queryDirecc = 'dir.id_direccion = '.$direccion;
+        }
+        if($status != NULL) {
+            $queryStatus = 'u.status = '.$status;
+        }
+        $data = $this->db
+            ->distinct()
+            ->select("u.no_empleado, u.nombre, u.apellido_paterno, u.apellido_materno, u.email, r.nombre as rol, u.status")
+            ->from("usuario u")
+            ->join("rol r", "u.id_rol=r.id_rol")
+            ->join("departamento depa", "u.id_departamento=depa.id_departamento")
+            ->join("direccion dir", "u.id_direccion=dir.id_direccion")
+            ->join("dependencia depen", "dir.id_dependencia=depen.id_dependencia")
+            ->where($queryRol)
+            ->where($queryDepa)
+            ->where($queryDepen)
+            ->where($queryDirecc)
+            ->where($queryStatus)
+            ->group_by('u.no_empleado')
+            ->get();
+        
+        if(!$data->result()) {
+            return false;
+        }
+        return $data->result();
+    }
+
 }
