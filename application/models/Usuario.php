@@ -9,14 +9,14 @@ class Usuario extends CI_Model {
         $this->db->insert('usuario', $datos);
     }
 
-    // Obtener los uquipo a los que esta asignado el usuario
+    // Buscador de empleado por sus diferentes campos
     public function buscarEmpleado($search) {
         // Busqueda por no_empleado
         $data = $this->db
             ->select("u.no_empleado, u.nombre, u.apellido_paterno, u.apellido_materno, d.nombre as direccion")
             ->from("usuario u")
             ->join("direccion d", "u.id_direccion=d.id_direccion")
-            // ->where(array('status' => 0, 'asignado' => 0)) este sera de los usuarios activos
+            ->where('u.status', 1)
             ->like('u.no_empleado', $search, 'after', '', TRUE)
             ->order_by('u.no_empleado')
             ->get();
@@ -26,7 +26,7 @@ class Usuario extends CI_Model {
                 ->select("u.no_empleado, u.nombre, u.apellido_paterno, u.apellido_materno, d.nombre as direccion")
                 ->from("usuario u")
                 ->join("direccion d", "u.id_direccion=d.id_direccion")
-                // ->where(array('status' => 0, 'asignado' => 0)) este sera de los usuarios activos
+                ->where('u.status', 1)
                 ->like('u.nombre', $search, 'after', '', TRUE)
                 ->order_by('u.no_empleado')
                 ->get();
@@ -37,7 +37,7 @@ class Usuario extends CI_Model {
                 ->select("u.no_empleado, u.nombre, u.apellido_paterno, u.apellido_materno, d.nombre as direccion")
                 ->from("usuario u")
                 ->join("direccion d", "u.id_direccion=d.id_direccion")
-                // ->where(array('status' => 0, 'asignado' => 0)) este sera de los usuarios activos
+                ->where('u.status', 1)
                 ->like('u.apellido_paterno', $search, 'after', '', TRUE)
                 ->order_by('u.no_empleado')
                 ->get();
@@ -48,7 +48,7 @@ class Usuario extends CI_Model {
                 ->select("u.no_empleado, u.nombre, u.apellido_paterno, u.apellido_materno, d.nombre as direccion")
                 ->from("usuario u")
                 ->join("direccion d", "u.id_direccion=d.id_direccion")
-                // ->where(array('status' => 0, 'asignado' => 0)) este sera de los usuarios activos
+                ->where('u.status', 1)
                 ->like('u.apellido_materno', $search, 'after', '', TRUE)
                 ->order_by('u.no_empleado')
                 ->get();

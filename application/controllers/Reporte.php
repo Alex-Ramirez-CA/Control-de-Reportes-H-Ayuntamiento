@@ -191,6 +191,7 @@ class Reporte extends CI_Controller {
 		$this->load->view('v_reporte', $data);
     }
 
+	// Funcion que realiza la consulta de la busqueda y manda los resultados al front
 	public function buscar_empleado() {
         // Validar para que no puedan ingresar a esta direccion sin estar logeados
 		if(!$this->session->has_userdata('id_rol')){
