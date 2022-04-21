@@ -165,8 +165,17 @@ class Usuarios extends CI_Controller {
 			// Recibir el no_empleado del usuario seleccionado
 			$no_empleado = $this->input->post('no_empleado');
 			// Traer los datos del usuario
-
+			$data = array(
+				'head' => $this->load->view('layout/head', '', TRUE),
+				'nav' => $this->load->view('layout/nav', '', TRUE),
+				'footer' => $this->load->view('layout/footer', '', TRUE),
+                'departamentos' => $this->Departamento->get_departamentos(),
+                'roles' => $this->Rol->get_roles(),
+				'direcciones' => $this->Direccion->get_direcciones(),
+				'datos_usuario' => $this->Usuario->getUsuario(),
+			);
 			// Cargar la vista y mandar los datos
+			$this->load->view('v_agregar_usuario', $data);
 		} else {
 			// Si no hay datos de sesion redireccionar a login
 			redirect('login');
