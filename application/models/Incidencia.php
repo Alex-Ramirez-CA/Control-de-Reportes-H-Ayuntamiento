@@ -301,6 +301,9 @@ class Incidencia extends CI_Model {
         return $data->result();
     }
     
+    // -----------------------------------------------------------------------------------
+
+    // Filtros para las incidencias con status cero
     public function get_incidenciasStatusCero($status, $direccion, $dependencia, $equipo, $departamento) {
         $queryDirecc = 'd.id_direccion IS NOT NULL';
         $queryDepen = 'd.id_dependencia IS NOT NULL';
@@ -414,6 +417,7 @@ class Incidencia extends CI_Model {
         return $data->result();
     }
     
+    // Filtros para las incidencias con status uno
     public function get_incidenciasStatusUno($status, $direccion, $dependencia, $equipo, $departamento) {
         $queryDirecc = 'd.id_direccion IS NOT NULL';
         $queryDepen = 'd.id_dependencia IS NOT NULL';
@@ -527,6 +531,7 @@ class Incidencia extends CI_Model {
         return $data->result();
     }
     
+    // Filtros para las incidencias con status dos
     public function get_incidenciasStatusDos($status, $fecha_inicio, $fecha_fin, $direccion, $dependencia, $equipo, $departamento) {
         $queryFecha = 'inc.fecha_cierre IS NOT NULL';
         $queryDirecc = 'd.id_direccion IS NOT NULL';
@@ -648,6 +653,8 @@ class Incidencia extends CI_Model {
         return $data->result();
     }
     
+    // -----------------------------------------------------------------------------------
+
     // Consulta todas las incidencias para la vista principal administrador
     public function get_incidenciasFiltradas($status, $fecha_inicio, $fecha_fin, $departamento, $dependencia, $direccion, $equipo) {
         if($status == 0) {
