@@ -134,4 +134,11 @@ class Usuario extends CI_Model {
         return $data->result();
     }
 
+    // Función que permite modificar el status de un usuario, ya sea como activo o inactivo
+    public function statusUsuario($status, $no_empleado) {
+        $this->db->set('status', $status);
+        $this->db->where('no_empleado', $no_empleado);
+        $this->db->update('usuario');
+    }
+
 }

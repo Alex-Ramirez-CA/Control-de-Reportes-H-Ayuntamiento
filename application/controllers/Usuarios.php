@@ -134,4 +134,11 @@ class Usuarios extends CI_Controller {
 		echo json_encode($data);
 	}
 
+	// Funcion que permitira actualizar el status de un usuario
+	public function modificarStatus() {
+		$status = $this->input->post('status');
+		$no_empleado = $this->input->post('no_empleado');
+		$this->Usuario->statusUsuario($status, $no_empleado);
+	}
+
 }
