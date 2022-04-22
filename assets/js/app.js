@@ -331,6 +331,17 @@
                 if(incidencia_pendiente.encargado == null){
                     incidencia_pendiente.encargado = ": Por asignar";
                 }
+
+                //Dar formato a la fecha de los reportes
+                var fecha = new Date(incidencia_pendiente.fecha_apertura);
+                var dia = fecha.getDate() + 1;
+                var mes = fecha.getMonth() + 1;
+                if(dia < 10){
+                    dia = "0" + dia
+                }
+                if(mes < 10){
+                    mes = "0" + mes
+                }
                 template_pendientes += `
                 <div class="card-tres-columnas">
                     <div class="card-title">
@@ -343,7 +354,7 @@
                         </div>
                         <div class="fecha">
                             <b><h5>Creado</h5></b>
-                            <p>${incidencia_pendiente.fecha_apertura}</p>
+                            <p>${dia + "/" + mes + "/" + fecha.getFullYear()}</p>
                         </div>
                         <div class="opciones-card">
                             <button class="ver" idReporte="${incidencia_pendiente.id_incidencia}">Ver</button>
@@ -372,6 +383,16 @@
         //Para las incidencias en proceso
         if(incidencias.en_proceso){
             (incidencias.en_proceso).forEach(incidencia_proceso => {
+                //Dar formato a la fecha de los reportes
+                var fecha = new Date(incidencia_proceso.fecha_apertura);
+                var dia = fecha.getDate() + 1;
+                var mes = fecha.getMonth() + 1;
+                if(dia < 10){
+                    dia = "0" + dia
+                }
+                if(mes < 10){
+                    mes = "0" + mes
+                }
                 template_proceso += `
                 <div class="card-tres-columnas">
                     <div class="card-title">
@@ -384,7 +405,7 @@
                         </div>
                         <div class="fecha">
                             <b><h5>Creado</h5></b>
-                            <p>${incidencia_proceso.fecha_apertura}</p>
+                            <p>${dia + "/" + mes + "/" + fecha.getFullYear()}</p>
                         </div>
                         <div class="opciones-card">
                             <button class="ver" idReporte="${incidencia_proceso.id_incidencia}">Ver</button>
@@ -413,6 +434,16 @@
         //Para las incidencias finalizadas
         if(incidencias.finalizados){
             (incidencias.finalizados).forEach(incidencia_finalizada => {
+                //Dar formato a la fecha de los reportes
+                var fecha = new Date(incidencia_finalizada.fecha_apertura);
+                var dia = fecha.getDate() + 1;
+                var mes = fecha.getMonth() + 1;
+                if(dia < 10){
+                    dia = "0" + dia
+                }
+                if(mes < 10){
+                    mes = "0" + mes
+                }
                 template_finalizados += `
                 <div class="card-tres-columnas">
                     <div class="card-title">
@@ -425,7 +456,7 @@
                         </div>
                         <div class="fecha">
                             <b><h5>Creado</h5></b>
-                            <p>${incidencia_finalizada.fecha_apertura}</p>
+                            <p>${dia + "/" + mes + "/" + fecha.getFullYear()}</p>
                         </div>
                         <div class="opciones-card">
                             <button class="ver" idReporte="${incidencia_finalizada.id_incidencia}">Ver</button>

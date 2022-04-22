@@ -21,7 +21,15 @@
             $('.titulo-reporte-filtro').html(json.titulo);
             $('#folio-reporte').html("Folio: " + json.id_incidencia);
             var fecha = new Date(json.fecha_apertura);
-            $('#fecha-reporte').html("Creado: " + (fecha.getDate() + 1) + "/" + (fecha.getMonth() + 1) + "/" + fecha.getFullYear());
+            var dia = fecha.getDate() + 1;
+            var mes = fecha.getMonth() + 1;
+            if(dia < 10){
+                dia = "0" + dia
+            }
+            if(mes < 10){
+                mes = "0" + mes
+            }
+            $('#fecha-reporte').html("Creado: " + dia + "/" + mes + "/" + fecha.getFullYear());
             $('#descripcion-reporte').html(json.descripcion);
             $('.guardar-cambios').attr('idReporte',json.id_incidencia);
         });
