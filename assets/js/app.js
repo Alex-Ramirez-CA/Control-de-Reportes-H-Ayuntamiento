@@ -415,6 +415,27 @@
 
     obtenerListaCompletaUsuarios ();
 
+    //Función para dar de baja o de alta algún empleado
+    $(document).on('click', '#status_empleado', function(){
+        let status;
+        let no_empleado = $(this).val();
+        if( $(this).is(':checked') ){
+            // Hacer algo si el checkbox ha sido seleccionado
+            status = 1;
+            $.post('modificar_status', {status, no_empleado}, function(response){
+                console.log(response);
+            });
+            console.log("El empleado con numero " + no_empleado + " ha sido seleccionado, nuevo status: " + status);
+        } else {
+            // Hacer algo si el checkbox ha sido deseleccionado
+            status = 0;
+            $.post('modificar_status', {status, no_empleado}, function(response){
+                console.log(response);
+            });
+            console.log("El empleado con numero " + no_empleado + " ha sido deseleccionado, nuevo status: " + status);
+        }
+    });
+
     //Función general para pintar la lista de los empleados de acuerdo a una respuesta
     function obtenerListaCompletaUsuarios (){
         $.ajax({
@@ -440,11 +461,11 @@
                     <td>${usuario.rol}</td>
                     <td class="campo_status_empleado">
                         <button class="editar_datos_usuarios">Editar</button> 
-                        <label class="label_status_empleado" for="status_empleado">
+                        <p class="label_status_empleado" for="status_empleado">
                             Status
                             <br>
                             <input id="status_empleado" type="checkbox" ${usuario.status == 1 ? "checked" : ""} value="${usuario.no_empleado}">
-                        </label>
+                        </p>
                     </td>
                 </tr>
                 `;

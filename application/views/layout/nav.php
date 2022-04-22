@@ -10,7 +10,7 @@
                             <a class="btn my-2 my-sm-0 mr-2" href="#">Administración</a>
                             <div class="opciones_administracion">
                                 <a href="<?= base_url('usuarios') ?>">Agregar usuario</a> 
-                                <a href="<?= base_url('usuarios/lista_usuarios') ?>">Listar usuarios</a> 
+                                <a class="opcion_lista_usuarios" href="<?= base_url('usuarios/lista_usuarios') ?>">Listar usuarios</a> 
                                 <a href="#">Agregar equipo</a> 
                                 <a href="#">Listar equipos</a>  
                             </div>
