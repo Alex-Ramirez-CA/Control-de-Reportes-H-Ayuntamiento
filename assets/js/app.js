@@ -567,29 +567,41 @@
                 400: function(xhr) {
                     let json = JSON.parse(xhr.responseText);
                     //Para mostrar los mensajes de error en caso de tener en los campos del formulario
-                    $('.error_message_nombre').css({'transform':'translateY(0px)'});
-                    $('.error_message_nombre').css({'z-index':'1'});
-                    $(".error_message_nombre").html(`<p>${json.nombre}</p>`);
+                    if (json.nombre !== ""){
+                        $('.error_message_nombre').css({'transform':'translateY(0px)'});
+                        $('.error_message_nombre').css({'z-index':'1'});
+                        $(".error_message_nombre").html(`<p>${json.nombre}</p>`);
+                    }
 
-                    $('.error_message_apellidoP').css({'transform':'translateY(0px)'});
-                    $('.error_message_apellidoP').css({'z-index':'1'});
-                    $(".error_message_apellidoP").html(`<p>${json.apellido_paterno}</p>`);
+                    if (json.apellido_paterno !== "") {
+                        $('.error_message_apellidoP').css({'transform':'translateY(0px)'});
+                        $('.error_message_apellidoP').css({'z-index':'1'});
+                        $(".error_message_apellidoP").html(`<p>${json.apellido_paterno}</p>`);
+                    }
 
-                    $('.error_message_apellidoM').css({'transform':'translateY(0px)'});
-                    $('.error_message_apellidoM').css({'z-index':'1'});
-                    $(".error_message_apellidoM").html(`<p>${json.apellido_materno}</p>`);
+                    if (json.apellido_materno !== "") {
+                        $('.error_message_apellidoM').css({'transform':'translateY(0px)'});
+                        $('.error_message_apellidoM').css({'z-index':'1'});
+                        $(".error_message_apellidoM").html(`<p>${json.apellido_materno}</p>`);
+                    }
 
-                    $('.error_message_email').css({'transform':'translateY(0px)'});
-                    $('.error_message_email').css({'z-index':'1'});
-                    $(".error_message_email").html(`<p>${json.email}</p>`);
-
-                    $('.error_message_password').css({'transform':'translateY(0px)'});
-                    $('.error_message_password').css({'z-index':'1'});
-                    $(".error_message_password").html(`<p>${json.password}</p>`);
-
-                    $('.error_message_direccionIP').css({'transform':'translateY(0px)'});
-                    $('.error_message_direccionIP').css({'z-index':'1'});
-                    $(".error_message_direccionIP").html(`<p>${json.id_equipo}</p>`);
+                    if (json.email !== "") {
+                        $('.error_message_email').css({'transform':'translateY(0px)'});
+                        $('.error_message_email').css({'z-index':'1'});
+                        $(".error_message_email").html(`<p>${json.email}</p>`);
+                    }
+                    
+                    if (json.password !== "") {
+                        $('.error_message_password').css({'transform':'translateY(0px)'});
+                        $('.error_message_password').css({'z-index':'1'});
+                        $(".error_message_password").html(`<p>${json.password}</p>`);
+                    }
+                     
+                    if (json.id_equipo !== "") {
+                        $('.error_message_direccionIP').css({'transform':'translateY(0px)'});
+                        $('.error_message_direccionIP').css({'z-index':'1'});
+                        $(".error_message_direccionIP").html(`<p>${json.id_equipo}</p>`);
+                    }
                 }
             },
         });
