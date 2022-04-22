@@ -13,6 +13,16 @@ Estilos para el contendeor de la pagina web
 	margin-top: 30px;
 }
 
+.container_lista_usuarios {
+	width: 100%;
+	max-width: 1080px;
+	max-height: 1000px;
+	display: flex;
+	justify-content: space-between;
+	margin: 0 auto;
+	margin-top: 30px;
+}
+
 /*
 ------------------------------------------------------------------------------------------------------------
 Estilos para los titulos de las columnas y el número de reportes
@@ -656,7 +666,7 @@ Estilos para los filtros que puede aplicar el administrador
 	color: #fff;
 }
 
- /*Estilos para el formulario de agregar usuario*/
+ /*-----------------------------Estilos para el formulario de agregar usuario-----------------------------*/
 .formulario_agregar_usuario {
 	border-radius: 10px;
 	width: 100%;
@@ -822,4 +832,63 @@ Estilos para los filtros que puede aplicar el administrador
 
 .cerrar_ventana_guardar_usuario:hover {
 	background: #2e2e2e;
+}
+
+ /*-----------------------------Estilos para el listado de usuarios usuarios-----------------------------*/
+.filtros_lista_usurios {
+	width: 25%;
+	height: 500px;
+	border: solid 1px #006e95;
+}
+
+.lista_usuarios {
+	width: 72%;
+	height: 500px;
+	border: solid 1px #006e95;
+	overflow: hidden;
+	overflow-y: scroll;
+	border-radius: 10px;
+}
+
+.tabla_lista_usuarios {
+	text-align: center;
+	font-size: 13px;
+}
+
+.tabla_lista_usuarios td {
+	padding-top: 1.85%;
+}
+
+.tabla_lista_usuarios thead {
+	background-color: #006e95;
+	color: #fff;
+}
+
+.editar_datos_usuarios {
+	background-color: #F5D344;
+	color: #4E4E4E;
+	font-size: 10px;
+	width: 43px;
+	height: 20px;
+	text-align: center;
+	border-radius: 5px;
+	padding-top: 3px;
+	border: none;
+	cursor: pointer;
+	margin-top: 10%;
+	margin-right: 7px;
+}
+
+.campo_status_empleado {
+	display: flex;
+}
+
+.editar_datos_usuarios:hover {
+	background-color: #ffdc51;
+	color: black;
+}
+
+.label_status_empleado {
+	font-size: 10px;
+	color: #006e95;
 }

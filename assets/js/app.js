@@ -260,6 +260,199 @@
         $('.contenedor-mensaje').css({'transform':'translateY(-200%)'});
     });
 
+    //Habilitar los campos del formulario
+    $("#tipo_usuario").change(function() {
+        if($("#tipo_usuario").val() !== "0"){
+            $('#departamento').prop('disabled', false);
+        }else{
+            $('#departamento').prop('disabled', 'disabled');
+            $('.departamento_indefinido').prop('selected', 'selected');   
+        }
+    });
+    
+
+    //Evento de cuando el administrador un equipo por su IP al ingresar un usuario nuevo
+    $("#direccion_ip").keyup(function(ev) {
+        if($('#direccion_ip').val()){
+            $('.opciones_busqueda_ip').css('display','block');
+            let search_IP = $('#direccion_ip').val();
+            //console.log(search_IP)
+            $.ajax({
+                url: 'usuarios/buscar_direccionIP',
+                type: 'POST',
+                data: { search_IP },
+                success: function(data) {
+                    let equipos = JSON.parse(data);
+                    let template = "";
+                    if (equipos){
+                        equipos.forEach(element => {
+                            template += ` <p class="opcion_equipo_ip" idEquipo="${element.id_equipo}">${element.direccion_ip}</p> `;
+                        });
+                    }else {
+                        template = "";
+                    }
+                    $('.opciones_busqueda_ip').html(template);
+                }
+            });
+        }else {
+            template = "";
+            $('.opciones_busqueda_ip').css('display','none');
+            $('.opciones_busqueda_ip').html(template);
+            $('#direccion_ip').removeAttr('idEquipo');
+        }
+    });
+
+    //Evento de cuando clique en enviar filtros
+    $(document).on('click', '.opcion_equipo_ip', function(){
+        let elemento = $(this)[0];
+        $('#direccion_ip').val($(this).text());
+        $('#direccion_ip').attr('idEquipo',$(elemento).attr('idEquipo'));
+        $('.opciones_busqueda_ip').css('display','none');
+    });
+
+    //Evento cuando se clica guardar los datos a la hora de guardar un usuario
+    $("#btn_guardar_usuario").click(function(ev) {
+        let nombre = $('#nombre').val();
+        let apellido_paterno = $('#apellido_paterno').val();
+        let apellido_materno = $('#apellido_materno').val();
+        let email = $('#email').val();
+        let password = $('#contraseña').val();
+        let id_direccion = $('#direccion').val();
+        let id_rol = $('#tipo_usuario').val();
+        let id_departamento = $('#departamento').val();
+        let id_equipo = $('#direccion_ip').attr('idEquipo');
+        $.ajax({
+            url: 'usuarios/guardar_usuario',
+            type: 'POST',
+            data: {nombre, apellido_paterno, apellido_materno, email, password, id_direccion, id_rol, id_departamento, id_equipo},
+            success: function(data) {
+                let json = JSON.parse(data);
+                $(".titulo-mensaje").html(`<b><h1>${json.msg}</h1></b>`);
+                $('.mensaje').css({'visibility':'visible'});
+                $('.contenedor_mensaje_guardar_usuario').css({'transform':'translateY(0%)'});
+                $(document).on('click', '.cerrar_ventana_guardar_usuario', function(){
+                    $('.mensaje').css({'visibility':'hidden'});
+                    $('.contenedor_mensaje_guardar_usuario').css({'transform':'translateY(-200%)'});
+                    window.location.replace(json.url);
+                });
+                
+            },
+            statusCode: {
+                400: function(xhr) {
+                    let json = JSON.parse(xhr.responseText);
+                    //Para mostrar los mensajes de error en caso de tener en los campos del formulario
+                    if (json.nombre !== ""){
+                        $('.error_message_nombre').css({'transform':'translateY(0px)'});
+                        $('.error_message_nombre').css({'z-index':'1'});
+                        $(".error_message_nombre").html(`<p>${json.nombre}</p>`);
+                    }
+
+                    if (json.apellido_paterno !== "") {
+                        $('.error_message_apellidoP').css({'transform':'translateY(0px)'});
+                        $('.error_message_apellidoP').css({'z-index':'1'});
+                        $(".error_message_apellidoP").html(`<p>${json.apellido_paterno}</p>`);
+                    }
+
+                    if (json.apellido_materno !== "") {
+                        $('.error_message_apellidoM').css({'transform':'translateY(0px)'});
+                        $('.error_message_apellidoM').css({'z-index':'1'});
+                        $(".error_message_apellidoM").html(`<p>${json.apellido_materno}</p>`);
+                    }
+
+                    if (json.email !== "") {
+                        $('.error_message_email').css({'transform':'translateY(0px)'});
+                        $('.error_message_email').css({'z-index':'1'});
+                        $(".error_message_email").html(`<p>${json.email}</p>`);
+                    }
+                    
+                    if (json.password !== "") {
+                        $('.error_message_password').css({'transform':'translateY(0px)'});
+                        $('.error_message_password').css({'z-index':'1'});
+                        $(".error_message_password").html(`<p>${json.password}</p>`);
+                    }
+                     
+                    if (json.id_equipo !== "") {
+                        $('.error_message_direccionIP').css({'transform':'translateY(0px)'});
+                        $('.error_message_direccionIP').css({'z-index':'1'});
+                        $(".error_message_direccionIP").html(`<p>${json.id_equipo}</p>`);
+                    }
+                }
+            },
+        });
+        ev.preventDefault();
+    });
+
+    //Funciones para ocultar los mensajes de error del formulario cuando el usuario comience a escribir
+    $(document).on('keyup', '#nombre', function(){
+        $('.error_message_nombre').css({'transform':'translateY(-10px)'});
+        $('.error_message_nombre').css({'z-index':'-1'});
+    });
+
+    $(document).on('keyup', '#apellido_paterno', function(){
+        $('.error_message_apellidoP').css({'transform':'translateY(-10px)'});
+        $('.error_message_apellidoP').css({'z-index':'-1'});
+    });
+    
+    $(document).on('keyup', '#apellido_materno', function(){
+        $('.error_message_apellidoM').css({'transform':'translateY(-10px)'});
+        $('.error_message_apellidoM').css({'z-index':'-1'});
+    });
+
+    $(document).on('keyup', '#email', function(){
+        $('.error_message_email').css({'transform':'translateY(-10px)'});
+        $('.error_message_email').css({'z-index':'-1'});
+    });
+    
+    $(document).on('keyup', '#contraseña', function(){
+        $('.error_message_password').css({'transform':'translateY(-10px)'});
+        $('.error_message_password').css({'z-index':'-1'});
+    });
+
+    $(document).on('keyup', '#direccion_ip', function(){
+        $('.error_message_direccionIP').css({'transform':'translateY(-10px)'});
+        $('.error_message_direccionIP').css({'z-index':'-1'});
+    });
+
+    obtenerListaCompletaUsuarios ();
+
+    //Función general para pintar la lista de los empleados de acuerdo a una respuesta
+    function obtenerListaCompletaUsuarios (){
+        $.ajax({
+            url: 'obtener_lista',
+            type: 'GET',
+            success: function(response) {
+                obtenerListaUsuarios (response);
+            }
+        });
+    }
+
+    //Función general para pintar de acuerdo a una respuesta las incidencias
+    function obtenerListaUsuarios (response){
+        let usuarios = JSON.parse(response);
+        let template = "";
+        if(usuarios){
+            (usuarios).forEach(usuario => {
+                template += `
+                <tr>
+                    <th scope="row">${usuario.no_empleado}</th>
+                    <td>${usuario.nombre + " " + usuario.apellido_paterno + " " + usuario.apellido_materno}</td>
+                    <td>${usuario.email}</td>
+                    <td>${usuario.rol}</td>
+                    <td class="campo_status_empleado">
+                        <button class="editar_datos_usuarios">Editar</button> 
+                        <label class="label_status_empleado" for="status_empleado">
+                            Status
+                            <br>
+                            <input id="status_empleado" type="checkbox" ${usuario.status == 1 ? "checked" : ""} value="${usuario.no_empleado}">
+                        </label>
+                    </td>
+                </tr>
+                `;
+            });
+        }
+        $('.tbody_lista_usuarios').html(template);
+    }    
+
     //Función que carga las incidencias
     function obtenerTodasIncidencias (){
         $.ajax({
@@ -271,6 +464,7 @@
         });
     }
 
+    //Finción para obtener los datos con los cuales el Amnistrador pordraá aplicar filtros
     function obtenerDatosFiltros (){
         $.ajax({
             url: 'administrador/datos_filtros',
@@ -313,6 +507,7 @@
         });
     }
 
+    //Función general para pintar de acuerdo a una respuesta las incidencias
     function obtenerIncidencias (response){
         let incidencias = JSON.parse(response);
         let template_pendientes = "";
@@ -516,158 +711,5 @@
         $('.cantidad-reportes-proceso').html(cantidad_proceso);
         $('.cantidad-reportes-finalizado').html(cantidad_finalizados);
     }
-
-    //Habilitar los campos del formulario
-    $("#tipo_usuario").change(function() {
-        if($("#tipo_usuario").val() !== "0"){
-            $('#departamento').prop('disabled', false);
-        }else{
-            $('#departamento').prop('disabled', 'disabled');
-            $('.departamento_indefinido').prop('selected', 'selected');   
-        }
-    });
-    
-
-    //Evento de cuando el administrador un equipo por su IP al ingresar un usuario nuevo
-    $("#direccion_ip").keyup(function(ev) {
-        if($('#direccion_ip').val()){
-            $('.opciones_busqueda_ip').css('display','block');
-            let search_IP = $('#direccion_ip').val();
-            //console.log(search_IP)
-            $.ajax({
-                url: 'usuarios/buscar_direccionIP',
-                type: 'POST',
-                data: { search_IP },
-                success: function(data) {
-                    let equipos = JSON.parse(data);
-                    let template = "";
-                    if (equipos){
-                        equipos.forEach(element => {
-                            template += ` <p class="opcion_equipo_ip" idEquipo="${element.id_equipo}">${element.direccion_ip}</p> `;
-                        });
-                    }else {
-                        template = "";
-                    }
-                    $('.opciones_busqueda_ip').html(template);
-                }
-            });
-        }else {
-            template = "";
-            $('.opciones_busqueda_ip').css('display','none');
-            $('.opciones_busqueda_ip').html(template);
-            $('#direccion_ip').removeAttr('idEquipo');
-        }
-    });
-
-    //Evento de cuando clique en enviar filtros
-    $(document).on('click', '.opcion_equipo_ip', function(){
-        let elemento = $(this)[0];
-        $('#direccion_ip').val($(this).text());
-        $('#direccion_ip').attr('idEquipo',$(elemento).attr('idEquipo'));
-        $('.opciones_busqueda_ip').css('display','none');
-    });
-
-    //Evento cuando se clica guardar los datos a la hora de guardar un usuario
-    $("#btn_guardar_usuario").click(function(ev) {
-        let nombre = $('#nombre').val();
-        let apellido_paterno = $('#apellido_paterno').val();
-        let apellido_materno = $('#apellido_materno').val();
-        let email = $('#email').val();
-        let password = $('#contraseña').val();
-        let id_direccion = $('#direccion').val();
-        let id_rol = $('#tipo_usuario').val();
-        let id_departamento = $('#departamento').val();
-        let id_equipo = $('#direccion_ip').attr('idEquipo');
-        $.ajax({
-            url: 'usuarios/guardar_usuario',
-            type: 'POST',
-            data: {nombre, apellido_paterno, apellido_materno, email, password, id_direccion, id_rol, id_departamento, id_equipo},
-            success: function(data) {
-                let json = JSON.parse(data);
-                $(".titulo-mensaje").html(`<b><h1>${json.msg}</h1></b>`);
-                $('.mensaje').css({'visibility':'visible'});
-                $('.contenedor_mensaje_guardar_usuario').css({'transform':'translateY(0%)'});
-                $(document).on('click', '.cerrar_ventana_guardar_usuario', function(){
-                    $('.mensaje').css({'visibility':'hidden'});
-                    $('.contenedor_mensaje_guardar_usuario').css({'transform':'translateY(-200%)'});
-                    window.location.replace(json.url);
-                });
-                
-            },
-            statusCode: {
-                400: function(xhr) {
-                    let json = JSON.parse(xhr.responseText);
-                    //Para mostrar los mensajes de error en caso de tener en los campos del formulario
-                    if (json.nombre !== ""){
-                        $('.error_message_nombre').css({'transform':'translateY(0px)'});
-                        $('.error_message_nombre').css({'z-index':'1'});
-                        $(".error_message_nombre").html(`<p>${json.nombre}</p>`);
-                    }
-
-                    if (json.apellido_paterno !== "") {
-                        $('.error_message_apellidoP').css({'transform':'translateY(0px)'});
-                        $('.error_message_apellidoP').css({'z-index':'1'});
-                        $(".error_message_apellidoP").html(`<p>${json.apellido_paterno}</p>`);
-                    }
-
-                    if (json.apellido_materno !== "") {
-                        $('.error_message_apellidoM').css({'transform':'translateY(0px)'});
-                        $('.error_message_apellidoM').css({'z-index':'1'});
-                        $(".error_message_apellidoM").html(`<p>${json.apellido_materno}</p>`);
-                    }
-
-                    if (json.email !== "") {
-                        $('.error_message_email').css({'transform':'translateY(0px)'});
-                        $('.error_message_email').css({'z-index':'1'});
-                        $(".error_message_email").html(`<p>${json.email}</p>`);
-                    }
-                    
-                    if (json.password !== "") {
-                        $('.error_message_password').css({'transform':'translateY(0px)'});
-                        $('.error_message_password').css({'z-index':'1'});
-                        $(".error_message_password").html(`<p>${json.password}</p>`);
-                    }
-                     
-                    if (json.id_equipo !== "") {
-                        $('.error_message_direccionIP').css({'transform':'translateY(0px)'});
-                        $('.error_message_direccionIP').css({'z-index':'1'});
-                        $(".error_message_direccionIP").html(`<p>${json.id_equipo}</p>`);
-                    }
-                }
-            },
-        });
-        ev.preventDefault();
-    });
-
-    //Funciones para ocultar los mensajes de error del formulario cuando el usuario comience a escribir
-    $(document).on('keyup', '#nombre', function(){
-        $('.error_message_nombre').css({'transform':'translateY(-10px)'});
-        $('.error_message_nombre').css({'z-index':'-1'});
-    });
-
-    $(document).on('keyup', '#apellido_paterno', function(){
-        $('.error_message_apellidoP').css({'transform':'translateY(-10px)'});
-        $('.error_message_apellidoP').css({'z-index':'-1'});
-    });
-    
-    $(document).on('keyup', '#apellido_materno', function(){
-        $('.error_message_apellidoM').css({'transform':'translateY(-10px)'});
-        $('.error_message_apellidoM').css({'z-index':'-1'});
-    });
-
-    $(document).on('keyup', '#email', function(){
-        $('.error_message_email').css({'transform':'translateY(-10px)'});
-        $('.error_message_email').css({'z-index':'-1'});
-    });
-    
-    $(document).on('keyup', '#contraseña', function(){
-        $('.error_message_password').css({'transform':'translateY(-10px)'});
-        $('.error_message_password').css({'z-index':'-1'});
-    });
-
-    $(document).on('keyup', '#direccion_ip', function(){
-        $('.error_message_direccionIP').css({'transform':'translateY(-10px)'});
-        $('.error_message_direccionIP').css({'z-index':'-1'});
-    });
 
 })(jQuery)

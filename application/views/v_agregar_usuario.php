@@ -1,7 +1,7 @@
 <?= $head; ?>
 <?= $nav; ?>
 
-<div class="container" rol="<?= $this->session->id_rol; ?>">
+<div class="container">
     <div class="formulario_agregar_usuario">
         <div class="titulo_formulario">
             <h1>Ingrese datos del nuevo usuario</h1>
