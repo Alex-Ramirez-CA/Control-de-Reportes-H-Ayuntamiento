@@ -83,6 +83,7 @@ class Usuarios extends CI_Controller {
 				'apellido_materno' => $this->input->post('apellido_materno'),
 				'email' => $this->input->post('email'),
 				'password' => $this->input->post('password'),
+				'status' => 1,
 				'id_direccion' => $this->input->post('id_direccion'),
 				'id_rol' => $this->input->post('id_rol'),
 				'id_departamento' => $this->input->post('id_departamento'),
@@ -119,6 +120,141 @@ class Usuarios extends CI_Controller {
             // Si no hay datos de sesion redireccionar a login
             redirect('login');
         }
+	}
+
+	// Funcion que trae los datos de todos los usuarios existentes
+	public function lista_usuarios() {
+		if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 3) {
+			// Validar que existan usuarios
+			if($res = $this->Usuario->getUsuarios()) {
+				$data = array(
+					'head' => $this->load->view('layout/head', '', TRUE),
+					'nav' => $this->load->view('layout/nav', '', TRUE),
+					'footer' => $this->load->view('layout/footer', '', TRUE),
+					'usuarios' => $res
+				);
+				$this->load->view('v_listar_usuarios', $data);
+			}
+		} else {
+			// Si no hay datos de sesion redireccionar a login
+			redirect('login');
+		}
+	}
+	
+	// Funcion que trae los datos de todos los usuarios existentes
+	public function obtener_lista() {
+		if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 3) {
+			// Validar que existan usuarios
+			if($res = $this->Usuario->getUsuarios()) {
+				echo json_encode($res);
+			}
+		} else {
+			// Si no hay datos de sesion redireccionar a login
+			redirect('login');
+		}
+	}
+
+	// Filtrar los usuarios
+	public function filtrar_usuarios() {
+		if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 3) {
+			// $rol, $departamento,  $dependencia, $direccion, $status
+			$data = $this->Usuario->filtrarUsuarios(2, 3,  NULL, NULL, NULL);
+			echo json_encode($data);
+		} else {
+			// Si no hay datos de sesion redireccionar a login
+			redirect('login');
+		}
+	}
+
+	// Funcion que permitira actualizar el status de un usuario
+	public function modificar_status() {
+		if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 3) {
+			$status = $this->input->post('status');
+			$no_empleado = $this->input->post('no_empleado');
+			$this->Usuario->statusUsuario($status, $no_empleado);
+		} else {
+			// Si no hay datos de sesion redireccionar a login
+			redirect('login');
+		}
+	}
+
+	// Funcion para cuando se clicke el boton de estidar usuario
+	public function editar_usuario() {
+		if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 3) {
+			// Recibir el no_empleado del usuario seleccionado
+			$no_empleado = $this->input->post('no_empleado');
+			// Traer los datos del usuario
+			$data = array(
+				'head' => $this->load->view('layout/head', '', TRUE),
+				'nav' => $this->load->view('layout/nav', '', TRUE),
+				'footer' => $this->load->view('layout/footer', '', TRUE),
+                'departamentos' => $this->Departamento->get_departamentos(),
+                'roles' => $this->Rol->get_roles(),
+				'direcciones' => $this->Direccion->get_direcciones(),
+				'datos_usuario' => $this->Usuario->getUsuario(),
+			);
+			// Cargar la vista y mandar los datos
+			$this->load->view('v_agregar_usuario', $data);
+		} else {
+			// Si no hay datos de sesion redireccionar a login
+			redirect('login');
+		}
+	}
+
+	// Funcion que guarda los cambios realizados en los datos del usuario
+	public function actualizar_usuario() {
+		if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 3) {
+			
+			// Datos para hacer la actualizacón del usuario
+			$datos = array(
+				'nombre' => $this->input->post('nombre'),
+				'apellido_paterno' => $this->input->post('apellido_paterno'),
+				'apellido_materno' => $this->input->post('apellido_materno'),
+				'email' => $this->input->post('email'),
+				'password' => $this->input->post('password'),
+				'id_direccion' => $this->input->post('id_direccion'),
+				'id_rol' => $this->input->post('id_rol'),
+				'id_departamento' => $this->input->post('id_departamento'),
+			);
+
+			// Obtener el no_empleado vía post
+			$no_empleado = 1;//$this->input->post('no_empleado');
+
+			// Si la direccion a la que pertenece es modificada
+			// Modificar tambien la impresora a la que estara asociado el usuario
+			$oldDireccion = $this->Usuario->obtenerDireccion($no_empleado);
+			$oldDireccion = $oldDireccion->id_direccion;
+			$newDireccion = 2;//$this->input->post('id_direccion');
+			if($oldDireccion !== $newDireccion){
+				// Obtener el id_equipo de la impresora a la que estaba asignado dicho usuario anteriormente
+				if($res = $this->Equipo->obtenerOldImpresora($no_empleado)) {
+					$old_id_equipo = $res->id_equipo;
+					// Obtener el id_equipo de la impresora de la nueva direccion
+					if($res = $this->Equipo->obtenerImpresora($newDireccion)) {
+						$id_equipo = $res->id_equipo;
+						// Realizar la actualizacion
+						$this->Equipo_usuario->updateEquipo($id_equipo, $no_empleado, $old_id_equipo);
+					}
+				}
+			}
+			
+			// Actualizar el equipo o PC del suarios
+			// Obtener el id_equipo vía post
+			$id_equipo = 1;//$this->input->post('id_equipo');
+			// Obtner el id del antiguo equipo del usuario
+			if($res = $this->Equipo->obtenerPC($no_empleado)) {
+				$old_id_equipo = $res->id_equipo;
+				// Realizar la actualizacion
+				$this->Equipo_usuario->updateEquipo($id_equipo, $no_empleado, $old_id_equipo);
+			}
+
+			// Hacer actualización de la tabla de usuarios
+			$this->Usuario->update_usuario($datos);
+
+		} else {
+			// Si no hay datos de sesion redireccionar a login
+			redirect('login');
+		}
 	}
 
 }
