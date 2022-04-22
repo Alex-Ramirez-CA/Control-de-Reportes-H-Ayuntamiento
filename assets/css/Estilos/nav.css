@@ -152,3 +152,31 @@ p {
 	color: #fff;
 	background-color: #006e95;
 }
+
+.administracion {
+	position: relative;
+}
+
+.opciones_administracion {
+	visibility: hidden;
+	position: absolute;
+	width: 130px;
+	top: 40px;
+	background-color: #f6f8fa;
+	text-align:center;
+	z-index: 1;
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+}
+
+.opciones .opciones_administracion a {
+	text-decoration: none;
+	padding: 0;
+	width: 100%;
+	padding-top: 10px;
+}
+
+.administracion:hover .opciones_administracion {
+	visibility: visible;
+}

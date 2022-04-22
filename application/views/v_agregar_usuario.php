@@ -85,7 +85,7 @@
                 <label for="departamento">
                     Departamento interno
                     <select name="departamento" id="departamento" disabled>
-                        <option selected value="0">Seleccione un departamento</option>
+                        <option class="departamento_indefinido" selected value="0">Seleccione un departamento</option>
                     <?php
                         foreach($departamentos as $item):
                     ?>
@@ -100,6 +100,21 @@
             </div>
         </div>
     </div>
+</div>
+
+<div class="mensaje">
+    <div class="contenedor_mensaje_guardar_usuario">
+        <div class="cerrar_ventana_guardar_usuario">
+            <p>x</p>
+        </div>
+        <div class="titulo-mensaje">
+            
+        </div>
+        <img style="margin-top: 15px" src="<?= base_url('assets/img/iconos/correcto.svg') ?>" width="250" alt="">
+        <div class="mensaje-body">
+
+        </div>
+            
 </div>
 
 <?= $footer ?>

@@ -492,6 +492,7 @@
             $('#departamento').prop('disabled', false);
         }else{
             $('#departamento').prop('disabled', 'disabled');
+            $('.departamento_indefinido').prop('selected', 'selected');   
         }
     });
     
@@ -552,35 +553,55 @@
             data: {nombre, apellido_paterno, apellido_materno, email, password, id_direccion, id_rol, id_departamento, id_equipo},
             success: function(data) {
                 let json = JSON.parse(data);
-                window.location.replace(json.url);
+                $(".titulo-mensaje").html(`<b><h1>${json.msg}</h1></b>`);
+                $('.mensaje').css({'visibility':'visible'});
+                $('.contenedor_mensaje_guardar_usuario').css({'transform':'translateY(0%)'});
+                $(document).on('click', '.cerrar_ventana_guardar_usuario', function(){
+                    $('.mensaje').css({'visibility':'hidden'});
+                    $('.contenedor_mensaje_guardar_usuario').css({'transform':'translateY(-200%)'});
+                    window.location.replace(json.url);
+                });
+                
             },
             statusCode: {
                 400: function(xhr) {
                     let json = JSON.parse(xhr.responseText);
                     //Para mostrar los mensajes de error en caso de tener en los campos del formulario
-                    $('.error_message_nombre').css({'transform':'translateY(0px)'});
-                    $('.error_message_nombre').css({'z-index':'1'});
-                    $(".error_message_nombre").html(`<p>${json.nombre}</p>`);
+                    if (json.nombre !== ""){
+                        $('.error_message_nombre').css({'transform':'translateY(0px)'});
+                        $('.error_message_nombre').css({'z-index':'1'});
+                        $(".error_message_nombre").html(`<p>${json.nombre}</p>`);
+                    }
 
-                    $('.error_message_apellidoP').css({'transform':'translateY(0px)'});
-                    $('.error_message_apellidoP').css({'z-index':'1'});
-                    $(".error_message_apellidoP").html(`<p>${json.apellido_paterno}</p>`);
+                    if (json.apellido_paterno !== "") {
+                        $('.error_message_apellidoP').css({'transform':'translateY(0px)'});
+                        $('.error_message_apellidoP').css({'z-index':'1'});
+                        $(".error_message_apellidoP").html(`<p>${json.apellido_paterno}</p>`);
+                    }
 
-                    $('.error_message_apellidoM').css({'transform':'translateY(0px)'});
-                    $('.error_message_apellidoM').css({'z-index':'1'});
-                    $(".error_message_apellidoM").html(`<p>${json.apellido_materno}</p>`);
+                    if (json.apellido_materno !== "") {
+                        $('.error_message_apellidoM').css({'transform':'translateY(0px)'});
+                        $('.error_message_apellidoM').css({'z-index':'1'});
+                        $(".error_message_apellidoM").html(`<p>${json.apellido_materno}</p>`);
+                    }
 
-                    $('.error_message_email').css({'transform':'translateY(0px)'});
-                    $('.error_message_email').css({'z-index':'1'});
-                    $(".error_message_email").html(`<p>${json.email}</p>`);
-
-                    $('.error_message_password').css({'transform':'translateY(0px)'});
-                    $('.error_message_password').css({'z-index':'1'});
-                    $(".error_message_password").html(`<p>${json.password}</p>`);
-
-                    $('.error_message_direccionIP').css({'transform':'translateY(0px)'});
-                    $('.error_message_direccionIP').css({'z-index':'1'});
-                    $(".error_message_direccionIP").html(`<p>${json.id_equipo}</p>`);
+                    if (json.email !== "") {
+                        $('.error_message_email').css({'transform':'translateY(0px)'});
+                        $('.error_message_email').css({'z-index':'1'});
+                        $(".error_message_email").html(`<p>${json.email}</p>`);
+                    }
+                    
+                    if (json.password !== "") {
+                        $('.error_message_password').css({'transform':'translateY(0px)'});
+                        $('.error_message_password').css({'z-index':'1'});
+                        $(".error_message_password").html(`<p>${json.password}</p>`);
+                    }
+                     
+                    if (json.id_equipo !== "") {
+                        $('.error_message_direccionIP').css({'transform':'translateY(0px)'});
+                        $('.error_message_direccionIP').css({'z-index':'1'});
+                        $(".error_message_direccionIP").html(`<p>${json.id_equipo}</p>`);
+                    }
                 }
             },
         });
@@ -617,4 +638,5 @@
         $('.error_message_direccionIP').css({'transform':'translateY(-10px)'});
         $('.error_message_direccionIP').css({'z-index':'-1'});
     });
+
 })(jQuery)
