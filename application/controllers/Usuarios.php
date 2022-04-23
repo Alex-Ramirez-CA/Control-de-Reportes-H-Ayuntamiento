@@ -131,7 +131,9 @@ class Usuarios extends CI_Controller {
 					'head' => $this->load->view('layout/head', '', TRUE),
 					'nav' => $this->load->view('layout/nav', '', TRUE),
 					'footer' => $this->load->view('layout/footer', '', TRUE),
-					'usuarios' => $res
+					'departamentos' => $this->Departamento->get_departamentos(),
+					'roles' => $this->Rol->get_roles(),
+					'direcciones' => $this->Direccion->get_direcciones(),
 				);
 				$this->load->view('v_listar_usuarios', $data);
 			}
@@ -157,8 +159,12 @@ class Usuarios extends CI_Controller {
 	// Filtrar los usuarios
 	public function filtrar_usuarios() {
 		if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 3) {
-			// $rol, $departamento,  $dependencia, $direccion, $status
-			$data = $this->Usuario->filtrarUsuarios(2, 3,  NULL, NULL, NULL);
+			$rol = $this->input->post('rol');
+			$departamento = $this->input->post('departamento'); 
+			$dependencia = $this->input->post('dependencia');
+			$direccion = $this->input->post('direccion');
+			$status = $this->input->post('status');
+			$data = $this->Usuario->filtrarUsuarios($rol, $departamento,  $dependencia, $direccion, $status);
 			echo json_encode($data);
 		} else {
 			// Si no hay datos de sesion redireccionar a login
