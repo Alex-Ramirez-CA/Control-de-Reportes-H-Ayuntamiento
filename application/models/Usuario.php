@@ -156,10 +156,11 @@ class Usuario extends CI_Model {
         return $data->row();
     }
 
-    public function getUsuario() {
+    public function getUsuario($no_empleado) {
         $data = $this->db
             ->select("no_empleado, nombre, apellido_paterno, apellido_materno, email, password, id_direccion, id_rol, id_departamento")
             ->from("usuario")
+            ->where('no_empleado', $no_empleado)
             ->get();
         
         // Si no se encuentra resultados
@@ -168,5 +169,17 @@ class Usuario extends CI_Model {
         }
         return $data->row();
     }
+
+    // Por si se actualizara campo por campo
+    public function update_nombre($no_empleado, $nombre) {
+        $this->db->set('nombre', $nombre);
+        $this->db->where('no_empleado', $no_empleado);
+        $this->db->update('usuario');
+    }
+
+    // Por si la actualizacion sera de todos los datos
+    public function update_usuario($no_empleado, $datos){
+		$this->db->update('usuario', $datos, array('no_empleado' => $no_empleado));
+	}
 
 }
