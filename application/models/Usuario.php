@@ -77,9 +77,10 @@ class Usuario extends CI_Model {
     // Obtiene todos los usuarios existentes
     public function getUsuarios() {
         $data = $this->db
-            ->select("u.no_empleado, u.nombre, u.apellido_paterno, u.apellido_materno, u.email, r.nombre as rol, u.status")
+            ->select("u.no_empleado, u.nombre, u.apellido_paterno, u.apellido_materno, dir.nombre as direccion, r.nombre as rol, u.status")
             ->from("usuario u")
             ->join("rol r", "u.id_rol=r.id_rol")
+            ->join("direccion dir", "u.id_direccion=dir.id_direccion")
             ->get();
         
         // Si no se encuentra resultados
@@ -114,7 +115,7 @@ class Usuario extends CI_Model {
         }
         $data = $this->db
             ->distinct()
-            ->select("u.no_empleado, u.nombre, u.apellido_paterno, u.apellido_materno, u.email, r.nombre as rol, u.status")
+            ->select("u.no_empleado, u.nombre, u.apellido_paterno, u.apellido_materno, dir.nombre as direccion, r.nombre as rol, u.status")
             ->from("usuario u")
             ->join("rol r", "u.id_rol=r.id_rol")
             ->join("departamento depa", "u.id_departamento=depa.id_departamento")
