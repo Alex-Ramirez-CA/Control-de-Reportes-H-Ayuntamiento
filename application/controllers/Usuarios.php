@@ -188,7 +188,7 @@ class Usuarios extends CI_Controller {
 	public function editar_usuario() {
 		if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 3) {
 			// Recibir el no_empleado del usuario seleccionado
-			$no_empleado = $this->input->post('no_empleado');
+			$no_empleado = (int)$this->input->post('no_empleado');
 			// Traer los datos del usuario
 			$data = array(
 				'head' => $this->load->view('layout/head', '', TRUE),
@@ -197,8 +197,7 @@ class Usuarios extends CI_Controller {
                 'departamentos' => $this->Departamento->get_departamentos(),
                 'roles' => $this->Rol->get_roles(),
 				'direcciones' => $this->Direccion->get_direcciones(),
-				'datos_usuario' => $this->Usuario->getUsuario(),
-				'no_empleado' => $no_empleado,
+				'datos_usuario' => $this->Usuario->getUsuario($no_empleado),
 			);
 			// Cargar la vista y mandar los datos
 			$this->load->view('v_agregar_usuario', $data);

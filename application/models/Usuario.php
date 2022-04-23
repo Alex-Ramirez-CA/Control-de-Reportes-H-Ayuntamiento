@@ -156,10 +156,11 @@ class Usuario extends CI_Model {
         return $data->row();
     }
 
-    public function getUsuario() {
+    public function getUsuario($no_empleado) {
         $data = $this->db
             ->select("no_empleado, nombre, apellido_paterno, apellido_materno, email, password, id_direccion, id_rol, id_departamento")
             ->from("usuario")
+            ->where('no_empleado', $no_empleado)
             ->get();
         
         // Si no se encuentra resultados
