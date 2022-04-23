@@ -419,21 +419,27 @@
     $(document).on('click', '#status_empleado', function(){
         let status;
         let no_empleado = $(this).val();
-        if( $(this).is(':checked') ){
-            // Hacer algo si el checkbox ha sido seleccionado
-            status = 1;
-            $.post('modificar_status', {status, no_empleado}, function(response){
-                console.log(response);
-            });
-            console.log("El empleado con numero " + no_empleado + " ha sido seleccionado, nuevo status: " + status);
+        
+        var opcion = confirm("¿Está seguro de cambiar el status actual del trabajador?");
+        if (opcion == true) {
+            if($(this).is(':checked')){
+                // Hacer algo si el checkbox ha sido seleccionado
+                status = 1;
+                console.log("El empleado con numero " + no_empleado + " ha sido seleccionado, nuevo status: " + status);
+                $.post('modificar_status', {status, no_empleado});
+                // obtenerListaCompletaUsuarios ();
+            } else {
+                // Hacer algo si el checkbox ha sido deseleccionado
+                status = 0;
+                console.log("El empleado con numero " + no_empleado + " ha sido deseleccionado, nuevo status: " + status);   
+                $.post('modificar_status', {status, no_empleado}); 
+                // obtenerListaCompletaUsuarios ();
+            }
         } else {
-            // Hacer algo si el checkbox ha sido deseleccionado
-            status = 0;
-            $.post('modificar_status', {status, no_empleado}, function(response){
-                console.log(response);
-            });
-            console.log("El empleado con numero " + no_empleado + " ha sido deseleccionado, nuevo status: " + status);
+            //console.log("No paso nada");
+            obtenerListaCompletaUsuarios ();
         }
+
     });
 
     //Función general para pintar la lista de los empleados de acuerdo a una respuesta

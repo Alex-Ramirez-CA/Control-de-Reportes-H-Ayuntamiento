@@ -838,13 +838,19 @@ Estilos para los filtros que puede aplicar el administrador
 .filtros_lista_usurios {
 	width: 25%;
 	height: 500px;
-	border: solid 1px #006e95;
+	background-color: rgba(248, 244, 244, 0.3);
+	box-shadow: 0 0px 20px 0 rgba(31, 38, 135, 0.37);
+    border: solid 0.1px #006e95;
 }
 
 .lista_usuarios {
 	width: 72%;
 	height: 500px;
-	border: solid 1px #006e95;
+	background-color: rgba(248, 244, 244, 0.3);
+	box-shadow: 0 0px 40px 0 rgba(31, 38, 135, 0.37);
+	border: solid 0.1px #006e95;
+	border-top: none;
+	border-right: none;
 	overflow: hidden;
 	overflow-y: scroll;
 	border-radius: 10px;

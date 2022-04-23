@@ -3,7 +3,8 @@
 
 <div class="container_lista_usuarios">
     <div class="filtros_lista_usurios">
-
+        <h1>Aplicar filtros</h1>
+        
     </div>
     <div class="lista_usuarios">
         <table class="table tabla_lista_usuarios">

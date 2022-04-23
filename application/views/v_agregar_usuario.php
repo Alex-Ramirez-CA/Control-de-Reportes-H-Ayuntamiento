@@ -114,6 +114,7 @@
         <div class="mensaje-body">
 
         </div>
+    </div>
             
 </div>
 
