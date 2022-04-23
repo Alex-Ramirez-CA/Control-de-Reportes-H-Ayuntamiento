@@ -84,9 +84,9 @@ class Usuarios extends CI_Controller {
 				'email' => $this->input->post('email'),
 				'password' => $this->input->post('password'),
 				'status' => 1,
-				'id_direccion' => $this->input->post('id_direccion'),
-				'id_rol' => $this->input->post('id_rol'),
-				'id_departamento' => $this->input->post('id_departamento'),
+				'id_direccion' => (int)$this->input->post('id_direccion'),
+				'id_rol' => (int)$this->input->post('id_rol'),
+				'id_departamento' => (int)$this->input->post('id_departamento'),
 			);
 			// Hacer insercion a la tabla de usuarios
 			$this->Usuario->guardar_usuario($datos);
@@ -96,14 +96,14 @@ class Usuarios extends CI_Controller {
 			$res = $this->Usuario->obtenerNoEmpleado($this->input->post('email'));
 			$no_empleado = $res->no_empleado;
 			$data = array(
-				'id_equipo' => $this->input->post('id_equipo'),
+				'id_equipo' => (int)$this->input->post('id_equipo'),
 				'no_empleado' => $no_empleado,
 			);
             $this->Equipo_usuario->insertar($data);
 
 			// Crear el vinculo del usuario con la impresora de su direccion
 			// Validar que dicha direccion si tenga ya una impresora
-			if($res = $this->Equipo->obtenerImpresora($this->input->post('id_direccion'))) {
+			if($res = $this->Equipo->obtenerImpresora((int)$this->input->post('id_direccion'))) {
 				$id_equipo = $res->id_equipo;
 				$data = array(
 					'id_equipo' => $id_equipo,
@@ -176,8 +176,8 @@ class Usuarios extends CI_Controller {
 	// Funcion que permitira actualizar el status de un usuario
 	public function modificar_status() {
 		if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 3) {
-			$status = $this->input->post('status');
-			$no_empleado = $this->input->post('no_empleado');
+			$status = (int)$this->input->post('status');
+			$no_empleado = (int)$this->input->post('no_empleado');
 			$this->Usuario->statusUsuario($status, $no_empleado);
 		} else {
 			// Si no hay datos de sesion redireccionar a login
@@ -211,9 +211,6 @@ class Usuarios extends CI_Controller {
 	// Funcion que guarda los cambios realizados en los datos del usuario de forma tradicional
 	public function actualizar_usuario() {
 		if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 3) {
-			// Buscar la manera en que solo me mande los datos que cambiaron, para obtimizar el update
-			// https://es.stackoverflow.com/questions/119096/como-detecto-todos-los-cambios-en-un-input-type-de-un-formulario
-			// Despues verificar los que si vienen modificados
 			// Datos para hacer la actualizacón del usuario
 			$datos = array(
 				'nombre' => $this->input->post('nombre'),
@@ -221,9 +218,9 @@ class Usuarios extends CI_Controller {
 				'apellido_materno' => $this->input->post('apellido_materno'),
 				'email' => $this->input->post('email'),
 				'password' => $this->input->post('password'),
-				'id_direccion' => $this->input->post('id_direccion'),
-				'id_rol' => $this->input->post('id_rol'),
-				'id_departamento' => $this->input->post('id_departamento'),
+				'id_direccion' => (int)$this->input->post('id_direccion'),
+				'id_rol' => (int)$this->input->post('id_rol'),
+				'id_departamento' => (int)$this->input->post('id_departamento'),
 			);
 
 			// Obtener el no_empleado vía post
@@ -233,7 +230,7 @@ class Usuarios extends CI_Controller {
 			// Modificar tambien la impresora a la que estara asociado el usuario
 			$oldDireccion = $this->Usuario->obtenerDireccion($no_empleado);
 			$oldDireccion = $oldDireccion->id_direccion;
-			$newDireccion = $this->input->post('id_direccion');
+			$newDireccion = (int)$this->input->post('id_direccion');
 			if($oldDireccion !== $newDireccion){
 				// Obtener el id_equipo de la impresora a la que estaba asignado dicho usuario anteriormente
 				if($res = $this->Equipo->obtenerOldImpresora($no_empleado)) {
@@ -250,67 +247,7 @@ class Usuarios extends CI_Controller {
 			// Si el equipo PC del usuario es modificado
 			// Actualizar el equipo o PC del suarios
 			// Obtener el id_equipo vía post
-			$id_equipo = $this->input->post('id_equipo');
-			// Obtner el id del antiguo equipo del usuario
-			if($res = $this->Equipo->obtenerPC($no_empleado)) {
-				$old_id_equipo = $res->id_equipo;
-				// Realizar la actualizacion
-				$this->Equipo_usuario->updateEquipo($id_equipo, $no_empleado, $old_id_equipo);
-			}
-
-			// Hacer actualización de la tabla de usuarios
-			$this->Usuario->update_usuario($no_empleado, $datos);
-
-		} else {
-			// Si no hay datos de sesion redireccionar a login
-			redirect('login');
-		}
-	}
-	
-	// Funcion que guarda los cambios realizados en los datos del usuario
-	// solo tomando encuenta los inputs que se modificaron
-	public function actualizar_usuario2() {
-		if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 3) {
-			// Buscar la manera en que solo me mande los datos que cambiaron, para obtimizar el update
-			// https://es.stackoverflow.com/questions/119096/como-detecto-todos-los-cambios-en-un-input-type-de-un-formulario
-			// Despues verificar los que si vienen modificados
-			// Datos para hacer la actualizacón del usuario
-			$datos = array(
-				'nombre' => $this->input->post('nombre'),
-				'apellido_paterno' => $this->input->post('apellido_paterno'),
-				'apellido_materno' => $this->input->post('apellido_materno'),
-				'email' => $this->input->post('email'),
-				'password' => $this->input->post('password'),
-				'id_direccion' => $this->input->post('id_direccion'),
-				'id_rol' => $this->input->post('id_rol'),
-				'id_departamento' => $this->input->post('id_departamento'),
-			);
-
-			// Obtener el no_empleado vía post
-			$no_empleado = (int)$this->input->post('no_empleado');
-
-			// Si la direccion a la que pertenece es modificada
-			// Modificar tambien la impresora a la que estara asociado el usuario
-			$oldDireccion = $this->Usuario->obtenerDireccion($no_empleado);
-			$oldDireccion = $oldDireccion->id_direccion;
-			$newDireccion = $this->input->post('id_direccion');
-			if($oldDireccion !== $newDireccion){
-				// Obtener el id_equipo de la impresora a la que estaba asignado dicho usuario anteriormente
-				if($res = $this->Equipo->obtenerOldImpresora($no_empleado)) {
-					$old_id_equipo = $res->id_equipo;
-					// Obtener el id_equipo de la impresora de la nueva direccion
-					if($res = $this->Equipo->obtenerImpresora($newDireccion)) {
-						$id_equipo = $res->id_equipo;
-						// Realizar la actualizacion
-						$this->Equipo_usuario->updateEquipo($id_equipo, $no_empleado, $old_id_equipo);
-					}
-				}
-			}
-			
-			// Si el equipo PC del usuario es modificado
-			// Actualizar el equipo o PC del suarios
-			// Obtener el id_equipo vía post
-			$id_equipo = $this->input->post('id_equipo');
+			$id_equipo = (int)$this->input->post('id_equipo');
 			// Obtner el id del antiguo equipo del usuario
 			if($res = $this->Equipo->obtenerPC($no_empleado)) {
 				$old_id_equipo = $res->id_equipo;
