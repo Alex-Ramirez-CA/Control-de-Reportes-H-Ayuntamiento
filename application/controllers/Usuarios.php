@@ -131,7 +131,9 @@ class Usuarios extends CI_Controller {
 					'head' => $this->load->view('layout/head', '', TRUE),
 					'nav' => $this->load->view('layout/nav', '', TRUE),
 					'footer' => $this->load->view('layout/footer', '', TRUE),
-					'usuarios' => $res
+					'departamentos' => $this->Departamento->get_departamentos(),
+					'roles' => $this->Rol->get_roles(),
+					'direcciones' => $this->Direccion->get_direcciones(),
 				);
 				$this->load->view('v_listar_usuarios', $data);
 			}
@@ -157,8 +159,12 @@ class Usuarios extends CI_Controller {
 	// Filtrar los usuarios
 	public function filtrar_usuarios() {
 		if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 3) {
-			// $rol, $departamento,  $dependencia, $direccion, $status
-			$data = $this->Usuario->filtrarUsuarios(2, 3,  NULL, NULL, NULL);
+			$rol = $this->input->post('rol');
+			$departamento = $this->input->post('departamento'); 
+			$dependencia = $this->input->post('dependencia');
+			$direccion = $this->input->post('direccion');
+			$status = $this->input->post('status');
+			$data = $this->Usuario->filtrarUsuarios($rol, $departamento,  $dependencia, $direccion, $status);
 			echo json_encode($data);
 		} else {
 			// Si no hay datos de sesion redireccionar a login
@@ -192,6 +198,7 @@ class Usuarios extends CI_Controller {
                 'roles' => $this->Rol->get_roles(),
 				'direcciones' => $this->Direccion->get_direcciones(),
 				'datos_usuario' => $this->Usuario->getUsuario(),
+				'no_empleado' => $no_empleado,
 			);
 			// Cargar la vista y mandar los datos
 			$this->load->view('v_agregar_usuario', $data);
@@ -204,7 +211,8 @@ class Usuarios extends CI_Controller {
 	// Funcion que guarda los cambios realizados en los datos del usuario
 	public function actualizar_usuario() {
 		if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 3) {
-			
+			// Buscar la manera en que solo me mande los datos que cambiaron, para obtimizar el update
+			// Despues verificar los que si vienen modificados
 			// Datos para hacer la actualizacón del usuario
 			$datos = array(
 				'nombre' => $this->input->post('nombre'),
@@ -218,13 +226,13 @@ class Usuarios extends CI_Controller {
 			);
 
 			// Obtener el no_empleado vía post
-			$no_empleado = 1;//$this->input->post('no_empleado');
+			$no_empleado = $this->input->post('no_empleado');
 
 			// Si la direccion a la que pertenece es modificada
 			// Modificar tambien la impresora a la que estara asociado el usuario
 			$oldDireccion = $this->Usuario->obtenerDireccion($no_empleado);
 			$oldDireccion = $oldDireccion->id_direccion;
-			$newDireccion = 2;//$this->input->post('id_direccion');
+			$newDireccion = $this->input->post('id_direccion');
 			if($oldDireccion !== $newDireccion){
 				// Obtener el id_equipo de la impresora a la que estaba asignado dicho usuario anteriormente
 				if($res = $this->Equipo->obtenerOldImpresora($no_empleado)) {
@@ -238,9 +246,10 @@ class Usuarios extends CI_Controller {
 				}
 			}
 			
+			// Si el equipo PC del usuario es modificado
 			// Actualizar el equipo o PC del suarios
 			// Obtener el id_equipo vía post
-			$id_equipo = 1;//$this->input->post('id_equipo');
+			$id_equipo = $this->input->post('id_equipo');
 			// Obtner el id del antiguo equipo del usuario
 			if($res = $this->Equipo->obtenerPC($no_empleado)) {
 				$old_id_equipo = $res->id_equipo;
