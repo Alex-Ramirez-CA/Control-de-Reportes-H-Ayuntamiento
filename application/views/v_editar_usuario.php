@@ -4,7 +4,7 @@
 <div class="container">
     <div class="formulario_agregar_usuario">
         <div class="titulo_formulario">
-            <h1>Ingrese datos del nuevo usuario</h1>
+            <h1>Ingrese los nuevos datos del usuario</h1>
         </div>
         <div class="columnas_formulario">
             <div class="columna_formulario">
@@ -17,28 +17,28 @@
                 </label>
                 <label for="apellido_paterno">
                     Apellido paterno
-                    <input id="apellido_paterno" type="text">
+                    <input id="apellido_paterno" type="text" value="<?= $datos_usuario->apellido_paterno?>">
                     <div class="error_message_apellidoP">
                         
                     </div>
                 </label>
                 <label for="apellido_materno">
                     Apellido materno
-                    <input id="apellido_materno" type="text">
+                    <input id="apellido_materno" type="text" value="<?= $datos_usuario->apellido_materno?>">
                     <div class="error_message_apellidoM">
                         
                     </div>
                 </label>
                 <label for="email">
                     Correo electrónico
-                    <input id="email" type="email">
+                    <input id="email" type="email" value="<?= $datos_usuario->email?>">
                     <div class="error_message_email">
                         
                     </div>
                 </label>
                 <label for="contraseña">
                     Contraseña
-                    <input id="contraseña" type="text">
+                    <input id="contraseña" type="text" value="<?= $datos_usuario->password?>">
                     <div class="error_message_password">
                         
                     </div>
@@ -52,7 +52,7 @@
                     <?php
                         foreach($direcciones as $item):
                     ?>
-                        <option value="<?= $item->id_direccion?>"><?= $item->nombre?></option>
+                        <option <?= $item->id_direccion == $datos_usuario->id_direccion? 'selected' : ''; ?> value="<?= $item->id_direccion?>"><?= $item->nombre?></option>
                     <?php 
                         endforeach; 
                             
@@ -61,7 +61,7 @@
                 </label>
                 <label for="direccion_ip">
                     Dirección IP
-                    <input id="direccion_ip" type="text">
+                    <input id="direccion_ip" type="text" value="<?= $PC_usuario->direccion_ip?>">
                     <div class="opciones_busqueda_ip">
                         
                     </div>
@@ -75,7 +75,7 @@
                     <?php
                         foreach($roles as $item):
                     ?>
-                        <option <?= $item->id_rol == '0' ? 'selected' : ''; ?> value="<?= $item->id_rol?>"><?= $item->nombre?></option>
+                        <option <?= $item->id_rol == $datos_usuario->id_rol ? 'selected' : ''; ?> value="<?= $item->id_rol?>"><?= $item->nombre?></option>
                     <?php 
                         endforeach; 
                             
@@ -84,19 +84,19 @@
                 </label>
                 <label for="departamento">
                     Departamento interno
-                    <select name="departamento" id="departamento" disabled>
+                    <select name="departamento" id="departamento">
                         <option class="departamento_indefinido" selected value="0">Seleccione un departamento</option>
                     <?php
                         foreach($departamentos as $item):
                     ?>
-                        <option value="<?= $item->id_departamento?>"><?= $item->nombre?></option>
+                        <option <?= $item->id_departamento == $datos_usuario->id_departamento ? 'selected' : ''; ?> value="<?= $item->id_departamento?>"><?= $item->nombre?></option>
                     <?php 
                         endforeach; 
                             
                     ?>
                     </select>
                 </label>
-                <button id="btn_guardar_usuario">Guardar usuario</button>
+                <button id="btn_guardar_cambios_usuario">Guardar cambios</button>
             </div>
         </div>
     </div>

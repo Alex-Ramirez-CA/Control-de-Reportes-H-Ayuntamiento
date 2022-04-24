@@ -763,7 +763,7 @@ Estilos para los filtros que puede aplicar el administrador
 	color: #fff;
 }
 
-#btn_guardar_usuario {
+#btn_guardar_usuario, #btn_guardar_cambios_usuario {
 	background-color: #f6f8fa;
 	color: #006e95;
 	font-size: 18px;
@@ -773,9 +773,10 @@ Estilos para los filtros que puede aplicar el administrador
 	width: 100%;
 	padding-top: 11.5px;
 	padding-bottom: 8.5px;
+	cursor: pointer;
 }
 
-#btn_guardar_usuario:hover {
+#btn_guardar_usuario:hover, #btn_guardar_cambios_usuario:hover {
 	background-color: #006e95;
 	color: #f6f8fa;
 }
