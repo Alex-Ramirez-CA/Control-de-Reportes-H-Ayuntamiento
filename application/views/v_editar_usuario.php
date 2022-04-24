@@ -61,7 +61,7 @@
                 </label>
                 <label for="direccion_ip">
                     Dirección IP
-                    <input id="direccion_ip" type="text">
+                    <input id="direccion_ip" type="text" value="<?= $PC_usuario->direccion_ip?>">
                     <div class="opciones_busqueda_ip">
                         
                     </div>
