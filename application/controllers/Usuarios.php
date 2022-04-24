@@ -212,6 +212,7 @@ class Usuarios extends CI_Controller {
                 'roles' => $this->Rol->get_roles(),
 				'direcciones' => $this->Direccion->get_direcciones(),
 				'datos_usuario' => $this->Usuario->getUsuario($no_empleado),
+				'PC_usuario' => $this->Equipo->obtenerPC($no_empleado),
 			);
 			// Cargar la vista y mandar los datos
 			$this->load->view('v_editar_usuario', $data);

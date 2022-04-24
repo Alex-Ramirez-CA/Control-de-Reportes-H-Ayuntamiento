@@ -56,7 +56,7 @@ class Equipo extends CI_Model {
 
     public function obtenerPC($no_empleado) {
         $data = $this->db
-            ->select("e.id_equipo")
+            ->select("e.id_equipo, e.direccion_ip")
             ->from("equipo e")
             ->join("equipo_usuario eu", "e.id_equipo=eu.id_equipo")
             ->where(array('eu.no_empleado' => $no_empleado, 'e.tipo_equipo' => 'PC'), 1)
