@@ -29,7 +29,7 @@ class Equipo extends CI_Model {
             ->from("equipo")
             ->like('direccion_ip', $search, 'after', '', TRUE)
             ->limit(5)
-            ->where('status', 1)
+            ->where(array('status' => 1, 'tipo_equipo' => 'PC'))
             ->order_by('id_equipo')
             ->get();
         // Si no se encuentra resultados
