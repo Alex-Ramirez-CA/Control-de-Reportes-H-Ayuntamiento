@@ -81,6 +81,7 @@ class Usuario extends CI_Model {
             ->from("usuario u")
             ->join("rol r", "u.id_rol=r.id_rol")
             ->join("direccion dir", "u.id_direccion=dir.id_direccion")
+            ->order_by('u.no_empleado')
             ->get();
         
         // Si no se encuentra resultados

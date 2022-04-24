@@ -29,7 +29,7 @@ class Equipo extends CI_Model {
             ->from("equipo")
             ->like('direccion_ip', $search, 'after', '', TRUE)
             ->limit(5)
-            ->where('status', 1)
+            ->where(array('status' => 1, 'tipo_equipo' => 'PC'))
             ->order_by('id_equipo')
             ->get();
         // Si no se encuentra resultados
@@ -56,7 +56,7 @@ class Equipo extends CI_Model {
 
     public function obtenerPC($no_empleado) {
         $data = $this->db
-            ->select("e.id_equipo")
+            ->select("e.id_equipo, e.direccion_ip")
             ->from("equipo e")
             ->join("equipo_usuario eu", "e.id_equipo=eu.id_equipo")
             ->where(array('eu.no_empleado' => $no_empleado, 'e.tipo_equipo' => 'PC'), 1)
