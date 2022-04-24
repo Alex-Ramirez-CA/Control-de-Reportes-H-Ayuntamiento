@@ -521,6 +521,14 @@
         
     });
 
+    //Evento de cuando clique en enviar filtros
+    $(document).on('click', '.editar_datos_usuarios', function(){
+        let elemento = $(this)[0]; 
+        let no_empleado = $(elemento).attr('idUsuario');
+        //console.log(no_empleado);
+        $.post('editar_usuario', {no_empleado});   
+    });
+
     //Función general para pintar la lista de los empleados de acuerdo a una respuesta
     function obtenerListaCompletaUsuarios (){
         $.ajax({
@@ -545,7 +553,7 @@
                     <td>${usuario.direccion}</td>
                     <td>${usuario.rol}</td>
                     <td class="campo_status_empleado">
-                        <button class="editar_datos_usuarios">Editar</button> 
+                        <button class="editar_datos_usuarios" idUsuario="${usuario.no_empleado}">Editar</button> 
                         <p class="label_status_empleado" for="status_empleado">
                             Status
                             <br>
