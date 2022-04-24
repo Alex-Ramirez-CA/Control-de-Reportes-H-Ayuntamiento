@@ -3,7 +3,7 @@
 
 <div class="container_lista_usuarios">
     <div class="filtros_lista_usurios">
-        <h1>Aplicar filtros</h1>
+        <h1 class="titulo_filtros_lista_usurios">Aplicar filtros</h1>
         <div class="filtro_dependencia_usuarios">
             <div class="titulo_filtro_usuarios">
                 <h2>Dependencia</h2>

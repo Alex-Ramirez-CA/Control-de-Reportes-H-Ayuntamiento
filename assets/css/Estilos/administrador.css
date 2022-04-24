@@ -909,8 +909,6 @@ Estilos para los filtros que puede aplicar el administrador
 	background: #f6f8fa;
 	display: flex;
 	flex-direction: column;
-	border-radius: 10px; 
-	border: 1px solid rgba(0, 0, 0, 0.15);
 	gap: 1px;
 }
 
@@ -918,7 +916,6 @@ Estilos para los filtros que puede aplicar el administrador
 	text-align: center;
 	font-size: 14px;
 	background-color: #f6f8fa;
-	border-radius: 8px;
 	padding-top: 4px;
 	color: #006e95;
 	cursor: pointer;
@@ -927,12 +924,12 @@ Estilos para los filtros que puede aplicar el administrador
 }
 
 .lista_dependencias_usuarios p:hover, .lista_direcciones_usuarios p:hover, .lista_departamentos_usuarios p:hover, .lista_tipos_usuarios p:hover, .lista_status_usuarios p:hover {
-	background-color: #006e95;	
+	background-color: #26A2D9;	
 	color: #fff;
 }
 
 .lista_dependencias_usuarios p.active, .lista_direcciones_usuarios p.active, .lista_departamentos_usuarios p.active, .lista_tipos_usuarios p.active, .lista_status_usuarios p.active {
-	background-color: #006e95;	
+	background-color: #26A2D9;	
 	color: #fff;
 }
 
@@ -941,4 +938,32 @@ Estilos para los filtros que puede aplicar el administrador
 	margin-bottom: 20px;
 	width: 100%;
 	cursor: pointer;
+}
+
+.titulo_filtro_usuarios {
+	width: 100%;
+	background-color: #006e95;
+	margin-top: 5px;
+	height: 30px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.titulo_filtro_usuarios h2 {
+	font-size: 18px;
+	color: #fff;
+	text-align: center;
+	margin: 0;
+	padding-top: 3px;
+}
+
+.titulo_filtros_lista_usurios {
+	height: 40px;
+	font-size: 22px;
+	background: linear-gradient(to right,#006E95,#006E95,#26A2D9,#006E95);
+	width: 100%;
+	text-align: center;
+	color: #fff;
+	margin: 0;
 }
