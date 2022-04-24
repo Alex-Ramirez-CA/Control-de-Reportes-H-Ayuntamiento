@@ -201,11 +201,9 @@ class Usuarios extends CI_Controller {
 	}
 
 	// Funcion para cuando se clicke el boton de estidar usuario
-	public function editar_usuario() {
+	public function editar_usuario($no_empleado) {
 		if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 3) {
-			// Recibir el no_empleado del usuario seleccionado
-			$no_empleado = (int)$this->input->post('no_empleado');
-			// Traer los datos del usuario
+			
 			$data = array(
 				'head' => $this->load->view('layout/head', '', TRUE),
 				'nav' => $this->load->view('layout/nav', '', TRUE),
