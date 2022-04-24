@@ -216,7 +216,7 @@ class Usuarios extends CI_Controller {
 				'datos_usuario' => $this->Usuario->getUsuario($no_empleado),
 			);
 			// Cargar la vista y mandar los datos
-			$this->load->view('v_agregar_usuario', $data);
+			$this->load->view('v_editar_usuario', $data);
 		} else {
 			// Si no hay datos de sesion redireccionar a login
 			redirect('login');

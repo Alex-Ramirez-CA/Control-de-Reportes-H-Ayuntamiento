@@ -1,4 +1,8 @@
 (function($) {
+    //Obtener la base url
+    var getUrl = window.location;
+    var baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+    
     let direccion = null;
     let departamento = null;
     let dependencia = null;
@@ -525,8 +529,8 @@
     $(document).on('click', '.editar_datos_usuarios', function(){
         let elemento = $(this)[0]; 
         let no_empleado = $(elemento).attr('idUsuario');
-        //console.log(no_empleado);
-        $.post('editar_usuario', {no_empleado});   
+        $.post('editar_usuario', {no_empleado});
+        window.location.replace(baseUrl + '/usuarios/editar_usuario');
     });
 
     //Función general para pintar la lista de los empleados de acuerdo a una respuesta
