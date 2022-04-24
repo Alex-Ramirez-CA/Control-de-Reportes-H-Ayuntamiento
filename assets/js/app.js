@@ -510,14 +510,14 @@
 
     //Evento de cuando clique en enviar filtros
     $(document).on('click', '.aplicar_filtros_usuarios', function(){
-        console.log("dependencia " + dependencia);
-        console.log("direccion " + direccion);
-        console.log("departamento " + departamento);
-        console.log("rol " + rol);
-        console.log("status " + status);
-        // $.post('filtrar_usuarios', {dependencia, direccion, departamento, rol, status}, function(response){
-        //     obtenerListaUsuarios (response);
-        // });
+        // console.log("dependencia " + dependencia);
+        // console.log("direccion " + direccion);
+        // console.log("departamento " + departamento);
+        // console.log("rol " + rol);
+        // console.log("status " + status);
+        $.post('filtrar_usuarios', {dependencia, direccion, departamento, rol, status}, function(response){
+            obtenerListaUsuarios (response);
+        });
         
     });
 
