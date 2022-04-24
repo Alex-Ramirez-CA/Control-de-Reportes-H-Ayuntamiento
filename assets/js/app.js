@@ -3,6 +3,8 @@
     let departamento = null;
     let dependencia = null;
     let equipo = null;
+    let rol = null;
+    let status = null;
 
     //Obtener las incidencia para el cliente tipo Administrador
     if (($('.container').attr('rol')) == 3){
@@ -253,7 +255,6 @@
         let fecha_inicio = $('#fecha_inicio').val();
         let fecha_fin = $('#fecha_fin').val();
         $.post('administrador/filtrar_incidencias', {dependencia, direccion, departamento, fecha_inicio, fecha_fin, equipo}, function(response){
-            let incidencias = JSON.parse(response);
             obtenerIncidencias (response);
         });
         $('.mensaje').css({'visibility':'hidden'});
@@ -419,21 +420,105 @@
     $(document).on('click', '#status_empleado', function(){
         let status;
         let no_empleado = $(this).val();
-        if( $(this).is(':checked') ){
-            // Hacer algo si el checkbox ha sido seleccionado
-            status = 1;
-            $.post('modificar_status', {status, no_empleado}, function(response){
-                console.log(response);
-            });
-            console.log("El empleado con numero " + no_empleado + " ha sido seleccionado, nuevo status: " + status);
+        
+        var opcion = confirm("¿Está seguro de cambiar el status actual del trabajador?");
+        if (opcion == true) {
+            if($(this).is(':checked')){
+                // Hacer algo si el checkbox ha sido seleccionado
+                status = 1;
+                console.log("El empleado con numero " + no_empleado + " ha sido seleccionado, nuevo status: " + status);
+                $.post('modificar_status', {status, no_empleado});
+                // obtenerListaCompletaUsuarios ();
+            } else {
+                // Hacer algo si el checkbox ha sido deseleccionado
+                status = 0;
+                console.log("El empleado con numero " + no_empleado + " ha sido deseleccionado, nuevo status: " + status);   
+                $.post('modificar_status', {status, no_empleado}); 
+                // obtenerListaCompletaUsuarios ();
+            }
         } else {
-            // Hacer algo si el checkbox ha sido deseleccionado
-            status = 0;
-            $.post('modificar_status', {status, no_empleado}, function(response){
-                console.log(response);
-            });
-            console.log("El empleado con numero " + no_empleado + " ha sido deseleccionado, nuevo status: " + status);
+            //console.log("No paso nada");
+            obtenerListaCompletaUsuarios ();
         }
+
+    });
+
+    //Evento de cuando clique una dependencia en filtros de listado de usuarios
+    $(document).on('click', '.opcion_dependencia_usuarios', function(){
+        if($(this).hasClass('active')){
+            $(this).toggleClass('active');
+            dependencia = null;
+        }else{
+            $('.lista_dependencias_usuarios').children().removeClass('active');
+            $(this).toggleClass('active');
+            dependencia = $(this).attr('idDependencia');
+            //console.log("dependencia " + dependencia);
+        }
+    });
+
+    //Evento de cuando clique una dirección en filtros de listado de usuarios
+    $(document).on('click', '.opcion_direccion_usuarios', function(){
+        if($(this).hasClass('active')){
+            $(this).toggleClass('active');
+            direccion = null;
+        }else{
+            $('.lista_direcciones_usuarios').children().removeClass('active');
+            $(this).toggleClass('active');
+            direccion = $(this).attr('idDireccion');
+            //console.log("direccion " + direccion);
+        }
+    });
+
+    //Evento de cuando clique una departamento en filtros de listado de usuarios
+    $(document).on('click', '.opcion_departamento_usuarios', function(){
+        if($(this).hasClass('active')){
+            $(this).toggleClass('active');
+            departamento = null;
+        }else{
+            $('.lista_departamentos_usuarios').children().removeClass('active');
+            $(this).toggleClass('active');
+            departamento = $(this).attr('idDepartamento');
+            //console.log("departamento " + departamento);
+        }
+    });
+
+    //Evento de cuando clique una opcion de tipo de usuario en filtros de listado de usuarios
+    $(document).on('click', '.opcion_tipo_usuarios', function(){
+        if($(this).hasClass('active')){
+            $(this).toggleClass('active');
+            rol = null;
+        }else{
+            $('.lista_tipos_usuarios').children().removeClass('active');
+            $(this).toggleClass('active');
+            rol = $(this).attr('rol');
+            //console.log("rol " + rol);
+        }
+    });
+
+    //Evento de cuando clique una opcion de status de usuario en filtros de listado de usuarios
+    $(document).on('click', '.opcion_status_usuarios', function(){
+        if($(this).hasClass('active')){
+            $(this).toggleClass('active');
+            status = null;
+        }else{
+            $('.lista_status_usuarios').children().removeClass('active');
+            $(this).toggleClass('active');
+            status = $(this).attr('status');
+            //console.log("status " + status);
+        }
+    });
+
+    //Evento de cuando clique en enviar filtros
+    $(document).on('click', '.aplicar_filtros_usuarios', function(){
+        // console.log("dependencia " + dependencia);
+        // console.log("direccion " + direccion);
+        // console.log("departamento " + departamento);
+        // console.log("rol " + rol);
+        // console.log("status " + status);
+        $.post('filtrar_usuarios', {dependencia, direccion, departamento, rol, status}, function(response){
+            obtenerListaUsuarios (response);
+        });
+        
     });
 
     //Función general para pintar la lista de los empleados de acuerdo a una respuesta
@@ -457,7 +542,7 @@
                 <tr>
                     <th scope="row">${usuario.no_empleado}</th>
                     <td>${usuario.nombre + " " + usuario.apellido_paterno + " " + usuario.apellido_materno}</td>
-                    <td>${usuario.email}</td>
+                    <td>${usuario.direccion}</td>
                     <td>${usuario.rol}</td>
                     <td class="campo_status_empleado">
                         <button class="editar_datos_usuarios">Editar</button> 
