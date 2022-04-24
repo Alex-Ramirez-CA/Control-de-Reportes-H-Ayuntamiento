@@ -2,7 +2,6 @@
     //Obtener la base url
     var getUrl = window.location;
     var baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
-    
     let direccion = null;
     let departamento = null;
     let dependencia = null;
@@ -522,15 +521,22 @@
         $.post('filtrar_usuarios', {dependencia, direccion, departamento, rol, status}, function(response){
             obtenerListaUsuarios (response);
         });
-        
     });
 
     //Evento de cuando clique en enviar filtros
     $(document).on('click', '.editar_datos_usuarios', function(){
         let elemento = $(this)[0]; 
         let no_empleado = $(elemento).attr('idUsuario');
-        $.post('editar_usuario', {no_empleado});
-        window.location.replace(baseUrl + '/usuarios/editar_usuario');
+        // console.log(no_empleado);
+        $.ajax({
+            url: 'editar_usuario',
+            type: 'POST',
+            data: { no_empleado },
+            success: function() {
+                console.log('si jalo');
+                //window.location.replace(baseUrl + '/usuarios/editar_usuario');
+            }
+        });
     });
 
     //Función general para pintar la lista de los empleados de acuerdo a una respuesta
