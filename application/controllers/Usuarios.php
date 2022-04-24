@@ -161,10 +161,10 @@ class Usuarios extends CI_Controller {
 	public function filtrar_usuarios() {
 		if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 3) {
 			$rol = $this->input->post('rol');
-			$departamento = $this->input->post('departamento'); 
-			$dependencia = $this->input->post('dependencia');
-			$direccion = $this->input->post('direccion');
-			$status = $this->input->post('status');
+			$departamento = (int)$this->input->post('departamento'); 
+			$dependencia = (int)$this->input->post('dependencia');
+			$direccion = (int)$this->input->post('direccion');
+			$status = (int)$this->input->post('status');
 			$data = $this->Usuario->filtrarUsuarios($rol, $departamento,  $dependencia, $direccion, $status);
 			echo json_encode($data);
 		} else {
