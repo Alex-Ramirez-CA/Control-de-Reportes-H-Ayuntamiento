@@ -417,8 +417,10 @@
         $('.error_message_direccionIP').css({'transform':'translateY(-10px)'});
         $('.error_message_direccionIP').css({'z-index':'-1'});
     });
-
-    obtenerListaCompletaUsuarios ();
+    
+    if(getUrl == baseUrl + "/usuarios/lista_usuarios") {
+        obtenerListaCompletaUsuarios ();
+    }
 
     //Función para dar de baja o de alta algún empleado
     $(document).on('click', '#status_empleado', function(){
