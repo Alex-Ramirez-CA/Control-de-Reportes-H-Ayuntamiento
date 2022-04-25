@@ -8,7 +8,7 @@
             <div class="titulo_filtro_usuarios" idFiltroUsuario="1">
                 <h2>Dependencia</h2>
                 <div class="marcar_filtro_seleccionado">
-                    
+
                 </div>
             </div>
             <div class="lista_dependencias_usuarios">
@@ -25,6 +25,9 @@
         <div class="filtro_direccion_usuarios">
             <div class="titulo_filtro_usuarios" idFiltroUsuario="2">
                     <h2>Dirección</h2>
+                <div class="marcar_filtro_seleccionado">
+                    
+                </div>
             </div>
             <div class="lista_direcciones_usuarios">
                 <?php 
@@ -39,6 +42,9 @@
         <div class="filtro_departamento_usuarios">
             <div class="titulo_filtro_usuarios" idFiltroUsuario="3">
                     <h2>Departamento</h2>
+                <div class="marcar_filtro_seleccionado">
+                    
+                </div>
             </div>
             <div class="lista_departamentos_usuarios">
                 <?php 
@@ -53,6 +59,9 @@
         <div class="filtro_tipo_usuarios">
             <div class="titulo_filtro_usuarios" idFiltroUsuario="4">
                     <h2>Tipo de usuario</h2>
+                <div class="marcar_filtro_seleccionado">
+                    
+                </div>
             </div>
             <div class="lista_tipos_usuarios">
                 <?php 
@@ -67,6 +76,9 @@
         <div class="filtro_status_usuarios">
             <div class="titulo_filtro_usuarios" idFiltroUsuario="5">
                     <h2>Status usuario</h2>
+                <div class="marcar_filtro_seleccionado">
+                    
+                </div>
             </div>
             <div class="lista_status_usuarios">
                 <p class="opcion_status_usuarios" status="1">Activos</p>
@@ -74,6 +86,9 @@
             </div> 
         </div>
         <button class="aplicar_filtros_usuarios">Aplicar filtros</button>
+    </div>
+    <div class="ocultar_filtros">
+        <img src="<?=base_url('assets/img/iconos/desplegar.svg')?>" alt="">
     </div>
     <div class="lista_usuarios">
         <table class="table tabla_lista_usuarios">

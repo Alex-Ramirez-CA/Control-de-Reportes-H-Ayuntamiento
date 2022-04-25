@@ -653,42 +653,70 @@
 	$(document).on("click", ".titulo_filtro_usuarios", function () {
         if ($(this).attr("idFiltroUsuario") == '1') {
             if ($('.lista_dependencias_usuarios').is(':hidden')) {
+                $(this).css({ background: "#f6f8fa" });
+                $("h2", this).css('color', '#006e95');
+                $(".marcar_filtro_seleccionado", this).css({ transform: "translatex(0%)" });
                 $(".lista_dependencias_usuarios").css({ display: "flex" });
-                $(".marcar_filtro_seleccionado").css({ transform: "translatex(0%)" });
             }else {
+                $("h2", this).css('color', '#006e95');
+                $(this).css({ 'background-color': "#fff" });
+                $(".marcar_filtro_seleccionado", this).css({ transform: "translatex(255px)" });
                 $(".lista_dependencias_usuarios").css({ display: "none" });
-                $(".marcar_filtro_seleccionado").css({ transform: "translatex(100%)" });
             }
         }
 
         if ($(this).attr("idFiltroUsuario") == '2') {
             if ($('.lista_direcciones_usuarios').is(':hidden')) {
+                $(this).css({ background: "#f6f8fa" });
+                $("h2", this).css('color', '#006e95');
+                $(".marcar_filtro_seleccionado", this).css({ transform: "translatex(0%)" });
                 $(".lista_direcciones_usuarios").css({ display: "flex" });
             }else {
+                $("h2", this).css('color', '#006e95');
+                $(this).css({ background: "#fff" });
+                $(".marcar_filtro_seleccionado", this).css({ transform: "translatex(255px)" });
                 $(".lista_direcciones_usuarios").css({ display: "none" });
             }
         }
 
         if ($(this).attr("idFiltroUsuario") == '3') {
             if ($('.lista_departamentos_usuarios').is(':hidden')) {
+                $(this).css({ background: "#f6f8fa" });
+                $("h2", this).css('color', '#006e95');
+                $(".marcar_filtro_seleccionado", this).css({ transform: "translatex(0%)" });
                 $(".lista_departamentos_usuarios").css({ display: "flex" });
             }else {
+                $("h2", this).css('color', '#006e95');
+                $(this).css({ background: "#fff" });
+                $(".marcar_filtro_seleccionado", this).css({ transform: "translatex(255px)" });
                 $(".lista_departamentos_usuarios").css({ display: "none" });
             }
         }
 
         if ($(this).attr("idFiltroUsuario") == '4') {
             if ($('.lista_tipos_usuarios').is(':hidden')) {
+                $(this).css({ background: "#f6f8fa" });
+                $("h2", this).css('color', '#006e95');
+                $(".marcar_filtro_seleccionado", this).css({ transform: "translatex(0%)" });
                 $(".lista_tipos_usuarios").css({ display: "flex" });
             }else {
+                $("h2", this).css('color', '#006e95');
+                $(this).css({ background: "#fff" });
+                $(".marcar_filtro_seleccionado", this).css({ transform: "translatex(255px)" });
                 $(".lista_tipos_usuarios").css({ display: "none" });
             }
         }
 
         if ($(this).attr("idFiltroUsuario") == '5') {
             if ($('.lista_status_usuarios').is(':hidden')) {
+                $(this).css({ background: "#f6f8fa" });
+                $("h2", this).css('color', '#006e95');
+                $(".marcar_filtro_seleccionado", this).css({ transform: "translatex(0%)" });
                 $(".lista_status_usuarios").css({ display: "flex" });
             }else {
+                $("h2", this).css('color', '#006e95');
+                $(this).css({ background: "#fff" });
+                $(".marcar_filtro_seleccionado", this).css({ transform: "translatex(255px)" });
                 $(".lista_status_usuarios").css({ display: "none" });
             }
         }
@@ -703,6 +731,17 @@
 				obtenerListaUsuarios(response);
 			}
 		);
+	});
+
+    //Evento de cuando clique en ocultar los filtros
+	$(document).on("click", ".ocultar_filtros", function () {
+        if ($('.filtros_lista_usurios').is(':hidden')) {
+            $(".filtros_lista_usurios").css({ display: "block" });
+            $(this).children("img").css('transform', 'rotate(180deg)');
+        }else {
+            $(".filtros_lista_usurios").css({ display: "none" });
+            $(this).children("img").css('transform', 'rotate(0deg)');
+        }
 	});
 
 	//Función general para pintar la lista de los empleados de acuerdo a una respuesta

@@ -21,6 +21,7 @@ Estilos para el contendeor de la pagina web
 	justify-content: space-between;
 	margin: 0 auto;
 	margin-top: 30px;
+	position: relative;
 }
 
 /*
@@ -727,6 +728,7 @@ Estilos para los filtros que puede aplicar el administrador
 	color: #006e95;
 	font-size: 14px;
 	padding-left: 8px;
+	padding-top: 5px;
 }
 
 .columna_formulario select {
@@ -837,28 +839,44 @@ Estilos para los filtros que puede aplicar el administrador
 
  /*-----------------------------Estilos para el listado de usuarios usuarios-----------------------------*/
 .filtros_lista_usurios {
-	width: 25%;
+	width: 30%;
 	height: 500px;
 	background-color: rgba(248, 244, 244, 0.3);
-	box-shadow: 0 0px 20px 0 rgba(31, 38, 135, 0.37);
+	box-shadow: 0 0px 7px 0 rgba(31, 38, 135, 0.37);
     border: solid 0.1px #006e95;
 	overflow: hidden;
 	overflow-y: scroll;
 	border-radius: 5px;
 	border-right: none;
+	/* display: none; */
+	margin-right: 5px;
 }
 
 .lista_usuarios {
-	width: 72%;
+	width: 100%;
 	height: 500px;
 	background-color: rgba(248, 244, 244, 0.3);
-	box-shadow: 0 0px 40px 0 rgba(31, 38, 135, 0.37);
+	box-shadow: 0 0px 7px 0 rgba(31, 38, 135, 0.37);
 	border: solid 0.1px #006e95;
 	border-top: none;
 	border-right: none;
 	overflow: hidden;
 	overflow-y: scroll;
 	border-radius: 10px;
+	margin-left: 5px;
+}
+
+.ocultar_filtros {	
+	cursor: pointer;
+	margin-top: 21.5%;
+}
+
+.ocultar_filtros img {	
+	transform:rotate(180deg);
+}
+
+.ocultar_filtros img:hover {
+	width: 25px;
 }
 
 .tabla_lista_usuarios {
@@ -883,8 +901,7 @@ Estilos para los filtros que puede aplicar el administrador
 	height: 20px;
 	text-align: center;
 	border-radius: 5px;
-	padding-top: 3px;
-	border: none;
+	padding-top: 4px;
 	cursor: pointer;
 	margin-top: 10%;
 	margin-right: 7px;
@@ -897,6 +914,7 @@ Estilos para los filtros que puede aplicar el administrador
 .editar_datos_usuarios:hover {
 	background-color: #ffdc51;
 	color: black;
+	text-decoration: none;
 }
 
 .label_status_empleado {
@@ -945,14 +963,18 @@ Estilos para los filtros que puede aplicar el administrador
 
 .titulo_filtro_usuarios {
 	width: 100%;
-	background-color: #f6f8fa;
-	margin-top: 5px;
+	background-color: #fff;
+	margin-top: 10px;
 	height: 30px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	cursor: pointer;
 	position: relative;
+}
+
+.titulo_filtro_usuarios:hover {
+	background: #f6f8fa;
 }
 
 .marcar_filtro_seleccionado {
@@ -964,7 +986,7 @@ Estilos para los filtros que puede aplicar el administrador
 	left: 0;
 	z-index: 1;
 	transition: all 400ms ease;
-	transform: translatex(200%);
+	transform: translatex(255px);
 }
 
 .titulo_filtro_usuarios h2 {
