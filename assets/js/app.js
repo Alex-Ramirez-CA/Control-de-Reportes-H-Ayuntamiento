@@ -1,8 +1,7 @@
 (function ($) {
 	//Obtener la base url
 	var getUrl = window.location;
-	var baseUrl =
-		getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split("/")[1];
+	var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split("/")[1];
 	let direccion = null;
 	let departamento = null;
 	let dependencia = null;
@@ -310,7 +309,7 @@
 			let search_IP = $("#direccion_ip").val();
 			//console.log(search_IP)
 			$.ajax({
-				url: "usuarios/buscar_direccionIP",
+				url: baseUrl + "/usuarios/buscar_direccionIP",
 				type: "POST",
 				data: { search_IP },
 				success: function (data) {
@@ -433,8 +432,9 @@
 		ev.preventDefault();
 	});
 
-	//Evento cuando se clica guardar los datos a la hora de guardar un usuario
+	//Evento cuando se clica guardar los cambios de los datos del usuario
 	$("#btn_guardar_cambios_usuario").click(function (ev) {
+        let no_empleado = $(this).attr("noEmpleado");
 		let nombre = $("#nombre").val();
 		let apellido_paterno = $("#apellido_paterno").val();
 		let apellido_materno = $("#apellido_materno").val();
@@ -444,73 +444,74 @@
 		let id_rol = $("#tipo_usuario").val();
 		let id_departamento = $("#departamento").val();
 		let id_equipo = $("#direccion_ip").attr("idEquipo");
-		console.log(nombre);
-		console.log(apellido_paterno);
-		console.log(apellido_materno);
-		console.log(email);
-		console.log(password);
-		console.log(id_direccion);
-		console.log(id_rol);
-		console.log(id_departamento);
-		console.log(id_equipo);
-		// $.ajax({
-		//     url: 'usuarios/guardar_usuario',
-		//     type: 'POST',
-		//     data: {nombre, apellido_paterno, apellido_materno, email, password, id_direccion, id_rol, id_departamento, id_equipo},
-		//     success: function(data) {
-		//         let json = JSON.parse(data);
-		//         $(".titulo-mensaje").html(`<b><h1>${json.msg}</h1></b>`);
-		//         $('.mensaje').css({'visibility':'visible'});
-		//         $('.contenedor_mensaje_guardar_usuario').css({'transform':'translateY(0%)'});
-		//         $(document).on('click', '.cerrar_ventana_guardar_usuario', function(){
-		//             $('.mensaje').css({'visibility':'hidden'});
-		//             $('.contenedor_mensaje_guardar_usuario').css({'transform':'translateY(-200%)'});
-		//             window.location.replace(json.url);
-		//         });
+        // console.log("Empleado " + no_empleado)
+		// console.log(nombre);
+		// console.log(apellido_paterno);
+		// console.log(apellido_materno);
+		// console.log(email);
+		// console.log(password);
+		// console.log(id_direccion);
+		// console.log(id_rol);
+		// console.log(id_departamento);
+		// console.log(id_equipo);
+		$.ajax({
+		    url: 'usuarios/actualizar_usuario',
+		    type: 'POST',
+		    data: {no_empleado, nombre, apellido_paterno, apellido_materno, email, password, id_direccion, id_rol, id_departamento, id_equipo},
+		    success: function(data) {
+		        let json = JSON.parse(data);
+		        $(".titulo-mensaje").html(`<b><h1>${json.msg}</h1></b>`);
+		        $('.mensaje').css({'visibility':'visible'});
+		        $('.contenedor_mensaje_guardar_usuario').css({'transform':'translateY(0%)'});
+		        $(document).on('click', '.cerrar_ventana_guardar_usuario', function(){
+		            $('.mensaje').css({'visibility':'hidden'});
+		            $('.contenedor_mensaje_guardar_usuario').css({'transform':'translateY(-200%)'});
+		            window.location.replace(json.url);
+		        });
 
-		//     },
-		//     statusCode: {
-		//         400: function(xhr) {
-		//             let json = JSON.parse(xhr.responseText);
-		//             //Para mostrar los mensajes de error en caso de tener en los campos del formulario
-		//             if (json.nombre !== ""){
-		//                 $('.error_message_nombre').css({'transform':'translateY(0px)'});
-		//                 $('.error_message_nombre').css({'z-index':'1'});
-		//                 $(".error_message_nombre").html(`<p>${json.nombre}</p>`);
-		//             }
+		    },
+		    statusCode: {
+		        400: function(xhr) {
+		            let json = JSON.parse(xhr.responseText);
+		            //Para mostrar los mensajes de error en caso de tener en los campos del formulario
+		            if (json.nombre !== ""){
+		                $('.error_message_nombre').css({'transform':'translateY(0px)'});
+		                $('.error_message_nombre').css({'z-index':'1'});
+		                $(".error_message_nombre").html(`<p>${json.nombre}</p>`);
+		            }
 
-		//             if (json.apellido_paterno !== "") {
-		//                 $('.error_message_apellidoP').css({'transform':'translateY(0px)'});
-		//                 $('.error_message_apellidoP').css({'z-index':'1'});
-		//                 $(".error_message_apellidoP").html(`<p>${json.apellido_paterno}</p>`);
-		//             }
+		            if (json.apellido_paterno !== "") {
+		                $('.error_message_apellidoP').css({'transform':'translateY(0px)'});
+		                $('.error_message_apellidoP').css({'z-index':'1'});
+		                $(".error_message_apellidoP").html(`<p>${json.apellido_paterno}</p>`);
+		            }
 
-		//             if (json.apellido_materno !== "") {
-		//                 $('.error_message_apellidoM').css({'transform':'translateY(0px)'});
-		//                 $('.error_message_apellidoM').css({'z-index':'1'});
-		//                 $(".error_message_apellidoM").html(`<p>${json.apellido_materno}</p>`);
-		//             }
+		            if (json.apellido_materno !== "") {
+		                $('.error_message_apellidoM').css({'transform':'translateY(0px)'});
+		                $('.error_message_apellidoM').css({'z-index':'1'});
+		                $(".error_message_apellidoM").html(`<p>${json.apellido_materno}</p>`);
+		            }
 
-		//             if (json.email !== "") {
-		//                 $('.error_message_email').css({'transform':'translateY(0px)'});
-		//                 $('.error_message_email').css({'z-index':'1'});
-		//                 $(".error_message_email").html(`<p>${json.email}</p>`);
-		//             }
+		            if (json.email !== "") {
+		                $('.error_message_email').css({'transform':'translateY(0px)'});
+		                $('.error_message_email').css({'z-index':'1'});
+		                $(".error_message_email").html(`<p>${json.email}</p>`);
+		            }
 
-		//             if (json.password !== "") {
-		//                 $('.error_message_password').css({'transform':'translateY(0px)'});
-		//                 $('.error_message_password').css({'z-index':'1'});
-		//                 $(".error_message_password").html(`<p>${json.password}</p>`);
-		//             }
+		            if (json.password !== "") {
+		                $('.error_message_password').css({'transform':'translateY(0px)'});
+		                $('.error_message_password').css({'z-index':'1'});
+		                $(".error_message_password").html(`<p>${json.password}</p>`);
+		            }
 
-		//             if (json.id_equipo !== "") {
-		//                 $('.error_message_direccionIP').css({'transform':'translateY(0px)'});
-		//                 $('.error_message_direccionIP').css({'z-index':'1'});
-		//                 $(".error_message_direccionIP").html(`<p>${json.id_equipo}</p>`);
-		//             }
-		//         }
-		//     },
-		// });
+		            if (json.id_equipo !== "") {
+		                $('.error_message_direccionIP').css({'transform':'translateY(0px)'});
+		                $('.error_message_direccionIP').css({'z-index':'1'});
+		                $(".error_message_direccionIP").html(`<p>${json.id_equipo}</p>`);
+		            }
+		        }
+		    },
+		});
 		ev.preventDefault();
 	});
 
@@ -646,6 +647,51 @@
 			status = $(this).attr("status");
 			//console.log("status " + status);
 		}
+	});
+
+	//Evento de cuando clique una opcion de status de usuario en filtros de listado de usuarios
+	$(document).on("click", ".titulo_filtro_usuarios", function () {
+        if ($(this).attr("idFiltroUsuario") == '1') {
+            if ($('.lista_dependencias_usuarios').is(':hidden')) {
+                $(".lista_dependencias_usuarios").css({ display: "flex" });
+                $(".marcar_filtro_seleccionado").css({ transform: "translatex(0%)" });
+            }else {
+                $(".lista_dependencias_usuarios").css({ display: "none" });
+                $(".marcar_filtro_seleccionado").css({ transform: "translatex(100%)" });
+            }
+        }
+
+        if ($(this).attr("idFiltroUsuario") == '2') {
+            if ($('.lista_direcciones_usuarios').is(':hidden')) {
+                $(".lista_direcciones_usuarios").css({ display: "flex" });
+            }else {
+                $(".lista_direcciones_usuarios").css({ display: "none" });
+            }
+        }
+
+        if ($(this).attr("idFiltroUsuario") == '3') {
+            if ($('.lista_departamentos_usuarios').is(':hidden')) {
+                $(".lista_departamentos_usuarios").css({ display: "flex" });
+            }else {
+                $(".lista_departamentos_usuarios").css({ display: "none" });
+            }
+        }
+
+        if ($(this).attr("idFiltroUsuario") == '4') {
+            if ($('.lista_tipos_usuarios').is(':hidden')) {
+                $(".lista_tipos_usuarios").css({ display: "flex" });
+            }else {
+                $(".lista_tipos_usuarios").css({ display: "none" });
+            }
+        }
+
+        if ($(this).attr("idFiltroUsuario") == '5') {
+            if ($('.lista_status_usuarios').is(':hidden')) {
+                $(".lista_status_usuarios").css({ display: "flex" });
+            }else {
+                $(".lista_status_usuarios").css({ display: "none" });
+            }
+        }
 	});
 
 	//Evento de cuando clique en enviar filtros

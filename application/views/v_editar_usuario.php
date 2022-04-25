@@ -61,7 +61,7 @@
                 </label>
                 <label for="direccion_ip">
                     Dirección IP
-                    <input id="direccion_ip" type="text" value="<?= $PC_usuario->direccion_ip?>">
+                    <input id="direccion_ip" type="text" idEquipo="<?= $PC_usuario->id_equipo?>" value="<?= $PC_usuario->direccion_ip?>">
                     <div class="opciones_busqueda_ip">
                         
                     </div>
@@ -96,7 +96,7 @@
                     ?>
                     </select>
                 </label>
-                <button id="btn_guardar_cambios_usuario">Guardar cambios</button>
+                <button id="btn_guardar_cambios_usuario" noEmpleado="<?= $datos_usuario->no_empleado?>">Guardar cambios</button>
             </div>
         </div>
     </div>

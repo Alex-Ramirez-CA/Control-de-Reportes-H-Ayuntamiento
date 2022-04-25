@@ -527,6 +527,7 @@ Estilos para los filtros que puede aplicar el administrador
 	border: 1px solid rgba(0, 0, 0, 0.15);
 	overflow: hidden;
 	overflow-y: scroll;
+	gap: 1px;
 }
 
 .lista-dependecias p {
@@ -539,7 +540,6 @@ Estilos para los filtros que puede aplicar el administrador
 	cursor: pointer;
 	height:auto;
 	word-wrap: break-word;
-	margin-bottom: 5px;
 }
 
 .lista-dependecias p:hover {
@@ -575,6 +575,7 @@ Estilos para los filtros que puede aplicar el administrador
 	border: 1px solid rgba(0, 0, 0, 0.15);
 	overflow: hidden;
 	overflow-y: scroll;
+	gap: 1px;
 }
 
 .lista-direcciones p {
@@ -587,7 +588,6 @@ Estilos para los filtros que puede aplicar el administrador
 	cursor: pointer;
 	height:auto;
 	word-wrap: break-word;
-	margin-bottom: 5px;
 }
 
 .lista-direcciones p:hover {
@@ -844,6 +844,8 @@ Estilos para los filtros que puede aplicar el administrador
     border: solid 0.1px #006e95;
 	overflow: hidden;
 	overflow-y: scroll;
+	border-radius: 5px;
+	border-right: none;
 }
 
 .lista_usuarios {
@@ -908,14 +910,14 @@ Estilos para los filtros que puede aplicar el administrador
 	width: 100%;
 	max-height: 300px;
 	background: #f6f8fa;
-	display: flex;
 	flex-direction: column;
 	gap: 1px;
+	display: none;
 }
 
 .lista_dependencias_usuarios p, .lista_direcciones_usuarios p, .lista_departamentos_usuarios p, .lista_tipos_usuarios p, .lista_status_usuarios p {
 	text-align: center;
-	font-size: 14px;
+	font-size: 15px;
 	background-color: #f6f8fa;
 	padding-top: 4px;
 	color: #006e95;
@@ -943,17 +945,31 @@ Estilos para los filtros que puede aplicar el administrador
 
 .titulo_filtro_usuarios {
 	width: 100%;
-	background-color: #006e95;
+	background-color: #f6f8fa;
 	margin-top: 5px;
 	height: 30px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	cursor: pointer;
+	position: relative;
+}
+
+.marcar_filtro_seleccionado {
+	position: absolute;
+	width: 12px;
+	height: 30px;
+	background-color: #006e95;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	transition: all 400ms ease;
+	transform: translatex(200%);
 }
 
 .titulo_filtro_usuarios h2 {
 	font-size: 18px;
-	color: #fff;
+	color: #006e95;
 	text-align: center;
 	margin: 0;
 	padding-top: 3px;
@@ -962,9 +978,25 @@ Estilos para los filtros que puede aplicar el administrador
 .titulo_filtros_lista_usurios {
 	height: 40px;
 	font-size: 22px;
-	background: linear-gradient(to right,#006E95,#006E95,#26A2D9,#006E95);
+	color: #f6f8fa;
+	background-color: #006e95;
 	width: 100%;
 	text-align: center;
-	color: #fff;
 	margin: 0;
+	padding-top: 7px
+}
+
+.aplicar_filtros_usuarios {
+	width: 100%;
+	font-size: 18px;
+	color: #f6f8fa;
+	background-color: #006e95;
+	border-radius: 5px;
+	border: none;
+	padding-top: 5px;
+}
+
+.aplicar_filtros_usuarios:hover {
+	color: #f6f8fa;
+	background-color: #26A2D9;
 }
