@@ -293,6 +293,10 @@ class Usuarios extends CI_Controller {
 
 				// Hacer actualización de la tabla de usuarios
 				$this->Usuario->update_usuario($no_empleado, $datos);
+				echo json_encode(array(
+					'msg' => 'Usuario actualizado correctamente',
+					'url' => base_url('usuarios/lista_usuarios'),
+				));
 			}
 			
 
