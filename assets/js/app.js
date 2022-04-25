@@ -16,7 +16,10 @@
 		obtenerDatosFiltros();
 	}
 
-	obtenerListaCompletaUsuarios();
+    //Listar a todos los usuarios solo cuando este la url correcta
+	if (getUrl == baseUrl + "/usuarios/lista_usuarios") {
+		obtenerListaCompletaUsuarios();
+	}
 
 	//Función para cuando le de click al boton de ver
 	$(document).on("click", ".ver", function () {
@@ -542,10 +545,6 @@
 		$(".error_message_direccionIP").css({ "z-index": "-1" });
 	});
 
-	if (getUrl == baseUrl + "/usuarios/lista_usuarios") {
-		obtenerListaCompletaUsuarios();
-	}
-
 	//Función para dar de baja o de alta algún empleado
 	$(document).on("click", "#status_empleado", function () {
 		let status;
@@ -680,27 +679,15 @@
 				template += `
                 <tr>
                     <th scope="row">${usuario.no_empleado}</th>
-                    <td>${
-											usuario.nombre +
-											" " +
-											usuario.apellido_paterno +
-											" " +
-											usuario.apellido_materno
-										}</td>
+                    <td>${usuario.nombre + " " + usuario.apellido_paterno + " " + usuario.apellido_materno}</td>
                     <td>${usuario.direccion}</td>
                     <td>${usuario.rol}</td>
                     <td class="campo_status_empleado">
-                        <a href="${baseUrl}/usuarios/editar_usuario/${
-					usuario.no_empleado
-				}" class="editar_datos_usuarios" idUsuario="${
-					usuario.no_empleado
-				}">Editar</a> 
+                        <a href="${baseUrl}/usuarios/editar_usuario/${usuario.no_empleado}" class="editar_datos_usuarios" idUsuario="${usuario.no_empleado}">Editar</a> 
                         <p class="label_status_empleado" for="status_empleado">
                             Status
                             <br>
-                            <input id="status_empleado" type="checkbox" ${
-															usuario.status == 1 ? "checked" : ""
-														} value="${usuario.no_empleado}">
+                            <input id="status_empleado" type="checkbox" ${usuario.status == 1 ? "checked" : ""} value="${usuario.no_empleado}">
                         </p>
                     </td>
                 </tr>
