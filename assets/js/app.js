@@ -455,7 +455,7 @@
 		// console.log(id_departamento);
 		// console.log(id_equipo);
 		$.ajax({
-		    url: 'usuarios/actualizar_usuario',
+		    url: baseUrl + "/usuarios/actualizar_usuario",
 		    type: 'POST',
 		    data: {no_empleado, nombre, apellido_paterno, apellido_materno, email, password, id_direccion, id_rol, id_departamento, id_equipo},
 		    success: function(data) {
@@ -468,7 +468,6 @@
 		            $('.contenedor_mensaje_guardar_usuario').css({'transform':'translateY(-200%)'});
 		            window.location.replace(json.url);
 		        });
-
 		    },
 		    statusCode: {
 		        400: function(xhr) {
