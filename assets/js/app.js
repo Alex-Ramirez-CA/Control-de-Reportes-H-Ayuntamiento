@@ -765,7 +765,7 @@
                     <th scope="row">${usuario.no_empleado}</th>
                     <td>${usuario.nombre + " " + usuario.apellido_paterno + " " + usuario.apellido_materno}</td>
                     <td>${usuario.direccion}</td>
-                    <td>${usuario.rol}</td>
+                    <td>${(usuario.rol).toUpperCase()}</td>
                     <td class="campo_status_empleado">
                         <a href="${baseUrl}/usuarios/editar_usuario/${usuario.no_empleado}" class="editar_datos_usuarios" idUsuario="${usuario.no_empleado}">Editar</a> 
                         <p class="label_status_empleado" for="status_empleado">
