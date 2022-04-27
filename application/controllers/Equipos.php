@@ -102,16 +102,19 @@ class Equipos extends CI_Controller {
             if($this->input->post('tipo_equipo') === 'PC') {
                 // Hacer insercion a la tabla de equipos
                 $this->Equipo->guardar_equipo($datos);
-                // Crear el vinculo entre el equipo personal y su usuario
-                // Obtener el id_equipo por su direccion ip
-                $res = $this->Equipo->obtenerIdEquipo($this->input->post('direccion_ip'));
-                $id_equipo = $res->id_equipo;
+                // Crear el vinculo entre el equipo personal y su usuario en caso de ser necesario
                 $no_empleado = (int)$this->input->post('no_empleado');
-                $data = array(
-                    'id_equipo' => $id_equipo,
-                    'no_empleado' => $no_empleado,
-                );
-                $this->Equipo_usuario->insertar($data);
+				if($no_empleado != 0) {
+					// Obtener el id_equipo por su direccion ip
+					$res = $this->Equipo->obtenerIdEquipo($this->input->post('direccion_ip'));
+					$id_equipo = $res->id_equipo;
+					$data = array(
+						'id_equipo' => $id_equipo,
+						'no_empleado' => $no_empleado,
+					);
+					$this->Equipo_usuario->insertar($data);
+				}
+                
             } else if($this->input->post('tipo_equipo') === 'Impresora') {
                 // verificar que si se va a insertar una impresora, que no esxita otra activa 
                 // relacionada con la misma direccion
