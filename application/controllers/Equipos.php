@@ -119,7 +119,6 @@ class Equipos extends CI_Controller {
                     // Hacer insercion a la tabla de equipos
                     $this->Equipo->guardar_equipo($datos);
                     // Crear el vinculo entre la impresora y la direccion a la que pertenece
-                    // Validar que dicha direccion no tenga ya una impresora asignada
                     if($res = $this->Equipo->obtenerImpresora((int)$this->input->post('id_direccion'))) {
                         $id_equipo = $res->id_equipo;
                         $usuarios = $this->Usuario->getUsuariosbyDireccion((int)$this->input->post('id_direccion'));

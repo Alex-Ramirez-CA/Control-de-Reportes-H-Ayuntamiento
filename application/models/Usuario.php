@@ -187,7 +187,7 @@ class Usuario extends CI_Model {
         $data = $this->db
             ->select("no_empleado")
             ->from("usuario")
-            ->where('id_direccion', $id_direccion)
+            ->where(array('id_direccion' => $id_direccion, 'status' => 1))
             ->get();
         
         // Si no se encuentra resultados
