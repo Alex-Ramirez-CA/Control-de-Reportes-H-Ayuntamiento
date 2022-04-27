@@ -29,19 +29,19 @@ class Equipos extends CI_Controller {
 		
 	}
 
-	// Funcion para el campo de busqueda de equipos
-	public function buscar_direccionIP() {
+	// Funcion para buscar el usuario al que se asociara dicho equipo
+	public function buscar_empleado() {
         // Validar para que no puedan ingresar a esta direccion sin estar logeados
 		if(!$this->session->has_userdata('id_rol')){
             redirect('login');
         }
         // Recibir el valor del campo de busqueda via post
-		$search_IP = $this->input->post('search_IP');
+		$search_usuario = $this->input->post('search_usuario');
         // Hacer consulta a la base de datos
-        if($search_IP != '' || $search_IP != NULL) {
-            $data = $this->Equipo->buscarDireccionIP($search_IP);
+        if($search_usuario != '' || $search_usuario != NULL) {
+            $data = $this->Usuario->buscarEmpleado($search_usuario);
         } else {
-            $data = false;
+            $data = NULL;
         }
         
         echo json_encode($data);
