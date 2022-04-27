@@ -48,7 +48,7 @@ class Equipos extends CI_Controller {
     }
 
     // Funcion para guardar los datos del usuario agregado
-	public function guardar_usuario() {
+	public function guardar_equipo() {
 		if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 3) {
 		// Eliminar los deliminatores que agrega por defecto la funcion form_error
 		$this->form_validation->set_error_delimiters('', '');
@@ -86,31 +86,34 @@ class Equipos extends CI_Controller {
 				'id_rol' => (int)$this->input->post('id_rol'),
 				'id_departamento' => (int)$this->input->post('id_departamento'),
 			);
-			// Hacer insercion a la tabla de usuarios
+			// Hacer insercion a la tabla de equipos
 			$this->Usuario->guardar_usuario($datos);
 
-			// Crear el vinculo entre el usuario y su equipo personal
-			// Obtener el numero de empleado por su email
-			$res = $this->Usuario->obtenerNoEmpleado($this->input->post('email'));
-			$no_empleado = $res->no_empleado;
-			$data = array(
-				'id_equipo' => (int)$this->input->post('id_equipo'),
-				'no_empleado' => $no_empleado,
-			);
-            $this->Equipo_usuario->insertar($data);
-
-			// Crear el vinculo del usuario con la impresora de su direccion
-			// Validar que dicha direccion si tenga ya una impresora
-			if($res = $this->Equipo->obtenerImpresora((int)$this->input->post('id_direccion'))) {
-				$id_equipo = $res->id_equipo;
-				$data = array(
-					'id_equipo' => $id_equipo,
-					'no_empleado' => $no_empleado,
-				);
-				$this->Equipo_usuario->insertar($data);
-			}
-			echo json_encode(array(
-				'msg' => 'Usuario agregado correctamente',
+            if($this->input->post('tipo_equipo') === 'PC') {
+                // Crear el vinculo entre el equipo personal y su usuario
+                // Obtener el id_equipo por su direccion ip
+                $res = $this->Equipo->obtenerIdEquipo($this->input->post('email'));
+                $no_empleado = $res->no_empleado;
+                $data = array(
+                    'id_equipo' => (int)$this->input->post('id_equipo'),
+                    'no_empleado' => $no_empleado,
+                );
+                $this->Equipo_usuario->insertar($data);
+            } else if($this->input->post('tipo_equipo') === 'PC') {
+                // Crear el vinculo entre la impresora y la direccion a la que pertenece
+                // Validar que dicha direccion si tenga ya una impresora
+                if($res = $this->Equipo->obtenerImpresora((int)$this->input->post('id_direccion'))) {
+                    $id_equipo = $res->id_equipo;
+                    $data = array(
+                        'id_equipo' => $id_equipo,
+                        'no_empleado' => $no_empleado,
+                    );
+                    $this->Equipo_usuario->insertar($data);
+                }
+            }
+			
+            echo json_encode(array(
+				'msg' => 'Equipo agregado correctamente',
 				'url' => base_url('usuarios'),
 			));
 		}

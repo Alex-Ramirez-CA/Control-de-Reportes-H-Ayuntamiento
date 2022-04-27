@@ -84,4 +84,18 @@ class Equipo extends CI_Model {
         return $data->row();
     }
 
+    public function obtenerIdEquipo($direccion_ip) {
+        $data = $this->db
+                ->select("id_equipo")
+                ->from("equipo")
+                ->where(array('direccion_ip' => $direccion_ip, 'tipo' => 'PC'), 1)
+                ->get();
+        
+        // Si no se encuentra resultados
+        if(!$data->result()) {
+            return false;
+        }
+        return $data->row();
+    }
+
 }
