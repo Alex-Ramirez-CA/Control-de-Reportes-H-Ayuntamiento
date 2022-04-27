@@ -4,6 +4,11 @@ class Equipo extends CI_Model {
         $this->load->database();
     }
 
+    // Insertar datos de un usuario nuevo
+    public function guardar_equipo($datos) {
+        $this->db->insert('equipo', $datos);
+    }
+
     // Obtener los uquipo a los que esta asignado el usuario
     public function buscarEquipo($search) {
         // Busqueda por nombre
@@ -88,7 +93,7 @@ class Equipo extends CI_Model {
         $data = $this->db
                 ->select("id_equipo")
                 ->from("equipo")
-                ->where(array('direccion_ip' => $direccion_ip, 'tipo' => 'PC'), 1)
+                ->where(array('direccion_ip' => $direccion_ip, 'tipo_equipo' => 'PC'), 1)
                 ->get();
         
         // Si no se encuentra resultados
