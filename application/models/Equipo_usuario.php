@@ -47,4 +47,18 @@ class Equipo_usuario extends CI_Model {
         $this->db->update('equipo_usuario');
     }
 
+    public function comprobarRelacion($id_equipo, $no_empleado) {
+        $data = $this->db
+                ->select("*")
+                ->from("equipo_usuario")
+                ->where(array('id_equipo' => $id_equipo, 'no_empleado' => $no_empleado), 1)
+                ->get();
+        
+        // Si no se encuentra resultados
+        if(!$data->result()) {
+            return false;
+        }
+        return $data->row();
+    }
+
 }

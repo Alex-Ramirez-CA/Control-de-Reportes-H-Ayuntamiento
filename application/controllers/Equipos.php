@@ -92,16 +92,19 @@ class Equipos extends CI_Controller {
             if($this->input->post('tipo_equipo') === 'PC') {
                 // Crear el vinculo entre el equipo personal y su usuario
                 // Obtener el id_equipo por su direccion ip
-                $res = $this->Equipo->obtenerIdEquipo($this->input->post('email'));
-                $no_empleado = $res->no_empleado;
-                $data = array(
-                    'id_equipo' => (int)$this->input->post('id_equipo'),
-                    'no_empleado' => $no_empleado,
-                );
-                $this->Equipo_usuario->insertar($data);
-            } else if($this->input->post('tipo_equipo') === 'PC') {
+                $res = $this->Equipo->obtenerIdEquipo($this->input->post('direccion_ip'));
+                $id_equipo = $res->id_equipo;
+                $no_empleado = (int)$this->input->post('no_empleado');
+                if(!$this->Equipo_usuario->comprobarRelacion($id_equipo, $no_empleado)) {
+                    $data = array(
+                        'id_equipo' => $id_equipo,
+                        'no_empleado' => $no_empleado,
+                    );
+                    $this->Equipo_usuario->insertar($data);
+                }
+            } else if($this->input->post('tipo_equipo') === 'Impresora') {
                 // Crear el vinculo entre la impresora y la direccion a la que pertenece
-                // Validar que dicha direccion si tenga ya una impresora
+                // Validar que dicha direccion no tenga ya una impresora
                 if($res = $this->Equipo->obtenerImpresora((int)$this->input->post('id_direccion'))) {
                     $id_equipo = $res->id_equipo;
                     $data = array(
