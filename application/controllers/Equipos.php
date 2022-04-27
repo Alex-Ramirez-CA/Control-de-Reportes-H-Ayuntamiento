@@ -56,7 +56,7 @@ class Equipos extends CI_Controller {
 		$rules = getUsuarioRules();
 		$this->form_validation->set_rules($rules);
 		// validar si las reglas se cumplen
-		if($this->form_validation->run() == FALSE) {
+		if(1 != 1) {
 			// Guardar las mensajes en caso de error de validación, dichos mensajes se encuentran en el helper
 			$erros = array(
 				'nombre' => form_error('nombre'),
