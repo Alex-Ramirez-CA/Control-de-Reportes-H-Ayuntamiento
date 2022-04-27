@@ -105,18 +105,17 @@ class Equipos extends CI_Controller {
             } else if($this->input->post('tipo_equipo') === 'Impresora') {
                 // Crear el vinculo entre la impresora y la direccion a la que pertenece
                 // Validar que dicha direccion no tenga ya una impresora asignada
-                if(!$this->Equipo->obtenerImpresora((int)$this->input->post('id_direccion'))) {
-                    $res = $this->Equipo->obtenerIdEquipo($this->input->post('direccion_ip'));
+                if($res = $this->Equipo->obtenerImpresora((int)$this->input->post('id_direccion'))) {
                     $id_equipo = $res->id_equipo;
-                    // 
-                    if($no_empleado = (int)$this->input->post('no_empleado')) {
-
+                    $usuarios = $this->Usuario->getUsuariosbyDireccion($id_direccion);
+                    foreach($usuarios as $usuario) {
+                        $no_empleado = $usuario->no_empleado;
+                        $data = array(
+                            'id_equipo' => $id_equipo,
+                            'no_empleado' => $no_empleado,
+                        );
+                        $this->Equipo_usuario->insertar($data);
                     }
-                    $data = array(
-                        'id_equipo' => $id_equipo,
-                        'no_empleado' => $no_empleado,
-                    );
-                    $this->Equipo_usuario->insertar($data);
                 }
             }
 			
