@@ -7,7 +7,7 @@ class Equipos extends CI_Controller {
 		parent::__construct();
 		$this->load->library(array('form_validation','session'));
 		$this->load->model(array('Usuario', 'Departamento', 'Rol', 'Direccion', 'Equipo', 'Equipo_usuario', 'Dependencia'));
-		$this->load->helper(array('user/usuario_rules'));
+		$this->load->helper(array('other/equipo_rules'));
 	}
 
     // Carga el formulario de agregar usuario nuevo
@@ -53,21 +53,20 @@ class Equipos extends CI_Controller {
 		// Eliminar los deliminatores que agrega por defecto la funcion form_error
 		$this->form_validation->set_error_delimiters('', '');
 		// Cargar las reglas de validación llamando a la función del helper
-		$rules = getUsuarioRules();
+		$rules = getEquipoRules();
 		$this->form_validation->set_rules($rules);
 		// validar si las reglas se cumplen
-		if(1 != 1) {
+		if($this->form_validation->run() == FALSE) {
 			// Guardar las mensajes en caso de error de validación, dichos mensajes se encuentran en el helper
 			$erros = array(
 				'nombre' => form_error('nombre'),
-				'apellido_paterno' => form_error('apellido_paterno'),
-				'apellido_materno' => form_error('apellido_materno'),
-				'email' => form_error('email'),
-				'password' => form_error('password'),
-				'id_direccion' => form_error('id_direccion'),
-				'id_rol' => form_error('id_rol'),
-				'id_departamento' => form_error('id_departamento'),
-				'id_equipo' => form_error('id_equipo'),
+				'sistema_operativo' => form_error('sistema_operativo'),
+				'marca' => form_error('marca'),
+				'inventario' => form_error('inventario'),
+				'serie' => form_error('serie'),
+				'direccion_ip' => form_error('direccion_ip'),
+				'procesador' => form_error('procesador'),
+				'segmento_de_red' => form_error('segmento_de_red'),
 			);
 			// Mandar respuesta al cliente
 			echo json_encode($erros);
@@ -154,106 +153,6 @@ class Equipos extends CI_Controller {
             redirect('login');
         }
 	}
-    
-	// Pruebas (ignorar)
-	// public function guardar_equipo_prueba() {
-	// 	if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 3) {
-	// 	// Eliminar los deliminatores que agrega por defecto la funcion form_error
-	// 	$this->form_validation->set_error_delimiters('', '');
-	// 	// Cargar las reglas de validación llamando a la función del helper
-	// 	$rules = getUsuarioRules();
-	// 	$this->form_validation->set_rules($rules);
-	// 	// validar si las reglas se cumplen
-	// 	if(1 != 1) {
-	// 		// Guardar las mensajes en caso de error de validación, dichos mensajes se encuentran en el helper
-	// 		$erros = array(
-	// 			'nombre' => form_error('nombre'),
-	// 			'apellido_paterno' => form_error('apellido_paterno'),
-	// 			'apellido_materno' => form_error('apellido_materno'),
-	// 			'email' => form_error('email'),
-	// 			'password' => form_error('password'),
-	// 			'id_direccion' => form_error('id_direccion'),
-	// 			'id_rol' => form_error('id_rol'),
-	// 			'id_departamento' => form_error('id_departamento'),
-	// 			'id_equipo' => form_error('id_equipo'),
-	// 		);
-	// 		// Mandar respuesta al cliente
-	// 		echo json_encode($erros);
-	// 		$this->output->set_status_header(400);
-	// 	} else {
-			
-	// 		// Datos para hacer la insercion en la tabla de usuario
-	// 		$datos = array(
-	// 			'direccion_ip' => '140.0.0.1',
-	// 			'ram' => NULL,
-	// 			'dvd' => NULL,
-	// 			'procesador' => NULL,
-	// 			'inventario_monitor' => NULL,
-	// 			'marca' => NULL,
-	// 			'marca_monitor' => NULL,
-	// 			'segmento_de_red' => NULL,
-	// 			'tamano_monitor' => NULL,
-	// 			'nombre' => NULL,
-	// 			'inventario' => NULL,
-	// 			'serie' => NULL,
-	// 			'status' => 1,
-	// 			'tipo_equipo' => 'Impresora',
-	// 			'id_direccion' => 3,
-	// 		);
-
-    //         if('Impresora' === 'PC') {
-    //             // Hacer insercion a la tabla de equipos
-    //             $this->Equipo->guardar_equipo($datos);
-    //             // Crear el vinculo entre el equipo personal y su usuario
-    //             // Obtener el id_equipo por su direccion ip
-    //             $res = $this->Equipo->obtenerIdEquipo('130.0.0.1');
-    //             $id_equipo = $res->id_equipo;
-    //             $no_empleado = 15;//(int)$this->input->post('no_empleado');
-    //             $data = array(
-    //                 'id_equipo' => $id_equipo,
-    //                 'no_empleado' => $no_empleado,
-    //             );
-    //             $this->Equipo_usuario->insertar($data);
-    //         } else if('Impresora' === 'Impresora') {
-    //             // verificar que si se va a insertar una impresora, que no esxita otra activa 
-    //             // relacionada con la misma direccion
-    //             if(!$this->Equipo->obtenerImpresora(3)) {
-    //                 // Hacer insercion a la tabla de equipos
-    //                 $this->Equipo->guardar_equipo($datos);
-    //                 // Crear el vinculo entre la impresora y la direccion a la que pertenece
-    //                 // Validar que dicha direccion no tenga ya una impresora asignada
-    //                 if($res = $this->Equipo->obtenerImpresora(3)) {
-    //                     $id_equipo = $res->id_equipo;
-    //                     $usuarios = $this->Usuario->getUsuariosbyDireccion(3);
-    //                     foreach($usuarios as $usuario) {
-    //                         $no_empleado = $usuario->no_empleado;
-    //                         $data = array(
-    //                             'id_equipo' => $id_equipo,
-    //                             'no_empleado' => $no_empleado,
-    //                         );
-    //                         $this->Equipo_usuario->insertar($data);
-    //                     }
-    //                 }
-    //             } else {
-    //                 echo json_encode(array(
-    //                     'msg' => 'Esta dirección ya tiene una impresora activa asociada',
-    //                     'url' => base_url('equipos'),
-    //                 ));
-    //                 $this->output->set_status_header(500);
-	// 				exit;
-    //             }
-    //         }
-			
-    //         echo json_encode(array(
-	// 			'msg' => 'Equipo agregado correctamente',
-	// 			'url' => base_url('equipos'),
-	// 		));
-	// 	}
-    //     } else {
-    //         // Si no hay datos de sesion redireccionar a login
-    //         redirect('login');
-    //     }
-	// }
 
 	// Funcion que trae los datos de todos los equipos existentes
 	public function lista_equipos() {
