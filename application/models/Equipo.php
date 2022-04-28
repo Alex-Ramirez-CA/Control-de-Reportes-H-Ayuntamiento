@@ -157,4 +157,11 @@ class Equipo extends CI_Model {
         return $data->result();
     }
 
+    // Función que permite modificar el status de un equipo, ya sea como activo o inactivo
+    public function statusEquipo($status, $id_equipo) {
+        $this->db->set('status', $status);
+        $this->db->where('id_equipo', $id_equipo);
+        $this->db->update('equipo');
+    }
+
 }

@@ -318,9 +318,9 @@ class Equipos extends CI_Controller {
 	// Funcion que permitira actualizar el status de un usuario
 	public function modificar_status() {
 		if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 3) {
-			$status = (int)$this->input->post('status');
-			$no_empleado = (int)$this->input->post('no_empleado');
-			$this->Usuario->statusUsuario($status, $no_empleado);
+			$status = 0;//(int)$this->input->post('status');
+			$id_equipo = 3;//(int)$this->input->post('id_equipo');
+			$this->Equipo->statusEquipo($status, $id_equipo);
 		} else {
 			// Si no hay datos de sesion redireccionar a login
 			redirect('login');
