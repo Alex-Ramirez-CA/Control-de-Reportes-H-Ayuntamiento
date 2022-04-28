@@ -366,6 +366,8 @@ Estilos para los filtros que puede aplicar el administrador
 	font-size: 25px;
 	color: #fff;
 	margin-top: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
 .parte1-filtros, .parte2-filtros, .parte3-filtros {
@@ -785,7 +787,7 @@ Estilos para los filtros que puede aplicar el administrador
 	color: #f6f8fa;
 }
 
-.error_message_nombre, .error_message_apellidoP, .error_message_apellidoM, .error_message_email, .error_message_password, .error_message_direccionIP  {
+.error_message_nombre, .error_message_apellidoP, .error_message_apellidoM, .error_message_email, .error_message_password, .error_message_direccionIP, .error_message_segmento_red, .error_message_serie, .error_message_sistema_operativo, .error_message_marca, .error_message_inventario, .error_message_procesador {
 	position: absolute;
 	background-color: #ffadba;
 	color: #E52141;
@@ -796,7 +798,7 @@ Estilos para los filtros que puede aplicar el administrador
 	z-index: -1;
 }
 
-.error_message_nombre, .error_message_apellidoP, .error_message_apellidoM, .error_message_email, .error_message_password, .error_message_direccionIP p {
+.error_message_nombre, .error_message_apellidoP, .error_message_apellidoM, .error_message_email, .error_message_password, .error_message_direccionIP p, .error_message_segmento_red p, .error_message_serie p, .error_message_sistema_operativo p, .error_message_marca p, .error_message_inventario p, .error_message_procesador p {
 	text-align: center;
 	font-size: 15px;
 	padding: 3px 5px;
@@ -1065,7 +1067,7 @@ Estilos para los filtros que puede aplicar el administrador
 }
 
 #observaciones_equipo {
-	width: 270%;
+	width: 322%;
 	border: solid 1px #006e95;
 	height: 32px;
 	border-radius: 10px;
