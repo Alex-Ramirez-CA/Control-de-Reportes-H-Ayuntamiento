@@ -551,29 +551,17 @@
 		let no_empleado = $(this).val();
 
 		var opcion = confirm(
-			"¿Está seguro de cambiar el status actual del trabajador?"
+			"¿Está seguro de cambiar el estatus actual del trabajador?"
 		);
 		if (opcion == true) {
 			if ($(this).is(":checked")) {
 				// Hacer algo si el checkbox ha sido seleccionado
 				status = 1;
-				console.log(
-					"El empleado con numero " +
-						no_empleado +
-						" ha sido seleccionado, nuevo status: " +
-						status
-				);
 				$.post("modificar_status", { status, no_empleado });
 				// obtenerListaCompletaUsuarios ();
 			} else {
 				// Hacer algo si el checkbox ha sido deseleccionado
 				status = 0;
-				console.log(
-					"El empleado con numero " +
-						no_empleado +
-						" ha sido deseleccionado, nuevo status: " +
-						status
-				);
 				$.post("modificar_status", { status, no_empleado });
 				// obtenerListaCompletaUsuarios ();
 			}
@@ -783,6 +771,36 @@
 		$('.opciones_busqueda_usuario').css('visibility','hidden');
 	});
 
+	//Habilitar los campos del formulario
+	$("#tipo_equipo").change(function () {
+		if ($("#tipo_equipo").val() === "Impresora") {
+			$("#search_usuario").prop("disabled", "disabled");
+			$('#search_usuario').attr("no_empleado",null);
+			$('#search_usuario').val("");
+			$("#invetario_monitor").prop("disabled", "disabled");
+			$("#serie_monitor").prop("disabled", "disabled");
+			$("#teclado_equipo").prop("disabled", "disabled");
+			$("#cantidad_ram_equipo").prop("disabled", "disabled");
+			$("#mause_equipo").prop("disabled", "disabled");
+			$("#marca_monitor").prop("disabled", "disabled");
+			$("#disco_duro_equipo").prop("disabled", "disabled");
+			$("#dvd_equipo").prop("disabled", "disabled");
+			$("#tamaño_monitor").prop("disabled", "disabled");
+
+		} else {
+			$("#search_usuario").prop("disabled", false);
+			$("#invetario_monitor").prop("disabled", false);
+			$("#serie_monitor").prop("disabled", false);
+			$("#teclado_equipo").prop("disabled", false);
+			$("#cantidad_ram_equipo").prop("disabled", false);
+			$("#mause_equipo").prop("disabled", false);
+			$("#marca_monitor").prop("disabled", false);
+			$("#disco_duro_equipo").prop("disabled", false);
+			$("#dvd_equipo").prop("disabled", false);
+			$("#tamaño_monitor").prop("disabled", false);
+		}
+	});
+
 	//Evento de cuando clique en guardar datos del equipo
 	$(document).on("click", ".guardar_equipo", function () {
 		let no_empleado = $('#search_usuario').attr("no_empleado");
@@ -794,18 +812,39 @@
 		let inventario = $("#inventario_equipo").val();
 		let serie = $("#serie_equipo").val();
 		let direccion_ip = $("#direccion_ip_equipo").val();
-		let teclado = $("#teclado_equipo").val();
-		let mouse = $("#mause_equipo").val();
-		let dvd = $("#dvd_equipo").val();
+		let teclado;
+		let mouse;
+		let dvd;
+		let ram;
+		let disco_duro;
+		let inventario_monitor;
+		let serie_monitor;
+		let marca_monitor;
+		let tamano_monitor;
 		let procesador = $("#procesador_equipo").val();
 		let segmento_de_red = $("#segmento_red_equipo").val();
-		let ram = $("#cantidad_ram_equipo").val();
-		let disco_duro = $("#disco_duro_equipo").val();
-		let inventario_monitor = $("#invetario_monitor").val();
-		let serie_monitor = $("#serie_monitor").val();
-		let marca_monitor = $("#marca_monitor").val();
-		let tamano_monitor = $("#tamaño_monitor").val();
 		let observaciones = $("#observaciones_equipo").val();
+		if($("#tipo_equipo").val() === "Impresora"){
+			teclado = null;
+			mouse = null;
+			dvd = null;
+			ram = null;
+			disco_duro = null;
+			inventario_monitor = null;
+			serie_monitor = null;
+			marca_monitor = null;
+			tamano_monitor = null;
+		}else{
+			teclado = $("#teclado_equipo").val();
+			mouse = $("#mause_equipo").val();
+			dvd = $("#dvd_equipo").val();
+		 	ram = $("#cantidad_ram_equipo").val();
+		 	disco_duro = $("#disco_duro_equipo").val();
+		 	inventario_monitor = $("#invetario_monitor").val();
+		 	serie_monitor = $("#serie_monitor").val();
+		 	marca_monitor = $("#marca_monitor").val();
+		 	tamano_monitor = $("#tamaño_monitor").val();
+		}
         // console.log("Empleado " + no_empleado)
 		// console.log(nombre);
 		// console.log(tipo_equipo);
@@ -816,9 +855,9 @@
 		// console.log(serie);
 		// console.log(direccion_ip);
 		// console.log(teclado);
-		// console.log(mause);
+		// console.log(mouse);
 		// console.log(dvd);
-		// console.log(pocesador);
+		// console.log(procesador);
 		// console.log(segmento_de_red);
 		// console.log(ram);
 		// console.log(disco_duro);
@@ -862,7 +901,7 @@
                     <td class="campo_status_empleado">
                         <a href="${baseUrl}/usuarios/editar_usuario/${usuario.no_empleado}" class="editar_datos_usuarios" idUsuario="${usuario.no_empleado}">Editar</a> 
                         <p class="label_status_empleado" for="status_empleado">
-                            Status
+                            Estatus
                             <br>
                             <input id="status_empleado" type="checkbox" ${usuario.status == 1 ? "checked" : ""} value="${usuario.no_empleado}">
                         </p>

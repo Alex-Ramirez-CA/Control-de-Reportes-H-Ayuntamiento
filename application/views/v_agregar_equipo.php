@@ -1,7 +1,7 @@
 <?= $head; ?>
 <?= $nav; ?>
 
-<div class="container">
+<div class="container_lista_usuarios">
     <div class="formulario_agregar_usuario">
         <div class="titulo_formulario">
             <h1>Ingrese datos del nuevo equipo</h1>
@@ -15,6 +15,19 @@
                         <option value="Impresora">Impresora</option>
                     </select>
                 </label>
+                <label for="direccion_equipo">
+                    Dirección
+                    <select name="direccion" id="direccion_equipo">
+                    <?php
+                        foreach($direcciones as $item):
+                    ?>
+                        <option value="<?= $item->id_direccion?>"><?= $item->nombre?></option>
+                    <?php 
+                        endforeach; 
+                            
+                    ?>                         
+                    </select>
+                </label>
                 <label for="sistema_operativo_equipo">
                     Sistema operativo
                     <input id="sistema_operativo_equipo" type="text">
@@ -22,21 +35,16 @@
                         
                     </div>
                 </label>
-                <label for="direccion_ip_equipo">
-                    Dirección IP
-                    <input id="direccion_ip_equipo" type="text">
-                    <div class="error_message_apellidoP">
+                <label for="search_usuario">
+                    Asignar a
+                    <input id="search_usuario" type="text">
+                    <div class="opciones_busqueda_usuario">
+                        
+                    </div>
+                    <div class="error_message_direccionIP">
                         
                     </div>
                 </label>
-                <label for="procesador_equipo">
-                    Procesador
-                    <input id="procesador_equipo" type="text">
-                    <div class="error_message_email">
-                        
-                    </div>
-                </label>
-                
                 <label for="invetario_monitor">
                     Inventario monitor
                     <input id="invetario_monitor" type="text">
@@ -61,19 +69,19 @@
                         
                     </div>
                 </label>
+                <label for="procesador_equipo">
+                    Procesador
+                    <input id="procesador_equipo" type="text">
+                    <div class="error_message_email">
+                        
+                    </div>
+                </label>
                 <label for="teclado_equipo">
                     Teclado
                     <select name="teclado_equipo" id="teclado_equipo">
                         <option value="1">Si</option>
                         <option value="0">No</option>
                     </select>
-                </label>
-                <label for="segmento_red_equipo">
-                    Segmento de red
-                    <input id="segmento_red_equipo" type="text">
-                    <div class="error_message_email">
-                        
-                    </div>
                 </label>
                 <label for="serie_monitor">
                     Serie monitor
@@ -85,23 +93,24 @@
             </div>
 
             <div class="columna_formulario">
-                <label for="direccion_equipo">
-                    Dirección
-                    <select name="direccion" id="direccion_equipo">
-                    <?php
-                        foreach($direcciones as $item):
-                    ?>
-                        <option value="<?= $item->id_direccion?>"><?= $item->nombre?></option>
-                    <?php 
-                        endforeach; 
-                            
-                    ?>                         
-                    </select>
+                <label for="direccion_ip_equipo">
+                    Dirección IP
+                    <input id="direccion_ip_equipo" type="text">
+                    <div class="error_message_apellidoP">
+                        
+                    </div>
                 </label>
                 <label for="inventario_equipo">
                     Inventario
                     <input id="inventario_equipo" type="text">
                     <div class="error_message_apellidoM">
+                        
+                    </div>
+                </label>
+                <label for="cantidad_ram_equipo">
+                    Catidad de RAM
+                    <input id="cantidad_ram_equipo" type="text">
+                    <div class="error_message_email">
                         
                     </div>
                 </label>
@@ -111,13 +120,6 @@
                         <option value="1">Si</option>
                         <option value="0">No</option>
                     </select>
-                </label>
-                <label for="cantidad_ram_equipo">
-                    Catidad de RAM
-                    <input id="cantidad_ram_equipo" type="text">
-                    <div class="error_message_email">
-                        
-                    </div>
                 </label>
                 <label for="marca_monitor">
                     Marca monitor
@@ -129,13 +131,10 @@
             </div>
 
             <div class="columna_formulario">
-                <label for="search_usuario">
-                    Asignar a
-                    <input id="search_usuario" type="text">
-                    <div class="opciones_busqueda_usuario">
-                        
-                    </div>
-                    <div class="error_message_direccionIP">
+                <label for="segmento_red_equipo">
+                    Segmento de red
+                    <input id="segmento_red_equipo" type="text">
+                    <div class="error_message_email">
                         
                     </div>
                 </label>
@@ -146,19 +145,19 @@
                         
                     </div>
                 </label>
-                <label for="dvd_equipo">
-                    DVD
-                    <select name="dvd_equipo" id="dvd_equipo">
-                        <option value="1">Si</option>
-                        <option value="0">No</option>
-                    </select>
-                </label>
                 <label for="disco_duro_equipo">
                     Disco duro
                     <input id="disco_duro_equipo" type="text">
                     <div class="error_message_email">
                         
                     </div>
+                </label>
+                <label for="dvd_equipo">
+                    DVD
+                    <select name="dvd_equipo" id="dvd_equipo">
+                        <option value="1">Si</option>
+                        <option value="0">No</option>
+                    </select>
                 </label>
                 <label for="tamaño_monitor">
                     Tamaño monitor
