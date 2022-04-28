@@ -287,19 +287,16 @@ class Equipos extends CI_Controller {
 		}
 	}
 
-	// Filtrar los usuarios
-	public function filtrar_usuarios() {
+	// Filtrar los equipos
+	public function filtrar_equipos() {
 		if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 3) {
-			$rol = $this->input->post('rol');
-			$departamento = $this->input->post('departamento'); 
+			$segmento_de_red = $this->input->post('segmento_de_red'); 
 			$dependencia = $this->input->post('dependencia');
 			$direccion = $this->input->post('direccion');
 			$status = $this->input->post('status');
-			if($rol === ""){
-				$rol = NULL;
-			}
-			if($departamento === ""){
-				$departamento = NULL;
+			
+			if($segmento_de_red === ""){
+				$segmento_de_red = NULL;
 			}
 			if($dependencia === ""){
 				$dependencia = NULL;
@@ -310,7 +307,7 @@ class Equipos extends CI_Controller {
 			if($status === ""){
 				$status = NULL;
 			}
-			$data = $this->Usuario->filtrarUsuarios($rol, $departamento,  $dependencia, $direccion, $status);
+			$data = $this->Equipo->filtrarEquipos($segmento_de_red,  $dependencia, $direccion, $status);
 			echo json_encode($data);
 		} else {
 			// Si no hay datos de sesion redireccionar a login

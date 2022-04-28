@@ -106,13 +106,51 @@ class Equipo extends CI_Model {
     // Obtiene todos los equipos existentes
     public function getEquipos() {
         $data = $this->db
-            ->select("e.id_equipo, e.direccion_ip, e.nombre, e.tipo_equipo, dir.nombre as direccion, e.status")
+            ->select("e.id_equipo, e.direccion_ip, e.segmento_de_red, e.nombre, e.tipo_equipo, dir.nombre as direccion, e.status")
             ->from("equipo e")
             ->join("direccion dir", "e.id_direccion=dir.id_direccion")
             ->order_by('e.id_equipo')
             ->get();
         
         // Si no se encuentra resultados
+        if(!$data->result()) {
+            return false;
+        }
+        return $data->result();
+    }
+
+    // Filtros para los equipos
+    public function filtrarEquipos($segmento_de_red,  $dependencia, $direccion, $status) {
+        $querySeg = 'e.segmento_de_red IS NOT NULL';
+        $queryDepen = 'depen.id_dependencia IS NOT NULL';
+        $queryDirecc = 'dir.id_direccion IS NOT NULL';
+        $queryStatus = 'e.status IS NOT NULL';
+
+        if($segmento_de_red !== NULL) {
+            $querySeg = 'e.segmento_de_red = '.$segmento_de_red;
+        }
+        if($dependencia !== NULL) {
+            $queryDepen = 'depen.id_dependencia = '.$dependencia;
+        }
+        if($direccion !== NULL) {
+            $queryDirecc = 'dir.id_direccion = '.$direccion;
+        }
+        if($status !== NULL) {
+            $queryStatus = 'e.status = '.$status;
+        }
+        $data = $this->db
+            ->distinct()
+            ->select("e.id_equipo, e.direccion_ip, e.segmento_de_red, e.nombre, e.tipo_equipo, dir.nombre as direccion, e.status")
+            ->from("equipo e")
+            ->join("direccion dir", "e.id_direccion=dir.id_direccion")
+            ->join("dependencia depen", "dir.id_dependencia=depen.id_dependencia")
+            ->where($querySeg)
+            ->where($queryDepen)
+            ->where($queryDirecc)
+            ->where($queryStatus)
+            ->group_by('e.id_equipo')
+            ->get();
+        
         if(!$data->result()) {
             return false;
         }
