@@ -123,15 +123,17 @@ class Equipos extends CI_Controller {
                     // Crear el vinculo entre la impresora y la direccion a la que pertenece
                     if($res = $this->Equipo->obtenerImpresora((int)$this->input->post('id_direccion'))) {
                         $id_equipo = $res->id_equipo;
-                        $usuarios = $this->Usuario->getUsuariosbyDireccion((int)$this->input->post('id_direccion'));
-                        foreach($usuarios as $usuario) {
-                            $no_empleado = $usuario->no_empleado;
-                            $data = array(
-                                'id_equipo' => $id_equipo,
-                                'no_empleado' => $no_empleado,
-                            );
-                            $this->Equipo_usuario->insertar($data);
-                        }
+                        if($usuarios = $this->Usuario->getUsuariosbyDireccion((int)$this->input->post('id_direccion'))) {
+							foreach($usuarios as $usuario) {
+								$no_empleado = $usuario->no_empleado;
+								$data = array(
+									'id_equipo' => $id_equipo,
+									'no_empleado' => $no_empleado,
+								);
+								$this->Equipo_usuario->insertar($data);
+							}
+						}
+                        
                     }
                 } else {
                     echo json_encode(array(
