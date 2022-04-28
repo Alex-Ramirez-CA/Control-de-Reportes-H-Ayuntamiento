@@ -72,21 +72,7 @@ class Equipos extends CI_Controller {
 			echo json_encode($erros);
 			$this->output->set_status_header(400);
 		} else {
-			if(!$this->input->post('mouse')) {
-				$mouse = NULL;
-			} else {
-				$mouse = (int)$this->input->post('mouse');
-			}
-			if(!$this->input->post('dvd')) {
-				$dvd = NULL;
-			} else {
-				$dvd = (int)$this->input->post('dvd');
-			}
-			if(!$this->input->post('teclado')) {
-				$teclado = NULL;
-			} else {
-				$teclado = (int)$this->input->post('teclado');
-			}
+			
 			if(!$this->input->post('ram')) {
 				$ram = NULL;
 			} else {
@@ -127,7 +113,7 @@ class Equipos extends CI_Controller {
 			$datos = array(
 				'direccion_ip' => $this->input->post('direccion_ip'),
 				'ram' => $ram,
-				'dvd' => $dvd,
+				'dvd' => (int)$this->input->post('dvd'),
 				'procesador' => $this->input->post('procesador'),
 				'inventario_monitor' => $inventario_monitor,
 				'marca' => $this->input->post('marca'),
@@ -140,9 +126,9 @@ class Equipos extends CI_Controller {
 				'status' => 1,
 				'serie_monitor' => $serie_monitor,
 				'disco_duro' => $disco_duro,
-				'teclado' => $teclado,
+				'teclado' => (int)$this->input->post('teclado'),
 				'observaciones' => $observaciones,
-				'mouse' => $mouse,
+				'mouse' => (int)$this->input->post('mouse'),
 				'sistema_operativo' => $this->input->post('sistema_operativo'),
 				'tipo_equipo' => $this->input->post('tipo_equipo'),
 				'id_direccion' => (int)$this->input->post('id_direccion'),
