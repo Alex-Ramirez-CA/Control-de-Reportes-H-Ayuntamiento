@@ -103,4 +103,20 @@ class Equipo extends CI_Model {
         return $data->row();
     }
 
+    // Obtiene todos los equipos existentes
+    public function getEquipos() {
+        $data = $this->db
+            ->select("e.id_equipo, e.direccion_ip, e.nombre, e.tipo_equipo, dir.nombre as direccion, e.status")
+            ->from("equipo e")
+            ->join("direccion dir", "e.id_direccion=dir.id_direccion")
+            ->order_by('e.id_equipo')
+            ->get();
+        
+        // Si no se encuentra resultados
+        if(!$data->result()) {
+            return false;
+        }
+        return $data->result();
+    }
+
 }

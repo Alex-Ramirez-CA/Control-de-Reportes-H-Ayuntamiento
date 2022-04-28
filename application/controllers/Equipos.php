@@ -262,6 +262,8 @@ class Equipos extends CI_Controller {
 				'head' => $this->load->view('layout/head', '', TRUE),
 				'nav' => $this->load->view('layout/nav', '', TRUE),
 				'footer' => $this->load->view('layout/footer', '', TRUE),
+				'departamentos' => $this->Departamento->get_departamentos(),
+				'roles' => $this->Rol->get_roles(),
 				'direcciones' => $this->Direccion->get_direcciones(),
 				'dependencias' => $this->Dependencia->get_dependencias(),
 			);
@@ -273,10 +275,10 @@ class Equipos extends CI_Controller {
 	}
 	
 	// Funcion que trae los datos de todos los usuarios existentes
-	public function obtener_lista() {
+	public function obtener_listaEquipos() {
 		if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 3) {
 			// Validar que existan usuarios
-			if($res = $this->Usuario->getUsuarios()) {
+			if($res = $this->Equipo->getEquipos()) {
 				echo json_encode($res);
 			}
 		} else {
