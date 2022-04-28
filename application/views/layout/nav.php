@@ -11,7 +11,7 @@
                             <div class="opciones_administracion">
                                 <a href="<?= base_url('usuarios') ?>">Agregar usuario</a> 
                                 <a class="opcion_lista_usuarios" href="<?= base_url('usuarios/lista_usuarios') ?>">Listar usuarios</a> 
-                                <a href="#">Agregar equipo</a> 
+                                <a href="<?= base_url('equipos') ?>">Agregar equipo</a> 
                                 <a href="#">Listar equipos</a>  
                             </div>
                         </div>                        
