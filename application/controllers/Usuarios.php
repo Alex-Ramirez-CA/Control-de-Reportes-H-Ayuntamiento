@@ -125,19 +125,16 @@ class Usuarios extends CI_Controller {
 	// Funcion que trae los datos de todos los usuarios existentes
 	public function lista_usuarios() {
 		if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 3) {
-			// Validar que existan usuarios
-			if($res = $this->Usuario->getUsuarios()) {
-				$data = array(
-					'head' => $this->load->view('layout/head', '', TRUE),
-					'nav' => $this->load->view('layout/nav', '', TRUE),
-					'footer' => $this->load->view('layout/footer', '', TRUE),
-					'departamentos' => $this->Departamento->get_departamentos(),
-					'roles' => $this->Rol->get_roles(),
-					'direcciones' => $this->Direccion->get_direcciones(),
-					'dependencias' => $this->Dependencia->get_dependencias(),
-				);
-				$this->load->view('v_listar_usuarios', $data);
-			}
+			$data = array(
+				'head' => $this->load->view('layout/head', '', TRUE),
+				'nav' => $this->load->view('layout/nav', '', TRUE),
+				'footer' => $this->load->view('layout/footer', '', TRUE),
+				'departamentos' => $this->Departamento->get_departamentos(),
+				'roles' => $this->Rol->get_roles(),
+				'direcciones' => $this->Direccion->get_direcciones(),
+				'dependencias' => $this->Dependencia->get_dependencias(),
+			);
+			$this->load->view('v_listar_usuarios', $data);
 		} else {
 			// Si no hay datos de sesion redireccionar a login
 			redirect('login');
