@@ -48,7 +48,7 @@ function getEquipoRules() {
         ),
         array(
                 'field' => 'direccion_ip',
-                'label' => 'Direccion IP',
+                'label' => 'Dirección IP',
                 'rules' => 'required|max_length[50]',
                 'errors' => array(
                         'required' => 'La %s es requerida',
