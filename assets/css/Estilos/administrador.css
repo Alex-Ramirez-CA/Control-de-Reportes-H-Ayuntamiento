@@ -681,6 +681,7 @@ Estilos para los filtros que puede aplicar el administrador
 	);
 	box-shadow: 0 3px 5px 0 rgba(31, 38, 135, 0.37);
 	border: solid 2px #afafaa;
+	position: relative;
 } 
 
 .formulario_agregar_usuario select, .formulario_agregar_usuario label {
@@ -710,13 +711,14 @@ Estilos para los filtros que puede aplicar el administrador
 	height: 450px;
 }
 
+
 .columna_formulario {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	height: 50%;
 	width: 40%;
-	margin: 50px 50px;
+	margin: 50px 15px;
 	position: relative;
 }
 
@@ -1021,4 +1023,74 @@ Estilos para los filtros que puede aplicar el administrador
 .aplicar_filtros_usuarios:hover {
 	color: #f6f8fa;
 	background-color: #26A2D9;
+}
+
+/**/
+.opciones_busqueda_usuario {
+	position: absolute;
+	z-index: 1;
+	visibility: hidden;
+	width: 100%;
+	background: #f6f8fa;
+	display: flex;
+	flex-direction: column;
+	border-radius: 5px; 
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	gap: 1px;
+}
+
+.opciones_busqueda_usuario p {
+	text-align: center;
+	font-size: 14px;
+	background-color: #fff;
+	border-radius: 5px;
+	padding-top: 4px;
+	color: #006e95;
+	cursor: pointer;
+	height:auto;
+	word-wrap: break-word;
+}
+
+.opciones_busqueda_usuario p:hover {
+	background-color: #006e95;	
+	color: #fff;
+}
+
+.comentario-enviar-datos-equipo {
+	position: absolute;
+	left: 0;
+	bottom: 10px;
+	width: 100%;
+	display: flex;
+}
+
+#observaciones_equipo {
+	width: 270%;
+	border: solid 1px #006e95;
+	height: 32px;
+	border-radius: 10px;
+	color: #006e95;
+	font-size: 14px;
+	padding-left: 8px;
+	padding-top: 5px;
+}
+
+.guardar_equipo {
+	width: 47%;
+	margin-left: 32.68%;
+	border: solid 1px #006e95;
+	border-radius: 10px;
+	cursor: pointer;
+	color: #006e95;
+	background-color: #f6f8fa;
+}
+
+.guardar_equipo:hover {
+	color: #f6f8fa;
+	background-color: #006e95;
+}
+
+.observaciones_equipo {
+	margin: 0;
+	margin-left: 15px;
 }

@@ -743,6 +743,99 @@
         }
 	});
 
+	//Evento que se ejecuta cuando el usuario este escribiendo en la barra de busqueda
+    $("#search_usuario").keyup(function(ev) {
+        $('.opciones_busqueda_usuario').css('visibility','visible');
+        if($('#search_usuario').val()){
+            let search_usuario = $('#search_usuario').val();
+            //console.log(search_usuario)
+
+            $.ajax({
+                url: 'equipos/buscar_empleado',
+                type: 'POST',
+                data: { search_usuario },
+                success: function(data) {
+                    let empleados = JSON.parse(data);
+					//console.log(empleados);
+                    let template = "";
+                    if (empleados){
+                        empleados.forEach(element => {
+                            template += ` <p class="opcion_empleado" no_empleado="${element.no_empleado}">${element.nombre + " " + element.apellido_paterno + " " + element.apellido_materno}</p>`;
+                        });
+                    }else {
+                        template = "";
+                    }
+                    $('.opciones_busqueda_usuario').html(template);
+                }
+            });
+        }else {
+            template = "";
+            $('.opciones_busqueda_usuario').html(template);
+			$('.opciones_busqueda_usuario').css('visibility','hidden');
+			$('#search_usuario').attr("no_empleado",null);
+        }
+    });
+
+	$(document).on("click", ".opcion_empleado", function () {
+		let elemento = $(this)[0];
+		$('#search_usuario').attr("no_empleado",$(elemento).attr("no_empleado"));
+		$('#search_usuario').val($(this).text());
+		$('.opciones_busqueda_usuario').css('visibility','hidden');
+	});
+
+	//Evento de cuando clique en guardar datos del equipo
+	$(document).on("click", ".guardar_equipo", function () {
+		let no_empleado = $('#search_usuario').attr("no_empleado");
+		let nombre = $("#nombre_equipo").val();
+		let tipo_equipo = $("#tipo_equipo").val();
+		let id_direccion = $("#direccion_equipo").val();
+		let sistema_operativo = $("#sistema_operativo_equipo").val();
+		let marca = $("#marca_equipo").val();
+		let inventario = $("#inventario_equipo").val();
+		let serie = $("#serie_equipo").val();
+		let direccion_ip = $("#direccion_ip_equipo").val();
+		let teclado = $("#teclado_equipo").val();
+		let mouse = $("#mause_equipo").val();
+		let dvd = $("#dvd_equipo").val();
+		let procesador = $("#procesador_equipo").val();
+		let segmento_de_red = $("#segmento_red_equipo").val();
+		let ram = $("#cantidad_ram_equipo").val();
+		let disco_duro = $("#disco_duro_equipo").val();
+		let inventario_monitor = $("#invetario_monitor").val();
+		let serie_monitor = $("#serie_monitor").val();
+		let marca_monitor = $("#marca_monitor").val();
+		let tamano_monitor = $("#tamaño_monitor").val();
+		let observaciones = $("#observaciones_equipo").val();
+        // console.log("Empleado " + no_empleado)
+		// console.log(nombre);
+		// console.log(tipo_equipo);
+		// console.log(id_direccion);
+		// console.log(sistema_operativo);
+		// console.log(marca);
+		// console.log(inventario);
+		// console.log(serie);
+		// console.log(direccion_ip);
+		// console.log(teclado);
+		// console.log(mause);
+		// console.log(dvd);
+		// console.log(pocesador);
+		// console.log(segmento_de_red);
+		// console.log(ram);
+		// console.log(disco_duro);
+		// console.log(inventario_monitor);
+		// console.log(serie_monitor);
+		// console.log(marca_monitor);
+		// console.log(tamano_monitor);
+		// console.log(observaciones);
+
+		$.post('equipos/guardar_equipo', {no_empleado, nombre, tipo_equipo, id_direccion, sistema_operativo, marca, inventario, serie, direccion_ip, teclado, mouse, dvd, procesador, segmento_de_red, ram, disco_duro, inventario_monitor, serie_monitor, marca_monitor, tamano_monitor, observaciones}, function(response){
+            let json = JSON.parse(response);            
+            console.log(json);
+        });
+	});
+
+
+
 	//Función general para pintar la lista de los empleados de acuerdo a una respuesta
 	function obtenerListaCompletaUsuarios() {
 		$.ajax({
