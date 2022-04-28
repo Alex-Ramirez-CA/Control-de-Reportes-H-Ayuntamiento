@@ -31,7 +31,7 @@
                 <label for="sistema_operativo_equipo">
                     Sistema operativo
                     <input id="sistema_operativo_equipo" type="text">
-                    <div class="error_message">
+                    <div class="error_message_sistema_operativo">
                         
                     </div>
                 </label>
@@ -39,9 +39,6 @@
                     Asignar a
                     <input id="search_usuario" type="text">
                     <div class="opciones_busqueda_usuario">
-                        
-                    </div>
-                    <div class="error_message_direccionIP">
                         
                     </div>
                 </label>
@@ -58,21 +55,21 @@
                 <label for="nombre_equipo">
                     Nombre del equipo
                     <input id="nombre_equipo" type="text">
-                    <div class="error_message">
+                    <div class="error_message_nombre">
                         
                     </div>
                 </label>
                 <label for="marca_equipo">
                     Marca
                     <input id="marca_equipo" type="text">
-                    <div class="error_message_password">
+                    <div class="error_message_marca">
                         
                     </div>
                 </label>
                 <label for="procesador_equipo">
                     Procesador
                     <input id="procesador_equipo" type="text">
-                    <div class="error_message_email">
+                    <div class="error_message_procesador">
                         
                     </div>
                 </label>
@@ -96,14 +93,14 @@
                 <label for="direccion_ip_equipo">
                     Dirección IP
                     <input id="direccion_ip_equipo" type="text">
-                    <div class="error_message_apellidoP">
+                    <div class="error_message_direccionIP">
                         
                     </div>
                 </label>
                 <label for="inventario_equipo">
                     Inventario
                     <input id="inventario_equipo" type="text">
-                    <div class="error_message_apellidoM">
+                    <div class="error_message_inventario">
                         
                     </div>
                 </label>
@@ -115,7 +112,7 @@
                     </div>
                 </label>
                 <label for="mause_equipo">
-                    Mause
+                    Mouse
                     <select name="mause_equipo" id="mause_equipo">
                         <option value="1">Si</option>
                         <option value="0">No</option>
@@ -134,14 +131,14 @@
                 <label for="segmento_red_equipo">
                     Segmento de red
                     <input id="segmento_red_equipo" type="text">
-                    <div class="error_message_email">
+                    <div class="error_message_segmento_red">
                         
                     </div>
                 </label>
                 <label for="serie_equipo">
                     Serie
                     <input id="serie_equipo" type="text">
-                    <div class="error_message_password">
+                    <div class="error_message_serie">
                         
                     </div>
                 </label>
@@ -187,7 +184,7 @@
         <div class="titulo-mensaje">
             
         </div>
-        <img style="margin-top: 15px" src="<?= base_url('assets/img/iconos/correcto.svg') ?>" width="250" alt="">
+        <img style="margin-top: 15px" src="" width="250" correcto="<?= base_url('assets/img/iconos/correcto.svg') ?>" incorrecto="<?= base_url('assets/img/iconos/incorrecto.svg') ?>" alt="">
         <div class="mensaje-body">
 
         </div>

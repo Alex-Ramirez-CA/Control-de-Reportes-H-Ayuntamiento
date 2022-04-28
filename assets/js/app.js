@@ -8,7 +8,6 @@
 	let equipo = null;
 	let rol = null;
 	let status = null;
-
 	//Obtener las incidencia para el cliente tipo Administrador
 	if ($(".container").attr("rol") == 3) {
 		obtenerTodasIncidencias();
@@ -515,7 +514,7 @@
 	});
 
 	//Funciones para ocultar los mensajes de error del formulario cuando el usuario comience a escribir
-	$(document).on("keyup", "#nombre", function () {
+	$(document).on("keyup", ("#nombre", "#nombre_equipo"), function () {
 		$(".error_message_nombre").css({ transform: "translateY(-10px)" });
 		$(".error_message_nombre").css({ "z-index": "-1" });
 	});
@@ -540,11 +539,40 @@
 		$(".error_message_password").css({ "z-index": "-1" });
 	});
 
-	$(document).on("keyup", "#direccion_ip", function () {
+	$(document).on("keyup", ("#direccion_ip", "#direccion_ip_equipo"), function () {
 		$(".error_message_direccionIP").css({ transform: "translateY(-10px)" });
 		$(".error_message_direccionIP").css({ "z-index": "-1" });
 	});
 
+	$(document).on("keyup", "#segmento_red_equipo", function () {
+		$(".error_message_segmento_red").css({ transform: "translateY(-10px)" });
+		$(".error_message_segmento_red").css({ "z-index": "-1" });
+	});
+
+	$(document).on("keyup", "#serie_equipo", function () {
+		$(".error_message_serie").css({ transform: "translateY(-10px)" });
+		$(".error_message_serie").css({ "z-index": "-1" });
+	});
+
+	$(document).on("keyup", "#sistema_operativo_equipo", function () {
+		$(".error_message_sistema_operativo").css({ transform: "translateY(-10px)" });
+		$(".error_message_sistema_operativo").css({ "z-index": "-1" });
+	});
+
+	$(document).on("keyup", "#marca_equipo", function () {
+		$(".error_message_marca").css({ transform: "translateY(-10px)" });
+		$(".error_message_marca").css({ "z-index": "-1" });
+	});
+
+	$(document).on("keyup", "#inventario_equipo", function () {
+		$(".error_message_inventario").css({ transform: "translateY(-10px)" });
+		$(".error_message_inventario").css({ "z-index": "-1" });
+	});
+
+	$(document).on("keyup", "#procesador_equipo", function () {
+		$(".error_message_procesador").css({ transform: "translateY(-10px)" });
+		$(".error_message_procesador").css({ "z-index": "-1" });
+	});
 	//Función para dar de baja o de alta algún empleado
 	$(document).on("click", "#status_empleado", function () {
 		let status;
@@ -866,11 +894,91 @@
 		// console.log(marca_monitor);
 		// console.log(tamano_monitor);
 		// console.log(observaciones);
+		$.ajax({
+		    url: "equipos/guardar_equipo",
+		    type: 'POST',
+		    data: {no_empleado, nombre, tipo_equipo, id_direccion, sistema_operativo, marca, inventario, serie, direccion_ip, teclado, mouse, dvd, procesador, segmento_de_red, ram, disco_duro, inventario_monitor, serie_monitor, marca_monitor, tamano_monitor, observaciones},
+		    success: function(data) {
+		        let json = JSON.parse(data);
+		        $(".titulo-mensaje").html(`<b><h1>${json.msg}</h1></b>`);
+		        $('.mensaje').css({'visibility':'visible'});
+				$('.contenedor_mensaje_guardar_usuario').children("img").attr("src",$('.contenedor_mensaje_guardar_usuario').children("img").attr("correcto"));
+		        $('.contenedor_mensaje_guardar_usuario').css({'transform':'translateY(0%)'});
+		        $(document).on('click', '.cerrar_ventana_guardar_usuario', function(){
+		            $('.mensaje').css({'visibility':'hidden'});
+		            $('.contenedor_mensaje_guardar_usuario').css({'transform':'translateY(-200%)'});
+		            window.location.replace(json.url);
+		        });
+		    },
+		    statusCode: {
+		        400: function(xhr) {
+		            let json = JSON.parse(xhr.responseText);
+		            //Para mostrar los mensajes de error en caso de tener en los campos del formulario
+					console.log(json);
+		            if (json.nombre !== ""){
+		                $('.error_message_nombre').css({'transform':'translateY(0px)'});
+		                $('.error_message_nombre').css({'z-index':'1'});
+		                $(".error_message_nombre").html(`<p>${json.nombre}</p>`);
+		            }
 
-		$.post('equipos/guardar_equipo', {no_empleado, nombre, tipo_equipo, id_direccion, sistema_operativo, marca, inventario, serie, direccion_ip, teclado, mouse, dvd, procesador, segmento_de_red, ram, disco_duro, inventario_monitor, serie_monitor, marca_monitor, tamano_monitor, observaciones}, function(response){
-            let json = JSON.parse(response);            
-            console.log(json);
-        });
+		            if (json.segmento_de_red !== "") {
+		                $('.error_message_segmento_red').css({'transform':'translateY(0px)'});
+		                $('.error_message_segmento_red').css({'z-index':'1'});
+		                $(".error_message_segmento_red").html(`<p>${json.segmento_de_red}</p>`);
+		            }
+
+		            if (json.serie !== "") {
+		                $('.error_message_serie').css({'transform':'translateY(0px)'});
+		                $('.error_message_serie').css({'z-index':'1'});
+		                $(".error_message_serie").html(`<p>${json.serie}</p>`);
+		            }
+
+		            if (json.sistema_operativo !== "") {
+		                $('.error_message_sistema_operativo').css({'transform':'translateY(0px)'});
+		                $('.error_message_sistema_operativo').css({'z-index':'1'});
+		                $(".error_message_sistema_operativo").html(`<p>${json.sistema_operativo}</p>`);
+		            }
+
+		            if (json.marca !== "") {
+		                $('.error_message_marca').css({'transform':'translateY(0px)'});
+		                $('.error_message_marca').css({'z-index':'1'});
+		                $(".error_message_marca").html(`<p>${json.marca}</p>`);
+		            }
+
+		            if (json.direccion_ip !== "") {
+		                $('.error_message_direccionIP').css({'transform':'translateY(0px)'});
+		                $('.error_message_direccionIP').css({'z-index':'1'});
+		                $(".error_message_direccionIP").html(`<p>${json.direccion_ip}</p>`);
+		            }
+
+					if (json.inventario !== "") {
+		                $('.error_message_inventario').css({'transform':'translateY(0px)'});
+		                $('.error_message_inventario').css({'z-index':'1'});
+		                $(".error_message_inventario").html(`<p>${json.inventario}</p>`);
+		            }
+					
+					if (json.procesador !== "") {
+		                $('.error_message_procesador').css({'transform':'translateY(0px)'});
+		                $('.error_message_procesador').css({'z-index':'1'});
+		                $(".error_message_procesador").html(`<p>${json.procesador}</p>`);
+		            }
+		        },
+				500: function(xhr) {
+					let json = JSON.parse(xhr.responseText);
+		            //Para mostrar los mensajes de error en caso de tener en los campos del formulario	
+					$(".titulo-mensaje").html(`<b><h1>${json.msg}</h1></b>`);
+					$('.mensaje').css({'visibility':'visible'});
+					$('.contenedor_mensaje_guardar_usuario').children("img").attr("src",$('.contenedor_mensaje_guardar_usuario').children("img").attr("incorrecto"));
+					$('.contenedor_mensaje_guardar_usuario').css({'transform':'translateY(0%)'});
+					$(document).on('click', '.cerrar_ventana_guardar_usuario', function(){
+						$('.mensaje').css({'visibility':'hidden'});
+						$('.contenedor_mensaje_guardar_usuario').css({'transform':'translateY(-200%)'});
+						window.location.replace(json.url);
+					});
+				}
+		    },
+		});
+		
 	});
 
 
