@@ -19,6 +19,11 @@
 		obtenerListaCompletaUsuarios();
 	}
 
+	//Listar a todos los equipos solo cuando este la url correcta
+	if (getUrl == baseUrl + "/equipos/lista_equipos") {
+		obtenerListaCompletaEquipos();
+	}
+
 	//Función para cuando le de click al boton de ver
 	$(document).on("click", ".ver", function () {
 		let elemento = $(this)[0];
@@ -573,6 +578,7 @@
 		$(".error_message_procesador").css({ transform: "translateY(-10px)" });
 		$(".error_message_procesador").css({ "z-index": "-1" });
 	});
+
 	//Función para dar de baja o de alta algún empleado
 	$(document).on("click", "#status_empleado", function () {
 		let status;
@@ -739,13 +745,28 @@
 
 	//Evento de cuando clique en enviar filtros
 	$(document).on("click", ".aplicar_filtros_usuarios", function () {
-		$.post(
-			"filtrar_usuarios",
-			{ dependencia, direccion, departamento, rol, status },
-			function (response) {
-				obtenerListaUsuarios(response);
-			}
-		);
+		let segmento_de_red = null;
+		//Listar a todos los usuarios solo cuando este la url correcta
+		if (getUrl == baseUrl + "/usuarios/lista_usuarios") {
+			$.post(
+				"filtrar_usuarios",
+				{ dependencia, direccion, departamento, rol, status },
+				function (response) {
+					obtenerListaUsuarios(response);
+				}
+			);
+		}
+
+		//Listar a todos los equipos solo cuando este la url correcta
+		if (getUrl == baseUrl + "/equipos/lista_equipos") {
+			$.post(
+				"filtrar_equipos",
+				{ dependencia, direccion, segmento_de_red, status },
+				function (response) {
+					obtenerListaEquipos(response);
+				}
+			);
+		}
 	});
 
     //Evento de cuando clique en ocultar los filtros
@@ -914,7 +935,7 @@
 		        400: function(xhr) {
 		            let json = JSON.parse(xhr.responseText);
 		            //Para mostrar los mensajes de error en caso de tener en los campos del formulario
-					console.log(json);
+					//console.log(json);
 		            if (json.nombre !== ""){
 		                $('.error_message_nombre').css({'transform':'translateY(0px)'});
 		                $('.error_message_nombre').css({'z-index':'1'});
@@ -981,8 +1002,6 @@
 		
 	});
 
-
-
 	//Función general para pintar la lista de los empleados de acuerdo a una respuesta
 	function obtenerListaCompletaUsuarios() {
 		$.ajax({
@@ -990,6 +1009,17 @@
 			type: "GET",
 			success: function (response) {
 				obtenerListaUsuarios(response);
+			},
+		});
+	}
+
+	//Función general para pintar la lista de los empleados de acuerdo a una respuesta
+	function obtenerListaCompletaEquipos() {
+		$.ajax({
+			url: "obtener_listaEquipos",
+			type: "GET",
+			success: function (response) {
+				obtenerListaEquipos(response);
 			},
 		});
 	}
@@ -1019,6 +1049,33 @@
 			});
 		}
 		$(".tbody_lista_usuarios").html(template);
+	}
+
+	//Función general para pintar la lista de los equipos de acuerdo a una respuesta
+	function obtenerListaEquipos(response) {
+		let equipos = JSON.parse(response);
+		let template = "";
+		if (equipos) {
+			equipos.forEach((equipo) => {
+				template += `
+                <tr>
+                    <th scope="row">${equipo.direccion_ip}</th>
+                    <td>${equipo.nombre}</td>
+					<td>${equipo.tipo_equipo}</td>
+                    <td>${equipo.direccion}</td>
+                    <td class="campo_status_empleado">
+                        <a href="${baseUrl}/usuarios/editar_equipo/${equipo.id_equipo}" class="editar_datos_equipo" idEquipo="${equipo.id_equipo}">Editar</a> 
+                        <p class="label_status_empleado" for="status_empleado">
+                            Estatus
+                            <br>
+                            <input id="status_empleado" type="checkbox" ${equipo.status == 1 ? "checked" : ""} value="${equipo.id_equipo}">
+                        </p>
+                    </td>
+                </tr>
+                `;
+			});
+		}
+		$(".tbody_lista_equipos").html(template);
 	}
 
 	//Función que carga las incidencias

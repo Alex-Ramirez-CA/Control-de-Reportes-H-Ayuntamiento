@@ -107,7 +107,7 @@
                 <label for="cantidad_ram_equipo">
                     Catidad de RAM
                     <input id="cantidad_ram_equipo" type="text">
-                    <div class="error_message_email">
+                    <div class="error_message_cantidad_ram">
                         
                     </div>
                 </label>
@@ -145,7 +145,7 @@
                 <label for="disco_duro_equipo">
                     Disco duro
                     <input id="disco_duro_equipo" type="text">
-                    <div class="error_message_email">
+                    <div class="error_message_disco_duro">
                         
                     </div>
                 </label>

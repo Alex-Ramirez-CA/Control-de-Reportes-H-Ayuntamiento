@@ -39,43 +39,9 @@
                 ?>
             </div>
         </div>
-        <div class="filtro_departamento_usuarios">
-            <div class="titulo_filtro_usuarios" idFiltroUsuario="3">
-                    <h2>Departamento</h2>
-                <div class="marcar_filtro_seleccionado">
-                    
-                </div>
-            </div>
-            <div class="lista_departamentos_usuarios">
-                <?php 
-                    foreach($departamentos as $item):
-                ?>
-                    <p class="opcion_departamento_usuarios" idDepartamento="<?= $item->id_departamento; ?>"><?= $item->nombre; ?></p>
-                <?php 
-                    endforeach;    
-                ?>
-            </div>
-        </div>
-        <div class="filtro_tipo_usuarios">
-            <div class="titulo_filtro_usuarios" idFiltroUsuario="4">
-                    <h2>Tipo de usuario</h2>
-                <div class="marcar_filtro_seleccionado">
-                    
-                </div>
-            </div>
-            <div class="lista_tipos_usuarios">
-                <?php 
-                    foreach($roles as $item):
-                ?>
-                    <p class="opcion_tipo_usuarios" rol="<?= $item->id_rol; ?>"><?= $item->nombre; ?></p>
-                <?php 
-                    endforeach;    
-                ?>
-            </div>  
-        </div>
         <div class="filtro_status_usuarios">
             <div class="titulo_filtro_usuarios" idFiltroUsuario="5">
-                    <h2>Estatus del usuario</h2>
+                    <h2>Estatus del equipo</h2>
                 <div class="marcar_filtro_seleccionado">
                     
                 </div>
@@ -94,14 +60,14 @@
         <table class="table tabla_lista_usuarios">
             <thead>
                 <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Nombre completo</th>
+                    <th scope="col">Dirección IP</th>
+                    <th scope="col">Nombre del equipo</th>
+                    <th scope="col">Tipo de equipo</th>
                     <th scope="col">Dirección</th>
-                    <th scope="col">Tipo de usuario</th>
                     <th scope="col">Opciones</th>
                 </tr>
             </thead>
-            <tbody class="tbody_lista_usuarios">
+            <tbody class="tbody_lista_equipos">
                 
             </tbody>
         </table>
