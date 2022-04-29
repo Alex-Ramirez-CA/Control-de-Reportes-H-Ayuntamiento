@@ -200,7 +200,7 @@ class Equipo extends CI_Model {
     // Obtiene los datos de un equipo en especifico
     public function getEquipo($id_equipo) {
         $data = $this->db
-            ->select("id_equipo, tipo_equipo, nombre, direccion_ip, segmento_de_red, marca, inventario, serie, sistema_operativo, procesador, ram, disco_duro, teclado, mouse, dvd, inventario_monitor, serie_monitor, marca_monitor, tamano_monitor, observaciones")
+            ->select("id_equipo, tipo_equipo, nombre, direccion_ip, segmento_de_red, id_direccion, marca, inventario, serie, sistema_operativo, procesador, ram, disco_duro, teclado, mouse, dvd, inventario_monitor, serie_monitor, marca_monitor, tamano_monitor, observaciones")
             ->from("equipo")
             ->where('id_equipo', $id_equipo)
             ->limit(1)
