@@ -262,8 +262,26 @@ class Equipos extends CI_Controller {
 		}
 	}
 
-	// Funcion para cuando se clicke el boton de estidar usuario
-	public function editar_usuario($no_empleado) {
+	// Funcion para el campo de busqueda de equipos
+	public function buscar_equipo() {
+        // Validar para que no puedan ingresar a esta direccion sin estar logeados
+		if(!$this->session->has_userdata('id_rol')){
+            redirect('login');
+        }
+        // Recibir el valor del campo de busqueda via post
+		$search_equipo = $this->input->post('search_equipo');
+        // Hacer consulta a la base de datos
+        if($search_equipo != '' || $search_equipo != NULL) {
+            $data = $this->Equipo->buscarEquipobyNameAndIP($search_equipo);
+        } else {
+            $data = false;
+        }
+        
+        echo json_encode($data);
+    }
+
+	// Funcion para cuando se clicke el boton de estidar equipo
+	public function editar_equipo($no_empleado) {
 		if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 3) {
 			
 			$data = array(
@@ -277,7 +295,7 @@ class Equipos extends CI_Controller {
 				'PC_usuario' => $this->Equipo->obtenerPC($no_empleado),
 			);
 			// Cargar la vista y mandar los datos
-			$this->load->view('v_editar_usuario', $data);
+			$this->load->view('v_editar_equipo', $data);
 		} else {
 			// Si no hay datos de sesion redireccionar a login
 			redirect('login');

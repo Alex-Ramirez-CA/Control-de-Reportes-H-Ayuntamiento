@@ -28,7 +28,7 @@ class Equipo extends CI_Model {
     
     // Hacer la busqueda de los equipos por su direccion ip
     public function buscarDireccionIP($search) {
-        // Busqueda por nombre
+        // Busqueda por direccion IP
         $data = $this->db
             ->select("id_equipo, direccion_ip")
             ->from("equipo")
@@ -162,6 +162,35 @@ class Equipo extends CI_Model {
         $this->db->set('status', $status);
         $this->db->where('id_equipo', $id_equipo);
         $this->db->update('equipo');
+    }
+
+    // Obtener los uquipo a los que esta asignado el usuario
+    public function buscarEquipobyNameAndIP($search_equipo) {
+        // Busqueda por nombre
+        $data = $this->db
+            ->select("e.id_equipo, e.direccion_ip, e.segmento_de_red, e.nombre, e.tipo_equipo, dir.nombre as direccion, e.status")
+            ->from("equipo e")
+            ->join("direccion dir", "e.id_direccion=dir.id_direccion")
+            ->like('e.nombre', $search_equipo, 'after', '', TRUE)
+            ->limit(5)
+            ->order_by('e.id_equipo')
+            ->get();
+        // buscar por direccion IP
+        if(!$data->result()) {
+            $data = $this->db
+                ->select("e.id_equipo, e.direccion_ip, e.segmento_de_red, e.nombre, e.tipo_equipo, dir.nombre as direccion, e.status")
+                ->from("equipo e")
+                ->join("direccion dir", "e.id_direccion=dir.id_direccion")
+                ->like('e.direccion_ip', $search_equipo, 'after', '', TRUE)
+                ->limit(5)
+                ->order_by('e.id_equipo')
+                ->get();
+        }
+        // Si no se encuentra resultados
+        if(!$data->result()) {
+            return false;
+        }
+        return $data->result();
     }
 
 }
