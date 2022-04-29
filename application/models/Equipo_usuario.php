@@ -49,7 +49,8 @@ class Equipo_usuario extends CI_Model {
                 ->select("e.id_equipo")
                 ->from("equipo_usuario eu")
                 ->join("equipo e", "eu.id_equipo=e.id_equipo")
-                ->where(array('eu.no_empleado' => $no_empleado, 'e.tipo_equipo' => "PC", 'e.status' => 1), 1)
+                ->where(array('eu.no_empleado' => $no_empleado, 'e.tipo_equipo' => "PC", 'e.status' => 1))
+                ->limit(1)
                 ->get();
         
         // Si no se encuentra resultados
@@ -70,7 +71,8 @@ class Equipo_usuario extends CI_Model {
                 ->select("*")
                 ->from("equipo_usuario eu")
                 ->join("equipo e", "eu.id_equipo=e.id_equipo")
-                ->where(array('id_equipo' => $id_equipo, 'no_empleado' => $no_empleado, 'e.status' => 1), 1)
+                ->where(array('id_equipo' => $id_equipo, 'no_empleado' => $no_empleado, 'e.status' => 1))
+                ->limit(1)
                 ->get();
         
         // Si no se encuentra resultados
