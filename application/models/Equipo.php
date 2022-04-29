@@ -202,6 +202,8 @@ class Equipo extends CI_Model {
         $data = $this->db
             ->select("id_equipo, tipo_equipo, nombre, direccion_ip, segmento_de_red, marca, inventario, serie, sistema_operativo, procesador, ram, disco_duro, teclado, mouse, dvd, inventario_monitor, serie_monitor, marca_monitor, tamano_monitor, observaciones")
             ->from("equipo")
+            ->where('id_equipo', $id_equipo)
+            ->limit(1)
             ->order_by('id_equipo')
             ->get();
         
