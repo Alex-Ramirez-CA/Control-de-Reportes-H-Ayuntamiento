@@ -18,6 +18,7 @@ class Usuario extends CI_Model {
             ->join("direccion d", "u.id_direccion=d.id_direccion")
             ->where('u.status', 1)
             ->like('u.no_empleado', $search, 'after', '', TRUE)
+            ->limit(5)
             ->order_by('u.no_empleado')
             ->get();
         if(!$data->result()) {

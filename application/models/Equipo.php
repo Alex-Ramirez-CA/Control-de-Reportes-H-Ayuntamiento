@@ -193,4 +193,19 @@ class Equipo extends CI_Model {
         return $data->result();
     }
 
+    // Obtiene los datos de un equipo en especifico
+    public function getEquipo($id_equipo) {
+        $data = $this->db
+            ->select("id_equipo, tipo_equipo, nombre, direccion_ip, segmento_de_red, marca, inventario, serie, sistema_operativo, procesador, ram, disco_duro, teclado, mouse, dvd, inventario_monitor, serie_monitor, marca_monitor, tamano_monitor, observaciones")
+            ->from("equipo")
+            ->order_by('id_equipo')
+            ->get();
+        
+        // Si no se encuentra resultados
+        if(!$data->result()) {
+            return false;
+        }
+        return $data->row();
+    }
+
 }

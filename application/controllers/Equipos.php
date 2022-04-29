@@ -281,21 +281,20 @@ class Equipos extends CI_Controller {
     }
 
 	// Funcion para cuando se clicke el boton de estidar equipo
-	public function editar_equipo($no_empleado) {
+	public function editar_equipo(/*$id_equipo*/) {
 		if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 3) {
 			
 			$data = array(
-				'head' => $this->load->view('layout/head', '', TRUE),
-				'nav' => $this->load->view('layout/nav', '', TRUE),
-				'footer' => $this->load->view('layout/footer', '', TRUE),
-                'departamentos' => $this->Departamento->get_departamentos(),
-                'roles' => $this->Rol->get_roles(),
+				// 'head' => $this->load->view('layout/head', '', TRUE),
+				// 'nav' => $this->load->view('layout/nav', '', TRUE),
+				// 'footer' => $this->load->view('layout/footer', '', TRUE),
 				'direcciones' => $this->Direccion->get_direcciones(),
-				'datos_usuario' => $this->Usuario->getUsuario($no_empleado),
-				'PC_usuario' => $this->Equipo->obtenerPC($no_empleado),
+				'datos_equipo' => $this->Equipo->getEquipo(1),
+				'usuarios' => $this->Equipo->getEquipo(1),
 			);
 			// Cargar la vista y mandar los datos
-			$this->load->view('v_editar_equipo', $data);
+			// $this->load->view('v_editar_equipo', $data);
+			echo json_encode($data);
 		} else {
 			// Si no hay datos de sesion redireccionar a login
 			redirect('login');
