@@ -674,6 +674,32 @@
 		}
 	});
 
+	//Función para dar de baja o de alta algún empleado
+	$(document).on("click", "#status_equipo", function () {
+		let status;
+		let id_equipo = $(this).val();
+
+		var opcion = confirm(
+			"¿Está seguro de cambiar el estatus actual del equipo?"
+		);
+		if (opcion == true) {
+			if ($(this).is(":checked")) {
+				// Hacer algo si el checkbox ha sido seleccionado
+				status = 1;
+				$.post("modificar_status", { status, id_equipo });
+				// obtenerListaCompletaUsuarios ();
+			} else {
+				// Hacer algo si el checkbox ha sido deseleccionado
+				status = 0;
+				$.post("modificar_status", { status, id_equipo });
+				// obtenerListaCompletaUsuarios ();
+			}
+		} else {
+			//console.log("No paso nada");
+			obtenerListaCompletaEquipos();
+		}
+	});
+
 	//Evento de cuando clique una dependencia en filtros de listado de usuarios
 	$(document).on("click", ".opcion_dependencia_usuarios", function () {
 		if ($(this).hasClass("active")) {
@@ -1137,7 +1163,7 @@
                         <p class="label_status_empleado" for="status_empleado">
                             Estatus
                             <br>
-                            <input id="status_empleado" type="checkbox" ${equipo.status == 1 ? "checked" : ""} value="${equipo.id_equipo}">
+                            <input id="status_equipo" type="checkbox" ${equipo.status == 1 ? "checked" : ""} value="${equipo.id_equipo}">
                         </p>
                     </td>
                 </tr>
