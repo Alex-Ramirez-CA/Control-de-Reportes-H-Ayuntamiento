@@ -49,6 +49,24 @@ class Usuarios extends CI_Controller {
         echo json_encode($data);
     }
 
+	// Funcion para buscar usuarios
+	public function buscar_empleado() {
+        // Validar para que no puedan ingresar a esta direccion sin estar logeados
+		if(!$this->session->has_userdata('id_rol')){
+            redirect('login');
+        }
+        // Recibir el valor del campo de busqueda via post
+		$search_empleado = $this->input->post('search_empleado');
+        // Hacer consulta a la base de datos
+        if($search_empleado != '' || $search_empleado != NULL) {
+            $data = $this->Usuario->buscarEmpleado($search_empleado);
+        } else {
+            $data = NULL;
+        }
+        
+        echo json_encode($data);
+    }
+
     // Funcion para guardar los datos del usuario agregado
 	public function guardar_usuario() {
 		if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 3) {
