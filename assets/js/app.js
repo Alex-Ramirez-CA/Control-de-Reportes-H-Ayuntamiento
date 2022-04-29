@@ -8,6 +8,58 @@
 	let equipo = null;
 	let rol = null;
 	let status = null;
+
+	if(getUrl == baseUrl + "/equipos/lista_equipos"){
+		$("#search").attr("placeholder", "Buscar equipo").blur();
+	}else{
+		$("#search").attr("placeholder", "Buscar reporte").blur();
+	}
+
+	//Evento que se ejecuta cuando el usuario este escribiendo en la barra de busqueda
+	$("#search").keyup(function() {
+		if(getUrl == baseUrl + "/equipos/lista_equipos"){
+			if($('#search').val()){
+				let search_equipo = $('#search').val();
+				$.ajax({
+					url: 'buscar_equipo',
+					type: 'POST',
+					data: { search_equipo},
+					success: function(response) {
+						obtenerListaEquipos(response);
+					}
+				});
+			}else{
+				obtenerListaCompletaEquipos();
+			}
+		}else{
+			$('#opciones-buscar').css('display','flex');
+			if($('#search').val()){
+				let search = $('#search').val();
+				let uri = $('#search').attr('url');
+				$.ajax({
+					url: 'busqueda/buscar_incidencia',
+					type: 'POST',
+					data: { search, uri },
+					success: function(data) {
+						let incidencias = JSON.parse(data);
+						let template = "";
+
+						if (incidencias){
+							incidencias.forEach(element => {
+								template += `<a class="autocompletado" href="#" idCard="${element.id_incidencia}">
+								${element.titulo}
+								</a>`;
+							});
+							$('#opciones-buscar').html(template);
+						}
+					}
+				});
+			}else{
+				template = "";
+			}
+		}       
+	});
+
 	//Obtener las incidencia para el cliente tipo Administrador
 	if ($(".container").attr("rol") == 3) {
 		obtenerTodasIncidencias();
