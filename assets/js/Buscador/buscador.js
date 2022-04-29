@@ -1,33 +1,4 @@
 (function($) {
-    //Evento que se ejecuta cuando el usuario este escribiendo en la barra de busqueda
-    $("#search").keyup(function(ev) {
-        $('#opciones-buscar').css('display','flex');
-        if($('#search').val()){
-            let search = $('#search').val();
-            let uri = $('#search').attr('url');
-            $.ajax({
-                url: 'busqueda/buscar_incidencia',
-                type: 'POST',
-                data: { search, uri },
-                success: function(data) {
-                    let incidencias = JSON.parse(data);
-                    let template = "";
-
-                    if (incidencias){
-                        incidencias.forEach(element => {
-                            template += `<a class="autocompletado" href="#" idCard="${element.id_incidencia}">
-                            ${element.titulo}
-                            </a>`;
-                        });
-                        $('#opciones-buscar').html(template);
-                    }
-                }
-            });
-        }else{
-            template = "";
-        }        
-    });
-
     $(document).on('click', '.usuario-icono', function(){
         if($('.menu-cerrar-sesion').css('display') == 'none'){
             $('.menu-cerrar-sesion').css('display','block');

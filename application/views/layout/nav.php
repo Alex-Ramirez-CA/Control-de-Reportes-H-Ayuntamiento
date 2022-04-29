@@ -20,7 +20,7 @@
                         <a class="btn my-2 my-sm-0 mr-2 btn-misreportes" href="<?=base_url('reporte');?>">Mis reportes</a>
                     </div>
                     <div class="autocompletar">
-                        <input name="search" id="search" url="<?= $this->uri->segment(1);?>" class="form-control mr-2" type="search" placeholder="Buscar reporte" autocomplete="off" aria-label="Search" style="display: <?= $this->uri->segment(2) == 'agregar_incidencia' || $this->uri->segment(1) == 'usuarios' ? 'none' : 'inline-block'; ?>;">                        
+                        <input name="search" id="search" url="<?= $this->uri->segment(1);?>" class="form-control mr-2" type="search" autocomplete="off" aria-label="Search" style="display: <?= $this->uri->segment(2) == 'agregar_incidencia' || $this->uri->segment(1) == 'usuarios' ? 'none' : 'inline-block'; ?>;">                        
                         <div id="opciones-buscar">
                             
                         </div>
