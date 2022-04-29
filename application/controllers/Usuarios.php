@@ -59,7 +59,7 @@ class Usuarios extends CI_Controller {
 		$search_empleado = $this->input->post('search_empleado');
         // Hacer consulta a la base de datos
         if($search_empleado != '' || $search_empleado != NULL) {
-            $data = $this->Usuario->buscarEmpleado($search_empleado);
+            $data = $this->Usuario->buscarUsuarios($search_empleado);
         } else {
             $data = NULL;
         }
