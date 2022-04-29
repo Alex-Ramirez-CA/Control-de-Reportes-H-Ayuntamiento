@@ -290,7 +290,7 @@ class Equipos extends CI_Controller {
 				// 'footer' => $this->load->view('layout/footer', '', TRUE),
 				'direcciones' => $this->Direccion->get_direcciones(),
 				'datos_equipo' => $this->Equipo->getEquipo(1),
-				'usuarios' => $this->Equipo->getEquipo(1),
+				'usuarios' => $this->Equipo_usuario->obtener_usuarios(1),
 			);
 			// Cargar la vista y mandar los datos
 			// $this->load->view('v_editar_equipo', $data);
