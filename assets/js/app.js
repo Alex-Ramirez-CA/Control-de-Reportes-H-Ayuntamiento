@@ -11,6 +11,9 @@
 
 	if(getUrl == baseUrl + "/equipos/lista_equipos"){
 		$("#search").attr("placeholder", "Buscar equipo").blur();
+	}else if(getUrl == baseUrl + "/usuarios/lista_usuarios"){
+		$("#search").attr("placeholder", "Buscar usuario").blur();
+		$("#search").css({ display: "inline-block" });
 	}else{
 		$("#search").attr("placeholder", "Buscar reporte").blur();
 	}
@@ -30,6 +33,20 @@
 				});
 			}else{
 				obtenerListaCompletaEquipos();
+			}
+		}else if(getUrl == baseUrl + "/usuarios/lista_usuarios"){
+			if($('#search').val()){
+				let search_empleado = $('#search').val();
+				$.ajax({
+					url: 'buscar_empleado',
+					type: 'POST',
+					data: { search_empleado},
+					success: function(response) {
+						obtenerListaUsuarios(response);
+					}
+				});
+			}else{
+				obtenerListaCompletaUsuarios();
 			}
 		}else{
 			$('#opciones-buscar').css('display','flex');
@@ -797,7 +814,6 @@
 
 	//Evento de cuando clique en enviar filtros
 	$(document).on("click", ".aplicar_filtros_usuarios", function () {
-		let segmento_de_red = null;
 		//Listar a todos los usuarios solo cuando este la url correcta
 		if (getUrl == baseUrl + "/usuarios/lista_usuarios") {
 			$.post(
@@ -811,6 +827,7 @@
 
 		//Listar a todos los equipos solo cuando este la url correcta
 		if (getUrl == baseUrl + "/equipos/lista_equipos") {
+			let segmento_de_red = null;
 			$.post(
 				"filtrar_equipos",
 				{ dependencia, direccion, segmento_de_red, status },
