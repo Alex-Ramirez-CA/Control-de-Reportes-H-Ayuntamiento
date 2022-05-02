@@ -720,7 +720,8 @@ Estilos para los filtros que puede aplicar el administrador
 	justify-content: space-between;
 	height: 50%;
 	width: 40%;
-	margin: 50px 15px;
+	/* margin: 50px 50px; */
+	margin: 0;
 	position: relative;
 }
 
@@ -1096,4 +1097,12 @@ Estilos para los filtros que puede aplicar el administrador
 .observaciones_equipo {
 	margin: 0;
 	margin-left: 15px;
+}
+
+.lista_usuarios::-webkit-scrollbar {
+	display: none;
+}
+
+.filtros_lista_usurios::-webkit-scrollbar {
+	display: none;
 }
