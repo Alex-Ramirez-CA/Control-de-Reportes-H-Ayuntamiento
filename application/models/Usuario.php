@@ -226,12 +226,6 @@ class Usuario extends CI_Model {
         return $data->row();
     }
 
-    // Por si se actualizara campo por campo
-    public function update_nombre($no_empleado, $nombre) {
-        $this->db->set('nombre', $nombre);
-        $this->db->where('no_empleado', $no_empleado);
-        $this->db->update('usuario');
-    }
 
     // Por si la actualizacion sera de todos los datos
     public function update_usuario($no_empleado, $datos){

@@ -304,7 +304,7 @@ class Equipos extends CI_Controller {
 	}
 
 	// Funcion que guarda los cambios realizados en los datos del usuario de forma tradicional
-	public function actualizar_usuario() {
+	public function actualizar_equipo() {
 		if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 3) {
 			// Eliminar los deliminatores que agrega por defecto la funcion form_error
 			$this->form_validation->set_error_delimiters('', '');
@@ -394,8 +394,9 @@ class Equipos extends CI_Controller {
 					}
 				}
 
-				// Hacer actualización de la tabla de usuarios
-				$this->Usuario->update_usuario($no_empleado, $datos);
+				// Hacer actualización de la tabla de equipo
+				$this->Usuario->update_equipo($id_equipo, $datos);
+
 				echo json_encode(array(
 					'msg' => 'Usuario actualizado correctamente',
 					'url' => base_url('usuarios/lista_usuarios'),
