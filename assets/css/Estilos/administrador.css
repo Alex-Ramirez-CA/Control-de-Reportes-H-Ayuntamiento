@@ -1097,3 +1097,11 @@ Estilos para los filtros que puede aplicar el administrador
 	margin: 0;
 	margin-left: 15px;
 }
+
+.lista_usuarios::-webkit-scrollbar {
+	display: none;
+}
+
+.filtros_lista_usurios::-webkit-scrollbar {
+	display: none;
+}
