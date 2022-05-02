@@ -385,7 +385,7 @@ class Equipos extends CI_Controller {
 					if($this->input->post('no_empleado_modif')) {
 						// Eliminar los registros que asocian la PC con sus usuarios
 						$this->Equipo_usuario->borrarRelacion($id_equipo, 'PC');
-						$no_empleados = $this->input->post('no_empleado');
+						$no_empleados = $this->input->post('no_empleados');
 						if(!empty($no_empleados)) {
 							foreach($no_empleados as $no_empleado) {
 								$data = array(
