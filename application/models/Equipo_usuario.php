@@ -15,7 +15,7 @@ class Equipo_usuario extends CI_Model {
                 ->select("e.id_equipo, e.nombre")
                 ->from("equipo_usuario eu")
                 ->join("equipo e", "eu.id_equipo=e.id_equipo")
-                ->where('eu.no_empleado', $no_empleado)
+                ->where(array('eu.no_empleado' => $no_empleado, 'e.status' => 1))
                 ->get();
         
         // Si no se encuentra resultados
