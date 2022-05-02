@@ -1162,7 +1162,7 @@
 		// console.log(tamano_monitor);
 		// console.log(observaciones);
 		$.ajax({
-		    url: "equipos/actualizar_equipo",
+		    url: baseUrl + "/equipos/actualizar_equipo",
 		    type: 'POST',
 		    data: {no_empleados, nombre, tipo_equipo, id_direccion, sistema_operativo, marca, inventario, serie, direccion_ip, teclado, mouse, dvd, procesador, segmento_de_red, ram, disco_duro, inventario_monitor, serie_monitor, marca_monitor, tamano_monitor, observaciones, id_direccion_modif, no_empleados_modif, id_equipo},
 		    success: function(data) {
