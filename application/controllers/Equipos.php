@@ -138,7 +138,7 @@ class Equipos extends CI_Controller {
                 // Hacer insercion a la tabla de equipos
                 $this->Equipo->guardar_equipo($datos);
                 // Crear el vinculo entre el equipo personal y su usuario en caso de ser necesario
-                $no_empleados = (int)$this->input->post('no_empleado');
+                $no_empleados = $this->input->post('no_empleado');
 				if(!empty($no_empleados)) {
 					// Obtener el id_equipo por su direccion ip
 					$res = $this->Equipo->obtenerIdEquipo($this->input->post('direccion_ip'));
