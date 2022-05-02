@@ -9,6 +9,8 @@
 	let rol = null;
 	let status = null;
 
+	var id_direccion_modif = false;
+
 	if(getUrl == baseUrl + "/equipos/lista_equipos"){
 		$("#search").attr("placeholder", "Buscar equipo").blur();
 	}else if(getUrl == baseUrl + "/usuarios/lista_usuarios"){
@@ -857,7 +859,7 @@
             //console.log(search_usuario)
 
             $.ajax({
-                url: 'equipos/buscar_empleado',
+                url: baseUrl+'/equipos/buscar_empleado',
                 type: 'POST',
                 data: { search_usuario },
                 success: function(data) {
@@ -882,11 +884,12 @@
         }
     });
 
+	let no_empleados_modif = false;
 	$(document).on("click", ".opcion_empleado", function () {
 		let elemento = $(this)[0];
-		$('#search_usuario').attr("no_empleado",$(elemento).attr("no_empleado"));
-		$('#search_usuario').val($(this).text());
 		$('.opciones_busqueda_usuario').css('visibility','hidden');
+		$( ".nombres_empleados_asociados" ).append( `<div no_empleado="${$(elemento).attr("no_empleado")}" class="tarjeta_empleado_asociado"><p>${$(this).text()}</p><p>x</p></div>` );
+		no_empleados_modif = true;
 	});
 
 	//Habilitar los campos del formulario
@@ -921,7 +924,10 @@
 
 	//Evento de cuando clique en guardar datos del equipo
 	$(document).on("click", ".guardar_equipo", function () {
-		let no_empleado = $('#search_usuario').attr("no_empleado");
+		let no_empleados = [];
+		$(".nombres_empleados_asociados div").each(function(){
+			no_empleados.push($(this).attr("no_empleado"));
+		});
 		let nombre = $("#nombre_equipo").val();
 		let tipo_equipo = $("#tipo_equipo").val();
 		let id_direccion = $("#direccion_equipo").val();
@@ -963,7 +969,7 @@
 		 	marca_monitor = $("#marca_monitor").val();
 		 	tamano_monitor = $("#tamaño_monitor").val();
 		}
-        // console.log("Empleado " + no_empleado)
+        //console.log("Empleados " + no_empleados)
 		// console.log(nombre);
 		// console.log(tipo_equipo);
 		// console.log(id_direccion);
@@ -984,10 +990,11 @@
 		// console.log(marca_monitor);
 		// console.log(tamano_monitor);
 		// console.log(observaciones);
+		// console.log($(".nombres_empleados_asociados").children().length);
 		$.ajax({
 		    url: "equipos/guardar_equipo",
 		    type: 'POST',
-		    data: {no_empleado, nombre, tipo_equipo, id_direccion, sistema_operativo, marca, inventario, serie, direccion_ip, teclado, mouse, dvd, procesador, segmento_de_red, ram, disco_duro, inventario_monitor, serie_monitor, marca_monitor, tamano_monitor, observaciones},
+		    data: {no_empleados, nombre, tipo_equipo, id_direccion, sistema_operativo, marca, inventario, serie, direccion_ip, teclado, mouse, dvd, procesador, segmento_de_red, ram, disco_duro, inventario_monitor, serie_monitor, marca_monitor, tamano_monitor, observaciones},
 		    success: function(data) {
 		        let json = JSON.parse(data);
 		        $(".titulo-mensaje").html(`<b><h1>${json.msg}</h1></b>`);
@@ -1071,6 +1078,175 @@
 		
 	});
 
+	//--------------------------Editar datos del usuario-----------------------------------
+	//Detectar si el campo de direccion ha cambiado
+	let direccion_actual = $("#direccion_equipo").val();
+	$("#direccion_equipo").change(function () {
+		if(direccion_actual !== $("#direccion_equipo").val()){
+			id_direccion_modif = true;
+		}else{
+			id_direccion_modif = false;
+		}
+	});
+
+	//Evento de cuando clique en guardar datos del equipo
+	$(document).on("click", ".guardar_cambios_equipo", function () {
+		let no_empleados = [];
+		$(".nombres_empleados_asociados div").each(function(){
+			no_empleados.push($(this).attr("no_empleado"));
+		});
+		let nombre = $("#nombre_equipo").val();
+		let tipo_equipo = $("#tipo_equipo").val();
+		let id_direccion = $("#direccion_equipo").val();
+		let sistema_operativo = $("#sistema_operativo_equipo").val();
+		let marca = $("#marca_equipo").val();
+		let inventario = $("#inventario_equipo").val();
+		let serie = $("#serie_equipo").val();
+		let direccion_ip = $("#direccion_ip_equipo").val();
+		let teclado;
+		let mouse;
+		let dvd;
+		let ram;
+		let disco_duro;
+		let inventario_monitor;
+		let serie_monitor;
+		let marca_monitor;
+		let tamano_monitor;
+		let procesador = $("#procesador_equipo").val();
+		let segmento_de_red = $("#segmento_red_equipo").val();
+		let observaciones = $("#observaciones_equipo").val();
+		if($("#tipo_equipo").val() === "Impresora"){
+			teclado = null;
+			mouse = null;
+			dvd = null;
+			ram = null;
+			disco_duro = null;
+			inventario_monitor = null;
+			serie_monitor = null;
+			marca_monitor = null;
+			tamano_monitor = null;
+		}else{
+			teclado = $("#teclado_equipo").val();
+			mouse = $("#mause_equipo").val();
+			dvd = $("#dvd_equipo").val();
+		 	ram = $("#cantidad_ram_equipo").val();
+		 	disco_duro = $("#disco_duro_equipo").val();
+		 	inventario_monitor = $("#invetario_monitor").val();
+		 	serie_monitor = $("#serie_monitor").val();
+		 	marca_monitor = $("#marca_monitor").val();
+		 	tamano_monitor = $("#tamaño_monitor").val();
+		}
+		let id_equipo = $('.guardar_cambios_equipo').attr('id_equipo');
+		// console.log(id_direccion_modif);
+		// console.log(no_empleados_modif);
+		// console.log(id_equipo);
+        // console.log("Empleados " + no_empleados)
+		// console.log(nombre);
+		// console.log(tipo_equipo);
+		// console.log(id_direccion);
+		// console.log(sistema_operativo);
+		// console.log(marca);
+		// console.log(inventario);
+		// console.log(serie);
+		// console.log(direccion_ip);
+		// console.log(teclado);
+		// console.log(mouse);
+		// console.log(dvd);
+		// console.log(procesador);
+		// console.log(segmento_de_red);
+		// console.log(ram);
+		// console.log(disco_duro);
+		// console.log(inventario_monitor);
+		// console.log(serie_monitor);
+		// console.log(marca_monitor);
+		// console.log(tamano_monitor);
+		// console.log(observaciones);
+		$.ajax({
+		    url: "equipos/actualizar_equipo",
+		    type: 'POST',
+		    data: {no_empleados, nombre, tipo_equipo, id_direccion, sistema_operativo, marca, inventario, serie, direccion_ip, teclado, mouse, dvd, procesador, segmento_de_red, ram, disco_duro, inventario_monitor, serie_monitor, marca_monitor, tamano_monitor, observaciones, id_direccion_modif, no_empleados_modif, id_equipo},
+		    success: function(data) {
+		        let json = JSON.parse(data);
+		        $(".titulo-mensaje").html(`<b><h1>${json.msg}</h1></b>`);
+		        $('.mensaje').css({'visibility':'visible'});
+				$('.contenedor_mensaje_guardar_usuario').children("img").attr("src",$('.contenedor_mensaje_guardar_usuario').children("img").attr("correcto"));
+		        $('.contenedor_mensaje_guardar_usuario').css({'transform':'translateY(0%)'});
+		        $(document).on('click', '.cerrar_ventana_guardar_usuario', function(){
+		            $('.mensaje').css({'visibility':'hidden'});
+		            $('.contenedor_mensaje_guardar_usuario').css({'transform':'translateY(-200%)'});
+		            window.location.replace(json.url);
+		        });
+		    },
+		    statusCode: {
+		        400: function(xhr) {
+		            let json = JSON.parse(xhr.responseText);
+		            //Para mostrar los mensajes de error en caso de tener en los campos del formulario
+					//console.log(json);
+		            if (json.nombre !== ""){
+		                $('.error_message_nombre').css({'transform':'translateY(0px)'});
+		                $('.error_message_nombre').css({'z-index':'1'});
+		                $(".error_message_nombre").html(`<p>${json.nombre}</p>`);
+		            }
+
+		            if (json.segmento_de_red !== "") {
+		                $('.error_message_segmento_red').css({'transform':'translateY(0px)'});
+		                $('.error_message_segmento_red').css({'z-index':'1'});
+		                $(".error_message_segmento_red").html(`<p>${json.segmento_de_red}</p>`);
+		            }
+
+		            if (json.serie !== "") {
+		                $('.error_message_serie').css({'transform':'translateY(0px)'});
+		                $('.error_message_serie').css({'z-index':'1'});
+		                $(".error_message_serie").html(`<p>${json.serie}</p>`);
+		            }
+
+		            if (json.sistema_operativo !== "") {
+		                $('.error_message_sistema_operativo').css({'transform':'translateY(0px)'});
+		                $('.error_message_sistema_operativo').css({'z-index':'1'});
+		                $(".error_message_sistema_operativo").html(`<p>${json.sistema_operativo}</p>`);
+		            }
+
+		            if (json.marca !== "") {
+		                $('.error_message_marca').css({'transform':'translateY(0px)'});
+		                $('.error_message_marca').css({'z-index':'1'});
+		                $(".error_message_marca").html(`<p>${json.marca}</p>`);
+		            }
+
+		            if (json.direccion_ip !== "") {
+		                $('.error_message_direccionIP').css({'transform':'translateY(0px)'});
+		                $('.error_message_direccionIP').css({'z-index':'1'});
+		                $(".error_message_direccionIP").html(`<p>${json.direccion_ip}</p>`);
+		            }
+
+					if (json.inventario !== "") {
+		                $('.error_message_inventario').css({'transform':'translateY(0px)'});
+		                $('.error_message_inventario').css({'z-index':'1'});
+		                $(".error_message_inventario").html(`<p>${json.inventario}</p>`);
+		            }
+					
+					if (json.procesador !== "") {
+		                $('.error_message_procesador').css({'transform':'translateY(0px)'});
+		                $('.error_message_procesador').css({'z-index':'1'});
+		                $(".error_message_procesador").html(`<p>${json.procesador}</p>`);
+		            }
+		        },
+				500: function(xhr) {
+					let json = JSON.parse(xhr.responseText);
+		            //Para mostrar los mensajes de error en caso de tener en los campos del formulario	
+					$(".titulo-mensaje").html(`<b><h1>${json.msg}</h1></b>`);
+					$('.mensaje').css({'visibility':'visible'});
+					$('.contenedor_mensaje_guardar_usuario').children("img").attr("src",$('.contenedor_mensaje_guardar_usuario').children("img").attr("incorrecto"));
+					$('.contenedor_mensaje_guardar_usuario').css({'transform':'translateY(0%)'});
+					$(document).on('click', '.cerrar_ventana_guardar_usuario', function(){
+						$('.mensaje').css({'visibility':'hidden'});
+						$('.contenedor_mensaje_guardar_usuario').css({'transform':'translateY(-200%)'});
+						window.location.replace(json.url);
+					});
+				}
+		    },
+		});
+		
+	});
 	//Función general para pintar la lista de los empleados de acuerdo a una respuesta
 	function obtenerListaCompletaUsuarios() {
 		$.ajax({
@@ -1133,7 +1309,7 @@
 					<td>${equipo.tipo_equipo}</td>
                     <td>${equipo.direccion}</td>
                     <td class="campo_status_empleado">
-                        <a href="${baseUrl}/usuarios/editar_equipo/${equipo.id_equipo}" class="editar_datos_equipo" idEquipo="${equipo.id_equipo}">Editar</a> 
+                        <a href="${baseUrl}/equipos/editar_equipo/${equipo.id_equipo}" class="editar_datos_equipo" idEquipo="${equipo.id_equipo}">Editar</a> 
                         <p class="label_status_empleado" for="status_empleado">
                             Estatus
                             <br>
