@@ -332,7 +332,7 @@ class Equipos extends CI_Controller {
 				// Datos para hacer la actualización en la tabla de usuario
 				$datos = array(
 					'direccion_ip' => $this->input->post('direccion_ip'),
-					'ram' => $ram,
+					'ram' => $this->input->post('ram'),
 					'dvd' => (int)$this->input->post('dvd'),
 					'procesador' => $this->input->post('procesador'),
 					'inventario_monitor' => $inventario_monitor,
