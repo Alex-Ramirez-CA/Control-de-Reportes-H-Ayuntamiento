@@ -354,32 +354,44 @@ class Equipos extends CI_Controller {
 					'id_direccion' => (int)$this->input->post('id_direccion'),
 				);
 
-				// Cuando se modifica la direccion a la que pertenece la impresora
 				// Obtener el id_equipo vía post
 				$id_equipo = (int)$this->input->post('id_equipo');
-				// Eliminar los registros que asocian dicha impresora con los usuarios 
-				// de la antigua direccion
-				$this->Equipo_usuario->borrarRelacion($id_equipo);
-				// Desues del borrado proceder a hacer los nuevos registros
-				if($usuarios = $this->Usuario->getUsuariosbyDireccion((int)$this->input->post('id_direccion'))) {
-					foreach($usuarios as $usuario) {
-						$no_empleado = $usuario->no_empleado;
-						$data = array(
-							'id_equipo' => $id_equipo,
-							'no_empleado' => $no_empleado,
-						);
-						$this->Equipo_usuario->insertar($data);
+
+				// Cuando se modifica la direccion a la que pertenece la impresora
+				// Verificar si la direccion cambio
+				if($this->input->post('id_direccion_modif')) {
+					// Eliminar los registros que asocian dicha impresora con los usuarios 
+					// de la antigua direccion
+					$this->Equipo_usuario->borrarRelacion($id_equipo, 'Impresora');
+					// Desues del borrado proceder a hacer los nuevos registros
+					if($usuarios = $this->Usuario->getUsuariosbyDireccion((int)$this->input->post('id_direccion'))) {
+						foreach($usuarios as $usuario) {
+							$no_empleado = $usuario->no_empleado;
+							$data = array(
+								'id_equipo' => $id_equipo,
+								'no_empleado' => $no_empleado,
+							);
+							$this->Equipo_usuario->insertar($data);
+						}
 					}
 				}
 				
+				
 				// Si los usuarios asignados a la PC son modificados
-				// Obtener el id_equipo vía post
-				$id_equipo = (int)$this->input->post('id_equipo');
-				// Obtner el id del antiguo equipo del usuario
-				if($res = $this->Equipo->obtenerPC($no_empleado)) {
-					$old_id_equipo = $res->id_equipo;
-					// Realizar la actualizacion
-					$this->Equipo_usuario->updateEquipo($id_equipo, $no_empleado, $old_id_equipo);
+				if($this->input->post('no_empleado_modif')) {
+					// Eliminar los registros que asocian la PC con sus usuarios
+					$this->Equipo_usuario->borrarRelacion($id_equipo, 'PC');
+					$no_empleados = $this->input->post('no_empleado');
+					if(!empty($no_empleados)) {
+						foreach($no_empleados as $no_empleado) {
+							$data = array(
+								'id_equipo' => $id_equipo,
+								'no_empleado' => $no_empleado,
+							);
+							$this->Equipo_usuario->insertar($data);
+						}
+						
+					}
 				}
 
 				// Hacer actualización de la tabla de usuarios

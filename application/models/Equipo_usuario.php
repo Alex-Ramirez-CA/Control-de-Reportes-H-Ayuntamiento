@@ -82,11 +82,12 @@ class Equipo_usuario extends CI_Model {
         return $data->row();
     }
     
-    public function borrarRelacion($id_equipo) {
+    public function borrarRelacion($id_equipo, $tipo_equipo) {
         $data = $this->db
                 ->delete()
-                ->from("equipo_usuario")
-                ->where('id_equipo', $id_equipo)
+                ->from("equipo_usuario eu")
+                ->join("equipo e", "eu.id_equipo=e.id_equipo")
+                ->where(array('e.id_equipo' => $id_equipo, 'e.tipo_equipo' => $tipo_equipo))
                 ->get();
         
         // Si no se puede realizar la accion
