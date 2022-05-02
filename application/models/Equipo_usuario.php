@@ -81,5 +81,19 @@ class Equipo_usuario extends CI_Model {
         }
         return $data->row();
     }
+    
+    public function borrarRelacion($id_equipo) {
+        $data = $this->db
+                ->delete()
+                ->from("equipo_usuario")
+                ->where('id_equipo', $id_equipo)
+                ->get();
+        
+        // Si no se puede realizar la accion
+        if(!$data->result()) {
+            return false;
+        }
+        return $data->result();
+    }
 
 }
