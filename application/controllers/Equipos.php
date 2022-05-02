@@ -382,10 +382,10 @@ class Equipos extends CI_Controller {
 				// Cuando es de tipo PC
 				if($this->input->post('tipo_equipo') === 'PC') {
 					// Si los usuarios asignados a la PC son modificados
-					if($this->input->post('no_empleado_modif')) {
+					if($this->input->post('no_empleados_modif')) {
 						// Eliminar los registros que asocian la PC con sus usuarios
 						$this->Equipo_usuario->borrarRelacion($id_equipo, 'PC');
-						$no_empleados = $this->input->post('no_empleado');
+						$no_empleados = $this->input->post('no_empleados');
 						if(!empty($no_empleados)) {
 							foreach($no_empleados as $no_empleado) {
 								$data = array(
