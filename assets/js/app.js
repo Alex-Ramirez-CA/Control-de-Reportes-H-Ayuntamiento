@@ -676,6 +676,30 @@
 		}
 	});
 
+	//Función para dar de baja o de alta algún equipo
+	$(document).on("click", "#status_equipo", function () {
+		let status;
+		let id_equipo = $(this).val();
+
+		var opcion = confirm(
+			"¿Está seguro de cambiar el estatus actual del equipo?"
+		);
+		if (opcion == true) {
+			if ($(this).is(":checked")) {
+				// Hacer algo si el checkbox ha sido seleccionado
+				status = 1;
+				$.post("modificar_status", { status, id_equipo });
+			} else {
+				// Hacer algo si el checkbox ha sido deseleccionado
+				status = 0;
+				$.post("modificar_status", { status, id_equipo });
+			}
+		} else {
+			//console.log("No paso nada");
+			obtenerListaCompletaEquipos();
+		}
+	});
+
 	//Evento de cuando clique una dependencia en filtros de listado de usuarios
 	$(document).on("click", ".opcion_dependencia_usuarios", function () {
 		if ($(this).hasClass("active")) {
@@ -888,7 +912,7 @@
 	$(document).on("click", ".opcion_empleado", function () {
 		let elemento = $(this)[0];
 		$('.opciones_busqueda_usuario').css('visibility','hidden');
-		$( ".nombres_empleados_asociados" ).append(`<div no_empleado="${$(elemento).attr("no_empleado")}" class="tarjeta_empleado_asociado"><p>${$(this).text()}</p><p class="quitar_empleado_asociado">x</p></div>`);
+		$( ".nombres_empleados_asociados" ).append(`<div no_empleado="${$(elemento).attr("no_empleado")}" class="tarjeta_empleado_asociado"><p class="nombre_tarjeta_empleado_asociado">${$(this).text()}</p><p class="quitar_empleado_asociado">x</p></div>`);
 		no_empleados_modif = 1;
 		$("#search_usuario").val("");
 	});
@@ -1320,7 +1344,7 @@
                         <p class="label_status_empleado" for="status_empleado">
                             Estatus
                             <br>
-                            <input id="status_empleado" type="checkbox" ${equipo.status == 1 ? "checked" : ""} value="${equipo.id_equipo}">
+                            <input id="status_equipo" type="checkbox" ${equipo.status == 1 ? "checked" : ""} value="${equipo.id_equipo}">
                         </p>
                     </td>
                 </tr>

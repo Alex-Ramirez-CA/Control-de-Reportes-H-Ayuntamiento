@@ -186,7 +186,7 @@
                 foreach($usuarios as $item):
         ?>
                 <div no_empleado="<?= $item->no_empleado ?>" class="tarjeta_empleado_asociado">
-                    <p><?= $item->nombre ?></p>
+                    <p class="nombre_tarjeta_empleado_asociado"><?= $item->nombre." ".$item->apellido_paterno." ".$item->apellido_materno?></p>
                     <p class="quitar_empleado_asociado">x</p>
                 </div>                
         <?php 

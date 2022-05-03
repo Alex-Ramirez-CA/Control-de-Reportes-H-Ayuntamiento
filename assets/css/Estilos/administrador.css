@@ -720,8 +720,7 @@ Estilos para los filtros que puede aplicar el administrador
 	justify-content: space-between;
 	height: 50%;
 	width: 40%;
-	/* margin: 50px 50px; */
-	margin: 0;
+	margin: 50px 50px;
 	position: relative;
 }
 
@@ -848,12 +847,10 @@ Estilos para los filtros que puede aplicar el administrador
 	height: 500px;
 	background-color: rgba(248, 244, 244, 0.3);
 	box-shadow: 0 0px 7px 0 rgba(31, 38, 135, 0.37);
-    border: solid 0.1px #006e95;
+	border: solid 2px #afafaa;
 	overflow: hidden;
 	overflow-y: scroll;
 	border-radius: 5px;
-	border-right: none;
-	/* display: none; */
 	margin-right: 5px;
 }
 
@@ -862,9 +859,8 @@ Estilos para los filtros que puede aplicar el administrador
 	height: 500px;
 	background-color: rgba(248, 244, 244, 0.3);
 	box-shadow: 0 0px 7px 0 rgba(31, 38, 135, 0.37);
-	border: solid 0.1px #006e95;
+	border: solid 2px #afafaa;
 	border-top: none;
-	border-right: none;
 	overflow: hidden;
 	overflow-y: scroll;
 	border-radius: 10px;
@@ -1099,23 +1095,52 @@ Estilos para los filtros que puede aplicar el administrador
 	margin-left: 15px;
 }
 
-.lista_usuarios::-webkit-scrollbar {
-	display: none;
-}
-
-.filtros_lista_usurios::-webkit-scrollbar {
+.lista_usuarios::-webkit-scrollbar, .filtros_lista_usurios::-webkit-scrollbar, .Lista_usuarios_asociados_equipo::-webkit-scrollbar {
 	display: none;
 }
 
 /*Estilos para las tarjetas de los usuarios asociados*/
+.Lista_usuarios_asociados_equipo {
+	background-color: rgba(248, 244, 244, 0.3);
+	box-shadow: 0 0px 7px 0 rgba(31, 38, 135, 0.37);
+	border: solid 2px #afafaa;
+	overflow: hidden;
+	overflow-y: scroll;
+	border-radius: 5px;
+	margin-left: 15px;
+}
+
 .tarjeta_empleado_asociado {
 	display: flex;
 	flex-direction: row;
-	font-size: 14px;
-	margin-top: 10px;
+	margin: 10px 5px;
+	position: relative;
+}
+
+.nombre_tarjeta_empleado_asociado {
+	background-color: rgba(0, 110, 150, 1);
+	border-radius: 10px;
+	color: #fff;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 3px;
+	font-size: 12px;
 }
 
 .quitar_empleado_asociado {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	cursor: pointer;
-	margin-left: 30px;
+	margin-left: 5px;
+	width: 20px;
+	height: 20px;
+	background-color: rgba(0, 0, 0, 0.5);
+	border-radius: 100%;
+	color: #fff;
+	font-size: 12px;
+}
+
+.quitar_empleado_asociado:hover {
+	background: #2e2e2e;
 }
