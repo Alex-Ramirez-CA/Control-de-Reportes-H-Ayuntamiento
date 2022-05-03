@@ -888,7 +888,14 @@
 	$(document).on("click", ".opcion_empleado", function () {
 		let elemento = $(this)[0];
 		$('.opciones_busqueda_usuario').css('visibility','hidden');
-		$( ".nombres_empleados_asociados" ).append( `<div no_empleado="${$(elemento).attr("no_empleado")}" class="tarjeta_empleado_asociado"><p>${$(this).text()}</p><p>x</p></div>` );
+		$( ".nombres_empleados_asociados" ).append(`<div no_empleado="${$(elemento).attr("no_empleado")}" class="tarjeta_empleado_asociado"><p>${$(this).text()}</p><p class="quitar_empleado_asociado">x</p></div>`);
+		no_empleados_modif = 1;
+		$("#search_usuario").val("");
+	});
+
+	//Función que se ejecuta cuando se clique en la x para quitar el usuario asociado
+	$(document).on("click", ".quitar_empleado_asociado", function () {
+		$(this).parent().remove();
 		no_empleados_modif = 1;
 	});
 
