@@ -893,11 +893,11 @@
 		$("#search_usuario").val("");
 	});
 
-	// //Función que se ejecuta cuando se clique en la x para quitar el usuario asociado
-	// $(document).on("click", ".quitar_empleado_asociado", function () {
-	// 	$(this).parent().remove();
-	// 	no_empleados_modif = 1;
-	// });
+	//Función que se ejecuta cuando se clique en la x para quitar el usuario asociado
+	$(document).on("click", ".quitar_empleado_asociado", function () {
+		$(this).parent().remove();
+		no_empleados_modif = 1;
+	});
 
 	//Habilitar los campos del formulario
 	$("#tipo_equipo").change(function () {
