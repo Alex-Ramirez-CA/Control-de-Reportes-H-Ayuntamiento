@@ -362,19 +362,30 @@ class Equipos extends CI_Controller {
 					// Si se modifica la direccion a la que pertenece la impresora
 					// Verificar si la direccion cambio
 					if((int)$this->input->post('id_direccion_modif') === 1) {
-						// Eliminar los registros que asocian dicha impresora con los usuarios 
-						// de la antigua direccion
-						$this->Equipo_usuario->borrarRelacion($id_equipo);
-						// Desues del borrado proceder a hacer los nuevos registros
-						if($usuarios = $this->Usuario->getUsuariosbyDireccion((int)$this->input->post('id_direccion'))) {
-							foreach($usuarios as $usuario) {
-								$no_empleado = $usuario->no_empleado;
-								$data = array(
-									'id_equipo' => $id_equipo,
-									'no_empleado' => $no_empleado,
-								);
-								$this->Equipo_usuario->insertar($data);
+						// verificar que si se va a insertar una impresora, que no esxita otra activa 
+						// relacionada con la misma direccion
+						if(!$this->Equipo->obtenerImpresora((int)$this->input->post('id_direccion'))) {
+							// Eliminar los registros que asocian dicha impresora con los usuarios 
+							// de la antigua direccion
+							$this->Equipo_usuario->borrarRelacion($id_equipo);
+							// Desues del borrado proceder a hacer los nuevos registros
+							if($usuarios = $this->Usuario->getUsuariosbyDireccion((int)$this->input->post('id_direccion'))) {
+								foreach($usuarios as $usuario) {
+									$no_empleado = $usuario->no_empleado;
+									$data = array(
+										'id_equipo' => $id_equipo,
+										'no_empleado' => $no_empleado,
+									);
+									$this->Equipo_usuario->insertar($data);
+								}
 							}
+						} else {
+							echo json_encode(array(
+								'msg' => 'Esta dirección ya tiene una impresora activa asociada',
+								'url' => base_url('equipos/lista_equipos'),
+							));
+							$this->output->set_status_header(500);
+							exit;
 						}
 					}
 				}
