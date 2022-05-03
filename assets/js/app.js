@@ -9,7 +9,7 @@
 	let rol = null;
 	let status = null;
 
-	var id_direccion_modif = false;
+	let id_direccion_modif = 0;
 
 	if(getUrl == baseUrl + "/equipos/lista_equipos"){
 		$("#search").attr("placeholder", "Buscar equipo").blur();
@@ -884,12 +884,12 @@
         }
     });
 
-	let no_empleados_modif = false;
+	let no_empleados_modif = 0;
 	$(document).on("click", ".opcion_empleado", function () {
 		let elemento = $(this)[0];
 		$('.opciones_busqueda_usuario').css('visibility','hidden');
 		$( ".nombres_empleados_asociados" ).append( `<div no_empleado="${$(elemento).attr("no_empleado")}" class="tarjeta_empleado_asociado"><p>${$(this).text()}</p><p>x</p></div>` );
-		no_empleados_modif = true;
+		no_empleados_modif = 1;
 	});
 
 	//Habilitar los campos del formulario
@@ -1083,9 +1083,9 @@
 	let direccion_actual = $("#direccion_equipo").val();
 	$("#direccion_equipo").change(function () {
 		if(direccion_actual !== $("#direccion_equipo").val()){
-			id_direccion_modif = true;
+			id_direccion_modif = 1;
 		}else{
-			id_direccion_modif = false;
+			id_direccion_modif = 0;
 		}
 	});
 
