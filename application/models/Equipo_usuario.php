@@ -28,7 +28,7 @@ class Equipo_usuario extends CI_Model {
     // Obtener los usuarios que estan asignados al equipo tipo PC
     public function obtener_usuarios($id_equipo) {
         $data = $this->db
-                ->select("u.no_empleado, u.nombre")
+                ->select("u.no_empleado, u.nombre, u.apellido_paterno, u.apellido_materno")
                 ->from("equipo_usuario eu")
                 ->join("usuario u", "eu.no_empleado=u.no_empleado")
                 ->join("equipo e", "eu.id_equipo=e.id_equipo")
