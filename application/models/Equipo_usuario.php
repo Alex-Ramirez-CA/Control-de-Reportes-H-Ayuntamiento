@@ -33,7 +33,6 @@ class Equipo_usuario extends CI_Model {
                 ->join("usuario u", "eu.no_empleado=u.no_empleado")
                 ->join("equipo e", "eu.id_equipo=e.id_equipo")
                 ->where(array('eu.id_equipo' => $id_equipo, 'e.tipo_equipo' => 'PC', 'u.status' => 1))
-                ->limit(2)
                 ->get();
         
         // Si no se encuentra resultados
@@ -82,19 +81,8 @@ class Equipo_usuario extends CI_Model {
         return $data->row();
     }
     
-    public function borrarRelacion($id_equipo, $tipo_equipo) {
-        $data = $this->db
-                ->delete()
-                ->from("equipo_usuario eu")
-                ->join("equipo e", "eu.id_equipo=e.id_equipo")
-                ->where(array('e.id_equipo' => $id_equipo, 'e.tipo_equipo' => $tipo_equipo))
-                ->get();
-        
-        // Si no se puede realizar la accion
-        if(!$data->result()) {
-            return false;
-        }
-        return $data->result();
+    public function borrarRelacion($id_equipo) {
+        $data = $this->db->delete('equipo_usuario', array('id_equipo' => $id_equipo));
     }
 
 }

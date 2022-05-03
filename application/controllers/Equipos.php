@@ -335,19 +335,19 @@ class Equipos extends CI_Controller {
 					'ram' => $this->input->post('ram'),
 					'dvd' => (int)$this->input->post('dvd'),
 					'procesador' => $this->input->post('procesador'),
-					'inventario_monitor' => $inventario_monitor,
+					'inventario_monitor' => $this->input->post('inventario_monitor'),
 					'marca' => $this->input->post('marca'),
-					'marca_monitor' => $marca_monitor,
+					'marca_monitor' => $this->input->post('marca_monitor'),
 					'segmento_de_red' => $this->input->post('segmento_de_red'),
-					'tamano_monitor' => $tamano_monitor,
+					'tamano_monitor' => $this->input->post('tamano_monitor'),
 					'nombre' => $this->input->post('nombre'),
 					'inventario' => $this->input->post('inventario'),
 					'serie' => $this->input->post('serie'),
 					'status' => 1,
-					'serie_monitor' => $serie_monitor,
-					'disco_duro' => $disco_duro,
+					'serie_monitor' => $this->input->post('serie_monitor'),
+					'disco_duro' => $this->input->post('disco_duro'),
 					'teclado' => (int)$this->input->post('teclado'),
-					'observaciones' => $observaciones,
+					'observaciones' => $this->input->post('observaciones'),
 					'mouse' => (int)$this->input->post('mouse'),
 					'sistema_operativo' => $this->input->post('sistema_operativo'),
 					'tipo_equipo' => $this->input->post('tipo_equipo'),
@@ -364,7 +364,7 @@ class Equipos extends CI_Controller {
 					if($this->input->post('id_direccion_modif')) {
 						// Eliminar los registros que asocian dicha impresora con los usuarios 
 						// de la antigua direccion
-						$this->Equipo_usuario->borrarRelacion($id_equipo, 'Impresora');
+						$this->Equipo_usuario->borrarRelacion($id_equipo);
 						// Desues del borrado proceder a hacer los nuevos registros
 						if($usuarios = $this->Usuario->getUsuariosbyDireccion((int)$this->input->post('id_direccion'))) {
 							foreach($usuarios as $usuario) {
@@ -384,7 +384,7 @@ class Equipos extends CI_Controller {
 					// Si los usuarios asignados a la PC son modificados
 					if($this->input->post('no_empleados_modif')) {
 						// Eliminar los registros que asocian la PC con sus usuarios
-						$this->Equipo_usuario->borrarRelacion($id_equipo, 'PC');
+						$this->Equipo_usuario->borrarRelacion($id_equipo);
 						$no_empleados = $this->input->post('no_empleados');
 						if(!empty($no_empleados)) {
 							foreach($no_empleados as $no_empleado) {
