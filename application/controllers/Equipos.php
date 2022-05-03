@@ -361,7 +361,7 @@ class Equipos extends CI_Controller {
 				if($this->input->post('tipo_equipo') === 'Impresora') {
 					// Si se modifica la direccion a la que pertenece la impresora
 					// Verificar si la direccion cambio
-					if($this->input->post('id_direccion_modif')) {
+					if((int)$this->input->post('id_direccion_modif') === 1) {
 						// Eliminar los registros que asocian dicha impresora con los usuarios 
 						// de la antigua direccion
 						$this->Equipo_usuario->borrarRelacion($id_equipo);
@@ -382,7 +382,7 @@ class Equipos extends CI_Controller {
 				// Cuando es de tipo PC
 				if($this->input->post('tipo_equipo') === 'PC') {
 					// Si los usuarios asignados a la PC son modificados
-					if($this->input->post('no_empleados_modif')) {
+					if((int)$this->input->post('no_empleados_modif') === 1) {
 						// Eliminar los registros que asocian la PC con sus usuarios
 						$this->Equipo_usuario->borrarRelacion($id_equipo);
 						$no_empleados = $this->input->post('no_empleados');
