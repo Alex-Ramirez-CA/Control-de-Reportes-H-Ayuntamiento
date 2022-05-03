@@ -1106,3 +1106,16 @@ Estilos para los filtros que puede aplicar el administrador
 .filtros_lista_usurios::-webkit-scrollbar {
 	display: none;
 }
+
+/*Estilos para las tarjetas de los usuarios asociados*/
+.tarjeta_empleado_asociado {
+	display: flex;
+	flex-direction: row;
+	font-size: 14px;
+	margin-top: 10px;
+}
+
+.quitar_empleado_asociado {
+	cursor: pointer;
+	margin-left: 30px;
+}
