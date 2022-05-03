@@ -96,7 +96,7 @@ Estilos para los titulos de las tarjetas
 	height: 30px;
 	width: 143%;
 	font-size: 12px;
-	background: #6CC5B2;
+	background: #F5D344;
 	color: white;
 	border-radius: 10px;
 }
@@ -108,7 +108,7 @@ Estilos para los titulos de las tarjetas
 	height: 30px;
 	width: 143%;
 	font-size: 12px;
-	background: #F5D344;
+	background: #6CC5B2;
 	color: white;
 	border-radius: 10px;
 }
@@ -142,13 +142,13 @@ Estilos para los textos de las fechas y el texto medio de las tarjetas
 
 .proceso .texto-medio h5,
 .proceso .fecha h5 {
-	color: #6cc5b2;
+	color: #F5D344;
 	font-size: 14px;
 	margin: 0px;
 }
 
 .finalizado .fecha h5 {
-	color: #F5D344;
+	color: #6cc5b2;
 	font-size: 14px;
 	margin: 0px;
 }
