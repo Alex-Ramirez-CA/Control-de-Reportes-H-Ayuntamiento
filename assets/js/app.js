@@ -1144,114 +1144,114 @@
 		 	tamano_monitor = $("#tamaño_monitor").val();
 		}
 		let id_equipo = $('.guardar_cambios_equipo').attr('id_equipo');
-		console.log(id_direccion_modif);
-		console.log(no_empleados_modif);
-		console.log(id_equipo);
-        console.log("Empleados " + no_empleados)
-		console.log(nombre);
-		console.log(tipo_equipo);
-		console.log(id_direccion);
-		console.log(sistema_operativo);
-		console.log(marca);
-		console.log(inventario);
-		console.log(serie);
-		console.log(direccion_ip);
-		console.log(teclado);
-		console.log(mouse);
-		console.log(dvd);
-		console.log(procesador);
-		console.log(segmento_de_red);
-		console.log(ram);
-		console.log(disco_duro);
-		console.log(inventario_monitor);
-		console.log(serie_monitor);
-		console.log(marca_monitor);
-		console.log(tamano_monitor);
-		console.log(observaciones);
-		// $.ajax({
-		//     url: baseUrl + "/equipos/actualizar_equipo",
-		//     type: 'POST',
-		//     data: {no_empleados, nombre, tipo_equipo, id_direccion, sistema_operativo, marca, inventario, serie, direccion_ip, teclado, mouse, dvd, procesador, segmento_de_red, ram, disco_duro, inventario_monitor, serie_monitor, marca_monitor, tamano_monitor, observaciones, id_direccion_modif, no_empleados_modif, id_equipo},
-		//     success: function(data) {
-		//         let json = JSON.parse(data);
-		//         $(".titulo-mensaje").html(`<b><h1>${json.msg}</h1></b>`);
-		//         $('.mensaje').css({'visibility':'visible'});
-		// 		$('.contenedor_mensaje_guardar_usuario').children("img").attr("src",$('.contenedor_mensaje_guardar_usuario').children("img").attr("correcto"));
-		//         $('.contenedor_mensaje_guardar_usuario').css({'transform':'translateY(0%)'});
-		//         $(document).on('click', '.cerrar_ventana_guardar_usuario', function(){
-		//             $('.mensaje').css({'visibility':'hidden'});
-		//             $('.contenedor_mensaje_guardar_usuario').css({'transform':'translateY(-200%)'});
-		//             window.location.replace(json.url);
-		//         });
-		//     },
-		//     statusCode: {
-		//         400: function(xhr) {
-		//             let json = JSON.parse(xhr.responseText);
-		//             //Para mostrar los mensajes de error en caso de tener en los campos del formulario
-		// 			//console.log(json);
-		//             if (json.nombre !== ""){
-		//                 $('.error_message_nombre').css({'transform':'translateY(0px)'});
-		//                 $('.error_message_nombre').css({'z-index':'1'});
-		//                 $(".error_message_nombre").html(`<p>${json.nombre}</p>`);
-		//             }
+		// console.log(id_direccion_modif);
+		// console.log(no_empleados_modif);
+		// console.log(id_equipo);
+        // console.log("Empleados " + no_empleados)
+		// console.log(nombre);
+		// console.log(tipo_equipo);
+		// console.log(id_direccion);
+		// console.log(sistema_operativo);
+		// console.log(marca);
+		// console.log(inventario);
+		// console.log(serie);
+		// console.log(direccion_ip);
+		// console.log(teclado);
+		// console.log(mouse);
+		// console.log(dvd);
+		// console.log(procesador);
+		// console.log(segmento_de_red);
+		// console.log(ram);
+		// console.log(disco_duro);
+		// console.log(inventario_monitor);
+		// console.log(serie_monitor);
+		// console.log(marca_monitor);
+		// console.log(tamano_monitor);
+		// console.log(observaciones);
+		$.ajax({
+		    url: baseUrl + "/equipos/actualizar_equipo",
+		    type: 'POST',
+		    data: {no_empleados, nombre, tipo_equipo, id_direccion, sistema_operativo, marca, inventario, serie, direccion_ip, teclado, mouse, dvd, procesador, segmento_de_red, ram, disco_duro, inventario_monitor, serie_monitor, marca_monitor, tamano_monitor, observaciones, id_direccion_modif, no_empleados_modif, id_equipo},
+		    success: function(data) {
+		        let json = JSON.parse(data);
+		        $(".titulo-mensaje").html(`<b><h1>${json.msg}</h1></b>`);
+		        $('.mensaje').css({'visibility':'visible'});
+				$('.contenedor_mensaje_guardar_usuario').children("img").attr("src",$('.contenedor_mensaje_guardar_usuario').children("img").attr("correcto"));
+		        $('.contenedor_mensaje_guardar_usuario').css({'transform':'translateY(0%)'});
+		        $(document).on('click', '.cerrar_ventana_guardar_usuario', function(){
+		            $('.mensaje').css({'visibility':'hidden'});
+		            $('.contenedor_mensaje_guardar_usuario').css({'transform':'translateY(-200%)'});
+		            window.location.replace(json.url);
+		        });
+		    },
+		    statusCode: {
+		        400: function(xhr) {
+		            let json = JSON.parse(xhr.responseText);
+		            //Para mostrar los mensajes de error en caso de tener en los campos del formulario
+					//console.log(json);
+		            if (json.nombre !== ""){
+		                $('.error_message_nombre').css({'transform':'translateY(0px)'});
+		                $('.error_message_nombre').css({'z-index':'1'});
+		                $(".error_message_nombre").html(`<p>${json.nombre}</p>`);
+		            }
 
-		//             if (json.segmento_de_red !== "") {
-		//                 $('.error_message_segmento_red').css({'transform':'translateY(0px)'});
-		//                 $('.error_message_segmento_red').css({'z-index':'1'});
-		//                 $(".error_message_segmento_red").html(`<p>${json.segmento_de_red}</p>`);
-		//             }
+		            if (json.segmento_de_red !== "") {
+		                $('.error_message_segmento_red').css({'transform':'translateY(0px)'});
+		                $('.error_message_segmento_red').css({'z-index':'1'});
+		                $(".error_message_segmento_red").html(`<p>${json.segmento_de_red}</p>`);
+		            }
 
-		//             if (json.serie !== "") {
-		//                 $('.error_message_serie').css({'transform':'translateY(0px)'});
-		//                 $('.error_message_serie').css({'z-index':'1'});
-		//                 $(".error_message_serie").html(`<p>${json.serie}</p>`);
-		//             }
+		            if (json.serie !== "") {
+		                $('.error_message_serie').css({'transform':'translateY(0px)'});
+		                $('.error_message_serie').css({'z-index':'1'});
+		                $(".error_message_serie").html(`<p>${json.serie}</p>`);
+		            }
 
-		//             if (json.sistema_operativo !== "") {
-		//                 $('.error_message_sistema_operativo').css({'transform':'translateY(0px)'});
-		//                 $('.error_message_sistema_operativo').css({'z-index':'1'});
-		//                 $(".error_message_sistema_operativo").html(`<p>${json.sistema_operativo}</p>`);
-		//             }
+		            if (json.sistema_operativo !== "") {
+		                $('.error_message_sistema_operativo').css({'transform':'translateY(0px)'});
+		                $('.error_message_sistema_operativo').css({'z-index':'1'});
+		                $(".error_message_sistema_operativo").html(`<p>${json.sistema_operativo}</p>`);
+		            }
 
-		//             if (json.marca !== "") {
-		//                 $('.error_message_marca').css({'transform':'translateY(0px)'});
-		//                 $('.error_message_marca').css({'z-index':'1'});
-		//                 $(".error_message_marca").html(`<p>${json.marca}</p>`);
-		//             }
+		            if (json.marca !== "") {
+		                $('.error_message_marca').css({'transform':'translateY(0px)'});
+		                $('.error_message_marca').css({'z-index':'1'});
+		                $(".error_message_marca").html(`<p>${json.marca}</p>`);
+		            }
 
-		//             if (json.direccion_ip !== "") {
-		//                 $('.error_message_direccionIP').css({'transform':'translateY(0px)'});
-		//                 $('.error_message_direccionIP').css({'z-index':'1'});
-		//                 $(".error_message_direccionIP").html(`<p>${json.direccion_ip}</p>`);
-		//             }
+		            if (json.direccion_ip !== "") {
+		                $('.error_message_direccionIP').css({'transform':'translateY(0px)'});
+		                $('.error_message_direccionIP').css({'z-index':'1'});
+		                $(".error_message_direccionIP").html(`<p>${json.direccion_ip}</p>`);
+		            }
 
-		// 			if (json.inventario !== "") {
-		//                 $('.error_message_inventario').css({'transform':'translateY(0px)'});
-		//                 $('.error_message_inventario').css({'z-index':'1'});
-		//                 $(".error_message_inventario").html(`<p>${json.inventario}</p>`);
-		//             }
+					if (json.inventario !== "") {
+		                $('.error_message_inventario').css({'transform':'translateY(0px)'});
+		                $('.error_message_inventario').css({'z-index':'1'});
+		                $(".error_message_inventario").html(`<p>${json.inventario}</p>`);
+		            }
 					
-		// 			if (json.procesador !== "") {
-		//                 $('.error_message_procesador').css({'transform':'translateY(0px)'});
-		//                 $('.error_message_procesador').css({'z-index':'1'});
-		//                 $(".error_message_procesador").html(`<p>${json.procesador}</p>`);
-		//             }
-		//         },
-		// 		500: function(xhr) {
-		// 			let json = JSON.parse(xhr.responseText);
-		//             //Para mostrar los mensajes de error en caso de tener en los campos del formulario	
-		// 			$(".titulo-mensaje").html(`<b><h1>${json.msg}</h1></b>`);
-		// 			$('.mensaje').css({'visibility':'visible'});
-		// 			$('.contenedor_mensaje_guardar_usuario').children("img").attr("src",$('.contenedor_mensaje_guardar_usuario').children("img").attr("incorrecto"));
-		// 			$('.contenedor_mensaje_guardar_usuario').css({'transform':'translateY(0%)'});
-		// 			$(document).on('click', '.cerrar_ventana_guardar_usuario', function(){
-		// 				$('.mensaje').css({'visibility':'hidden'});
-		// 				$('.contenedor_mensaje_guardar_usuario').css({'transform':'translateY(-200%)'});
-		// 				window.location.replace(json.url);
-		// 			});
-		// 		}
-		//     },
-		// });
+					if (json.procesador !== "") {
+		                $('.error_message_procesador').css({'transform':'translateY(0px)'});
+		                $('.error_message_procesador').css({'z-index':'1'});
+		                $(".error_message_procesador").html(`<p>${json.procesador}</p>`);
+		            }
+		        },
+				500: function(xhr) {
+					let json = JSON.parse(xhr.responseText);
+		            //Para mostrar los mensajes de error en caso de tener en los campos del formulario	
+					$(".titulo-mensaje").html(`<b><h1>${json.msg}</h1></b>`);
+					$('.mensaje').css({'visibility':'visible'});
+					$('.contenedor_mensaje_guardar_usuario').children("img").attr("src",$('.contenedor_mensaje_guardar_usuario').children("img").attr("incorrecto"));
+					$('.contenedor_mensaje_guardar_usuario').css({'transform':'translateY(0%)'});
+					$(document).on('click', '.cerrar_ventana_guardar_usuario', function(){
+						$('.mensaje').css({'visibility':'hidden'});
+						$('.contenedor_mensaje_guardar_usuario').css({'transform':'translateY(-200%)'});
+						window.location.replace(json.url);
+					});
+				}
+		    },
+		});
 		
 	});
 	//Función general para pintar la lista de los empleados de acuerdo a una respuesta
