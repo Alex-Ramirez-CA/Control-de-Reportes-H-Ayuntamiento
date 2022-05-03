@@ -187,9 +187,7 @@
         ?>
                 <div no_empleado="<?= $item->no_empleado ?>" class="tarjeta_empleado_asociado">
                     <p><?= $item->nombre ?></p>
-                    <div class="quitar_empleado_asociado">
-                        <p>x</p>
-                    </div>
+                    <p class="quitar_empleado_asociado">x</p>
                 </div>                
         <?php 
                 endforeach; 
