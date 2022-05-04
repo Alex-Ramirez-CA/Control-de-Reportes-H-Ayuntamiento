@@ -117,6 +117,7 @@ class Equipo extends CI_Model {
         $data = $this->db
             ->select("e.id_equipo, e.direccion_ip, e.segmento_de_red, e.nombre, e.tipo_equipo, dir.nombre as direccion, e.status")
             ->from("equipo e")
+            ->where("e.status", 1)
             ->join("direccion dir", "e.id_direccion=dir.id_direccion")
             ->order_by('e.id_equipo')
             ->get();

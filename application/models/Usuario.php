@@ -134,6 +134,7 @@ class Usuario extends CI_Model {
         $data = $this->db
             ->select("u.no_empleado, u.nombre, u.apellido_paterno, u.apellido_materno, dir.nombre as direccion, r.nombre as rol, u.status")
             ->from("usuario u")
+            ->where("u.status", 1)
             ->join("rol r", "u.id_rol=r.id_rol")
             ->join("direccion dir", "u.id_direccion=dir.id_direccion")
             ->order_by('u.no_empleado')
