@@ -87,7 +87,7 @@ class Usuarios extends CI_Controller {
 				'id_direccion' => form_error('id_direccion'),
 				'id_rol' => form_error('id_rol'),
 				'id_departamento' => form_error('id_departamento'),
-				'id_equipo' => form_error('id_equipo'),
+				// 'id_equipo' => form_error('id_equipo'),
 			);
 			// Mandar respuesta al cliente
 			echo json_encode($erros);
@@ -106,18 +106,23 @@ class Usuarios extends CI_Controller {
 				'id_rol' => (int)$this->input->post('id_rol'),
 				'id_departamento' => (int)$this->input->post('id_departamento'),
 			);
+
 			// Hacer insercion a la tabla de usuarios
 			$this->Usuario->guardar_usuario($datos);
-
-			// Crear el vinculo entre el usuario y su equipo personal
+			
 			// Obtener el numero de empleado por su email
 			$res = $this->Usuario->obtenerNoEmpleado($this->input->post('email'));
 			$no_empleado = $res->no_empleado;
-			$data = array(
-				'id_equipo' => (int)$this->input->post('id_equipo'),
-				'no_empleado' => $no_empleado,
-			);
-            $this->Equipo_usuario->insertar($data);
+
+			// Crear el vinculo entre el usuario y su equipo personal
+			if($this->input->post('id_equipo')) { // Validar que si se haya asignado un equipo
+				$data = array(
+					'id_equipo' => (int)$this->input->post('id_equipo'),
+					'no_empleado' => $no_empleado,
+				);
+				$this->Equipo_usuario->insertar($data);
+			}
+			
 
 			// Crear el vinculo del usuario con la impresora de su direccion
 			// Validar que dicha direccion si tenga ya una impresora
@@ -129,6 +134,7 @@ class Usuarios extends CI_Controller {
 				);
 				$this->Equipo_usuario->insertar($data);
 			}
+
 			echo json_encode(array(
 				'msg' => 'Usuario agregado correctamente',
 				'url' => base_url('usuarios'),
