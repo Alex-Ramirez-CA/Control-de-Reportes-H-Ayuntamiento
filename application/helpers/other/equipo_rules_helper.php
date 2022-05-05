@@ -49,10 +49,11 @@ function getEquipoRules() {
         array(
                 'field' => 'direccion_ip',
                 'label' => 'Dirección IP',
-                'rules' => 'required|max_length[50]',
+                'rules' => 'required|max_length[50]|valid_ip',
                 'errors' => array(
                         'required' => 'La %s es requerida',
                         'max_length' => 'La %s debe ser mas corta',
+                        'valid_ip' => 'Ingrese formato valido de %s',
                 ),
         ),
         array(
