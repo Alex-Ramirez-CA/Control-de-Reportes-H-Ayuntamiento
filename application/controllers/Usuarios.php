@@ -302,15 +302,18 @@ class Usuarios extends CI_Controller {
 				}
 				
 				// Si el equipo PC del usuario es modificado
-				// Actualizar el equipo o PC del suarios
-				// Obtener el id_equipo vía post
-				$id_equipo = (int)$this->input->post('id_equipo');
-				// Obtner el id del antiguo equipo del usuario
-				if($res = $this->Equipo->obtenerPC($no_empleado)) {
-					$old_id_equipo = $res->id_equipo;
-					// Realizar la actualizacion
-					$this->Equipo_usuario->updateEquipo($id_equipo, $no_empleado, $old_id_equipo);
+				if($this->input->post('id_equipo')) {
+					// Actualizar el equipo o PC del suarios
+					// Obtener el id_equipo vía post
+					$id_equipo = (int)$this->input->post('id_equipo');
+					// Obtner el id del antiguo equipo del usuario
+					if($res = $this->Equipo->obtenerPC($no_empleado)) {
+						$old_id_equipo = $res->id_equipo;
+						// Realizar la actualizacion
+						$this->Equipo_usuario->updateEquipo($id_equipo, $no_empleado, $old_id_equipo);
+					}
 				}
+				
 
 				// Hacer actualización de la tabla de usuarios
 				$this->Usuario->update_usuario($no_empleado, $datos);
