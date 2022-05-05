@@ -7,7 +7,7 @@
     <!-- Columna donde se muestran todos los reportes -->
     
     <div class="pendiente">
-        <div class="titulo-pendiente">
+        <div class="titulo-columna">
             <p class="cantidad-reportes"><?= empty($incidencias) ? '0' : count($incidencias); ?></p>
             <h3><b>Reportes</b></h3>
         </div>
@@ -64,7 +64,7 @@
 
     <!-- Columna para complementar reporte -->
     <div class="complementar-reporte">
-        <div class="titulo-pendiente">
+        <div class="titulo-columna">
             <h3><b>Complementar reporte</b></h3>
         </div>
 
