@@ -19,6 +19,12 @@
 	}else{
 		$("#search").attr("placeholder", "Buscar reporte").blur();
 	}
+	if(getUrl == baseUrl + "/usuarios"){
+		$("#search").css({ display: "none" });
+	}
+	if(getUrl == baseUrl + "/equipos"){
+		$("#search").css({ display: "none" });
+	}
 
 	//Evento que se ejecuta cuando el usuario este escribiendo en la barra de busqueda
 	$("#search").keyup(function() {
