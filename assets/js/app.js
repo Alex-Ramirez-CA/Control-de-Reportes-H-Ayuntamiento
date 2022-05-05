@@ -590,8 +590,13 @@
 	});
 
 	//Funciones para ocultar los mensajes de error del formulario cuando el usuario comience a escribir
-	$(document).on("keyup", ("#nombre", "#nombre_equipo"), function () {
+	$(document).on("keyup", ("#nombre"), function () {
 		$(".error_message_nombre").css({ transform: "translateY(-10px)" });
+		$(".error_message_nombre").css({ "z-index": "-1" });
+	});
+
+	$(document).on("keyup", ("#nombre_equipo"), function () {
+		$(".error_message_nombre").css({ transform: "translateY(-30px)" });
 		$(".error_message_nombre").css({ "z-index": "-1" });
 	});
 
@@ -615,38 +620,43 @@
 		$(".error_message_password").css({ "z-index": "-1" });
 	});
 
-	$(document).on("keyup", ("#direccion_ip", "#direccion_ip_equipo"), function () {
+	$(document).on("keyup", ("#direccion_ip"), function () {
 		$(".error_message_direccionIP").css({ transform: "translateY(-10px)" });
 		$(".error_message_direccionIP").css({ "z-index": "-1" });
 	});
 
+	$(document).on("keyup", ("#direccion_ip_equipo"), function () {
+		$(".error_message_direccionIP").css({ transform: "translateY(-30px)" });
+		$(".error_message_direccionIP").css({ "z-index": "-1" });
+	});
+
 	$(document).on("keyup", "#segmento_red_equipo", function () {
-		$(".error_message_segmento_red").css({ transform: "translateY(-10px)" });
+		$(".error_message_segmento_red").css({ transform: "translateY(-30px)" });
 		$(".error_message_segmento_red").css({ "z-index": "-1" });
 	});
 
 	$(document).on("keyup", "#serie_equipo", function () {
-		$(".error_message_serie").css({ transform: "translateY(-10px)" });
+		$(".error_message_serie").css({ transform: "translateY(-30px)" });
 		$(".error_message_serie").css({ "z-index": "-1" });
 	});
 
 	$(document).on("keyup", "#sistema_operativo_equipo", function () {
-		$(".error_message_sistema_operativo").css({ transform: "translateY(-10px)" });
+		$(".error_message_sistema_operativo").css({ transform: "translateY(-30px)" });
 		$(".error_message_sistema_operativo").css({ "z-index": "-1" });
 	});
 
 	$(document).on("keyup", "#marca_equipo", function () {
-		$(".error_message_marca").css({ transform: "translateY(-10px)" });
+		$(".error_message_marca").css({ transform: "translateY(-30px)" });
 		$(".error_message_marca").css({ "z-index": "-1" });
 	});
 
 	$(document).on("keyup", "#inventario_equipo", function () {
-		$(".error_message_inventario").css({ transform: "translateY(-10px)" });
+		$(".error_message_inventario").css({ transform: "translateY(-30px)" });
 		$(".error_message_inventario").css({ "z-index": "-1" });
 	});
 
 	$(document).on("keyup", "#procesador_equipo", function () {
-		$(".error_message_procesador").css({ transform: "translateY(-10px)" });
+		$(".error_message_procesador").css({ transform: "translateY(-30px)" });
 		$(".error_message_procesador").css({ "z-index": "-1" });
 	});
 
@@ -911,10 +921,24 @@
 	let no_empleados_modif = 0;
 	$(document).on("click", ".opcion_empleado", function () {
 		let elemento = $(this)[0];
-		$('.opciones_busqueda_usuario').css('visibility','hidden');
-		$( ".nombres_empleados_asociados" ).append(`<div no_empleado="${$(elemento).attr("no_empleado")}" class="tarjeta_empleado_asociado"><p class="nombre_tarjeta_empleado_asociado">${$(this).text()}</p><p class="quitar_empleado_asociado">x</p></div>`);
-		no_empleados_modif = 1;
-		$("#search_usuario").val("");
+		let no_empleados = [];
+		$(".nombres_empleados_asociados div.tarjeta_empleado_asociado").each(function(){
+			no_empleados.push($(this).attr("no_empleado"));
+		});
+		//Comprobar si el empleado ya existe en la lista de asociados y no agregarlo
+		if (!no_empleados.includes($(elemento).attr("no_empleado"))){
+			$('.opciones_busqueda_usuario').css('visibility','hidden');
+			$( ".nombres_empleados_asociados" ).append(`
+				<div no_empleado="${$(elemento).attr("no_empleado")}" class="tarjeta_empleado_asociado">
+					<p class="nombre_tarjeta_empleado_asociado">${$(this).text()}</p>
+					<div class="quitar_empleado_asociado">
+						<p>x</p>
+					</div>
+				</div>
+			`);
+			no_empleados_modif = 1;
+			$("#search_usuario").val("");	
+		}
 	});
 
 	//Función que se ejecuta cuando se clique en la x para quitar el usuario asociado
@@ -1123,7 +1147,7 @@
 	//Evento de cuando clique en guardar datos del equipo
 	$(document).on("click", ".guardar_cambios_equipo", function () {
 		let no_empleados = [];
-		$(".nombres_empleados_asociados div").each(function(){
+		$(".nombres_empleados_asociados div.tarjeta_empleado_asociado").each(function(){
 			no_empleados.push($(this).attr("no_empleado"));
 		});
 		let nombre = $("#nombre_equipo").val();
@@ -1275,8 +1299,7 @@
 					});
 				}
 		    },
-		});
-		
+		});	
 	});
 	//Función general para pintar la lista de los empleados de acuerdo a una respuesta
 	function obtenerListaCompletaUsuarios() {
