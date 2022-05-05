@@ -692,16 +692,17 @@ Estilos para los filtros que puede aplicar el administrador
 
 .titulo_formulario {
 	background: linear-gradient(to right,#006E95,#26A2D9,#006E95, #006E95, #006E95,#26A2D9,#006E95);
+	box-shadow: 0 0px 3px 0 rgba(31, 38, 135, 0.37);
 	width: 100%;
-	height: 10%;
-	border-radius: 10px;
+	height: 40px;
+	border-radius: 5px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
 
 .titulo_formulario h1 {
-	font-size: 25px;
+	font-size: 20px;
 	color: #fff;
 	margin: 0;
 }
@@ -713,7 +714,6 @@ Estilos para los filtros que puede aplicar el administrador
 	height: 450px;
 }
 
-
 .columna_formulario {
 	display: flex;
 	flex-direction: column;
@@ -724,25 +724,48 @@ Estilos para los filtros que puede aplicar el administrador
 	position: relative;
 }
 
-.columna_formulario input {
+.columnas_formulario_equipo {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	overflow: hidden;
+	overflow-y: scroll;
+	height: 460px;
+}
+
+.columna_formulario_equipo {
+	display: flex;
+	flex-direction: column;
+	width: 50%;
+	position: relative;
+	margin: 10px 30px;
+}
+
+.columna_formulario_equipo label {
+	color: #006e95;
+}
+
+.columna_formulario input, .columna_formulario_equipo input {
 	width: 100%;
 	border: solid 1px #006e95;
 	height: 32px;
-	border-radius: 10px;
+	border-radius: 5px;
 	color: #006e95;
 	font-size: 14px;
 	padding-left: 8px;
-	padding-top: 5px;
+	padding-top: 6px;
 }
 
-.columna_formulario select {
+.columna_formulario select, .columna_formulario_equipo select {
+	margin: 0;
 	padding-bottom: 5px;
 	padding-top: 5px;
-	border-radius: 10px;
+	border-radius: 5px;
 	border: solid 1px #006e95;
 	text-align: center;
 	width: 100%;
 	margin-top: 2px;
+	color: #006e95;
 }
 
 .opciones_busqueda_ip {
@@ -1025,7 +1048,20 @@ Estilos para los filtros que puede aplicar el administrador
 	background-color: #26A2D9;
 }
 
-/**/
+/*Asignar empleado*/
+#search_usuario {
+	width: 85%;
+	margin-left: 5px;
+	border: none;
+	color: #006e95;
+	font-size: 14px;
+	padding-top: 3px;
+}
+
+#search_usuario:focus {
+    box-shadow: 0 1px 1px rgba(229, 103, 23, 0.01);
+}
+
 .opciones_busqueda_usuario {
 	position: absolute;
 	z-index: 1;
@@ -1037,6 +1073,8 @@ Estilos para los filtros que puede aplicar el administrador
 	border-radius: 5px; 
 	border: 1px solid rgba(0, 0, 0, 0.15);
 	gap: 1px;
+	left: 15px;
+	top: 87px;
 }
 
 .opciones_busqueda_usuario p {
@@ -1056,25 +1094,6 @@ Estilos para los filtros que puede aplicar el administrador
 	color: #fff;
 }
 
-.comentario-enviar-datos-equipo {
-	position: absolute;
-	left: 0;
-	bottom: 10px;
-	width: 100%;
-	display: flex;
-}
-
-#observaciones_equipo {
-	width: 322%;
-	border: solid 1px #006e95;
-	height: 32px;
-	border-radius: 10px;
-	color: #006e95;
-	font-size: 14px;
-	padding-left: 8px;
-	padding-top: 5px;
-}
-
 .guardar_equipo {
 	width: 47%;
 	margin-left: 35.68%;
@@ -1090,55 +1109,131 @@ Estilos para los filtros que puede aplicar el administrador
 	background-color: #006e95;
 }
 
-.observaciones_equipo {
-	margin: 0;
-	margin-left: 15px;
-}
-
 .lista_usuarios::-webkit-scrollbar, .filtros_lista_usurios::-webkit-scrollbar, .Lista_usuarios_asociados_equipo::-webkit-scrollbar {
 	display: none;
 }
 
+/*Formulario para editar equipo*/
+.formulario_equipos {
+	width: 78%;	
+	border: solid 1px #ebf4f7;
+	border-top: none;
+	border-radius: 5px;
+}
+
 /*Estilos para las tarjetas de los usuarios asociados*/
+.parte_derecha_formulario {
+	width: 22%;
+	min-height: 500px;
+	max-height: 1000px;
+	display: flex;
+	flex-direction: column;
+	position: relative;	
+}
+
+.parte_derecha_formulario h2 {
+	background: #f6f8fa;
+	color: #006e95;
+	font-size: 15px;
+	width: 100%;
+	height: 40px;
+	text-align: center;
+	padding-top: 11px;
+	border-radius: 5px;
+	margin: 0;
+	margin-left: 15px;
+	margin-bottom: 15px;
+	border: solid 1px #ebf4f7;
+}
+
+.buscador_empleado_asignar {
+	display: flex;
+	margin-left: 15px;
+	border: solid 1px #006e95;
+	border-radius: 5px;
+	height: 32px;
+	width: 100%;
+	background: #fff;
+	margin-bottom: 15px;
+}
+
+.buscador_empleado_asignar img {
+	width: 15px;
+	padding-top: 3px;
+	margin-left: 5px;
+	opacity: 0.9;
+}
+
 .Lista_usuarios_asociados_equipo {
+	display: flex;
+	flex-direction: column;
 	background-color: rgba(248, 244, 244, 0.3);
 	box-shadow: 0 0px 7px 0 rgba(31, 38, 135, 0.37);
-	border: solid 2px #afafaa;
+	border: solid 1px #ebf4f7;
 	overflow: hidden;
 	overflow-y: scroll;
 	border-radius: 5px;
+	width: 100%;
+	align-items: center;
 	margin-left: 15px;
+	height: 278px;
+	margin-bottom: 15px;
+}
+
+.guardar_cambios_equipo {
+	cursor: pointer;
+	background-color: #f6f8fa;
+	border: solid 1px #006e95;
+	border-radius: 10px;
+	color: #006e95;
+	width: 100%;
+	height: 50px;
+	margin-left: 15px;
+}
+
+.guardar_cambios_equipo:hover {
+	background-color: #006e95;
+	color: #fff;	
 }
 
 .tarjeta_empleado_asociado {
 	display: flex;
 	flex-direction: row;
 	margin: 10px 5px;
-	position: relative;
+	align-items: center;
 }
 
 .nombre_tarjeta_empleado_asociado {
-	background-color: rgba(0, 110, 150, 1);
+	background-color: #6CC5B2;
 	border-radius: 10px;
 	color: #fff;
-	padding-left: 5px;
-	padding-right: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
 	padding-top: 3px;
 	font-size: 12px;
+	width: 90%;
+	text-align: center;
 }
 
 .quitar_empleado_asociado {
 	display: flex;
-	justify-content: center;
 	align-items: center;
 	cursor: pointer;
-	margin-left: 5px;
-	width: 20px;
-	height: 20px;
-	background-color: rgba(0, 0, 0, 0.5);
-	border-radius: 100%;
+	background: #000;
 	color: #fff;
-	font-size: 12px;
+	width: 17px;
+	height: 17px;
+	border-radius: 100%;
+	padding-top: 1px;
+	padding-left: 6px;
+	background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 2px 0 rgb(31 38 135 / 37%);
+    color: #fff;
+	margin-left: 5px;
+}
+
+.quitar_empleado_asociado p {
+	font-size: 9px;
 }
 
 .quitar_empleado_asociado:hover {
