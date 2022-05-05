@@ -173,7 +173,7 @@
             <?php 
                 if (empty($usuarios)) {
             ?>
-                    <img src="<?= base_url('assets/img/logotipos/flor.png');?>" alt="" width="150">
+                    
             <?php 
                 }else{
                     foreach($usuarios as $item):
