@@ -261,7 +261,7 @@ class Usuarios extends CI_Controller {
 					'apellido_materno' => form_error('apellido_materno'),
 					'email' => form_error('email'),
 					'password' => form_error('password'),
-					'id_equipo' => form_error('id_equipo'),
+					// 'id_equipo' => form_error('id_equipo'),
 				);
 				// Mandar respuesta al cliente
 				echo json_encode($erros);
@@ -311,6 +311,13 @@ class Usuarios extends CI_Controller {
 						$old_id_equipo = $res->id_equipo;
 						// Realizar la actualizacion
 						$this->Equipo_usuario->updateEquipo($id_equipo, $no_empleado, $old_id_equipo);
+					} else {
+						// Si no tiene equipo anterior realizar una incersion
+						$data = array(
+							'id_equipo' => $id_equipo,
+							'no_empleado' => $no_empleado,
+						);
+						$this->Equipo_usuario->insertar($data);
 					}
 				}
 				
