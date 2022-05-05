@@ -61,13 +61,21 @@
                 </label>
                 <label for="direccion_ip">
                     Dirección IP
-                    <input id="direccion_ip" type="text" idEquipo="<?= $PC_usuario->id_equipo?>" value="<?= $PC_usuario->direccion_ip?>">
-                    <div class="opciones_busqueda_ip">
-                        
-                    </div>
-                    <div class="error_message_direccionIP">
-                        
-                    </div>
+                    <?php if(empty($PC_usuario->id_equipo)){?>
+                        <input id="direccion_ip" type="text">
+                        <div class="opciones_busqueda_ip">
+                            
+                        </div>
+                    <?php
+                    }else{
+                    ?>
+                        <input id="direccion_ip" type="text" idEquipo="<?= $PC_usuario->id_equipo?>" value="<?= $PC_usuario->direccion_ip?>">
+                        <div class="opciones_busqueda_ip">
+                            
+                        </div>
+                    <?php
+                    }
+                    ?>
                 </label>
                 <label for="tipo_usuario">
                     Tipo de usuario
