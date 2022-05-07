@@ -26,6 +26,26 @@ Estilos para el contendeor de la pagina web
 
 /*
 ------------------------------------------------------------------------------------------------------------
+Estilos para el menu de navegación
+------------------------------------------------------------------------------------------------------------
+*/
+.buscador_menu_nav {
+	display: flex;
+	border-radius: 5px;
+	width: 221px;
+	border: solid 1px #d1cece;
+	margin-right: 8px;
+	background-color: #fff;
+}
+
+.buscador_menu_nav img {
+	width: 16px;
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-bottom: 5px;
+}
+/*
+------------------------------------------------------------------------------------------------------------
 Estilos para los titulos de las columnas y el número de reportes
 ------------------------------------------------------------------------------------------------------------
 */
