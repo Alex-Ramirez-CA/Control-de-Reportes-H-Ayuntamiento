@@ -776,41 +776,6 @@ class Incidencia extends CI_Model {
                 ->get();
         }
         
-        // if($fecha_inicio != NULL && $fecha_fin != NULL) {
-        //     $queryFecha = 'inc.fecha_cierre BETWEEN "'. date('Y-m-d', strtotime($fecha_inicio)). '" and "'. date('Y-m-d', strtotime($fecha_fin)).'"';
-        // }
-        // if($departamento != NULL) {
-        //     $queryDepa = 'id.id_departamento = '.$departamento;
-        // }
-        // if($dependencia != NULL) {
-        //     $queryDepen = 'd.id_dependencia = '.$dependencia;
-        // }
-        // if($direccion != NULL) {
-        //     $queryDirecc = 'd.id_direccion = '.$direccion;
-        // }
-        // $data = $this->db
-        //         ->distinct()
-        //         ->select("inc.id_incidencia, inc.titulo, inc.status, inc.fecha_apertura, (SELECT GROUP_CONCAT( DISTINCT d.nombre SEPARATOR ', ') 
-        //         FROM incidencia as i 
-        //         INNER JOIN incidencia_departamento as i_d ON i.id_incidencia=i_d.id_incidencia 
-        //         INNER JOIN departamento as d ON i_d.id_departamento=d.id_departamento
-        //         WHERE i.id_incidencia = inc.id_incidencia) as departamento, (SELECT GROUP_CONCAT( DISTINCT u.nombre SEPARATOR ', ') 
-        //         FROM incidencia as i 
-        //         INNER JOIN atender_incidencia as ai ON i.id_incidencia=ai.id_incidencia 
-        //         INNER JOIN usuario as u ON ai.no_empleado=u.no_empleado
-        //         WHERE i.id_incidencia = inc.id_incidencia) as encargado")
-        //         ->from("incidencia inc")
-        //         ->join("incidencia_departamento id", "inc.id_incidencia=id.id_incidencia")
-        //         ->join("usuario u", "inc.no_empleado=u.no_empleado")
-        //         ->join("direccion d", "u.id_direccion=d.id_direccion")
-        //         ->join("dependencia dp", "d.id_dependencia=dp.id_dependencia")
-        //         ->where('inc.status', $status)
-        //         ->where($queryFecha)
-        //         ->where($queryDepa)
-        //         ->where($queryDepen)
-        //         ->where($queryDirecc)
-        //         ->group_by('inc.id_incidencia')
-        //         ->get();
         
         if(!$data->result()) {
             return false;
@@ -902,6 +867,31 @@ class Incidencia extends CI_Model {
         $this->db->where('id_incidencia', $id_incidencia);
         $this->db->update('incidencia');
     }
+
+    // Obtener el valor de la variable de contador de la incidencia
+    // Para saber cuantos tecnicos le han dado finalizar a una misma incidencia
+    public function getValorContador($id_incidencia) {
+        $data = $this->db
+            ->select("contador")
+            ->from("incidencia")
+            ->where('id_incidencia', $id_incidencia)
+            ->limit(1)
+            ->get();
+
+        // Si no se encuentra resultados
+        if(!$data->result()) {
+        return false;
+        }
+        return $data->row();
+    }
+    
+    
+    public function updateContador($id_incidencia, $valor) {
+        $this->db->set('contador', $valor);
+        $this->db->where('id_incidencia', $id_incidencia);
+        $this->db->update('incidencia');
+    }
+
 }
 
 

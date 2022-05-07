@@ -59,16 +59,46 @@ class Atendiendo extends CI_Controller {
 			);
 			// Hacer la insercion del registro
 			$this->Atender_incidencia->insertar($data);
-			// Cambiar el estatus de la incidencia a finalizada
-			$this->Incidencia->modificar_status($id_incidencia, 2);
-			// Agregar la fecha de cierre
-			$this->Incidencia->update_fechaCierre($id_incidencia, $fecha);
+			
+			// Hacer el proceso de finalizar incidencia
+			//Obtener el valor de la variable contador
+			$res = $this->Incidencia->getValorContador($id_incidencia);
+			$contador = $res->contador;
+			// Sumarle 1 al contador
+			$this->Incidencia->updateContador($id_incidencia, ($contador + 1));
+			// Verificar si el valor de contador actualizado coincide con el del
+			// numero de tecnicos que atienden dicha incidencia
+			$res = $this->Atender_incidencia->noParticipantes($id_incidencia);
+			$cantidad = $res->cantidad;
+			$res = $this->Incidencia->getValorContador($id_incidencia);
+			$contador = $res->contador;
+			if($cantidad === $contador) {
+				// Si los valores son iguales significan que todos los tecnicos le han dado
+				// finalizar a la incidencia, por lo cual si se puede cambiar la misma a status finalizada
+				// Cambiar el estatus de la incidencia a finalizada
+				$this->Incidencia->modificar_status($id_incidencia, 2);
+				// Agregar la fecha de cierre
+				$this->Incidencia->update_fechaCierre($id_incidencia, $fecha);
+			}
+			
 			echo json_encode(array('url' => base_url('atendiendo')));
 			//redirect('tecnico');
 		} else {
 			// Si no hay datos de sesion redireccionar a login
 			redirect('login');
 		}
+	}
+
+	public function probar() {
+		$res = $this->Atender_incidencia->noParticipantes(9);
+		$cantidad = $res->cantidad;
+		echo json_encode(array('cantidad' => $cantidad));
+	}
+	public function probar2() {
+		$this->Incidencia->updateContador($id_incidencia, $valor);
+		$res = $this->Incidencia->getValorContador($id_incidencia);
+		$contador = $res->contador;
+		echo json_encode(array('cantidad' => $contador));
 	}
 
 	// Funcion que reabrira una incidenia para pasarla a en_proceso y en caso de que no

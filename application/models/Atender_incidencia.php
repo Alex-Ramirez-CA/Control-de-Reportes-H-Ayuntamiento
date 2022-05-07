@@ -29,7 +29,23 @@ class Atender_incidencia extends CI_Model {
         $data = $this->db
                 ->select("*")
                 ->from("atender_incidencia")
-                ->where(array('id_incidencia' => $id_incidencia, 'no_empleado' => $no_empleado),1)
+                ->where(array('id_incidencia' => $id_incidencia, 'no_empleado' => $no_empleado))
+                ->limit(1)
+                ->get();
+        
+        // Si no se encuentra resultados
+        if(!$data->result()) {
+            return false;
+        }
+        return $data->row();
+    }
+    
+    // Obtener la cantidad de tecnicos que atienden una incidencia
+    public function noParticipantes($id_incidencia) {
+        $data = $this->db
+                ->select("COUNT(DISTINCT no_empleado) as cantidad")
+                ->from("atender_incidencia")
+                ->where('id_incidencia', $id_incidencia)
                 ->get();
         
         // Si no se encuentra resultados
