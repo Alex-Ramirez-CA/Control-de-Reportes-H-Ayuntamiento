@@ -203,26 +203,26 @@ Estilos para las opciones de las tarjetas (ver, atender, unirme, finalizar y rea
 	color: #fff;
 }
 
-.opciones-card .reabrir, .finalizar{
+.opciones-card .reabrir, .reabrir-atendido{
 	background-color: #eaf7ff;
 	color: #365e55;
 	border-radius: 5px;
 	border: solid 1px #6CC5B2;	
 }
 
-.opciones-card .reabrir:hover, .finalizar:hover {
+.opciones-card .reabrir:hover, .reabrir-atendido:hover {
 	background-color: #3a9c87;
 	color: #fff;
 }
 
-.opciones-card .unirme, .reabrir-atendido {
+.opciones-card .unirme, .finalizar {
 	background-color: #eaf7ff;
 	color: black;
 	border-radius: 5px;
 	border: solid 1px #F5D344;	
 }
 
-.opciones-card .unirme:hover, .reabrir-atendido:hover{
+.opciones-card .unirme:hover, .finalizar:hover{
 	background-color: #ccac2b;
 	color: black;
 }

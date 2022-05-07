@@ -208,11 +208,11 @@
                         </div>
                     </div>
                 </div>
-                <button class="respuesta">El problema quedó completamente solucionado</button>
-                <button class="respuesta">Me gustaría ayudar a solucionar el problema</button>
                 <button class="respuesta">El día de hoy comenzaré a darle solución al reporte</button>
-                <button class="respuesta">Ya quedó completamente solucionado el problema</button>
-                <button class="respuesta">Ya quedó completamente solucionado el problema</button>
+                <button class="respuesta">Me gustaría ayudar a solucionar el problema</button>
+                <button class="respuesta">Surgió un imprevisto y por eso me regrese</button>
+                <button class="respuesta">El problema quedó completamente solucionado</button>
+                <button class="respuesta"></button>
             </div>
         </div>
     </div>

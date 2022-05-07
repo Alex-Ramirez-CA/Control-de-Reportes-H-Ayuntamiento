@@ -26,6 +26,13 @@
 		$("#search").css({ display: "none" });
 	}
 
+	//Evento para las respuetas rapidas
+	//Función para cuando le de click al boton de ver
+	$(document).on("click", ".respuesta", function () {
+		let elemento = $(this)[0];
+		$('#comentario-tecnico').val($(elemento).text() + ".");
+	});
+
 	//Evento que se ejecuta cuando el usuario este escribiendo en la barra de busqueda
 	$("#search").keyup(function() {
 		if(getUrl == baseUrl + "/equipos/lista_equipos"){
