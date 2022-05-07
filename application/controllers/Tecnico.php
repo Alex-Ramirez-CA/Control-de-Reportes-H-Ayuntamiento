@@ -141,11 +141,15 @@ class Tecnico extends CI_Controller {
 				// Si dicho tecnico formas parte de quienes atendieron esta incidencia
 				// Se agrega otra insercion
 				$this->Atender_incidencia->insertar($data);
+				//Obtener el valor de la variable contador
+				$res = $this->Incidencia->getValorContador($id_incidencia);
+				$contador = $res->contador;
+				// Restarle 1 al contador
+				$this->Incidencia->updateContador($id_incidencia, ($contador - 1));
 				// Se le vuelve a cambiar el estatus a la misma a 1 = en proceso
 				$this->Incidencia->modificar_status($id_incidencia, 1);
 				// Actualizar la fecha de cierre a NULL
 				$this->Incidencia->update_fechaCierre($id_incidencia, NULL);
-				// redirect('tecnico');
 				echo json_encode(array(
 					'msg' => 'Reabriste la incidencia',
 					'url' => base_url('tecnico')
@@ -155,8 +159,15 @@ class Tecnico extends CI_Controller {
 				// se hace el cambio de estatus de la misma
 				// Agregar registro
 				$this->Atender_incidencia->insertar($data);
+				//Obtener el valor de la variable contador
+				$res = $this->Incidencia->getValorContador($id_incidencia);
+				$contador = $res->contador;
+				// Restarle 1 al contador
+				$this->Incidencia->updateContador($id_incidencia, ($contador - 1));
 				// Cambiar el estatus de la incidencia a en_proceso
 				$this->Incidencia->modificar_status($id_incidencia, 1);
+				// Actualizar la fecha de cierre a NULL
+				$this->Incidencia->update_fechaCierre($id_incidencia, NULL);
 				echo json_encode(array(
 					'msg' => 'Reabriste la incidencia y te unes a ella',
 					'url' => base_url('tecnico')
