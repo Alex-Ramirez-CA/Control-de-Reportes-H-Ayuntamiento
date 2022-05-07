@@ -79,10 +79,18 @@ class Atendiendo extends CI_Controller {
 				$this->Incidencia->modificar_status($id_incidencia, 2);
 				// Agregar la fecha de cierre
 				$this->Incidencia->update_fechaCierre($id_incidencia, $fecha);
+			} else {
+				echo json_encode(array(
+					'msg' => 'Listo, esta finalizara cuando todos los técnicos le den finalizar',
+					'url' => base_url('atendiendo')
+				));
+				exit;
 			}
 			
-			echo json_encode(array('url' => base_url('atendiendo')));
-			//redirect('tecnico');
+			echo json_encode(array(
+				'msg' => 'Incidencia finalizada',
+				'url' => base_url('atendiendo')
+			));
 		} else {
 			// Si no hay datos de sesion redireccionar a login
 			redirect('login');
