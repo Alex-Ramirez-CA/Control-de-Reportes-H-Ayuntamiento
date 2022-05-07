@@ -159,6 +159,7 @@ class Reporte extends CI_Controller {
 				'fecha_cierre' => NULL,
 				'descripcion' => $descripcion,
 				'status' => 0,
+				'contador' => 0,
 				'archivo' => $nombre_archivo,
 				'ext' => $extension,
 				'asignado' => 0,

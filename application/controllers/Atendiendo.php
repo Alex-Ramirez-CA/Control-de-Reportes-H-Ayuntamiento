@@ -89,18 +89,6 @@ class Atendiendo extends CI_Controller {
 		}
 	}
 
-	public function probar() {
-		$res = $this->Atender_incidencia->noParticipantes(9);
-		$cantidad = $res->cantidad;
-		echo json_encode(array('cantidad' => $cantidad));
-	}
-	public function probar2() {
-		$this->Incidencia->updateContador($id_incidencia, $valor);
-		$res = $this->Incidencia->getValorContador($id_incidencia);
-		$contador = $res->contador;
-		echo json_encode(array('cantidad' => $contador));
-	}
-
 	// Funcion que reabrira una incidenia para pasarla a en_proceso y en caso de que no
 	// Unira al usuario a la solucion de esta
 	public function reabrir() {
