@@ -6,7 +6,7 @@ class Tecnico extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->library('session');
-		$this->load->model(array('Incidencia', 'Atender_incidencia'));
+		$this->load->model(array('Incidencia', 'Atender_incidencia', 'Estatus_por_usuario'));
 	}
 
 	public function index()
@@ -48,7 +48,7 @@ class Tecnico extends CI_Controller {
 			// Obtener el id del empleado de los datos de sesion
 			$no_empleado = $this->session->userdata('id');
 			// Recibir id_incidencia vía post
-			$id_incidencia = $this->input->post('id_incidencia');
+			$id_incidencia = (int)$this->input->post('id_incidencia');
 			// Recibir el comentario vía post
 			$comentario = $this->input->post('comentario');
 			//Obtener la fecha del sistema
@@ -64,8 +64,16 @@ class Tecnico extends CI_Controller {
 			$this->Atender_incidencia->insertar($data);
 			// Cambiar el estatus de la incidencia a en_proceso
 			$this->Incidencia->modificar_status($id_incidencia, 1);
+			
+			// Asignarle el status de esa incidencia con relacion al tecnico que la cambio
+			$datos = array(
+				'id_incidencia' => $id_incidencia,
+				'no_empleado' => $no_empleado,
+				'status' => 1,
+			);
+			$this->Estatus_por_usuario->insertar($datos);
 
-			//redirect('tecnico');
+			
 			echo json_encode(array('url' => base_url('tecnico')));
 		} else {
 			// Si no hay datos de sesion redireccionar a login
@@ -103,6 +111,15 @@ class Tecnico extends CI_Controller {
 				);
 				// Agregar registro
 				$this->Atender_incidencia->insertar($data);
+
+				// Asignarle el status de esa incidencia con relacion al tecnico que la cambio
+				$datos = array(
+					'id_incidencia' => $id_incidencia,
+					'no_empleado' => $no_empleado,
+					'status' => 1,
+				);
+				$this->Estatus_por_usuario->insertar($datos);
+				
 				echo json_encode(array(
 					'msg' => 'Se ha unido para la solución del reporte',
 					'url' => base_url('tecnico')
