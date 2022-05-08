@@ -153,13 +153,30 @@ class Tecnico extends CI_Controller {
 				'fecha' => $fecha,
 			);
 			
-			// Se agrega otra insercion
-			$this->Atender_incidencia->insertar($data);
-			//Obtener el valor de la variable contador
-			$res = $this->Incidencia->getValorContador($id_incidencia);
-			$contador = $res->contador;
-			// Restarle 1 al contador
-			$this->Incidencia->updateContador($id_incidencia, ($contador - 1));
+			// Se verifica si dicho usuario ya atendia esta incidecnia o apenas se unira a ella
+			if(!$this->Atender_incidencia->verificar($id_incidencia, $no_empleado)) {
+				// Se agrega otra insercion
+				$this->Atender_incidencia->insertar($data);
+				// Hacer la incercion a la tabla de Estatus_por_usuario
+				// Asignarle el status de esa incidencia con relacion al tecnico que la cambio
+				$datos = array(
+					'id_incidencia' => $id_incidencia,
+					'no_empleado' => $no_empleado,
+					'status' => 1,
+				);
+				$this->Estatus_por_usuario->insertar($datos);
+			} else {
+				// Se agrega otra insercion
+				$this->Atender_incidencia->insertar($data);
+				// Hacer solo la actualizacion a la tabla de Estatus_por_usuario
+				// Actualizar el status de la incidencia que le asigno este usuario de finalizada a en proceso
+				$this->Estatus_por_usuario->updateEstatus($id_incidencia, $no_empleado, 1);
+				//Obtener el valor de la variable contador
+				$res = $this->Incidencia->getValorContador($id_incidencia);
+				$contador = $res->contador;
+				// Restarle 1 al contador
+				$this->Incidencia->updateContador($id_incidencia, ($contador - 1));
+			}
 			// Se le vuelve a cambiar el estatus a la misma a 1 = en proceso
 			$this->Incidencia->modificar_status($id_incidencia, 1);
 			// Actualizar la fecha de cierre a NULL

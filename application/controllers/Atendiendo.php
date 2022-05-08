@@ -137,6 +137,8 @@ class Atendiendo extends CI_Controller {
 			
 			// Se agrega otra insercion
 			$this->Atender_incidencia->insertar($data);
+			// Actualizar el status de la incidencia que le asigno este usuario de finalizada a en proceso
+			$this->Estatus_por_usuario->updateEstatus($id_incidencia, $no_empleado, 1);
 			//Obtener el valor de la variable contador
 			$res = $this->Incidencia->getValorContador($id_incidencia);
 			$contador = $res->contador;
