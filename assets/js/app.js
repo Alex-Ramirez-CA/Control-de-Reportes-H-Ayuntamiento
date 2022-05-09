@@ -8,8 +8,21 @@
 	let equipo = null;
 	let rol = null;
 	let status = null;
-
 	let id_direccion_modif = 0;
+
+	if (getUrl == baseUrl + "/atendiendo") {
+		let cantidad_reportes = $(".proceso").children(".columna-proceso").children(".card-atendiendo").length;
+		if (cantidad_reportes > 999) {
+			cantidad_reportes = (cantidad_reportes/1000).toFixed(1) + "k";
+		}
+		$(".cantidad-reportes-proceso-tecnico").html(cantidad_reportes);
+	} 
+	
+	// else if (incidencias.pendientes.length > 999) {
+	// 	cantidad_pendientes = incidencias.pendientes.length.toFixed(1) + "k";
+	// } else {
+	// 	cantidad_pendientes = incidencias.pendientes.length;
+	// }
 
 	if(getUrl == baseUrl + "/equipos/lista_equipos"){
 		$("#search").attr("placeholder", "Buscar equipo").blur();
@@ -148,7 +161,19 @@
 				{ id_incidencia, comentario },
 				function (response) {
 					let json = JSON.parse(response);
-					window.location.replace(json.url);
+					$('.mensaje_aceptacion').css({visibility: "visible"});
+					$('.mensaje_aceptacion').html(`
+						<h1>${json.msg}</h1>
+						<img src="${baseUrl}/assets/img/iconos/correcto.svg" alt=""><br>
+						<button class="aceptar_mensaje">Aceptar</button>
+					`);
+					$(document).on("click", ".aceptar_mensaje", function () {
+						while ($('.mensaje_aceptacion').firstChild) {
+							$('.mensaje_aceptacion').removeChild($('.mensaje_aceptacion').firstChild);
+						}
+						$('.mensaje_aceptacion').css({visibility: "hidden"});
+						window.location.replace(json.url);
+					});
 				}
 			);
 		});
@@ -178,7 +203,19 @@
 				{ id_incidencia, comentario },
 				function (response) {
 					let json = JSON.parse(response);
-					window.location.replace(json.url);
+					$('.mensaje_aceptacion').css({visibility: "visible"});
+					$('.mensaje_aceptacion').html(`
+						<h1>${json.msg}</h1>
+						<img src="${baseUrl}/assets/img/iconos/correcto.svg" alt=""><br>
+						<button class="aceptar_mensaje">Aceptar</button>
+					`);
+					$(document).on("click", ".aceptar_mensaje", function () {
+						while ($('.mensaje_aceptacion').firstChild) {
+							$('.mensaje_aceptacion').removeChild($('.mensaje_aceptacion').firstChild);
+						}
+						$('.mensaje_aceptacion').css({visibility: "hidden"});
+						window.location.replace(json.url);
+					});
 				}
 			);
 		});
@@ -206,7 +243,19 @@
 				{ id_incidencia, comentario },
 				function (response) {
 					let json = JSON.parse(response);
-					window.location.replace(json.url);
+					$('.mensaje_aceptacion').css({visibility: "visible"});
+					$('.mensaje_aceptacion').html(`
+						<h1>${json.msg}</h1>
+						<img src="${baseUrl}/assets/img/iconos/correcto.svg" alt=""><br>
+						<button class="aceptar_mensaje">Aceptar</button>
+					`);
+					$(document).on("click", ".aceptar_mensaje", function () {
+						while ($('.mensaje_aceptacion').firstChild) {
+							$('.mensaje_aceptacion').removeChild($('.mensaje_aceptacion').firstChild);
+						}
+						$('.mensaje_aceptacion').css({visibility: "hidden"});
+						window.location.replace(json.url);
+					});
 				}
 			);
 		});
@@ -234,7 +283,19 @@
 				{ id_incidencia, comentario },
 				function (response) {
 					let json = JSON.parse(response);
-					window.location.replace(json.url);
+					$('.mensaje_aceptacion').css({visibility: "visible"});
+					$('.mensaje_aceptacion').html(`
+						<h1>${json.msg}</h1>
+						<img src="${baseUrl}/assets/img/iconos/correcto.svg" alt=""><br>
+						<button class="aceptar_mensaje">Aceptar</button>
+					`);
+					$(document).on("click", ".aceptar_mensaje", function () {
+						while ($('.mensaje_aceptacion').firstChild) {
+							$('.mensaje_aceptacion').removeChild($('.mensaje_aceptacion').firstChild);
+						}
+						$('.mensaje_aceptacion').css({visibility: "hidden"});
+						window.location.replace(json.url);
+					});
 				}
 			);
 		});
@@ -262,7 +323,19 @@
 				{ id_incidencia, comentario },
 				function (response) {
 					let json = JSON.parse(response);
-					window.location.replace(json.url);
+					$('.mensaje_aceptacion').css({visibility: "visible"});
+					$('.mensaje_aceptacion').html(`
+						<h1>${json.msg}</h1>
+						<img src="${baseUrl}/assets/img/iconos/correcto.svg" alt=""><br>
+						<button class="aceptar_mensaje">Aceptar</button>
+					`);
+					$(document).on("click", ".aceptar_mensaje", function () {
+						while ($('.mensaje_aceptacion').firstChild) {
+							$('.mensaje_aceptacion').removeChild($('.mensaje_aceptacion').firstChild);
+						}
+						$('.mensaje_aceptacion').css({visibility: "hidden"});
+						window.location.replace(json.url);
+					});
 				}
 			);
 		});
@@ -1649,7 +1722,7 @@
 		if (incidencias.pendientes.length == null) {
 			cantidad_pendientes = 0;
 		} else if (incidencias.pendientes.length > 999) {
-			cantidad_pendientes = incidencias.pendientes.length.toFixed(1) + "k";
+			cantidad_pendientes = (incidencias.pendientes.length/1000).toFixed(1) + "k";
 		} else {
 			cantidad_pendientes = incidencias.pendientes.length;
 		}
@@ -1657,7 +1730,7 @@
 		if (incidencias.en_proceso.length == null) {
 			cantidad_proceso = 0;
 		} else if (incidencias.en_proceso.length > 999) {
-			cantidad_proceso = incidencias.en_proceso.length.toFixed(1) + "k";
+			cantidad_proceso = (incidencias.en_proceso.length/1000).toFixed(1) + "k";
 		} else {
 			cantidad_proceso = incidencias.en_proceso.length;
 		}
@@ -1665,7 +1738,7 @@
 		if (incidencias.finalizados.length == null) {
 			cantidad_finalizados = 0;
 		} else if (incidencias.finalizados.length > 999) {
-			cantidad_finalizados = incidencias.finalizados.length.toFixed(1) + "k";
+			cantidad_finalizados = (incidencias.finalizados.length/1000).toFixed(1) + "k";
 		} else {
 			cantidad_finalizados = incidencias.finalizados.length;
 		}

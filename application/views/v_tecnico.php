@@ -13,7 +13,7 @@
             <?php 
                 if (empty($pendientes)) {
             ?>
-                    <img class="contenido-vacio-cliente" src="<?= base_url('assets/img/logotipos/flor.png');?>" alt="" width="150">
+                    <img class="contenido-vacio-tecnico" src="<?= base_url('assets/img/logotipos/flor.png');?>" alt="" width="150">
             <?php 
                 }else{
                     foreach($pendientes as $item):
@@ -68,7 +68,7 @@
             <?php 
                 if (empty($en_proceso)) {
             ?>
-                    <img class="contenido-vacio-cliente" src="<?= base_url('assets/img/logotipos/flor.png');?>" alt="" width="150">
+                    <img class="contenido-vacio-tecnico" src="<?= base_url('assets/img/logotipos/flor.png');?>" alt="" width="150">
             <?php 
                 }else{
                     foreach($en_proceso as $item):
@@ -184,6 +184,9 @@
 </div>
 
 <div class="mensaje">
+    <div class="mensaje_aceptacion">
+        
+    </div>
     <div class="cerrar-ventana">
         <p class="cerrar-mensaje-tecnico">x</p>
     </div>

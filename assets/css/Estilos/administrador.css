@@ -64,7 +64,7 @@ Estilos para los titulos de las columnas y el número de reportes
 	padding-top: 4px;
 }
 
-.cantidad-reportes-pendiente, .cantidad-reportes-proceso, .cantidad-reportes-finalizado {
+.cantidad-reportes-pendiente, .cantidad-reportes-proceso, .cantidad-reportes-finalizado, .cantidad-reportes-proceso-tecnico {
 	height: 25px;
 	width: 25px;
 	background-color: #006e95;
@@ -370,6 +370,43 @@ Estilos para cuando hay 3 columnas en pantalla
 	width: 100%;
 }
 
+/*
+------------------------------------------------------------------------------------------------------------
+Estilos para los filtros que puede aplicar el tecnico
+------------------------------------------------------------------------------------------------------------
+*/
+.mensaje_aceptacion {
+	visibility: hidden;
+	position: absolute;
+	z-index: 1;
+	text-align: center;
+	background-color: #fff;
+    border-radius: 5px;
+    border: solid 2px #6CC5B2;
+	min-width: 35%;
+}
+
+.mensaje_aceptacion h1 {
+	background-color: #55BA7D;
+	font-size: 18px;
+	padding: 10px;
+	color: #fff;
+}
+
+.mensaje_aceptacion button {
+	background-color: #55BA7D;
+	width: 60%;
+	border: solid 1px #6CC5B2;
+}
+
+.mensaje_aceptacion button:hover {
+	background-color: #51e98e;
+	border: solid 1px #55BA7D;
+}
+
+.mensaje_aceptacion img {
+	width: 175px;
+}
 /*
 ------------------------------------------------------------------------------------------------------------
 Estilos para los filtros que puede aplicar el administrador

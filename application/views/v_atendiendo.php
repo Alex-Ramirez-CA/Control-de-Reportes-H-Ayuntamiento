@@ -6,7 +6,7 @@
     <!-- Columna de los reportes en proceso -->
     <div class="proceso">
         <div class="titulo-columna">
-            <p class="cantidad-reportes"><?= empty($en_proceso) ? '0' : count($en_proceso); ?></p>
+            <p class="cantidad-reportes-proceso-tecnico"></p>
             <h3><b>Reportes en proceso</b></h3>
         </div>
         
@@ -18,6 +18,7 @@
             <?php 
                 }else{
                     foreach($en_proceso as $item):
+                        if($item->statusbyUsuario == 1){
             ?>
                         <div class="card-atendiendo" idCard="<?= $item->id_incidencia;?>">
                             <div class="card-title">
@@ -52,7 +53,12 @@
                                 </div>                                
                             </div>
                         </div>
-            <?php 
+            <?php
+                        }else{
+            ?> 
+                           <img class="contenido-vacio-cliente" src="<?= base_url('assets/img/logotipos/flor.png');?>" alt="" width="150"> 
+            <?php           
+                        } 
                     endforeach; 
                 }    
             ?>   
@@ -120,6 +126,9 @@
 </div>
 
 <div class="mensaje">
+    <div class="mensaje_aceptacion">
+        
+    </div>
     <div class="cerrar-ventana">
         <p class="cerrar-mensaje-tecnico">x</p>
     </div>
