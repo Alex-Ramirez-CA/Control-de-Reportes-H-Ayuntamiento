@@ -73,8 +73,10 @@ class Tecnico extends CI_Controller {
 			);
 			$this->Estatus_por_usuario->insertar($datos);
 
-			
-			echo json_encode(array('url' => base_url('atendiendo')));
+			echo json_encode(array(
+				'msg' => 'Listo',
+				'url' => base_url('atendiendo')
+			));
 		} else {
 			// Si no hay datos de sesion redireccionar a login
 			redirect('login');
