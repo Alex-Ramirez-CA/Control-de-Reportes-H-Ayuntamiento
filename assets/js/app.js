@@ -1594,6 +1594,10 @@
                 `;
 				//console.log(incidencia_pendiente);
 			});
+		}else {
+			template_pendientes += `
+			<img class="contenido-vacio-tecnico" src="${baseUrl}/assets/img/logotipos/flor.png" alt="" width="150">
+			`;
 		}
 
 		//Para las incidencias en proceso
@@ -1653,6 +1657,10 @@
                 `;
 				//console.log(incidencia_proceso);
 			});
+		}else {
+			template_pendientes += `
+			<img class="contenido-vacio-tecnico" src="${baseUrl}/assets/img/logotipos/flor.png" alt="" width="150">
+			`;
 		}
 
 		//Para las incidencias finalizadas
@@ -1712,6 +1720,10 @@
                 `;
 				//console.log(incidencia_finalizada);
 			});
+		}else {
+			template_pendientes += `
+			<img class="contenido-vacio-tecnico" src="${baseUrl}/assets/img/logotipos/flor.png" alt="" width="150">
+			`;
 		}
 
 		//Pintar los reportes en sus columnas correspondientes
