@@ -15,15 +15,18 @@
 		$("#search").attr("placeholder", "Buscar equipo").blur();
 	}else if(getUrl == baseUrl + "/usuarios/lista_usuarios"){
 		$("#search").attr("placeholder", "Buscar usuario").blur();
-		$("#search").css({ display: "inline-block" });
+		$(".buscador_menu_nav").css({ display: "flex" });
 	}else{
 		$("#search").attr("placeholder", "Buscar reporte").blur();
 	}
 	if(getUrl == baseUrl + "/usuarios"){
-		$("#search").css({ display: "none" });
+		$(".buscador_menu_nav").css({ display: "none" });
 	}
 	if(getUrl == baseUrl + "/equipos"){
-		$("#search").css({ display: "none" });
+		$(".buscador_menu_nav").css({ display: "none" });
+	}
+	if(getUrl == baseUrl + "/reporte/agregar_incidencia"){
+		$(".buscador_menu_nav").css({ display: "none" });
 	}
 
 	//Evento para las respuetas rapidas

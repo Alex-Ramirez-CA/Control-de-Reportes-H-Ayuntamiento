@@ -20,7 +20,10 @@
                         <a class="btn my-2 my-sm-0 mr-2 btn-misreportes" href="<?=base_url('reporte');?>">Mis reportes</a>
                     </div>
                     <div class="autocompletar">
-                        <input name="search" id="search" url="<?= $this->uri->segment(1);?>" class="form-control mr-2" type="search" autocomplete="off" aria-label="Search" style="display: <?= $this->uri->segment(2) == 'agregar_incidencia' || $this->uri->segment(2) == 'editar_usuario' || $this->uri->segment(2) == 'editar_equipo' ? 'none' : 'inline-block'; ?>;">                        
+                        <div class="buscador_menu_nav" style="display: <?= $this->uri->segment(2) == 'agregar_incidencia' || $this->uri->segment(2) == 'editar_usuario' || $this->uri->segment(2) == 'editar_equipo' ? 'none' : 'flex'; ?>;">
+                            <label for="search_usuario"><img src="<?= base_url('assets/img/iconos/lupa.svg');?>" alt=""></label>
+                            <input name="search" id="search" url="<?= $this->uri->segment(1);?>" class="form-control" type="search" autocomplete="off" aria-label="Search">
+                        </div>                        
                         <div id="opciones-buscar">
                             
                         </div>
