@@ -265,7 +265,9 @@ class Incidencia extends CI_Model {
                 FROM incidencia as i 
                 INNER JOIN atender_incidencia as ai ON i.id_incidencia=ai.id_incidencia 
                 INNER JOIN usuario as u ON ai.no_empleado=u.no_empleado
-                WHERE i.id_incidencia = inc.id_incidencia) as encargado")
+                WHERE i.id_incidencia = inc.id_incidencia) as encargado, (SELECT eu.status 
+                FROM estatus_por_usuario as eu
+                WHERE eu.id_incidencia = inc.id_incidencia AND eu.no_empleado = ".$no_empleado.") as statusbyUsuario")
                 ->from("incidencia inc")
                 ->join("incidencia_departamento id", "inc.id_incidencia=id.id_incidencia")
                 ->join("atender_incidencia ai", "inc.id_incidencia=ai.id_incidencia")
