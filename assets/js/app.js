@@ -1595,7 +1595,7 @@
 				//console.log(incidencia_pendiente);
 			});
 		}else {
-			template_pendientes += `
+			template_pendientes = `
 			<img class="contenido-vacio-tecnico" src="${baseUrl}/assets/img/logotipos/flor.png" alt="" width="150">
 			`;
 		}
@@ -1658,7 +1658,7 @@
 				//console.log(incidencia_proceso);
 			});
 		}else {
-			template_pendientes += `
+			template_proceso = `
 			<img class="contenido-vacio-tecnico" src="${baseUrl}/assets/img/logotipos/flor.png" alt="" width="150">
 			`;
 		}
@@ -1721,7 +1721,7 @@
 				//console.log(incidencia_finalizada);
 			});
 		}else {
-			template_pendientes += `
+			template_finalizados = `
 			<img class="contenido-vacio-tecnico" src="${baseUrl}/assets/img/logotipos/flor.png" alt="" width="150">
 			`;
 		}
