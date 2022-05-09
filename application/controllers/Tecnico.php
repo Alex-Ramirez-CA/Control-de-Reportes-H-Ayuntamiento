@@ -74,7 +74,7 @@ class Tecnico extends CI_Controller {
 			$this->Estatus_por_usuario->insertar($datos);
 
 			
-			echo json_encode(array('url' => base_url('tecnico')));
+			echo json_encode(array('url' => base_url('atendiendo')));
 		} else {
 			// Si no hay datos de sesion redireccionar a login
 			redirect('login');
@@ -122,7 +122,7 @@ class Tecnico extends CI_Controller {
 				
 				echo json_encode(array(
 					'msg' => 'Se ha unido para la solución del reporte',
-					'url' => base_url('tecnico')
+					'url' => base_url('atendiendo')
 				));
 				//redirect('tecnico');
 			}
@@ -183,7 +183,7 @@ class Tecnico extends CI_Controller {
 			$this->Incidencia->update_fechaCierre($id_incidencia, NULL);
 			echo json_encode(array(
 				'msg' => 'Reabriste la incidencia',
-				'url' => base_url('tecnico')
+				'url' => base_url('atendiendo')
 			));
 
 		} else {
