@@ -19,7 +19,7 @@ class Estatus_por_usuario extends CI_Model {
         
         // Si no se encuentra resultados
         if(!$data->result()) {
-            return false;
+            return 0;
         }
         return $data->row();
     }

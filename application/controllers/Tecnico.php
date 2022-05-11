@@ -94,11 +94,37 @@ class Tecnico extends CI_Controller {
 			$id_incidencia = $this->input->post('id_incidencia');
 			// Recibir el comentario vía post
 			$comentario = $this->input->post('comentario');
+			// Verificar si este tecnico no habia finalizado ya antes esta incidencia
+			$status = $this->Estatus_por_usuario->verificarEstatus($id_incidencia, $no_empleado);
+			$status = $status->status;
 			// Se hace una consulta a la bd para verificar que dicho usuario no haya
 			// atendido antes dicho incidencia y no repetir registros
-			if($this->Atender_incidencia->verificar($id_incidencia, $no_empleado)) {
+			if($this->Atender_incidencia->verificar($id_incidencia, $no_empleado) && $status == 1) {
 				echo json_encode(array(
-					'msg' => 'Ya se había unido con anterioridad',
+					'msg' => 'Usted ya esta atendiendo esta incidencia',
+					'url' => base_url('tecnico')
+				));
+			} else if($this->Atender_incidencia->verificar($id_incidencia, $no_empleado) && $status == 2) {
+				//Obtener la fecha del sistema
+				date_default_timezone_set('America/Mexico_City');
+				$fecha = date("Y-m-d h:i:s", time());
+				$data = array(
+					'no_empleado' => $no_empleado,
+					'id_incidencia' => $id_incidencia,
+					'comentario' => $comentario,
+					'fecha' => $fecha,
+				);
+				// Agregar registro
+				$this->Atender_incidencia->insertar($data);
+				// Actualizar el status de la incidencia que le asigno este usuario de finalizada a en proceso
+				$this->Estatus_por_usuario->updateEstatus($id_incidencia, $no_empleado, 1);
+				//Obtener el valor de la variable contador
+				$res = $this->Incidencia->getValorContador($id_incidencia);
+				$contador = $res->contador;
+				// Restarle 1 al contador
+				$this->Incidencia->updateContador($id_incidencia, ($contador - 1));
+				echo json_encode(array(
+					'msg' => 'Te has unido nuevamente a esta incidencia',
 					'url' => base_url('tecnico')
 				));
 			} else {
