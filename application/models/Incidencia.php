@@ -142,6 +142,7 @@ class Incidencia extends CI_Model {
             ->select("id_incidencia, titulo")
             ->from("incidencia")
             ->like('id_incidencia', $search, 'after', '', TRUE)
+            ->limit(10)
             ->order_by('id_incidencia')
             ->get();
         if(!$data->result()) {
