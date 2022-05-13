@@ -7,7 +7,7 @@ function getUsuarioRules() {
                 'rules' => 'required|max_length[50]',
                 'errors' => array(
                     'required' => 'El %s es requerido',
-                    'max_length' => 'El %s debe ser mas corto',
+                    'max_length' => 'El %s debe ser más corto',
                 ),
         ),
         array(
@@ -16,7 +16,7 @@ function getUsuarioRules() {
                 'rules' => 'required|max_length[25]',
                 'errors' => array(
                         'required' => 'El %s es requerido',
-                        'max_length' => 'El %s debe ser mas corto',
+                        'max_length' => 'El %s debe ser más corto',
                 ),
         ),
         array(
@@ -25,7 +25,7 @@ function getUsuarioRules() {
                 'rules' => 'required|max_length[25]',
                 'errors' => array(
                         'required' => 'El %s es requerido',
-                        'max_length' => 'El %s debe ser mas corto',
+                        'max_length' => 'El %s debe ser más corto',
                 ),
         ),
         array(
