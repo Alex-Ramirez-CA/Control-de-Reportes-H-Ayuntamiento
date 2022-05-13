@@ -14,7 +14,7 @@ class Equipo extends CI_Model {
 		$this->db->update('equipo', $datos, array('id_equipo' => $id_equipo));
 	}
 
-    // Obtener los uquipo a los que esta asignado el usuario
+    // Hacer la busqueda de los equipos existentes, por su nombre
     public function buscarEquipo($search) {
         // Busqueda por nombre
         $data = $this->db
