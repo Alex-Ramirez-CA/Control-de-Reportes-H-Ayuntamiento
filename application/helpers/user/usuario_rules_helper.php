@@ -69,13 +69,5 @@ function getUsuarioRules() {
                         'required' => 'El %s es requerida',
                 ),
         ),
-        // array(
-        //         'field' => 'id_equipo',
-        //         'label' => 'Direccion IP',
-        //         'rules' => 'required|max_length[45]',
-        //         'errors' => array(
-        //             'required' => 'La %s es requerida',
-        //         ),
-        // ),
     );
 }
