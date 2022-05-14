@@ -130,15 +130,12 @@ class Equipo extends CI_Model {
     }
 
     // Filtros para los equipos
-    public function filtrarEquipos($segmento_de_red,  $dependencia, $direccion, $status) {
-        $querySeg = 'e.segmento_de_red IS NOT NULL';
+    public function filtrarEquipos($dependencia, $direccion, $status, $tipo_equipo) {
         $queryDepen = 'depen.id_dependencia IS NOT NULL';
         $queryDirecc = 'dir.id_direccion IS NOT NULL';
         $queryStatus = 'e.status IS NOT NULL';
+        $queryTipo = 'e.tipo_equipo IS NOT NULL';
 
-        if($segmento_de_red !== NULL) {
-            $querySeg = 'e.segmento_de_red = '.$segmento_de_red;
-        }
         if($dependencia !== NULL) {
             $queryDepen = 'depen.id_dependencia = '.$dependencia;
         }
@@ -148,16 +145,19 @@ class Equipo extends CI_Model {
         if($status !== NULL) {
             $queryStatus = 'e.status = '.$status;
         }
+        if($tipo_equipo !== NULL) {
+            $queryTipo = 'e.tipo_equipo = '.'"'.$tipo_equipo.'"';
+        }
         $data = $this->db
             ->distinct()
             ->select("e.id_equipo, e.direccion_ip, e.segmento_de_red, e.nombre, e.tipo_equipo, dir.nombre as direccion, e.status")
             ->from("equipo e")
             ->join("direccion dir", "e.id_direccion=dir.id_direccion")
             ->join("dependencia depen", "dir.id_dependencia=depen.id_dependencia")
-            ->where($querySeg)
             ->where($queryDepen)
             ->where($queryDirecc)
             ->where($queryStatus)
+            ->where($queryTipo)
             ->group_by('e.id_equipo')
             ->get();
         

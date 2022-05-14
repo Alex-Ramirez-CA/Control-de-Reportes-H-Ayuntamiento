@@ -228,14 +228,12 @@ class Equipos extends CI_Controller {
 	// Filtrar los equipos
 	public function filtrar_equipos() {
 		if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 3) {
-			$segmento_de_red = $this->input->post('segmento_de_red'); 
+			
 			$dependencia = $this->input->post('dependencia');
 			$direccion = $this->input->post('direccion');
 			$status = $this->input->post('status');
+			$tipo_equipo = $this->input->post('tipo_equipo');
 			
-			if($segmento_de_red === ""){
-				$segmento_de_red = NULL;
-			}
 			if($dependencia === ""){
 				$dependencia = NULL;
 			}
@@ -245,7 +243,10 @@ class Equipos extends CI_Controller {
 			if($status === ""){
 				$status = NULL;
 			}
-			$data = $this->Equipo->filtrarEquipos($segmento_de_red,  $dependencia, $direccion, $status);
+			if($tipo_equipo === ""){
+				$tipo_equipo = NULL;
+			}
+			$data = $this->Equipo->filtrarEquipos($dependencia, $direccion, $status, $tipo_equipo);
 			echo json_encode($data);
 		} else {
 			// Si no hay datos de sesion redireccionar a login
