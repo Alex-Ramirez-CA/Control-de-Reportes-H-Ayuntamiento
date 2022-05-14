@@ -1105,7 +1105,7 @@
 	//Evento de cuando clique en guardar datos del equipo
 	$(document).on("click", ".guardar_equipo", function () {
 		let no_empleados = [];
-		$(".nombres_empleados_asociados div").each(function(){
+		$(".nombres_empleados_asociados div.tarjeta_empleado_asociado").each(function(){
 			no_empleados.push($(this).attr("no_empleado"));
 		});
 		let nombre = $("#nombre_equipo").val();
