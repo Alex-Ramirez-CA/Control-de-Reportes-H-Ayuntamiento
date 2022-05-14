@@ -801,17 +801,38 @@
 				// Hacer algo si el checkbox ha sido seleccionado
 				status = 1;
 				$.post("modificar_status", { status, id_equipo, direccion_ip }, function (response) {
-					console.log(response);
+					if(response){
+						let json = JSON.parse(response);
+						$(".titulo-mensaje").html(`<b><h1>${json.msg}</h1></b>`);
+						$('.mensaje').css({'visibility':'visible'});
+						$('.contenedor_mensaje_guardar_usuario').children("img").attr("src",$('.contenedor_mensaje_guardar_usuario').children("img").attr("correcto"));
+						$('.contenedor_mensaje_guardar_usuario').css({'transform':'translateY(0%)'});
+						$(document).on('click', '.cerrar_ventana_listar_equipos', function(){
+							$('.mensaje').css({'visibility':'hidden'});
+							$('.contenedor_mensaje_guardar_usuario').css({'transform':'translateY(-200%)'});
+							obtenerListaCompletaEquipos();
+						});
+					}
 				});
-				//console.log(direccion_ip + " " + id_equipo);
 			} else {
 				// Hacer algo si el checkbox ha sido deseleccionado
 				status = 0;
 				$.post("modificar_status", { status, id_equipo, direccion_ip}, function (response) {
-					console.log(response);
-				});
-				//console.log(direccion_ip + " " + id_equipo);
+					if(response){
+						let json = JSON.parse(response);
+						$(".titulo-mensaje").html(`<b><h1>${json.msg}</h1></b>`);
+						$('.mensaje').css({'visibility':'visible'});
+						$('.contenedor_mensaje_guardar_usuario').children("img").attr("src",$('.contenedor_mensaje_guardar_usuario').children("img").attr("correcto"));
+						$('.contenedor_mensaje_guardar_usuario').css({'transform':'translateY(0%)'});
+						$(document).on('click', '.cerrar_ventana_listar_equipos', function(){
+							$('.mensaje').css({'visibility':'hidden'});
+							$('.contenedor_mensaje_guardar_usuario').css({'transform':'translateY(-200%)'});
+							obtenerListaCompletaEquipos();
+						});
+					}
+				});	
 			}
+			obtenerListaCompletaEquipos();
 		} else {
 			//console.log("No paso nada");
 			obtenerListaCompletaEquipos();
@@ -1177,8 +1198,13 @@
 		    success: function(data) {
 		        let json = JSON.parse(data);
 		        $(".titulo-mensaje").html(`<b><h1>${json.msg}</h1></b>`);
+				if(json.msg === "Equipo agregado correctamente"){
+					$('.contenedor_mensaje_guardar_usuario').children("img").attr("src",$('.contenedor_mensaje_guardar_usuario').children("img").attr("correcto"));
+				}else{
+					$('.contenedor_mensaje_guardar_usuario').children("img").attr("src",$('.contenedor_mensaje_guardar_usuario').children("img").attr("incorrecto"));
+					$('.contenedor_mensaje_guardar_usuario').children("img").css({width: "200px"});
+				}
 		        $('.mensaje').css({'visibility':'visible'});
-				$('.contenedor_mensaje_guardar_usuario').children("img").attr("src",$('.contenedor_mensaje_guardar_usuario').children("img").attr("correcto"));
 		        $('.contenedor_mensaje_guardar_usuario').css({'transform':'translateY(0%)'});
 		        $(document).on('click', '.cerrar_ventana_guardar_usuario', function(){
 		            $('.mensaje').css({'visibility':'hidden'});

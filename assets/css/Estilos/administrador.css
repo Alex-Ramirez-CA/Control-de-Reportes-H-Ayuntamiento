@@ -870,6 +870,7 @@ Estilos para los filtros que puede aplicar el administrador
 .contenedor_mensaje_guardar_usuario {
 	min-width: 400px;
 	min-height: 300px;
+	max-width: 750px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -884,7 +885,12 @@ Estilos para los filtros que puede aplicar el administrador
 	backdrop-filter: blur(4px);
 }
 
-.cerrar_ventana_guardar_usuario {
+.contenedor_mensaje_guardar_usuario img {
+	margin-top: 20px;
+	margin-bottom: 25px;
+}
+
+.cerrar_ventana_guardar_usuario, .cerrar_ventana_listar_equipos {
 	left: 102%;
 	font-size: 15px;
 	padding-top: 0.295rem;
@@ -899,7 +905,7 @@ Estilos para los filtros que puede aplicar el administrador
 	position: absolute;
 }
 
-.cerrar_ventana_guardar_usuario:hover {
+.cerrar_ventana_guardar_usuario:hover, .cerrar_ventana_listar_equipos:hover {
 	background: #2e2e2e;
 }
 
@@ -1278,4 +1284,10 @@ Estilos para los filtros que puede aplicar el administrador
 
 .quitar_empleado_asociado:hover {
 	background: #2e2e2e;
+}
+
+.imagen_mensaje {
+	width: 200px;
+	margin-top: 20px;
+	margin-bottom: 25px;
 }
