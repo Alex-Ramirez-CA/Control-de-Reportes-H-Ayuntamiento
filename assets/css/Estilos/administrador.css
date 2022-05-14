@@ -1134,8 +1134,9 @@ Estilos para los filtros que puede aplicar el administrador
 }
 
 .guardar_equipo {
-	width: 47%;
-	margin-left: 35.68%;
+	width: 100%;
+	height: 50px;
+	margin-left: 15px;
 	border: solid 1px #006e95;
 	border-radius: 10px;
 	cursor: pointer;

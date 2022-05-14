@@ -173,7 +173,7 @@
            
             </div>
         </div>
-        <button class="guardar_cambios_equipo">Guardar cambios</button>
+        <button class="guardar_equipo">Guardar cambios</button>
     </div>
 </div>
 
