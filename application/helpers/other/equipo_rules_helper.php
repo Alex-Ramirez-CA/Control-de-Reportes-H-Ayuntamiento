@@ -7,7 +7,7 @@ function getEquipoRules() {
                 'rules' => 'required|max_length[50]',
                 'errors' => array(
                     'required' => 'El %s es requerido',
-                    'max_length' => 'El %s debe ser mas corto',
+                    'max_length' => 'El %s debe ser más corto',
                 ),
         ),
         array(
@@ -16,7 +16,7 @@ function getEquipoRules() {
                 'rules' => 'required|max_length[50]',
                 'errors' => array(
                         'required' => 'El %s es requerido',
-                        'max_length' => 'El nombre del %s debe ser mas corto',
+                        'max_length' => 'El nombre del %s debe ser más corto',
                 ),
         ),
         array(
@@ -25,7 +25,7 @@ function getEquipoRules() {
                 'rules' => 'required|max_length[25]',
                 'errors' => array(
                         'required' => 'La %s es requerida',
-                        'max_length' => 'El nombre de la %s debe ser mas corto',
+                        'max_length' => 'El nombre de la %s debe ser más corto',
                 ),
         ),
         array(
@@ -34,7 +34,7 @@ function getEquipoRules() {
                 'rules' => 'required|max_length[50]',
                 'errors' => array(
                         'required' => 'El %s es requerido',
-                        'max_length' => 'El %s debe ser mas corto',
+                        'max_length' => 'El %s debe ser más corto',
                 ),
         ),
         array(
@@ -43,7 +43,7 @@ function getEquipoRules() {
                 'rules' => 'required|max_length[50]',
                 'errors' => array(
                         'required' => 'La %s es requerida',
-                        'max_length' => 'La %s debe ser mas corta',
+                        'max_length' => 'La %s debe ser más corta',
                 ),
         ),
         array(
@@ -52,8 +52,8 @@ function getEquipoRules() {
                 'rules' => 'required|max_length[50]|valid_ip',
                 'errors' => array(
                         'required' => 'La %s es requerida',
-                        'max_length' => 'La %s debe ser mas corta',
-                        'valid_ip' => 'Ingrese formato valido de %s',
+                        'max_length' => 'La %s debe ser más corta',
+                        'valid_ip' => 'Ingrese formato válido de %s',
                 ),
         ),
         array(
@@ -62,7 +62,7 @@ function getEquipoRules() {
                 'rules' => 'required|max_length[50]',
                 'errors' => array(
                     'required' => 'El %s es requerido',
-                    'max_length' => 'La %s debe ser mas corta',
+                    'max_length' => 'La %s debe ser más corta',
                 ),
         ),
         array(
@@ -71,7 +71,7 @@ function getEquipoRules() {
                 'rules' => 'required|max_length[10]',
                 'errors' => array(
                     'required' => 'El %s es requerido',
-                    'max_length' => 'El %s debe ser mas corto',
+                    'max_length' => 'El %s debe ser más corto',
                 ),
         ),
     );
