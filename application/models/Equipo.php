@@ -101,7 +101,7 @@ class Equipo extends CI_Model {
         $data = $this->db
                 ->select("id_equipo")
                 ->from("equipo")
-                ->where(array('direccion_ip' => $direccion_ip, 'tipo_equipo' => 'PC'))
+                ->where(array('direccion_ip' => $direccion_ip, 'tipo_equipo' => 'PC', 'status' =>1))
                 ->limit(1)
                 ->get();
         
