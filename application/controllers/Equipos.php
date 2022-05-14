@@ -72,122 +72,130 @@ class Equipos extends CI_Controller {
 			echo json_encode($erros);
 			$this->output->set_status_header(400);
 		} else {
-			
-			if(!$this->input->post('ram')) {
-				$ram = NULL;
-			} else {
-				$ram = $this->input->post('ram');
-			}
-			if(!$this->input->post('disco_duro')) {
-				$disco_duro = NULL;
-			} else {
-				$disco_duro = $this->input->post('disco_duro');
-			}
-			if(!$this->input->post('inventario_monitor')) {
-				$inventario_monitor = NULL;
-			} else {
-				$inventario_monitor = $this->input->post('inventario_monitor');
-			}
-			if(!$this->input->post('serie_monitor')) {
-				$serie_monitor = NULL;
-			} else {
-				$serie_monitor = $this->input->post('serie_monitor');
-			}
-			if(!$this->input->post('marca_monitor')) {
-				$marca_monitor = NULL;
-			} else {
-				$marca_monitor = $this->input->post('marca_monitor');
-			}
-			if(!$this->input->post('tamano_monitor')) {
-				$tamano_monitor = NULL;
-			} else {
-				$tamano_monitor = $this->input->post('tamano_monitor');
-			}
-			if(!$this->input->post('observaciones')) {
-				$observaciones = NULL;
-			} else {
-				$observaciones = $this->input->post('observaciones');
-			}
-			
-			// Datos para hacer la insercion en la tabla de usuario
-			$datos = array(
-				'direccion_ip' => $this->input->post('direccion_ip'),
-				'ram' => $ram,
-				'dvd' => (int)$this->input->post('dvd'),
-				'procesador' => $this->input->post('procesador'),
-				'inventario_monitor' => $inventario_monitor,
-				'marca' => $this->input->post('marca'),
-				'marca_monitor' => $marca_monitor,
-				'segmento_de_red' => $this->input->post('segmento_de_red'),
-				'tamano_monitor' => $tamano_monitor,
-				'nombre' => $this->input->post('nombre'),
-				'inventario' => $this->input->post('inventario'),
-				'serie' => $this->input->post('serie'),
-				'status' => 1,
-				'serie_monitor' => $serie_monitor,
-				'disco_duro' => $disco_duro,
-				'teclado' => (int)$this->input->post('teclado'),
-				'observaciones' => $observaciones,
-				'mouse' => (int)$this->input->post('mouse'),
-				'sistema_operativo' => $this->input->post('sistema_operativo'),
-				'tipo_equipo' => $this->input->post('tipo_equipo'),
-				'id_direccion' => (int)$this->input->post('id_direccion'),
-			);
 
-            if($this->input->post('tipo_equipo') === 'PC') {
-                // Hacer insercion a la tabla de equipos
-                $this->Equipo->guardar_equipo($datos);
-                // Crear el vinculo entre el equipo personal y su usuario en caso de ser necesario
-                $no_empleados = $this->input->post('no_empleados');
-				if(!empty($no_empleados)) {
-					// Obtener el id_equipo por su direccion ip
-					$res = $this->Equipo->obtenerIdEquipo($this->input->post('direccion_ip'));
-					$id_equipo = $res->id_equipo;
-					foreach($no_empleados as $no_empleado) {
-						$data = array(
-							'id_equipo' => $id_equipo,
-							'no_empleado' => $no_empleado,
-						);
-						$this->Equipo_usuario->insertar($data);
+			// Validar que la direccion IP no este ya asignada a un equipo activo
+			if(!$this->Equipo->direccionIpYaExistente($this->input->post('direccion_ip'))) {
+				if(!$this->input->post('ram')) {
+					$ram = NULL;
+				} else {
+					$ram = $this->input->post('ram');
+				}
+				if(!$this->input->post('disco_duro')) {
+					$disco_duro = NULL;
+				} else {
+					$disco_duro = $this->input->post('disco_duro');
+				}
+				if(!$this->input->post('inventario_monitor')) {
+					$inventario_monitor = NULL;
+				} else {
+					$inventario_monitor = $this->input->post('inventario_monitor');
+				}
+				if(!$this->input->post('serie_monitor')) {
+					$serie_monitor = NULL;
+				} else {
+					$serie_monitor = $this->input->post('serie_monitor');
+				}
+				if(!$this->input->post('marca_monitor')) {
+					$marca_monitor = NULL;
+				} else {
+					$marca_monitor = $this->input->post('marca_monitor');
+				}
+				if(!$this->input->post('tamano_monitor')) {
+					$tamano_monitor = NULL;
+				} else {
+					$tamano_monitor = $this->input->post('tamano_monitor');
+				}
+				if(!$this->input->post('observaciones')) {
+					$observaciones = NULL;
+				} else {
+					$observaciones = $this->input->post('observaciones');
+				}
+				
+				// Datos para hacer la insercion en la tabla de usuario
+				$datos = array(
+					'direccion_ip' => $this->input->post('direccion_ip'),
+					'ram' => $ram,
+					'dvd' => (int)$this->input->post('dvd'),
+					'procesador' => $this->input->post('procesador'),
+					'inventario_monitor' => $inventario_monitor,
+					'marca' => $this->input->post('marca'),
+					'marca_monitor' => $marca_monitor,
+					'segmento_de_red' => $this->input->post('segmento_de_red'),
+					'tamano_monitor' => $tamano_monitor,
+					'nombre' => $this->input->post('nombre'),
+					'inventario' => $this->input->post('inventario'),
+					'serie' => $this->input->post('serie'),
+					'status' => 1,
+					'serie_monitor' => $serie_monitor,
+					'disco_duro' => $disco_duro,
+					'teclado' => (int)$this->input->post('teclado'),
+					'observaciones' => $observaciones,
+					'mouse' => (int)$this->input->post('mouse'),
+					'sistema_operativo' => $this->input->post('sistema_operativo'),
+					'tipo_equipo' => $this->input->post('tipo_equipo'),
+					'id_direccion' => (int)$this->input->post('id_direccion'),
+				);
+
+				if($this->input->post('tipo_equipo') === 'PC') {
+					// Hacer insercion a la tabla de equipos
+					$this->Equipo->guardar_equipo($datos);
+					// Crear el vinculo entre el equipo personal y su usuario en caso de ser necesario
+					$no_empleados = $this->input->post('no_empleados');
+					if(!empty($no_empleados)) {
+						// Obtener el id_equipo por su direccion ip
+						$res = $this->Equipo->obtenerIdEquipo($this->input->post('direccion_ip'));
+						$id_equipo = $res->id_equipo;
+						foreach($no_empleados as $no_empleado) {
+							$data = array(
+								'id_equipo' => $id_equipo,
+								'no_empleado' => $no_empleado,
+							);
+							$this->Equipo_usuario->insertar($data);
+						}
+						
 					}
 					
-				}
-                
-            } else if($this->input->post('tipo_equipo') === 'Impresora') {
-                // verificar que si se va a insertar una impresora, que no esxita otra activa 
-                // relacionada con la misma direccion
-                if(!$this->Equipo->obtenerImpresora((int)$this->input->post('id_direccion'))) {
-                    // Hacer insercion a la tabla de equipos
-                    $this->Equipo->guardar_equipo($datos);
-                    // Crear el vinculo entre la impresora y la direccion a la que pertenece
-                    if($res = $this->Equipo->obtenerImpresora((int)$this->input->post('id_direccion'))) {
-                        $id_equipo = $res->id_equipo;
-                        if($usuarios = $this->Usuario->getUsuariosbyDireccion((int)$this->input->post('id_direccion'))) {
-							foreach($usuarios as $usuario) {
-								$no_empleado = $usuario->no_empleado;
-								$data = array(
-									'id_equipo' => $id_equipo,
-									'no_empleado' => $no_empleado,
-								);
-								$this->Equipo_usuario->insertar($data);
+				} else if($this->input->post('tipo_equipo') === 'Impresora') {
+					// verificar que si se va a insertar una impresora, que no esxita otra activa 
+					// relacionada con la misma direccion
+					if(!$this->Equipo->obtenerImpresora((int)$this->input->post('id_direccion'))) {
+						// Hacer insercion a la tabla de equipos
+						$this->Equipo->guardar_equipo($datos);
+						// Crear el vinculo entre la impresora y la direccion a la que pertenece
+						if($res = $this->Equipo->obtenerImpresora((int)$this->input->post('id_direccion'))) {
+							$id_equipo = $res->id_equipo;
+							if($usuarios = $this->Usuario->getUsuariosbyDireccion((int)$this->input->post('id_direccion'))) {
+								foreach($usuarios as $usuario) {
+									$no_empleado = $usuario->no_empleado;
+									$data = array(
+										'id_equipo' => $id_equipo,
+										'no_empleado' => $no_empleado,
+									);
+									$this->Equipo_usuario->insertar($data);
+								}
 							}
+							
 						}
-                        
-                    }
-                } else {
-                    echo json_encode(array(
-                        'msg' => 'Esta dirección ya tiene una impresora activa asociada',
-                        'url' => base_url('equipos'),
-                    ));
-                    $this->output->set_status_header(500);
-					exit;
-                }
-            }
-			
-            echo json_encode(array(
-				'msg' => 'Equipo agregado correctamente',
-				'url' => base_url('equipos'),
-			));
+					} else {
+						echo json_encode(array(
+							'msg' => 'Esta dirección ya tiene una impresora activa asociada',
+							'url' => base_url('equipos'),
+						));
+						$this->output->set_status_header(500);
+						exit;
+					}
+				}
+				
+				echo json_encode(array(
+					'msg' => 'Equipo agregado correctamente',
+					'url' => base_url('equipos'),
+				));	
+			} else {
+				echo json_encode(array(
+					'msg' => 'La Dirección IP ya esta asignada a otro equipo activo. Intenta con otra o da de baja dicho equipo',
+					'url' => base_url('equipos'),
+				));	
+			}
 		}
         } else {
             // Si no hay datos de sesion redireccionar a login

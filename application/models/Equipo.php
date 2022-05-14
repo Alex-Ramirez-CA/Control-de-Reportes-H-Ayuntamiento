@@ -220,4 +220,19 @@ class Equipo extends CI_Model {
         return $data->row();
     }
 
+    public function direccionIpYaExistente($direccion_ip) {
+        $data = $this->db
+                ->select("*")
+                ->from("equipo")
+                ->where(array('direccion_ip' => $direccion_ip, 'status' =>1))
+                ->limit(1)
+                ->get();
+        
+        // Si no se encuentra resultados
+        if(!$data->result()) {
+            return false;
+        }
+        return $data->row();
+    }
+
 }
