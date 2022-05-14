@@ -791,6 +791,7 @@
 	$(document).on("click", "#status_equipo", function () {
 		let status;
 		let id_equipo = $(this).val();
+		let direccion_ip = $(this).attr("direccionIP");
 
 		var opcion = confirm(
 			"¿Está seguro de cambiar el estatus actual del equipo?"
@@ -799,11 +800,17 @@
 			if ($(this).is(":checked")) {
 				// Hacer algo si el checkbox ha sido seleccionado
 				status = 1;
-				$.post("modificar_status", { status, id_equipo });
+				$.post("modificar_status", { status, id_equipo, direccion_ip }, function (response) {
+					console.log(response);
+				});
+				//console.log(direccion_ip + " " + id_equipo);
 			} else {
 				// Hacer algo si el checkbox ha sido deseleccionado
 				status = 0;
-				$.post("modificar_status", { status, id_equipo });
+				$.post("modificar_status", { status, id_equipo, direccion_ip}, function (response) {
+					console.log(response);
+				});
+				//console.log(direccion_ip + " " + id_equipo);
 			}
 		} else {
 			//console.log("No paso nada");
@@ -1116,15 +1123,7 @@
 		let inventario = $("#inventario_equipo").val();
 		let serie = $("#serie_equipo").val();
 		let direccion_ip = $("#direccion_ip_equipo").val();
-		let teclado;
-		let mouse;
-		let dvd;
-		let ram;
-		let disco_duro;
-		let inventario_monitor;
-		let serie_monitor;
-		let marca_monitor;
-		let tamano_monitor;
+		let teclado, mouse, dvd, ram, disco_duro, inventario_monitor, serie_monitor, marca_monitor, tamano_monitor;
 		let procesador = $("#procesador_equipo").val();
 		let segmento_de_red = $("#segmento_red_equipo").val();
 		let observaciones = $("#observaciones_equipo").val();
@@ -1492,7 +1491,7 @@
                         <p class="label_status_empleado" for="status_empleado">
                             Estatus
                             <br>
-                            <input id="status_equipo" type="checkbox" ${equipo.status == 1 ? "checked" : ""} value="${equipo.id_equipo}">
+                            <input id="status_equipo" type="checkbox" ${equipo.status == 1 ? "checked" : ""} value="${equipo.id_equipo}" direccionIP="${equipo.direccion_ip}">
                         </p>
                     </td>
                 </tr>
