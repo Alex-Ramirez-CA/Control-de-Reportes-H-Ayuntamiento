@@ -267,7 +267,14 @@ class Equipos extends CI_Controller {
 		if($this->session->has_userdata('id_rol') && $this->session->userdata('id_rol') == 3) {
 			$status = (int)$this->input->post('status');
 			$id_equipo = (int)$this->input->post('id_equipo');
-			$this->Equipo->statusEquipo($status, $id_equipo);
+			if($this->Equipo->direccionIpYaExistente($this->input->post('direccion_ip')) && $status === 1){
+				echo json_encode(array(
+					'msg' => 'Ya existe un equipo activo con la misma Dirección IP',
+				));
+			} else {
+				$this->Equipo->statusEquipo($status, $id_equipo);
+			}
+			
 		} else {
 			// Si no hay datos de sesion redireccionar a login
 			redirect('login');
