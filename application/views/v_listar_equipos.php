@@ -51,6 +51,18 @@
                 <p class="opcion_status_usuarios" status="0">De baja</p>
             </div> 
         </div>
+        <div class="filtro_tipo_equipo">
+            <div class="titulo_filtro_usuarios" idFiltroUsuario="6">
+                    <h2>Tipo de equipo</h2>
+                <div class="marcar_filtro_seleccionado">
+                    
+                </div>
+            </div>
+            <div class="lista_tipo_equipo">
+                <p class="opcion_tipo_equipo" tipoEquipo="PC">Computadora</p>
+                <p class="opcion_tipo_equipo" tipoEquipo="Impresora">Impresora</p>
+            </div> 
+        </div>
         <button class="aplicar_filtros_usuarios">Aplicar filtros</button>
     </div>
     <div class="ocultar_filtros">

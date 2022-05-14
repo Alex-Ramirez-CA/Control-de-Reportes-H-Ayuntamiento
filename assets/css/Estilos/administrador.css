@@ -476,8 +476,6 @@ Estilos para los filtros que puede aplicar el administrador
 .fechas-filtro {
 	position: absolute;
 	top: 8px;
-	z-index: -1;
-	visibility: hidden;
 	transition: all 400ms ease;
 	width: 240px;
 	background: #fff;
@@ -486,11 +484,10 @@ Estilos para los filtros que puede aplicar el administrador
 	border-radius: 10px; 
 	border: 1px solid rgba(0, 0, 0, 0.15);
 	padding: 10px;
-	transform: translatex(15%);
-}
-
-.filtro:hover .fechas-filtro {
-	visibility: visible;
+	/* transform: translatex(15%);
+	z-index: -1;
+	visibility: hidden; */
+	visibility: hidden;
 	transform: translatex(87%);
 	z-index: 1;
 }
@@ -530,8 +527,6 @@ Estilos para los filtros que puede aplicar el administrador
 .lista-departamentos {
 	position: absolute;
 	top: 20px;
-	z-index: -1;
-	visibility: hidden;
 	transition: all 400ms ease;
 	width: 150px;
 	background: #fff;
@@ -539,8 +534,13 @@ Estilos para los filtros que puede aplicar el administrador
 	flex-direction: column;
 	border-radius: 10px; 
 	border: 1px solid rgba(0, 0, 0, 0.15);
-	transform: translatex(5%);
 	margin-bottom: 5px;
+	visibility: hidden;
+	transform: translatex(-109%);
+	z-index: 1;
+	/* transform: translatex(5%);
+	z-index: -1;
+	visibility: hidden; */
 }
 
 .lista-departamentos p {
@@ -564,19 +564,12 @@ Estilos para los filtros que puede aplicar el administrador
 	color: #fff;
 }
 
-.filtro:hover .lista-departamentos {
-	visibility: visible;
-	transform: translatex(-109%);
-	z-index: 1;
-}
 
 /*Estilos para el filtro de dependencia*/
 .lista-dependecias {
 	position: absolute;
 	top: 0;
 	left: 0;
-	z-index: -1;
-	visibility: hidden;
 	transition: all 400ms ease;
 	width: 250px;
 	max-height: 300px;
@@ -588,6 +581,11 @@ Estilos para los filtros que puede aplicar el administrador
 	overflow: hidden;
 	overflow-y: scroll;
 	gap: 1px;
+	/* z-index: -1;
+	visibility: hidden; */
+	visibility: visible;
+	transform: translatex(66%);
+	z-index: 1;
 }
 
 .lista-dependecias p {
@@ -612,19 +610,11 @@ Estilos para los filtros que puede aplicar el administrador
 	color: #fff;
 }
 
-.filtro:hover .lista-dependecias {
-	visibility: visible;
-	transform: translatex(67%);
-	z-index: 1;
-}
-
 /*Estilos para el filtro de direcciones*/
 .lista-direcciones {
 	position: absolute;
 	top: 0;
 	right: 0;
-	z-index: -1;
-	visibility: hidden;
 	transition: all 300ms ease;
 	width: 250px;
 	max-height: 300px;
@@ -636,6 +626,11 @@ Estilos para los filtros que puede aplicar el administrador
 	overflow: hidden;
 	overflow-y: scroll;
 	gap: 1px;
+	/* z-index: -1;
+	visibility: hidden; */
+	visibility: visible;
+	transform: translatex(-67%);
+	z-index: 1;
 }
 
 .lista-direcciones p {
@@ -660,19 +655,12 @@ Estilos para los filtros que puede aplicar el administrador
 	color: #fff;
 }
 
-.filtro:hover .lista-direcciones {
-	visibility: visible;
-	transform: translatex(-67%);
-	z-index: 1;
-}
-
 /*Estilos para el filtro de buscar por equipo*/
 #search_equipo {
 	visibility: hidden;
 	position: absolute;
 	top: 75%;
 	right: 0 auto;
-	z-index: -1;
 	transition: all 1s ease;
 	border: solid 1px #006e95;
 	border-radius: 5px;
@@ -682,19 +670,15 @@ Estilos para los filtros que puede aplicar el administrador
 	font-size: 14px;
 	padding-left: 8px;
 	padding-top: 5px;
-}
-
-.filtro:hover #search_equipo {
-	visibility: visible;
+	visibility: hidden;
 	transform: translatey(135%);
 	z-index: 1;
 	transition: all 300ms ease;
+	/* z-index: -1; */
 }
 
 .opciones-busqueda-equipo {
-	visibility: hidden;
 	display: none;
-	z-index: -1;
 	position: absolute;
 	top: 0;
 	right: 0 auto;
@@ -705,12 +689,10 @@ Estilos para los filtros que puede aplicar el administrador
 	overflow: hidden;
 	overflow-y: scroll;
 	border: 1px solid rgba(0, 0, 0, 0.15);
-}
-
-.filtro:hover .opciones-busqueda-equipo {
 	transform: translatey(157px);
 	z-index: 1;
 	visibility: visible;
+	/* visibility: hidden; */
 }
 
 .opciones-busqueda-equipo p {
@@ -1006,7 +988,7 @@ Estilos para los filtros que puede aplicar el administrador
 
 
 /*------------------------------Estilos para los filtros aplicables en la lista de usuarios*/
-.lista_dependencias_usuarios, .lista_direcciones_usuarios, .lista_departamentos_usuarios, .lista_tipos_usuarios, .lista_status_usuarios {
+.lista_dependencias_usuarios, .lista_direcciones_usuarios, .lista_departamentos_usuarios, .lista_tipos_usuarios, .lista_status_usuarios, .lista_tipo_equipo {
 	width: 100%;
 	max-height: 300px;
 	background: #f6f8fa;
@@ -1015,7 +997,7 @@ Estilos para los filtros que puede aplicar el administrador
 	display: none;
 }
 
-.lista_dependencias_usuarios p, .lista_direcciones_usuarios p, .lista_departamentos_usuarios p, .lista_tipos_usuarios p, .lista_status_usuarios p {
+.lista_dependencias_usuarios p, .lista_direcciones_usuarios p, .lista_departamentos_usuarios p, .lista_tipos_usuarios p, .lista_status_usuarios p, .lista_tipo_equipo p {
 	text-align: center;
 	font-size: 15px;
 	background-color: #f6f8fa;
@@ -1026,12 +1008,12 @@ Estilos para los filtros que puede aplicar el administrador
 	word-wrap: break-word;
 }
 
-.lista_dependencias_usuarios p:hover, .lista_direcciones_usuarios p:hover, .lista_departamentos_usuarios p:hover, .lista_tipos_usuarios p:hover, .lista_status_usuarios p:hover {
+.lista_dependencias_usuarios p:hover, .lista_direcciones_usuarios p:hover, .lista_departamentos_usuarios p:hover, .lista_tipos_usuarios p:hover, .lista_status_usuarios p:hover, .lista_tipo_equipo p:hover {
 	background-color: #26A2D9;	
 	color: #fff;
 }
 
-.lista_dependencias_usuarios p.active, .lista_direcciones_usuarios p.active, .lista_departamentos_usuarios p.active, .lista_tipos_usuarios p.active, .lista_status_usuarios p.active {
+.lista_dependencias_usuarios p.active, .lista_direcciones_usuarios p.active, .lista_departamentos_usuarios p.active, .lista_tipos_usuarios p.active, .lista_status_usuarios p.active, .lista_tipo_equipo p.active {
 	background-color: #26A2D9;	
 	color: #fff;
 }

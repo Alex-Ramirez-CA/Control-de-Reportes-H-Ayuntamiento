@@ -162,7 +162,7 @@
         <h2>Asignar empleados al equipo</h2>
         <div class="buscador_empleado_asignar">
             <label for="search_usuario"><img src="<?= base_url('assets/img/iconos/lupa.svg');?>" alt=""></label>
-            <input id="search_usuario" type="text" placeholder="Buscar empleado" src="<?= base_url('assets/img/logotipos/flor.png');?>">
+            <input <?= $datos_equipo->tipo_equipo == 'Impresora' ? 'disabled' : ''; ?> id="search_usuario" type="text" placeholder="Buscar empleado" src="<?= base_url('assets/img/logotipos/flor.png');?>">
             <div class="opciones_busqueda_usuario">
                 
             </div>

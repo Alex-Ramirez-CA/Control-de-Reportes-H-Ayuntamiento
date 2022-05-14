@@ -8,6 +8,7 @@
 	let equipo = null;
 	let rol = null;
 	let status = null;
+	let tipo_equipo = null;
 	let id_direccion_modif = 0;
 
 	if (getUrl == baseUrl + "/atendiendo") {
@@ -363,6 +364,17 @@
 	$(document).on("click", "#btn-filtros", function () {
 		$(".mensaje").css({ visibility: "visible" });
 		$(".contenedor-mensaje").css({ transform: "translateY(0%)" });
+	});
+
+	//Evento cuando se clica en algunos de los filtros
+	$(document).on("click", ".filtro", function () {
+		if($(this).children(".lista-dependecias").is(":visible")){
+			$(this).children(".lista-dependecias").css({visibility : "hidden"})
+		}
+
+		if($(this).children(".lista-direcciones").is(":visible")){
+			$(this).children(".lista-direcciones").css({visibility : "hidden"})
+		}
 	});
 
 	//Eventos cuando selccione algun departamento
@@ -864,6 +876,18 @@
 		}
 	});
 
+	//Evento de cuando clique una opcion de tipo de equipo
+	$(document).on("click", ".opcion_tipo_equipo", function () {
+		if ($(this).hasClass("active")) {
+			$(this).toggleClass("active");
+			tipo_equipo = null;
+		} else {
+			$(".lista_tipo_equipo").children().removeClass("active");
+			$(this).toggleClass("active");
+			tipo_equipo = $(this).attr("tipoEquipo");
+		}
+	});
+
 	//Evento de cuando clique una opcion de status de usuario en filtros de listado de usuarios
 	$(document).on("click", ".titulo_filtro_usuarios", function () {
         if ($(this).attr("idFiltroUsuario") == '1') {
@@ -935,6 +959,19 @@
                 $(".lista_status_usuarios").css({ display: "none" });
             }
         }
+		if ($(this).attr("idFiltroUsuario") == '6') {
+            if ($('.lista_tipo_equipo').is(':hidden')) {
+                $(this).css({ background: "#f6f8fa" });
+                $("h2", this).css('color', '#006e95');
+                $(".marcar_filtro_seleccionado", this).css({ transform: "translatex(0%)" });
+                $(".lista_tipo_equipo").css({ display: "flex" });
+            }else {
+                $("h2", this).css('color', '#006e95');
+                $(this).css({ background: "#fff" });
+                $(".marcar_filtro_seleccionado", this).css({ transform: "translatex(255px)" });
+                $(".lista_tipo_equipo").css({ display: "none" });
+            }
+        }
 	});
 
 	//Evento de cuando clique en enviar filtros
@@ -952,10 +989,9 @@
 
 		//Listar a todos los equipos solo cuando este la url correcta
 		if (getUrl == baseUrl + "/equipos/lista_equipos") {
-			let segmento_de_red = null;
 			$.post(
 				"filtrar_equipos",
-				{ dependencia, direccion, segmento_de_red, status },
+				{ dependencia, direccion, tipo_equipo, status },
 				function (response) {
 					obtenerListaEquipos(response);
 				}
@@ -1017,7 +1053,7 @@
 		//Comprobar si el empleado ya existe en la lista de asociados y no agregarlo
 		if (!no_empleados.includes($(elemento).attr("no_empleado"))){
 			$('.opciones_busqueda_usuario').css('visibility','hidden');
-			$( ".nombres_empleados_asociados" ).append(`
+			$(".nombres_empleados_asociados" ).append(`
 				<div no_empleado="${$(elemento).attr("no_empleado")}" class="tarjeta_empleado_asociado">
 					<p class="nombre_tarjeta_empleado_asociado">${$(this).text()}</p>
 					<div class="quitar_empleado_asociado">
@@ -1051,7 +1087,7 @@
 			$("#disco_duro_equipo").prop("disabled", "disabled");
 			$("#dvd_equipo").prop("disabled", "disabled");
 			$("#tamaño_monitor").prop("disabled", "disabled");
-
+			$(".nombres_empleados_asociados").empty()
 		} else {
 			$("#search_usuario").prop("disabled", false);
 			$("#invetario_monitor").prop("disabled", false);
