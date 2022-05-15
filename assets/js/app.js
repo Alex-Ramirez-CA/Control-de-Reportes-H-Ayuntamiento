@@ -367,13 +367,39 @@
 	});
 
 	//Evento cuando se clica en algunos de los filtros
-	$(document).on("click", ".filtro", function () {
-		if($(this).children(".lista-dependecias").is(":visible")){
-			$(this).children(".lista-dependecias").css({visibility : "hidden"})
+	$(document).on("click", ".filtro-dependecia", function () {
+		if ($('.lista-dependecias').is(':hidden')) {
+			$('.lista-dependecias').css({display : "flex"});
+		}else {
+			$('.lista-dependecias').css({display : "none"});
 		}
-
-		if($(this).children(".lista-direcciones").is(":visible")){
-			$(this).children(".lista-direcciones").css({visibility : "hidden"})
+	});
+	$(document).on("click", ".filtro-fecha", function () {
+		if ($('.fechas-filtro').is(':hidden')) {
+			$('.fechas-filtro').css({display : "flex"});
+		}else {
+			$('.fechas-filtro').css({display : "none"});
+		}
+	});
+	$(document).on("click", ".filtro-equipo", function () {
+		if ($('#search_equipo').is(':visible')) {
+			$('#search_equipo').hide();
+		} else {
+			$('#search_equipo').show();
+		}
+	});
+	$(document).on("click", ".filtro-direccion", function () {
+		if ($('.lista-direcciones').is(':hidden')) {
+			$('.lista-direcciones').css({display : "flex"});
+		}else {
+			$('.lista-direcciones').css({display : "none"});
+		}
+	});
+	$(document).on("click", ".filtro-departamento", function () {
+		if ($('.lista-departamentos').is(':hidden')) {
+			$('.lista-departamentos').css({display : "flex"});
+		}else {
+			$('.lista-departamentos').css({display : "none"});
 		}
 	});
 
