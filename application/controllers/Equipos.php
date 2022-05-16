@@ -410,8 +410,9 @@ class Equipos extends CI_Controller {
 						} else {
 							echo json_encode(array(
 								'msg' => 'Esta dirección ya tiene una impresora activa asociada',
+								'url' => 'equipos/lista_equipos'
 							));
-							$this->output->set_status_header(500);
+							$this->output->set_status_header(504);
 							exit;
 						}
 					}
@@ -421,8 +422,6 @@ class Equipos extends CI_Controller {
 				if($this->input->post('tipo_equipo') === 'PC') {
 					// Si los usuarios asignados a la PC son modificados
 					if((int)$this->input->post('no_empleados_modif') === 1) {
-						// Eliminar los registros que asocian la PC con sus usuarios
-						$this->Equipo_usuario->borrarRelacion($id_equipo);
 						$no_empleados = $this->input->post('no_empleados');
 						if(!empty($no_empleados)) {
 							// validar que los usuarios no tengan PC's ya asignadas
@@ -430,11 +429,16 @@ class Equipos extends CI_Controller {
 								if($this->Equipo_usuario->usuarioTienePC($no_empleado)) {
 									echo json_encode(array(
 										'msg' => 'Operación fallida, el usuario con ID '.$no_empleado.', ya tiene una PC asosiada',
+										'url' => 'equipos/lista_equipos'
 									));
-									$this->output->set_status_header(500);
+									$this->output->set_status_header(504);	
 									exit;
 								}
 							}
+						}
+						// Eliminar los registros que asocian la PC con sus usuarios
+						$this->Equipo_usuario->borrarRelacion($id_equipo);
+						if(!empty($no_empleados)) {
 							foreach($no_empleados as $no_empleado) {
 								$data = array(
 									'id_equipo' => $id_equipo,
