@@ -356,107 +356,117 @@ class Equipos extends CI_Controller {
 				echo json_encode($erros);
 				$this->output->set_status_header(400);
 			} else {
-				// Si pasa la validación, realizar el proceso de actualizado
-				// Datos para hacer la actualización en la tabla de usuario
-				$datos = array(
-					'direccion_ip' => $this->input->post('direccion_ip'),
-					'ram' => $this->input->post('ram'),
-					'dvd' => (int)$this->input->post('dvd'),
-					'procesador' => $this->input->post('procesador'),
-					'inventario_monitor' => $this->input->post('inventario_monitor'),
-					'marca' => $this->input->post('marca'),
-					'marca_monitor' => $this->input->post('marca_monitor'),
-					'segmento_de_red' => $this->input->post('segmento_de_red'),
-					'tamano_monitor' => $this->input->post('tamano_monitor'),
-					'nombre' => $this->input->post('nombre'),
-					'inventario' => $this->input->post('inventario'),
-					'serie' => $this->input->post('serie'),
-					'status' => 1,
-					'serie_monitor' => $this->input->post('serie_monitor'),
-					'disco_duro' => $this->input->post('disco_duro'),
-					'teclado' => (int)$this->input->post('teclado'),
-					'observaciones' => $this->input->post('observaciones'),
-					'mouse' => (int)$this->input->post('mouse'),
-					'sistema_operativo' => $this->input->post('sistema_operativo'),
-					'tipo_equipo' => $this->input->post('tipo_equipo'),
-					'id_direccion' => (int)$this->input->post('id_direccion'),
-				);
+				// Validar que la direccion IP no este ya asignada a un equipo activo
+				if(!$this->Equipo->direccionIpYaExistente($this->input->post('direccion_ip'))) {
+					// Si pasa la validación, realizar el proceso de actualizado
+					// Datos para hacer la actualización en la tabla de usuario
+					$datos = array(
+						'direccion_ip' => $this->input->post('direccion_ip'),
+						'ram' => $this->input->post('ram'),
+						'dvd' => (int)$this->input->post('dvd'),
+						'procesador' => $this->input->post('procesador'),
+						'inventario_monitor' => $this->input->post('inventario_monitor'),
+						'marca' => $this->input->post('marca'),
+						'marca_monitor' => $this->input->post('marca_monitor'),
+						'segmento_de_red' => $this->input->post('segmento_de_red'),
+						'tamano_monitor' => $this->input->post('tamano_monitor'),
+						'nombre' => $this->input->post('nombre'),
+						'inventario' => $this->input->post('inventario'),
+						'serie' => $this->input->post('serie'),
+						'status' => 1,
+						'serie_monitor' => $this->input->post('serie_monitor'),
+						'disco_duro' => $this->input->post('disco_duro'),
+						'teclado' => (int)$this->input->post('teclado'),
+						'observaciones' => $this->input->post('observaciones'),
+						'mouse' => (int)$this->input->post('mouse'),
+						'sistema_operativo' => $this->input->post('sistema_operativo'),
+						'tipo_equipo' => $this->input->post('tipo_equipo'),
+						'id_direccion' => (int)$this->input->post('id_direccion'),
+					);
 
-				// Obtener el id_equipo vía post
-				$id_equipo = (int)$this->input->post('id_equipo');
+					// Obtener el id_equipo vía post
+					$id_equipo = (int)$this->input->post('id_equipo');
 
-				// Cuando es de tipo Impresora
-				if($this->input->post('tipo_equipo') === 'Impresora') {
-					// Si se modifica la direccion a la que pertenece la impresora
-					// Verificar si la direccion cambio
-					if((int)$this->input->post('id_direccion_modif') === 1) {
-						// verificar que si se va a insertar una impresora, que no esxita otra activa 
-						// relacionada con la misma direccion
-						if(!$this->Equipo->obtenerImpresora((int)$this->input->post('id_direccion'))) {
-							// Eliminar los registros que asocian dicha impresora con los usuarios 
-							// de la antigua direccion
+					// Cuando es de tipo Impresora
+					if($this->input->post('tipo_equipo') === 'Impresora') {
+						// Si se modifica la direccion a la que pertenece la impresora
+						// Verificar si la direccion cambio
+						if((int)$this->input->post('id_direccion_modif') === 1) {
+							// verificar que si se va a insertar una impresora, que no esxita otra activa 
+							// relacionada con la misma direccion
+							if(!$this->Equipo->obtenerImpresora((int)$this->input->post('id_direccion'))) {
+								// Eliminar los registros que asocian dicha impresora con los usuarios 
+								// de la antigua direccion
+								$this->Equipo_usuario->borrarRelacion($id_equipo);
+								// Desues del borrado proceder a hacer los nuevos registros
+								if($usuarios = $this->Usuario->getUsuariosbyDireccion((int)$this->input->post('id_direccion'))) {
+									foreach($usuarios as $usuario) {
+										$no_empleado = $usuario->no_empleado;
+										$data = array(
+											'id_equipo' => $id_equipo,
+											'no_empleado' => $no_empleado,
+										);
+										$this->Equipo_usuario->insertar($data);
+									}
+								}
+							} else {
+								echo json_encode(array(
+									'msg' => 'Esta dirección ya tiene una impresora activa asociada',
+									'url' => 'equipos/lista_equipos'
+								));
+								$this->output->set_status_header(504);
+								exit;
+							}
+						}
+					}
+					
+					// Cuando es de tipo PC
+					if($this->input->post('tipo_equipo') === 'PC') {
+						// Si los usuarios asignados a la PC son modificados
+						if((int)$this->input->post('no_empleados_modif') === 1) {
+							$no_empleados = $this->input->post('no_empleados');
+							if(!empty($no_empleados)) {
+								// validar que los usuarios no tengan PC's ya asignadas
+								foreach($no_empleados as $no_empleado) {
+									if($this->Equipo_usuario->usuarioTienePC($no_empleado)) {
+										echo json_encode(array(
+											'msg' => 'Operación fallida, el usuario con ID '.$no_empleado.', ya tiene una PC asociada',
+											'url' => base_url('equipos/lista_equipos')
+										));
+										$this->output->set_status_header(504);	
+										exit;
+									}
+								}
+							}
+							// Eliminar los registros que asocian la PC con sus usuarios
 							$this->Equipo_usuario->borrarRelacion($id_equipo);
-							// Desues del borrado proceder a hacer los nuevos registros
-							if($usuarios = $this->Usuario->getUsuariosbyDireccion((int)$this->input->post('id_direccion'))) {
-								foreach($usuarios as $usuario) {
-									$no_empleado = $usuario->no_empleado;
+							if(!empty($no_empleados)) {
+								foreach($no_empleados as $no_empleado) {
 									$data = array(
 										'id_equipo' => $id_equipo,
 										'no_empleado' => $no_empleado,
 									);
 									$this->Equipo_usuario->insertar($data);
-								}
-							}
-						} else {
-							echo json_encode(array(
-								'msg' => 'Esta dirección ya tiene una impresora activa asociada',
-								'url' => 'equipos/lista_equipos'
-							));
-							$this->output->set_status_header(504);
-							exit;
-						}
-					}
-				}
-				
-				// Cuando es de tipo PC
-				if($this->input->post('tipo_equipo') === 'PC') {
-					// Si los usuarios asignados a la PC son modificados
-					if((int)$this->input->post('no_empleados_modif') === 1) {
-						$no_empleados = $this->input->post('no_empleados');
-						if(!empty($no_empleados)) {
-							// validar que los usuarios no tengan PC's ya asignadas
-							foreach($no_empleados as $no_empleado) {
-								if($this->Equipo_usuario->usuarioTienePC($no_empleado)) {
-									echo json_encode(array(
-										'msg' => 'Operación fallida, el usuario con ID '.$no_empleado.', ya tiene una PC asociada',
-										'url' => base_url('equipos/lista_equipos')
-									));
-									$this->output->set_status_header(504);	
-									exit;
-								}
+								}	
 							}
 						}
-						// Eliminar los registros que asocian la PC con sus usuarios
-						$this->Equipo_usuario->borrarRelacion($id_equipo);
-						if(!empty($no_empleados)) {
-							foreach($no_empleados as $no_empleado) {
-								$data = array(
-									'id_equipo' => $id_equipo,
-									'no_empleado' => $no_empleado,
-								);
-								$this->Equipo_usuario->insertar($data);
-							}	
-						}
 					}
-				}
-				
-				// Hacer actualización de la tabla de equipo
-				$this->Equipo->update_equipo($id_equipo, $datos);
+					
+					// Hacer actualización de la tabla de equipo
+					$this->Equipo->update_equipo($id_equipo, $datos);
 
-				echo json_encode(array(
-					'msg' => 'Equipo actualizado correctamente',
-					'url' => base_url('equipos/lista_equipos'),
-				));
+					echo json_encode(array(
+						'msg' => 'Equipo actualizado correctamente',
+						'url' => base_url('equipos/lista_equipos'),
+					));
+				} else {
+					echo json_encode(array(
+						'msg' => 'La Dirección IP ya esta asignada a otro equipo activo. Intenta con otra o da de baja dicho equipo',
+						'url' => base_url('equipos/lista_equipos')
+					));
+					$this->output->set_status_header(504);
+				}
+				
 			}
 			
 
