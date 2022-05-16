@@ -137,11 +137,22 @@ class Equipos extends CI_Controller {
 				);
 
 				if($this->input->post('tipo_equipo') === 'PC') {
-					// Hacer insercion a la tabla de equipos
-					$this->Equipo->guardar_equipo($datos);
-					// Crear el vinculo entre el equipo personal y su usuario en caso de ser necesario
 					$no_empleados = $this->input->post('no_empleados');
 					if(!empty($no_empleados)) {
+						// validad que los usuarios no tengan PC's ya asignadas
+						foreach($no_empleados as $no_empleado) {
+							if($this->Equipo_usuario->usuarioTienePC($no_empleado)) {
+								echo json_encode(array(
+									'msg' => 'Operación fallida, el usuario con ID '.$no_empleado.', ya tiene una PC asosiada',
+									'url' => base_url('equipos'),
+								));
+								$this->output->set_status_header(500);
+								exit;
+							}
+						}
+						// Hacer insercion a la tabla de equipos
+						$this->Equipo->guardar_equipo($datos);
+						// Crear el vinculo entre el equipo personal y su usuario en caso de ser necesario
 						// Obtener el id_equipo por su direccion ip
 						$res = $this->Equipo->obtenerIdEquipo($this->input->post('direccion_ip'));
 						$id_equipo = $res->id_equipo;
@@ -153,6 +164,9 @@ class Equipos extends CI_Controller {
 							$this->Equipo_usuario->insertar($data);
 						}
 						
+					} else {
+						// Solo insertar los datos del equipo sin asignarle usuarios
+						$this->Equipo->guardar_equipo($datos);
 					}
 					
 				} else if($this->input->post('tipo_equipo') === 'Impresora') {
