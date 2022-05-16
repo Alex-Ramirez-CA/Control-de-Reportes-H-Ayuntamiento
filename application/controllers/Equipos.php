@@ -427,6 +427,16 @@ class Equipos extends CI_Controller {
 						$this->Equipo_usuario->borrarRelacion($id_equipo);
 						$no_empleados = $this->input->post('no_empleados');
 						if(!empty($no_empleados)) {
+							// validar que los usuarios no tengan PC's ya asignadas
+							foreach($no_empleados as $no_empleado) {
+								if($this->Equipo_usuario->usuarioTienePC($no_empleado)) {
+									echo json_encode(array(
+										'msg' => 'Operación fallida, el usuario con ID '.$no_empleado.', ya tiene una PC asosiada',
+									));
+									$this->output->set_status_header(504);
+									exit;
+								}
+							}
 							foreach($no_empleados as $no_empleado) {
 								$data = array(
 									'id_equipo' => $id_equipo,
