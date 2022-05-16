@@ -143,7 +143,7 @@ class Equipos extends CI_Controller {
 						foreach($no_empleados as $no_empleado) {
 							if($this->Equipo_usuario->usuarioTienePC($no_empleado)) {
 								echo json_encode(array(
-									'msg' => 'Operación fallida, el usuario con ID '.$no_empleado.', ya tiene una PC asosiada',
+									'msg' => 'Operación fallida, el usuario con ID '.$no_empleado.', ya tiene una PC asociada',
 								));
 								$this->output->set_status_header(500);
 								exit;
@@ -428,7 +428,7 @@ class Equipos extends CI_Controller {
 							foreach($no_empleados as $no_empleado) {
 								if($this->Equipo_usuario->usuarioTienePC($no_empleado)) {
 									echo json_encode(array(
-										'msg' => 'Operación fallida, el usuario con ID '.$no_empleado.', ya tiene una PC asosiada',
+										'msg' => 'Operación fallida, el usuario con ID '.$no_empleado.', ya tiene una PC asociada',
 										'url' => base_url('equipos/lista_equipos')
 									));
 									$this->output->set_status_header(504);	
