@@ -429,7 +429,7 @@ class Equipos extends CI_Controller {
 								if($this->Equipo_usuario->usuarioTienePC($no_empleado)) {
 									echo json_encode(array(
 										'msg' => 'Operación fallida, el usuario con ID '.$no_empleado.', ya tiene una PC asosiada',
-										'url' => 'equipos/lista_equipos'
+										'url' => base_url('equipos/lista_equipos')
 									));
 									$this->output->set_status_header(504);	
 									exit;
