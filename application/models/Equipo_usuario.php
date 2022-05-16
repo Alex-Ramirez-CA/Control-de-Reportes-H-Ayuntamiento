@@ -85,8 +85,7 @@ class Equipo_usuario extends CI_Model {
         $data = $this->db->delete('equipo_usuario', array('id_equipo' => $id_equipo));
     }
 
-    // Funcion que nos arrojara el nuero de veces que aparece dicho usuario en la tabla equipo_usuario
-    // esto para saber si el usuario ya tiene una PC asosiada en caso del resultado ser 2
+    // Funcion que nos ayudara a saber si un usuario no tiene ya una PC activa asosiada
     public function usuarioTienePC($no_empleado) {
         $data = $this->db
                 ->select("*")
