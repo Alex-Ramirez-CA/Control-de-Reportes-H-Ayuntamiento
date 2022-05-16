@@ -145,7 +145,7 @@ class Equipos extends CI_Controller {
 								echo json_encode(array(
 									'msg' => 'Operación fallida, el usuario con ID '.$no_empleado.', ya tiene una PC asosiada',
 								));
-								$this->output->set_status_header(400);
+								$this->output->set_status_header(504);
 								exit;
 							}
 						}
