@@ -182,7 +182,6 @@ class Equipo extends CI_Model {
             ->from("equipo e")
             ->join("direccion dir", "e.id_direccion=dir.id_direccion")
             ->like('e.nombre', $search_equipo, 'after', '', TRUE)
-            ->limit(5)
             ->order_by('e.id_equipo')
             ->get();
         // buscar por direccion IP
@@ -192,7 +191,6 @@ class Equipo extends CI_Model {
                 ->from("equipo e")
                 ->join("direccion dir", "e.id_direccion=dir.id_direccion")
                 ->like('e.direccion_ip', $search_equipo, 'after', '', TRUE)
-                ->limit(5)
                 ->order_by('e.id_equipo')
                 ->get();
         }
