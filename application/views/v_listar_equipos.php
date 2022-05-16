@@ -86,4 +86,20 @@
     </div>
 </div>
 
+<div class="mensaje">
+    <div class="contenedor_mensaje_guardar_usuario">
+        <div class="cerrar_ventana_listar_equipos">
+            <p>x</p>
+        </div>
+        <div class="titulo-mensaje">
+            
+        </div>
+        <img class="imagen_mensaje" src="<?= base_url('assets/img/iconos/incorrecto.svg') ?>" alt="">
+        <div class="mensaje-body">
+
+        </div>
+    </div>
+            
+</div>
+
 <?= $footer ?>

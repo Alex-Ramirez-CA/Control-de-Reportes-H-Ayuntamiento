@@ -367,13 +367,39 @@
 	});
 
 	//Evento cuando se clica en algunos de los filtros
-	$(document).on("click", ".filtro", function () {
-		if($(this).children(".lista-dependecias").is(":visible")){
-			$(this).children(".lista-dependecias").css({visibility : "hidden"})
+	$(document).on("click", ".filtro-dependecia", function () {
+		if ($('.lista-dependecias').is(':hidden')) {
+			$('.lista-dependecias').css({display : "flex"});
+		}else {
+			$('.lista-dependecias').css({display : "none"});
 		}
-
-		if($(this).children(".lista-direcciones").is(":visible")){
-			$(this).children(".lista-direcciones").css({visibility : "hidden"})
+	});
+	$(document).on("click", ".filtro-fecha", function () {
+		if ($('.fechas-filtro').is(':hidden')) {
+			$('.fechas-filtro').css({display : "flex"});
+		}else {
+			$('.fechas-filtro').css({display : "none"});
+		}
+	});
+	$(document).on("click", ".filtro-equipo", function () {
+		if ($('#search_equipo').is(':visible')) {
+			$('#search_equipo').hide();
+		} else {
+			$('#search_equipo').show();
+		}
+	});
+	$(document).on("click", ".filtro-direccion", function () {
+		if ($('.lista-direcciones').is(':hidden')) {
+			$('.lista-direcciones').css({display : "flex"});
+		}else {
+			$('.lista-direcciones').css({display : "none"});
+		}
+	});
+	$(document).on("click", ".filtro-departamento", function () {
+		if ($('.lista-departamentos').is(':hidden')) {
+			$('.lista-departamentos').css({display : "flex"});
+		}else {
+			$('.lista-departamentos').css({display : "none"});
 		}
 	});
 
@@ -801,17 +827,38 @@
 				// Hacer algo si el checkbox ha sido seleccionado
 				status = 1;
 				$.post("modificar_status", { status, id_equipo, direccion_ip }, function (response) {
-					console.log(response);
+					if(response){
+						let json = JSON.parse(response);
+						$(".titulo-mensaje").html(`<b><h1>${json.msg}</h1></b>`);
+						$('.mensaje').css({'visibility':'visible'});
+						$('.contenedor_mensaje_guardar_usuario').children("img").attr("src",$('.contenedor_mensaje_guardar_usuario').children("img").attr("correcto"));
+						$('.contenedor_mensaje_guardar_usuario').css({'transform':'translateY(0%)'});
+						$(document).on('click', '.cerrar_ventana_listar_equipos', function(){
+							$('.mensaje').css({'visibility':'hidden'});
+							$('.contenedor_mensaje_guardar_usuario').css({'transform':'translateY(-200%)'});
+							obtenerListaCompletaEquipos();
+						});
+					}
 				});
-				//console.log(direccion_ip + " " + id_equipo);
 			} else {
 				// Hacer algo si el checkbox ha sido deseleccionado
 				status = 0;
 				$.post("modificar_status", { status, id_equipo, direccion_ip}, function (response) {
-					console.log(response);
-				});
-				//console.log(direccion_ip + " " + id_equipo);
+					if(response){
+						let json = JSON.parse(response);
+						$(".titulo-mensaje").html(`<b><h1>${json.msg}</h1></b>`);
+						$('.mensaje').css({'visibility':'visible'});
+						$('.contenedor_mensaje_guardar_usuario').children("img").attr("src",$('.contenedor_mensaje_guardar_usuario').children("img").attr("correcto"));
+						$('.contenedor_mensaje_guardar_usuario').css({'transform':'translateY(0%)'});
+						$(document).on('click', '.cerrar_ventana_listar_equipos', function(){
+							$('.mensaje').css({'visibility':'hidden'});
+							$('.contenedor_mensaje_guardar_usuario').css({'transform':'translateY(-200%)'});
+							obtenerListaCompletaEquipos();
+						});
+					}
+				});	
 			}
+			obtenerListaCompletaEquipos();
 		} else {
 			//console.log("No paso nada");
 			obtenerListaCompletaEquipos();
@@ -1177,8 +1224,13 @@
 		    success: function(data) {
 		        let json = JSON.parse(data);
 		        $(".titulo-mensaje").html(`<b><h1>${json.msg}</h1></b>`);
+				if(json.msg === "Equipo agregado correctamente"){
+					$('.contenedor_mensaje_guardar_usuario').children("img").attr("src",$('.contenedor_mensaje_guardar_usuario').children("img").attr("correcto"));
+				}else{
+					$('.contenedor_mensaje_guardar_usuario').children("img").attr("src",$('.contenedor_mensaje_guardar_usuario').children("img").attr("incorrecto"));
+					$('.contenedor_mensaje_guardar_usuario').children("img").css({width: "200px"});
+				}
 		        $('.mensaje').css({'visibility':'visible'});
-				$('.contenedor_mensaje_guardar_usuario').children("img").attr("src",$('.contenedor_mensaje_guardar_usuario').children("img").attr("correcto"));
 		        $('.contenedor_mensaje_guardar_usuario').css({'transform':'translateY(0%)'});
 		        $(document).on('click', '.cerrar_ventana_guardar_usuario', function(){
 		            $('.mensaje').css({'visibility':'hidden'});

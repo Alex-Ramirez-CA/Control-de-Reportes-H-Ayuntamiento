@@ -472,6 +472,10 @@ Estilos para los filtros que puede aplicar el administrador
 	width: 70px;
 }
 
+.filtro-dependecia:hover, .filtro-fecha:hover, .filtro-direccion:hover, .filtro-equipo:hover, .filtro-departamento:hover {
+	width: 75px;
+}
+
 /*Estilos para el filtro de fechas*/
 .fechas-filtro {
 	position: absolute;
@@ -479,15 +483,11 @@ Estilos para los filtros que puede aplicar el administrador
 	transition: all 400ms ease;
 	width: 240px;
 	background: #fff;
-	display: flex;
+	display: none;
 	flex-direction: column;
 	border-radius: 10px; 
 	border: 1px solid rgba(0, 0, 0, 0.15);
 	padding: 10px;
-	/* transform: translatex(15%);
-	z-index: -1;
-	visibility: hidden; */
-	visibility: hidden;
 	transform: translatex(87%);
 	z-index: 1;
 }
@@ -530,17 +530,13 @@ Estilos para los filtros que puede aplicar el administrador
 	transition: all 400ms ease;
 	width: 150px;
 	background: #fff;
-	display: flex;
+	display: none;
 	flex-direction: column;
 	border-radius: 10px; 
 	border: 1px solid rgba(0, 0, 0, 0.15);
 	margin-bottom: 5px;
-	visibility: hidden;
 	transform: translatex(-109%);
 	z-index: 1;
-	/* transform: translatex(5%);
-	z-index: -1;
-	visibility: hidden; */
 }
 
 .lista-departamentos p {
@@ -574,16 +570,13 @@ Estilos para los filtros que puede aplicar el administrador
 	width: 250px;
 	max-height: 300px;
 	background: #f6f8fa;
-	display: flex;
+	display: none;
 	flex-direction: column;
 	border-radius: 10px; 
 	border: 1px solid rgba(0, 0, 0, 0.15);
 	overflow: hidden;
 	overflow-y: scroll;
 	gap: 1px;
-	/* z-index: -1;
-	visibility: hidden; */
-	visibility: visible;
 	transform: translatex(66%);
 	z-index: 1;
 }
@@ -619,16 +612,13 @@ Estilos para los filtros que puede aplicar el administrador
 	width: 250px;
 	max-height: 300px;
 	background: #f6f8fa;
-	display: flex;
+	display: none;
 	flex-direction: column;
 	border-radius: 10px; 
 	border: 1px solid rgba(0, 0, 0, 0.15);
 	overflow: hidden;
 	overflow-y: scroll;
 	gap: 1px;
-	/* z-index: -1;
-	visibility: hidden; */
-	visibility: visible;
 	transform: translatex(-67%);
 	z-index: 1;
 }
@@ -657,7 +647,7 @@ Estilos para los filtros que puede aplicar el administrador
 
 /*Estilos para el filtro de buscar por equipo*/
 #search_equipo {
-	visibility: hidden;
+	display: none;
 	position: absolute;
 	top: 75%;
 	right: 0 auto;
@@ -670,11 +660,9 @@ Estilos para los filtros que puede aplicar el administrador
 	font-size: 14px;
 	padding-left: 8px;
 	padding-top: 5px;
-	visibility: hidden;
 	transform: translatey(135%);
 	z-index: 1;
 	transition: all 300ms ease;
-	/* z-index: -1; */
 }
 
 .opciones-busqueda-equipo {
@@ -870,6 +858,7 @@ Estilos para los filtros que puede aplicar el administrador
 .contenedor_mensaje_guardar_usuario {
 	min-width: 400px;
 	min-height: 300px;
+	max-width: 750px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -884,7 +873,12 @@ Estilos para los filtros que puede aplicar el administrador
 	backdrop-filter: blur(4px);
 }
 
-.cerrar_ventana_guardar_usuario {
+.contenedor_mensaje_guardar_usuario img {
+	margin-top: 20px;
+	margin-bottom: 25px;
+}
+
+.cerrar_ventana_guardar_usuario, .cerrar_ventana_listar_equipos {
 	left: 102%;
 	font-size: 15px;
 	padding-top: 0.295rem;
@@ -899,7 +893,7 @@ Estilos para los filtros que puede aplicar el administrador
 	position: absolute;
 }
 
-.cerrar_ventana_guardar_usuario:hover {
+.cerrar_ventana_guardar_usuario:hover, .cerrar_ventana_listar_equipos:hover {
 	background: #2e2e2e;
 }
 
@@ -1278,4 +1272,10 @@ Estilos para los filtros que puede aplicar el administrador
 
 .quitar_empleado_asociado:hover {
 	background: #2e2e2e;
+}
+
+.imagen_mensaje {
+	width: 200px;
+	margin-top: 20px;
+	margin-bottom: 25px;
 }
