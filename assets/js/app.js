@@ -1471,6 +1471,19 @@
 						$('.mensaje').css({'visibility':'hidden'});
 						$('.contenedor_mensaje_guardar_usuario').css({'transform':'translateY(-200%)'});
 					});
+				},
+				504: function(xhr) {
+					let json = JSON.parse(xhr.responseText);
+		            //Para mostrar los mensajes de error en caso de tener en los campos del formulario	
+					$(".titulo-mensaje").html(`<b><h1>${json.msg}</h1></b>`);
+					$('.mensaje').css({'visibility':'visible'});
+					$('.contenedor_mensaje_guardar_usuario').children("img").attr("src",$('.contenedor_mensaje_guardar_usuario').children("img").attr("incorrecto"));
+					$('.contenedor_mensaje_guardar_usuario').css({'transform':'translateY(0%)'});
+					$(document).on('click', '.cerrar_ventana_guardar_usuario', function(){
+						$('.mensaje').css({'visibility':'hidden'});
+						$('.contenedor_mensaje_guardar_usuario').css({'transform':'translateY(-200%)'});
+						window.location.replace(json.url);
+					});
 				}
 		    },
 		});	
