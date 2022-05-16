@@ -1301,7 +1301,6 @@
 					$(document).on('click', '.cerrar_ventana_guardar_usuario', function(){
 						$('.mensaje').css({'visibility':'hidden'});
 						$('.contenedor_mensaje_guardar_usuario').css({'transform':'translateY(-200%)'});
-						window.location.replace(json.url);
 					});
 				}
 		    },
@@ -1471,7 +1470,6 @@
 					$(document).on('click', '.cerrar_ventana_guardar_usuario', function(){
 						$('.mensaje').css({'visibility':'hidden'});
 						$('.contenedor_mensaje_guardar_usuario').css({'transform':'translateY(-200%)'});
-						window.location.replace(json.url);
 					});
 				}
 		    },
