@@ -10,6 +10,7 @@
 	let status = null;
 	let tipo_equipo = null;
 	let id_direccion_modif = 0;
+	let id_equipo_modif = 0;
 
 	if (getUrl == baseUrl + "/atendiendo") {
 		let cantidad_reportes = $(".proceso").children(".columna-proceso").children(".card-atendiendo").length;
@@ -534,6 +535,16 @@
 			$("#direccion_ip").removeAttr("idEquipo");
 		}
 	});
+	
+	//Detectar si cambia el campo de la direccion ip a la hora de modificar usuario
+	$(document).on("change", "#direccion_ip", function () {
+		id_equipo_modif = 1;
+	});
+
+	//Detectar si cambia el campo de la direccion a la hora de modificar usuario
+	$(document).on("change", "#direccion", function () {
+		id_direccion_modif = 1;
+	});
 
 	//Evento de cuando clique en enviar filtros
 	$(document).on("click", ".opcion_equipo_ip", function () {
@@ -659,7 +670,7 @@
 		$.ajax({
 		    url: baseUrl + "/usuarios/actualizar_usuario",
 		    type: 'POST',
-		    data: {no_empleado, nombre, apellido_paterno, apellido_materno, email, password, id_direccion, id_rol, id_departamento, id_equipo},
+		    data: {id_direccion_modif, id_equipo_modif, no_empleado, nombre, apellido_paterno, apellido_materno, email, password, id_direccion, id_rol, id_departamento, id_equipo},
 		    success: function(data) {
 		        let json = JSON.parse(data);
 		        $(".titulo-mensaje").html(`<b><h1>${json.msg}</h1></b>`);
