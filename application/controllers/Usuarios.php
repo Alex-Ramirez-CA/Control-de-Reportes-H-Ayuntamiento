@@ -127,12 +127,14 @@ class Usuarios extends CI_Controller {
 			// Crear el vinculo del usuario con la impresora de su direccion
 			// Validar que dicha direccion si tenga ya una impresora
 			if($res = $this->Equipo->obtenerImpresora((int)$this->input->post('id_direccion'))) {
-				$id_equipo = $res->id_equipo;
-				$data = array(
-					'id_equipo' => $id_equipo,
-					'no_empleado' => $no_empleado,
-				);
-				$this->Equipo_usuario->insertar($data);
+				foreach($res as $id_equipo) {
+					$data = array(
+						'id_equipo' => $id_equipo->id_equipo,
+						'no_empleado' => $no_empleado,
+					);
+					$this->Equipo_usuario->insertar($data);
+				}
+				
 			}
 
 			echo json_encode(array(

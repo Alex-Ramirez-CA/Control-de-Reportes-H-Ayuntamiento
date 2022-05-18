@@ -55,14 +55,13 @@ class Equipo extends CI_Model {
             ->select("id_equipo")
             ->from("equipo")
             ->where(array('id_direccion' => $id_direccion, 'tipo_equipo' => 'Impresora', 'status' => 1))
-            ->limit(1)
             ->get();
 
         // Si no se encuentra resultados
         if(!$data->result()) {
             return false;
         }
-        return $data->row(); 
+        return $data->result(); 
     }
 
     public function obtenerPC($no_empleado) {
