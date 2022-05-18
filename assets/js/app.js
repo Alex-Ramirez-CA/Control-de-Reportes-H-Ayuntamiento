@@ -11,6 +11,7 @@
 	let tipo_equipo = null;
 	let id_direccion_modif = 0;
 	let id_equipo_modif = 0;
+	let direccion_ip_modif = 0;
 
 	if (getUrl == baseUrl + "/atendiendo") {
 		let cantidad_reportes = $(".proceso").children(".columna-proceso").children(".card-atendiendo").length;
@@ -1330,6 +1331,10 @@
 		}
 	});
 
+	$(document).on("change", ("#direccion_ip_equipo"), function () {
+		direccion_ip_modif = 1;
+	});
+
 	//Evento de cuando clique en guardar datos del equipo
 	$(document).on("click", ".guardar_cambios_equipo", function () {
 		let no_empleados = [];
@@ -1405,7 +1410,7 @@
 		$.ajax({
 		    url: baseUrl + "/equipos/actualizar_equipo",
 		    type: 'POST',
-		    data: {no_empleados, nombre, tipo_equipo, id_direccion, sistema_operativo, marca, inventario, serie, direccion_ip, teclado, mouse, dvd, procesador, segmento_de_red, ram, disco_duro, inventario_monitor, serie_monitor, marca_monitor, tamano_monitor, observaciones, id_direccion_modif, no_empleados_modif, id_equipo},
+		    data: {direccion_ip_modif, no_empleados, nombre, tipo_equipo, id_direccion, sistema_operativo, marca, inventario, serie, direccion_ip, teclado, mouse, dvd, procesador, segmento_de_red, ram, disco_duro, inventario_monitor, serie_monitor, marca_monitor, tamano_monitor, observaciones, id_direccion_modif, no_empleados_modif, id_equipo},
 		    success: function(data) {
 		        let json = JSON.parse(data);
 		        $(".titulo-mensaje").html(`<b><h1>${json.msg}</h1></b>`);
