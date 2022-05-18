@@ -356,8 +356,16 @@ class Equipos extends CI_Controller {
 				echo json_encode($erros);
 				$this->output->set_status_header(400);
 			} else {
-				// Validar que la direccion IP no este ya asignada a un equipo activo
-				if(!$this->Equipo->direccionIpYaExistente($this->input->post('direccion_ip'))) {
+				if((int)$this->input->post('direccion_ip_modif') === 1) {
+					if($this->Equipo->direccionIpYaExistente($this->input->post('direccion_ip'))) {
+						echo json_encode(array(
+							'msg' => 'La Dirección IP ya esta asignada a otro equipo activo. Intenta con otra o da de baja dicho equipo',
+							'url' => base_url('equipos/lista_equipos')
+						));
+						$this->output->set_status_header(504);
+						exit;
+					} 
+				} 
 					// Si pasa la validación, realizar el proceso de actualizado
 					// Datos para hacer la actualización en la tabla de usuario
 					$datos = array(
@@ -459,13 +467,6 @@ class Equipos extends CI_Controller {
 						'msg' => 'Equipo actualizado correctamente',
 						'url' => base_url('equipos/lista_equipos'),
 					));
-				} else {
-					echo json_encode(array(
-						'msg' => 'La Dirección IP ya esta asignada a otro equipo activo. Intenta con otra o da de baja dicho equipo',
-						'url' => base_url('equipos/lista_equipos')
-					));
-					$this->output->set_status_header(504);
-				}
 				
 			}
 			
