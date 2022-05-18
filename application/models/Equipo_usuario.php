@@ -84,6 +84,11 @@ class Equipo_usuario extends CI_Model {
     public function borrarRelacion($id_equipo) {
         $data = $this->db->delete('equipo_usuario', array('id_equipo' => $id_equipo));
     }
+    
+    // Borra la relacion especifica de un equipo con un usuario
+    public function borrarVinculoEyU($id_equipo, $no_empleado) {
+        $data = $this->db->delete('equipo_usuario', array('id_equipo' => $id_equipo, 'no_empleado' => $no_empleado));
+    }
 
     // Funcion que nos ayudara a saber si un usuario no tiene ya una PC activa asosiada
     public function usuarioTienePC($no_empleado) {

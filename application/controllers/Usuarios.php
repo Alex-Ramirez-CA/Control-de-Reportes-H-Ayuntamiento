@@ -285,23 +285,49 @@ class Usuarios extends CI_Controller {
 				// Obtener el no_empleado vía post
 				$no_empleado = (int)$this->input->post('no_empleado');
 
-				// Si la direccion a la que pertenece es modificada
-				// Modificar tambien la impresora a la que estara asociado el usuario
-				$oldDireccion = $this->Usuario->obtenerDireccion($no_empleado);
-				$oldDireccion = $oldDireccion->id_direccion;
-				$newDireccion = (int)$this->input->post('id_direccion');
-				if($oldDireccion !== $newDireccion){
-					// Obtener el id_equipo de la impresora a la que estaba asignado dicho usuario anteriormente
-					if($res = $this->Equipo->obtenerOldImpresora($no_empleado)) {
-						$old_id_equipo = $res->id_equipo;
-						// Obtener el id_equipo de la impresora de la nueva direccion
-						if($res = $this->Equipo->obtenerImpresora($newDireccion)) {
-							$id_equipo = $res->id_equipo;
-							// Realizar la actualizacion
-							$this->Equipo_usuario->updateEquipo($id_equipo, $no_empleado, $old_id_equipo);
+				// Cuando la direccion a la que pertenece el usuario es modificada
+				if((int)$this->input->post('id_direccion_modif') === 1) {
+					// Obtener el id_direccion actual del ususario
+					$id_direccion = $this->Usuario->obtenerDireccion($no_empleado);
+					$id_direccion = $id_direccion->id_direccion;
+					// Borrar los registros que vinculan al usuario con las impresoras de dicha direccion
+					if($res = $this->Equipo->obtenerImpresora($id_direccion)) {
+						foreach($res as $equipo) {
+							$id_equipo = $equipo->id_equipo;
+							$this->Equipo_usuario->borrarVinculoEyU($id_equipo, $no_empleado);
 						}
+						
+					}
+					// Realizar la vinculación del usuario con las nuevas impresoras de la nueva direccion
+					// Validar que dicha direccion si tenga ya una impresora
+					if($res = $this->Equipo->obtenerImpresora((int)$this->input->post('id_direccion'))) {
+						foreach($res as $id_equipo) {
+							$data = array(
+								'id_equipo' => $id_equipo->id_equipo,
+								'no_empleado' => $no_empleado,
+							);
+							$this->Equipo_usuario->insertar($data);
+						}
+						
 					}
 				}
+				// Si la direccion a la que pertenece es modificada
+				// Modificar tambien la impresora a la que estara asociado el usuario
+				// $oldDireccion = $this->Usuario->obtenerDireccion($no_empleado);
+				// $oldDireccion = $oldDireccion->id_direccion;
+				// $newDireccion = (int)$this->input->post('id_direccion');
+				// if($oldDireccion !== $newDireccion){
+				// 	// Obtener el id_equipo de la impresora a la que estaba asignado dicho usuario anteriormente
+				// 	if($res = $this->Equipo->obtenerOldImpresora($no_empleado)) {
+				// 		$old_id_equipo = $res->id_equipo;
+				// 		// Obtener el id_equipo de la impresora de la nueva direccion
+				// 		if($res = $this->Equipo->obtenerImpresora($newDireccion)) {
+				// 			$id_equipo = $res->id_equipo;
+				// 			// Realizar la actualizacion
+				// 			$this->Equipo_usuario->updateEquipo($id_equipo, $no_empleado, $old_id_equipo);
+				// 		}
+				// 	}
+				// }
 				
 				// Si el equipo PC del usuario es modificado
 				if($this->input->post('id_equipo')) {
