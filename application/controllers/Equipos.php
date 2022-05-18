@@ -171,11 +171,11 @@ class Equipos extends CI_Controller {
 				} else if($this->input->post('tipo_equipo') === 'Impresora') {
 					// verificar que si se va a insertar una impresora, que no esxita otra activa 
 					// relacionada con la misma direccion
-					if(!$this->Equipo->obtenerImpresora((int)$this->input->post('id_direccion'))) {
+					// if(!$this->Equipo->obtenerImpresora((int)$this->input->post('id_direccion'))) {
 						// Hacer insercion a la tabla de equipos
 						$this->Equipo->guardar_equipo($datos);
 						// Crear el vinculo entre la impresora y la direccion a la que pertenece
-						if($res = $this->Equipo->obtenerImpresora((int)$this->input->post('id_direccion'))) {
+						if($res = $this->Equipo->obtenerIdImpresora($this->input->post('direccion_ip'))) {
 							$id_equipo = $res->id_equipo;
 							if($usuarios = $this->Usuario->getUsuariosbyDireccion((int)$this->input->post('id_direccion'))) {
 								foreach($usuarios as $usuario) {
@@ -189,13 +189,13 @@ class Equipos extends CI_Controller {
 							}
 							
 						}
-					} else {
-						echo json_encode(array(
-							'msg' => 'Esta dirección ya tiene una impresora activa asociada',
-						));
-						$this->output->set_status_header(500);
-						exit;
-					}
+					// } else {
+					// 	echo json_encode(array(
+					// 		'msg' => 'Esta dirección ya tiene una impresora activa asociada',
+					// 	));
+					// 	$this->output->set_status_header(500);
+					// 	exit;
+					// }
 				}
 				
 				echo json_encode(array(
@@ -394,7 +394,7 @@ class Equipos extends CI_Controller {
 						if((int)$this->input->post('id_direccion_modif') === 1) {
 							// verificar que si se va a insertar una impresora, que no esxita otra activa 
 							// relacionada con la misma direccion
-							if(!$this->Equipo->obtenerImpresora((int)$this->input->post('id_direccion'))) {
+							// if(!$this->Equipo->obtenerImpresora((int)$this->input->post('id_direccion'))) {
 								// Eliminar los registros que asocian dicha impresora con los usuarios 
 								// de la antigua direccion
 								$this->Equipo_usuario->borrarRelacion($id_equipo);
@@ -409,14 +409,14 @@ class Equipos extends CI_Controller {
 										$this->Equipo_usuario->insertar($data);
 									}
 								}
-							} else {
-								echo json_encode(array(
-									'msg' => 'Esta dirección ya tiene una impresora activa asociada',
-									'url' => 'equipos/lista_equipos'
-								));
-								$this->output->set_status_header(504);
-								exit;
-							}
+							// } else {
+							// 	echo json_encode(array(
+							// 		'msg' => 'Esta dirección ya tiene una impresora activa asociada',
+							// 		'url' => 'equipos/lista_equipos'
+							// 	));
+							// 	$this->output->set_status_header(504);
+							// 	exit;
+							// }
 						}
 					}
 					

@@ -111,6 +111,21 @@ class Equipo extends CI_Model {
         }
         return $data->row();
     }
+    
+    public function obtenerIdImpresora($direccion_ip) {
+        $data = $this->db
+                ->select("id_equipo")
+                ->from("equipo")
+                ->where(array('direccion_ip' => $direccion_ip, 'tipo_equipo' => 'Impresora', 'status' =>1))
+                ->limit(1)
+                ->get();
+        
+        // Si no se encuentra resultados
+        if(!$data->result()) {
+            return false;
+        }
+        return $data->row();
+    }
 
     // Obtiene todos los equipos existentes
     public function getEquipos() {
