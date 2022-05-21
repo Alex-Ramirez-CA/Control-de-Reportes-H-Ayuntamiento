@@ -9,7 +9,7 @@ class Auth extends CI_Model {
             ->select("b.no_empleado, b.email, b.nombre, b.apellido_paterno, b.apellido_materno, a.id_rol, a.nombre as rol_nombre, b.id_departamento")
             ->from("rol a")
             ->join("usuario b", "a.id_rol = b.id_rol")
-            ->where(array('b.email' => $usuario, 'b.password' => $password), 1)
+            ->where(array('b.email' => $usuario, 'b.password' => md5($password)), 1)
             ->get();
 
         if(!$data->result()) {
