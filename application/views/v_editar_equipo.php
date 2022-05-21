@@ -4,7 +4,7 @@
 <div class="container_lista_usuarios">
     <div class="formulario_equipos">
         <div class="titulo_formulario">
-            <h1>Ingrese datos del nuevo equipo</h1>
+            <h1>Ingrese los nuevos datos del equipo</h1>
         </div>
         <div class="columnas_formulario_equipo">
             <div class="columna_formulario_equipo">
