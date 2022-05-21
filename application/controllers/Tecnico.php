@@ -125,7 +125,7 @@ class Tecnico extends CI_Controller {
 				$this->Incidencia->updateContador($id_incidencia, ($contador - 1));
 				echo json_encode(array(
 					'msg' => 'Te has unido nuevamente a esta incidencia',
-					'url' => base_url('tecnico')
+					'url' => base_url('atendiendo')
 				));
 			} else {
 				//Obtener la fecha del sistema
