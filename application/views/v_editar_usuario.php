@@ -38,7 +38,7 @@
                 </label>
                 <label for="contraseña">
                     Contraseña
-                    <input id="contraseña" type="text" value="<?= $datos_usuario->password?>">
+                    <input id="contraseña" type="password" value="<?= $datos_usuario->password?>">
                     <div class="error_message_password">
                         
                     </div>
