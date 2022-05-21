@@ -269,17 +269,32 @@ class Usuarios extends CI_Controller {
 				$this->output->set_status_header(400);
 			} else {
 				// Si pasa la validación, realizar el proceso de actualizado
-				// Datos para hacer la actualizacón del usuario
-				$datos = array(
-					'nombre' => $this->input->post('nombre'),
-					'apellido_paterno' => $this->input->post('apellido_paterno'),
-					'apellido_materno' => $this->input->post('apellido_materno'),
-					'email' => $this->input->post('email'),
-					'password' => md5($this->input->post('password')),
-					'id_direccion' => (int)$this->input->post('id_direccion'),
-					'id_rol' => (int)$this->input->post('id_rol'),
-					'id_departamento' => (int)$this->input->post('id_departamento'),
-				);
+				// validar si el password se modifico, para agregarlo a los datos que se actualizaran
+				if((int)$this->input->post('password_modif') === 1) {
+					// Datos para hacer la actualizacón del usuario
+					$datos = array(
+						'nombre' => $this->input->post('nombre'),
+						'apellido_paterno' => $this->input->post('apellido_paterno'),
+						'apellido_materno' => $this->input->post('apellido_materno'),
+						'email' => $this->input->post('email'),
+						'password' => md5($this->input->post('password')),
+						'id_direccion' => (int)$this->input->post('id_direccion'),
+						'id_rol' => (int)$this->input->post('id_rol'),
+						'id_departamento' => (int)$this->input->post('id_departamento'),
+					);
+				} else {
+					// Datos para hacer la actualizacón del usuario
+					$datos = array(
+						'nombre' => $this->input->post('nombre'),
+						'apellido_paterno' => $this->input->post('apellido_paterno'),
+						'apellido_materno' => $this->input->post('apellido_materno'),
+						'email' => $this->input->post('email'),
+						'id_direccion' => (int)$this->input->post('id_direccion'),
+						'id_rol' => (int)$this->input->post('id_rol'),
+						'id_departamento' => (int)$this->input->post('id_departamento'),
+					);
+				}
+				
 
 				// Obtener el no_empleado vía post
 				$no_empleado = (int)$this->input->post('no_empleado');
@@ -310,24 +325,7 @@ class Usuarios extends CI_Controller {
 						
 					}
 				}
-				// Si la direccion a la que pertenece es modificada
-				// Modificar tambien la impresora a la que estara asociado el usuario
-				// $oldDireccion = $this->Usuario->obtenerDireccion($no_empleado);
-				// $oldDireccion = $oldDireccion->id_direccion;
-				// $newDireccion = (int)$this->input->post('id_direccion');
-				// if($oldDireccion !== $newDireccion){
-				// 	// Obtener el id_equipo de la impresora a la que estaba asignado dicho usuario anteriormente
-				// 	if($res = $this->Equipo->obtenerOldImpresora($no_empleado)) {
-				// 		$old_id_equipo = $res->id_equipo;
-				// 		// Obtener el id_equipo de la impresora de la nueva direccion
-				// 		if($res = $this->Equipo->obtenerImpresora($newDireccion)) {
-				// 			$id_equipo = $res->id_equipo;
-				// 			// Realizar la actualizacion
-				// 			$this->Equipo_usuario->updateEquipo($id_equipo, $no_empleado, $old_id_equipo);
-				// 		}
-				// 	}
-				// }
-				
+
 				// Si el equipo PC del usuario es modificado
 				if((int)$this->input->post('id_equipo_modif') === 1) {
 					if($this->input->post('id_equipo')) {
@@ -354,27 +352,6 @@ class Usuarios extends CI_Controller {
 						$this->Equipo_usuario->borrarVinculoEyU($id_equipo, $no_empleado);
 					}
 				}
-
-				// if($this->input->post('id_equipo')) {
-				// 	// Actualizar el equipo o PC del suarios
-				// 	// Obtener el id_equipo vía post
-				// 	$id_equipo = (int)$this->input->post('id_equipo');
-				// 	// Obtner el id del antiguo equipo del usuario
-				// 	if($res = $this->Equipo->obtenerPC($no_empleado)) {
-				// 		$old_id_equipo = $res->id_equipo;
-				// 		// Realizar la actualizacion
-				// 		$this->Equipo_usuario->updateEquipo($id_equipo, $no_empleado, $old_id_equipo);
-				// 	} else {
-				// 		// Si no tiene equipo anterior realizar una incersion
-				// 		$data = array(
-				// 			'id_equipo' => $id_equipo,
-				// 			'no_empleado' => $no_empleado,
-				// 		);
-				// 		$this->Equipo_usuario->insertar($data);
-				// 	}
-				// }
-				
-				
 
 				// Hacer actualización de la tabla de usuarios
 				$this->Usuario->update_usuario($no_empleado, $datos);
