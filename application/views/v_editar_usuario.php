@@ -38,7 +38,7 @@
                 </label>
                 <label for="contraseña">
                     Contraseña
-                    <input id="contraseña" type="text" value="<?= $datos_usuario->password?>">
+                    <input id="contraseña" type="password" value="<?= $datos_usuario->password?>">
                     <div class="error_message_password">
                         
                     </div>
@@ -92,7 +92,7 @@
                 </label>
                 <label for="departamento">
                     Departamento interno
-                    <select name="departamento" id="departamento">
+                    <select name="departamento" id="departamento" <?= $datos_usuario->id_rol == 0 ? 'disabled' : ''; ?> >
                         <option class="departamento_indefinido" selected value="0">Seleccione un departamento</option>
                     <?php
                         foreach($departamentos as $item):

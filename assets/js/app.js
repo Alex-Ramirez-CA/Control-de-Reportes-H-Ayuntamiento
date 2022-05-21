@@ -646,6 +646,18 @@
 		ev.preventDefault();
 	});
 
+	//Variables para detectar y mandar el cambio de contraseña
+	let old_password = $("#contraseña").val();
+	let password_modif = 0;
+	//Detectar si cambia el campo de la password a la hora de modificar usuario
+	$(document).on("change", "#contraseña", function () {
+		if ($(this).val() === old_password){
+			password_modif = 0;	
+		}else{
+			password_modif = 1;
+		}
+	});
+
 	//Evento cuando se clica guardar los cambios de los datos del usuario
 	$("#btn_guardar_cambios_usuario").click(function (ev) {
         let no_empleado = $(this).attr("noEmpleado");
@@ -671,7 +683,7 @@
 		$.ajax({
 		    url: baseUrl + "/usuarios/actualizar_usuario",
 		    type: 'POST',
-		    data: {id_direccion_modif, id_equipo_modif, no_empleado, nombre, apellido_paterno, apellido_materno, email, password, id_direccion, id_rol, id_departamento, id_equipo},
+		    data: {password_modif, id_direccion_modif, id_equipo_modif, no_empleado, nombre, apellido_paterno, apellido_materno, email, password, id_direccion, id_rol, id_departamento, id_equipo},
 		    success: function(data) {
 		        let json = JSON.parse(data);
 		        $(".titulo-mensaje").html(`<b><h1>${json.msg}</h1></b>`);
