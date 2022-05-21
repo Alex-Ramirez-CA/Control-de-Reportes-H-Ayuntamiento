@@ -958,83 +958,83 @@
 	$(document).on("click", ".titulo_filtro_usuarios", function () {
         if ($(this).attr("idFiltroUsuario") == '1') {
             if ($('.lista_dependencias_usuarios').is(':hidden')) {
-                $(this).css({ background: "#f6f8fa" });
-                $("h2", this).css('color', '#006e95');
+                $(this).css({ background: "#006e95" });
+                $("h2", this).css('color', '#fff');
                 $(".marcar_filtro_seleccionado", this).css({ transform: "translatex(0%)" });
                 $(".lista_dependencias_usuarios").css({ display: "flex" });
             }else {
                 $("h2", this).css('color', '#006e95');
                 $(this).css({ 'background-color': "#fff" });
-                $(".marcar_filtro_seleccionado", this).css({ transform: "translatex(255px)" });
+                $(".marcar_filtro_seleccionado", this).css({ transform: "translatex(300px)" });
                 $(".lista_dependencias_usuarios").css({ display: "none" });
             }
         }
 
         if ($(this).attr("idFiltroUsuario") == '2') {
             if ($('.lista_direcciones_usuarios').is(':hidden')) {
-                $(this).css({ background: "#f6f8fa" });
-                $("h2", this).css('color', '#006e95');
+                $(this).css({ background: "#006e95" });
+                $("h2", this).css('color', '#fff');
                 $(".marcar_filtro_seleccionado", this).css({ transform: "translatex(0%)" });
                 $(".lista_direcciones_usuarios").css({ display: "flex" });
             }else {
                 $("h2", this).css('color', '#006e95');
                 $(this).css({ background: "#fff" });
-                $(".marcar_filtro_seleccionado", this).css({ transform: "translatex(255px)" });
+                $(".marcar_filtro_seleccionado", this).css({ transform: "translatex(300px)" });
                 $(".lista_direcciones_usuarios").css({ display: "none" });
             }
         }
 
         if ($(this).attr("idFiltroUsuario") == '3') {
             if ($('.lista_departamentos_usuarios').is(':hidden')) {
-                $(this).css({ background: "#f6f8fa" });
-                $("h2", this).css('color', '#006e95');
+                $(this).css({ background: "#006e95" });
+                $("h2", this).css('color', '#fff');
                 $(".marcar_filtro_seleccionado", this).css({ transform: "translatex(0%)" });
                 $(".lista_departamentos_usuarios").css({ display: "flex" });
             }else {
                 $("h2", this).css('color', '#006e95');
                 $(this).css({ background: "#fff" });
-                $(".marcar_filtro_seleccionado", this).css({ transform: "translatex(255px)" });
+                $(".marcar_filtro_seleccionado", this).css({ transform: "translatex(300px)" });
                 $(".lista_departamentos_usuarios").css({ display: "none" });
             }
         }
 
         if ($(this).attr("idFiltroUsuario") == '4') {
             if ($('.lista_tipos_usuarios').is(':hidden')) {
-                $(this).css({ background: "#f6f8fa" });
-                $("h2", this).css('color', '#006e95');
+                $(this).css({ background: "#006e95" });
+                $("h2", this).css('color', '#fff');
                 $(".marcar_filtro_seleccionado", this).css({ transform: "translatex(0%)" });
                 $(".lista_tipos_usuarios").css({ display: "flex" });
             }else {
                 $("h2", this).css('color', '#006e95');
                 $(this).css({ background: "#fff" });
-                $(".marcar_filtro_seleccionado", this).css({ transform: "translatex(255px)" });
+                $(".marcar_filtro_seleccionado", this).css({ transform: "translatex(300px)" });
                 $(".lista_tipos_usuarios").css({ display: "none" });
             }
         }
 
         if ($(this).attr("idFiltroUsuario") == '5') {
             if ($('.lista_status_usuarios').is(':hidden')) {
-                $(this).css({ background: "#f6f8fa" });
-                $("h2", this).css('color', '#006e95');
+                $(this).css({ background: "#006e95" });
+                $("h2", this).css('color', '#fff');
                 $(".marcar_filtro_seleccionado", this).css({ transform: "translatex(0%)" });
                 $(".lista_status_usuarios").css({ display: "flex" });
             }else {
                 $("h2", this).css('color', '#006e95');
                 $(this).css({ background: "#fff" });
-                $(".marcar_filtro_seleccionado", this).css({ transform: "translatex(255px)" });
+                $(".marcar_filtro_seleccionado", this).css({ transform: "translatex(300px)" });
                 $(".lista_status_usuarios").css({ display: "none" });
             }
         }
 		if ($(this).attr("idFiltroUsuario") == '6') {
             if ($('.lista_tipo_equipo').is(':hidden')) {
-                $(this).css({ background: "#f6f8fa" });
-                $("h2", this).css('color', '#006e95');
+                $(this).css({ background: "#006e95" });
+                $("h2", this).css('color', '#fff');
                 $(".marcar_filtro_seleccionado", this).css({ transform: "translatex(0%)" });
                 $(".lista_tipo_equipo").css({ display: "flex" });
             }else {
                 $("h2", this).css('color', '#006e95');
                 $(this).css({ background: "#fff" });
-                $(".marcar_filtro_seleccionado", this).css({ transform: "translatex(255px)" });
+                $(".marcar_filtro_seleccionado", this).css({ transform: "translatex(300px)" });
                 $(".lista_tipo_equipo").css({ display: "none" });
             }
         }

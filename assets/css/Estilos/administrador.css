@@ -903,7 +903,7 @@ option {
 
  /*-----------------------------Estilos para el listado de usuarios usuarios-----------------------------*/
 .filtros_lista_usurios {
-	width: 30%;
+	width: 35%;
 	height: 500px;
 	background-color: rgba(248, 244, 244, 0.3);
 	box-shadow: 0 0px 7px 0 rgba(31, 38, 135, 0.37);
@@ -990,19 +990,20 @@ option {
 	width: 100%;
 	background: #f6f8fa;
 	flex-direction: column;
-	gap: 1px;
+	/* gap: 1px; */
 	display: none;
 }
 
 .lista_dependencias_usuarios p, .lista_direcciones_usuarios p, .lista_departamentos_usuarios p, .lista_tipos_usuarios p, .lista_status_usuarios p, .lista_tipo_equipo p {
 	text-align: center;
-	font-size: 15px;
+	font-size: 14px;
 	background-color: #f6f8fa;
 	padding-top: 4px;
 	color: #006e95;
 	cursor: pointer;
 	height:auto;
 	word-wrap: break-word;
+	border-bottom: solid 1px #6cc5b2;
 }
 
 .lista_dependencias_usuarios p:hover, .lista_direcciones_usuarios p:hover, .lista_departamentos_usuarios p:hover, .lista_tipos_usuarios p:hover, .lista_status_usuarios p:hover, .lista_tipo_equipo p:hover {
@@ -1042,12 +1043,12 @@ option {
 	position: absolute;
 	width: 12px;
 	height: 30px;
-	background-color: #006e95;
+	background-color: #26A2D9;
 	top: 0;
 	left: 0;
 	z-index: 1;
 	transition: all 400ms ease;
-	transform: translatex(255px);
+	transform: translatex(300px);
 }
 
 .titulo_filtro_usuarios h2 {
