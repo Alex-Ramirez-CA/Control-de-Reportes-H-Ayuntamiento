@@ -1,0 +1,5 @@
+id_equipo,direccion_ip,ram,dvd,procesador,inventario_monitor,marca,marca_monitor,segmento_de_red,tamano_monitor,nombre,inventario,serie,status,serie_monitor,disco_duro,teclado,observaciones,mouse,sistema_operativo,tipo_equipo,id_direccion
+,,,0,,,CANON,,,,CANON IR-400,AC40,QLA04475,1,,,0,,0,,Impresora,1
+,,,0,,,BROTHER ,,,,BROTHER DCP-L5650DN,AC68,000G01234567890,1,,,0,,0,,Impresora,1
+,,,0,,,CANON,,,,CANON IR-400,AC53,QLL06489,1,,,0,,0,,Impresora,1
+,,,,,,,,,,,,,,,,,,,,,

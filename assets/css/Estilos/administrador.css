@@ -101,7 +101,7 @@ Estilos para los titulos de las tarjetas
     margin: 0;
 	text-align: center;
 	padding-top: 8px;
-	height: 30px;
+	min-height: 30px;
 	width: 143%;
 	font-size: 12px;
 	background: #f07d6f;
@@ -113,7 +113,7 @@ Estilos para los titulos de las tarjetas
     margin: 0;
 	text-align: center;
 	padding-top: 8px;
-	height: 30px;
+	min-height: 30px;
 	width: 143%;
 	font-size: 12px;
 	background: #F5D344;
@@ -125,7 +125,7 @@ Estilos para los titulos de las tarjetas
     margin: 0;
 	text-align: center;
 	padding-top: 8px;
-	height: 30px;
+	min-height: 30px;
 	width: 143%;
 	font-size: 12px;
 	background: #6CC5B2;

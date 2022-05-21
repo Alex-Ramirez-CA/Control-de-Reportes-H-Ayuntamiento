@@ -92,7 +92,7 @@
                 </label>
                 <label for="departamento">
                     Departamento interno
-                    <select name="departamento" id="departamento">
+                    <select name="departamento" id="departamento" <?= $datos_usuario->id_rol == 0 ? 'disabled' : ''; ?> >
                         <option class="departamento_indefinido" selected value="0">Seleccione un departamento</option>
                     <?php
                         foreach($departamentos as $item):
