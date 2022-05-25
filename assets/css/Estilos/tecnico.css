@@ -75,6 +75,32 @@
 	backdrop-filter: blur(4px);
 }
 
+.contenedor-mensaje-filtro {
+	min-width: 400px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	border-radius: 10px;
+	transition: transform 900ms;
+	transform: translateY(-200%);
+	background-color: rgba(248, 244, 244, 0.3);
+	box-shadow: 0 0px 40px 0 rgba(31, 38, 135, 0.37);
+    border-left: solid 1px #616161;
+	border-right: solid 1px #616161;
+	border-bottom: solid 1px #616161;
+	backdrop-filter: blur(4px);
+}
+
+.div-texto-mensaje {
+	margin-top: 25px;
+	display: flex;
+	min-height: 40px;
+	width: 100%;
+	align-items: center;
+	justify-content: center;
+	border-radius: 9px;
+}
+
 .cerrar-ventana {
 	position: absolute;
 }

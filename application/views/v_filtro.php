@@ -82,10 +82,12 @@
 </div>
 
 <div class="mensaje">
-    <div class="contenedor-mensaje">
+    <div class="contenedor-mensaje-filtro">
         <p class="cerrar-mensaje">x</p>
         <img class="img-mensaje" src="" alt="" correcto="<?= base_url('assets/img/iconos/correcto.svg') ?>" incorrecto="<?= base_url('assets/img/iconos/incorrecto.svg') ?>">
-        <h4 class="texto-mensaje">Cambios guardados con exito</h4>
+        <div class="div-texto-mensaje">
+            <h4 class="texto-mensaje">Cambios guardados con exito</h4>
+        </div>
     </div>
 </div>
 

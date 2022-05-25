@@ -239,12 +239,9 @@
 	background: #2e2e2e;
 }
 
-.img-mensaje {
-	width: 30%;
-}
-
 .texto-mensaje {
-	margin-top: 20px;
 	color: #006e95;
 	font-size: 18px;
+	padding-top: 5px;
+	margin: 0;
 }
