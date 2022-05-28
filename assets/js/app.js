@@ -1495,7 +1495,6 @@
                 <tr>
                     <td>${equipo.direccion_ip}</td>
                     <td>${equipo.nombre}</td>
-					<td>${equipo.inventario}</td>
 					<td>${equipo.tipo_equipo}</td>
                     <td>${equipo.direccion}</td>
                     <td class="campo_status_empleado">
