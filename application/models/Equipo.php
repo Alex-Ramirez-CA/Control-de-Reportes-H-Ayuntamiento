@@ -145,7 +145,7 @@ class Equipo extends CI_Model {
     // Obtiene todos los equipos existentes
     public function getEquipos() {
         $data = $this->db
-            ->select("e.id_equipo, e.direccion_ip, e.segmento_de_red, e.nombre, e.tipo_equipo, dir.nombre as direccion, e.status")
+            ->select("e.id_equipo, e.direccion_ip, e.inventario, e.nombre, e.tipo_equipo, dir.nombre as direccion, e.status")
             ->from("equipo e")
             ->where("e.status", 1)
             ->join("direccion dir", "e.id_direccion=dir.id_direccion")
@@ -180,7 +180,7 @@ class Equipo extends CI_Model {
         }
         $data = $this->db
             ->distinct()
-            ->select("e.id_equipo, e.direccion_ip, e.segmento_de_red, e.nombre, e.tipo_equipo, dir.nombre as direccion, e.status")
+            ->select("e.id_equipo, e.direccion_ip, e.inventario, e.nombre, e.tipo_equipo, dir.nombre as direccion, e.status")
             ->from("equipo e")
             ->join("direccion dir", "e.id_direccion=dir.id_direccion")
             ->join("dependencia depen", "dir.id_dependencia=depen.id_dependencia")
