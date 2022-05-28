@@ -567,7 +567,7 @@ Estilos para los filtros que puede aplicar el administrador
 	top: 0;
 	left: 0;
 	transition: all 400ms ease;
-	width: 250px;
+	width: 400px;
 	max-height: 300px;
 	background: #f6f8fa;
 	display: none;
@@ -577,7 +577,7 @@ Estilos para los filtros que puede aplicar el administrador
 	overflow: hidden;
 	overflow-y: scroll;
 	gap: 1px;
-	transform: translatex(66%);
+	transform: translatex(42%);
 	z-index: 1;
 }
 
@@ -609,7 +609,7 @@ Estilos para los filtros que puede aplicar el administrador
 	top: 0;
 	right: 0;
 	transition: all 300ms ease;
-	width: 250px;
+	width: 400px;
 	max-height: 300px;
 	background: #f6f8fa;
 	display: none;
@@ -619,7 +619,7 @@ Estilos para los filtros que puede aplicar el administrador
 	overflow: hidden;
 	overflow-y: scroll;
 	gap: 1px;
-	transform: translatex(-67%);
+	transform: translatex(-42%);
 	z-index: 1;
 }
 

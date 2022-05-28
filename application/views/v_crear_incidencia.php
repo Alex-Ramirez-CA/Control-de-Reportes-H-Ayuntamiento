@@ -50,8 +50,6 @@
                     </select>
                 </div>
                 <div class="form-group pb-2 file">
-                    <h2>Arrastre y sulte el archivo</h2>
-                    <span>o</span>
                     <label for="archivo">Elegir archivo</label>
                     <input id="archivo" class="form-control" type="file" name="archivo">
                     <img id="preview" width="50">

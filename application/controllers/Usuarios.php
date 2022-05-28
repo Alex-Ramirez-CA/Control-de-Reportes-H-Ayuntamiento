@@ -87,7 +87,7 @@ class Usuarios extends CI_Controller {
 				'id_direccion' => form_error('id_direccion'),
 				'id_rol' => form_error('id_rol'),
 				'id_departamento' => form_error('id_departamento'),
-				// 'id_equipo' => form_error('id_equipo'),
+				//'id_equipo' => form_error('id_equipo'),
 			);
 			// Mandar respuesta al cliente
 			echo json_encode($erros);

@@ -535,6 +535,14 @@
 			$("#direccion_ip").removeAttr("idEquipo");
 		}
 	});
+
+	//Evento de cuando se dé clic en una opción de la busqueda del equipo	
+	$(document).on("click", ".opcion_equipo_ip", function () {
+		let elemento = $(this)[0];
+		$("#direccion_ip").val($(this).text());
+		$("#direccion_ip").attr("idEquipo", $(elemento).attr("idEquipo"));
+		$(".opciones_busqueda_ip").css("display", "none");
+	});
 	
 	//Detectar si cambia el campo de la direccion ip a la hora de modificar usuario
 	$(document).on("change", "#direccion_ip", function () {
@@ -544,14 +552,6 @@
 	//Detectar si cambia el campo de la direccion a la hora de modificar usuario
 	$(document).on("change", "#direccion", function () {
 		id_direccion_modif = 1;
-	});
-
-	//Evento de cuando clique en enviar filtros
-	$(document).on("click", ".opcion_equipo_ip", function () {
-		let elemento = $(this)[0];
-		$("#direccion_ip").val($(this).text());
-		$("#direccion_ip").attr("idEquipo", $(elemento).attr("idEquipo"));
-		$(".opciones_busqueda_ip").css("display", "none");
 	});
 
 	//Evento cuando se clica guardar los datos a la hora de guardar un usuario
@@ -630,14 +630,6 @@
 						$(".error_message_password").css({ transform: "translateY(0px)" });
 						$(".error_message_password").css({ "z-index": "1" });
 						$(".error_message_password").html(`<p>${json.password}</p>`);
-					}
-
-					if (json.id_equipo !== "") {
-						$(".error_message_direccionIP").css({
-							transform: "translateY(0px)",
-						});
-						$(".error_message_direccionIP").css({ "z-index": "1" });
-						$(".error_message_direccionIP").html(`<p>${json.id_equipo}</p>`);
 					}
 				},
 			},
