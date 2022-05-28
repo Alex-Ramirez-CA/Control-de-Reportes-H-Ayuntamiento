@@ -2,6 +2,8 @@
 	//Obtener la base url
 	var getUrl = window.location;
 	var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split("/")[1];
+
+	//Variable globales que se usan pa distintas funcines del código
 	let direccion = null;
 	let departamento = null;
 	let dependencia = null;
@@ -13,6 +15,7 @@
 	let id_equipo_modif = 0;
 	let direccion_ip_modif = 0;
 
+	//Colocar que la cantidad de reportes no sea un número muy alto
 	if (getUrl == baseUrl + "/atendiendo") {
 		let cantidad_reportes = $(".proceso").children(".columna-proceso").children(".card-atendiendo").length;
 		if (cantidad_reportes > 999) {
@@ -20,13 +23,8 @@
 		}
 		$(".cantidad-reportes-proceso-tecnico").html(cantidad_reportes);
 	} 
-	
-	// else if (incidencias.pendientes.length > 999) {
-	// 	cantidad_pendientes = incidencias.pendientes.length.toFixed(1) + "k";
-	// } else {
-	// 	cantidad_pendientes = incidencias.pendientes.length;
-	// }
 
+	//Hacer que la barra de busqueda aparesca en ciertas direcciones
 	if(getUrl == baseUrl + "/equipos/lista_equipos"){
 		$("#search").attr("placeholder", "Buscar equipo").blur();
 	}else if(getUrl == baseUrl + "/usuarios/lista_usuarios"){
@@ -187,7 +185,6 @@
 		let titulo = $(elemento).attr("titulo");
 		let participantes = $(elemento).attr("participantes").split(",");
 		$(".folio").html("Folio: " + id);
-		//$('.participante').css({'padding-left':'8px'});
 		$(".participante").html(participantes.length);
 		$(".nombres-asignados").html("Atendido por " + participantes);
 		$(".titulo-reporte-tecnico").html("Titulo: " + titulo);
@@ -413,7 +410,6 @@
 			$(".lista-departamentos").children().removeClass("active");
 			$(this).toggleClass("active");
 			departamento = $(this).attr("idDepartamento");
-			//console.log("departamento " + departamento);
 		}
 	});
 
@@ -426,7 +422,6 @@
 			$(".lista-dependecias").children().removeClass("active");
 			$(this).toggleClass("active");
 			dependencia = $(this).attr("idDependecia");
-			//console.log("dependecia " + dependecia);
 		}
 	});
 
@@ -439,7 +434,6 @@
 			$(".lista-direcciones").children().removeClass("active");
 			$(this).toggleClass("active");
 			direccion = $(this).attr("idDireccion");
-			//console.log("direccion " + direccion);
 		}
 	});
 
@@ -448,7 +442,6 @@
 		if ($("#search_equipo").val()) {
 			$(".opciones-busqueda-equipo").css("display", "block");
 			let search_equipo = $("#search_equipo").val();
-			//console.log(search_usuario)
 			$.ajax({
 				url: "administrador/buscar_equipo",
 				type: "POST",
@@ -510,7 +503,6 @@
 		if ($("#direccion_ip").val()) {
 			$(".opciones_busqueda_ip").css("display", "block");
 			let search_IP = $("#direccion_ip").val();
-			//console.log(search_IP)
 			$.ajax({
 				url: baseUrl + "/usuarios/buscar_direccionIP",
 				type: "POST",
@@ -661,16 +653,6 @@
 		let id_rol = $("#tipo_usuario").val();
 		let id_departamento = $("#departamento").val();
 		let id_equipo = $("#direccion_ip").attr("idEquipo");
-        // console.log("Empleado " + no_empleado)
-		// console.log(nombre);
-		// console.log(apellido_paterno);
-		// console.log(apellido_materno);
-		// console.log(email);
-		// console.log(password);
-		// console.log(id_direccion);
-		// console.log(id_rol);
-		// console.log(id_departamento);
-		// console.log(id_equipo);
 		$.ajax({
 		    url: baseUrl + "/usuarios/actualizar_usuario",
 		    type: 'POST',
@@ -875,7 +857,6 @@
 			}
 			obtenerListaCompletaEquipos();
 		} else {
-			//console.log("No paso nada");
 			obtenerListaCompletaEquipos();
 		}
 	});
@@ -889,7 +870,6 @@
 			$(".lista_dependencias_usuarios").children().removeClass("active");
 			$(this).toggleClass("active");
 			dependencia = $(this).attr("idDependencia");
-			//console.log("dependencia " + dependencia);
 		}
 	});
 
@@ -902,7 +882,6 @@
 			$(".lista_direcciones_usuarios").children().removeClass("active");
 			$(this).toggleClass("active");
 			direccion = $(this).attr("idDireccion");
-			//console.log("direccion " + direccion);
 		}
 	});
 
@@ -915,7 +894,6 @@
 			$(".lista_departamentos_usuarios").children().removeClass("active");
 			$(this).toggleClass("active");
 			departamento = $(this).attr("idDepartamento");
-			//console.log("departamento " + departamento);
 		}
 	});
 
@@ -928,7 +906,6 @@
 			$(".lista_tipos_usuarios").children().removeClass("active");
 			$(this).toggleClass("active");
 			rol = $(this).attr("rol");
-			//console.log("rol " + rol);
 		}
 	});
 
@@ -941,7 +918,6 @@
 			$(".lista_status_usuarios").children().removeClass("active");
 			$(this).toggleClass("active");
 			status = $(this).attr("status");
-			//console.log("status " + status);
 		}
 	});
 
@@ -1084,7 +1060,6 @@
         $('.opciones_busqueda_usuario').css('visibility','visible');
         if($('#search_usuario').val()){
             let search_usuario = $('#search_usuario').val();
-            //console.log(search_usuario)
 
             $.ajax({
                 url: baseUrl+'/equipos/buscar_empleado',
@@ -1210,28 +1185,7 @@
 		 	marca_monitor = $("#marca_monitor").val();
 		 	tamano_monitor = $("#tamaño_monitor").val();
 		}
-        //console.log("Empleados " + no_empleados)
-		// console.log(nombre);
-		// console.log(tipo_equipo);
-		// console.log(id_direccion);
-		// console.log(sistema_operativo);
-		// console.log(marca);
-		// console.log(inventario);
-		// console.log(serie);
-		// console.log(direccion_ip);
-		// console.log(teclado);
-		// console.log(mouse);
-		// console.log(dvd);
-		// console.log(procesador);
-		// console.log(segmento_de_red);
-		// console.log(ram);
-		// console.log(disco_duro);
-		// console.log(inventario_monitor);
-		// console.log(serie_monitor);
-		// console.log(marca_monitor);
-		// console.log(tamano_monitor);
-		// console.log(observaciones);
-		// console.log($(".nombres_empleados_asociados").children().length);
+        
 		$.ajax({
 		    url: "equipos/guardar_equipo",
 		    type: 'POST',
@@ -1257,7 +1211,6 @@
 		        400: function(xhr) {
 		            let json = JSON.parse(xhr.responseText);
 		            //Para mostrar los mensajes de error en caso de tener en los campos del formulario
-					//console.log(json);
 		            if (json.nombre !== ""){
 		                $('.error_message_nombre').css({'transform':'translateY(0px)'});
 		                $('.error_message_nombre').css({'z-index':'1'});
@@ -1386,30 +1339,7 @@
 		 	tamano_monitor = $("#tamaño_monitor").val();
 		}
 		let id_equipo = $('.guardar_cambios_equipo').attr('id_equipo');
-		// console.log(id_direccion_modif);
-		// console.log(no_empleados_modif);
-		// console.log(id_equipo);
-        // console.log("Empleados " + no_empleados)
-		// console.log(nombre);
-		// console.log(tipo_equipo);
-		// console.log(id_direccion);
-		// console.log(sistema_operativo);
-		// console.log(marca);
-		// console.log(inventario);
-		// console.log(serie);
-		// console.log(direccion_ip);
-		// console.log(teclado);
-		// console.log(mouse);
-		// console.log(dvd);
-		// console.log(procesador);
-		// console.log(segmento_de_red);
-		// console.log(ram);
-		// console.log(disco_duro);
-		// console.log(inventario_monitor);
-		// console.log(serie_monitor);
-		// console.log(marca_monitor);
-		// console.log(tamano_monitor);
-		// console.log(observaciones);
+		
 		$.ajax({
 		    url: baseUrl + "/equipos/actualizar_equipo",
 		    type: 'POST',
@@ -1430,7 +1360,6 @@
 		        400: function(xhr) {
 		            let json = JSON.parse(xhr.responseText);
 		            //Para mostrar los mensajes de error en caso de tener en los campos del formulario
-					//console.log(json);
 		            if (json.nombre !== ""){
 		                $('.error_message_nombre').css({'transform':'translateY(0px)'});
 		                $('.error_message_nombre').css({'z-index':'1'});
@@ -1709,7 +1638,6 @@
                     </div>
                 </div>
                 `;
-				//console.log(incidencia_pendiente);
 			});
 		}else {
 			template_pendientes = `
@@ -1772,7 +1700,6 @@
                     </div>
                 </div>
                 `;
-				//console.log(incidencia_proceso);
 			});
 		}else {
 			template_proceso = `
@@ -1835,7 +1762,6 @@
                     </div>
                 </div>
                 `;
-				//console.log(incidencia_finalizada);
 			});
 		}else {
 			template_finalizados = `

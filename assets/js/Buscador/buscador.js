@@ -29,7 +29,6 @@
             let json = JSON.parse(response);
             window.open(json.url);
         });
-        console.log(id_incidencia);
     });
 
 })(jQuery)

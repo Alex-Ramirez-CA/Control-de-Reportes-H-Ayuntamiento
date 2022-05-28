@@ -5,7 +5,6 @@
     $(document).on('click', '.btn-ver-filtro', function(){
         let elemento = $(this)[0];
         let id_incidencia = $(elemento).attr('idReporte');
-        console.log(id_incidencia);
         $.post('reporte/visualizar_reporte', {id_incidencia}, function(response){
             let json = JSON.parse(response);
             window.open(json.url);

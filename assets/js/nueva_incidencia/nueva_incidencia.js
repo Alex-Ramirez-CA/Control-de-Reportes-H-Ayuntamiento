@@ -14,7 +14,6 @@
         $('.opciones-usuarios-nueva-incidencia').css('display','block');
         if($('.search_usuario').val()){
             let search_usuario = $('.search_usuario').val();
-            //console.log(search_usuario)
 
             $.ajax({
                 url: 'buscar_empleado',
@@ -48,7 +47,6 @@
     $(document).on('click', '.opcion-empleado', function(){
         let elemento = $(this)[0]; 
         let id_usuario = $(elemento).attr('no_empleado');
-        console.log(id_usuario);
         let nombre = $(elemento).text();
         $(".search_usuario").val(nombre);
         $('.creador-reporte').html("Creador del reporte: " + nombre);
@@ -66,8 +64,6 @@
             }
             $('.opciones-usuarios-nueva-incidencia').html(template);
             $('#seleccion-equipo').html(template);
-            
-            console.log(json);
         });
     });
 
