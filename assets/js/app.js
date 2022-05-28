@@ -1493,8 +1493,9 @@
 			equipos.forEach((equipo) => {
 				template += `
                 <tr>
-                    <th scope="row">${equipo.direccion_ip}</th>
+                    <td>${equipo.direccion_ip}</td>
                     <td>${equipo.nombre}</td>
+					<td>${equipo.inventario}</td>
 					<td>${equipo.tipo_equipo}</td>
                     <td>${equipo.direccion}</td>
                     <td class="campo_status_empleado">

@@ -74,6 +74,7 @@
                 <tr>
                     <th scope="col">Dirección IP</th>
                     <th scope="col">Nombre del equipo</th>
+                    <th scope="col">Inventario</th>
                     <th scope="col">Tipo de equipo</th>
                     <th scope="col">Dirección</th>
                     <th scope="col">Opciones</th>

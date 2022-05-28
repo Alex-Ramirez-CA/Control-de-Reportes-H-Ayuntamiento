@@ -1,0 +1,9 @@
+@font-face {
+	font-family: Acumin;
+	src: url("http://localhost/Control-de-Reportes-H-Ayuntamiento/assets/fuentes/Acumin-RPro.otf");
+	font-display: swap;
+}
+
+* {
+	font-family: Acumin;
+}
